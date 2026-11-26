@@ -301,7 +301,7 @@ export function RoleCount({
   const siteInfo = useContext(SiteInfoContext);
   const [roleData, setRoleData] = useState(null);
   const isPhoneDevice = useIsPhoneDevice();
-  const skin = useSkinRedesign();
+  const redesignOn = useSkinRedesign();
 
   const {
     popoverOpen: canOpenPopover,
@@ -657,11 +657,11 @@ export function RoleCount({
       <Popover
         open={popoverOpen}
         sx={{
-          pointerEvents: openByClick || skin ? "auto" : "none",
-          zIndex: skin ? 7900 : undefined,
+          pointerEvents: openByClick || redesignOn ? "auto" : "none",
+          zIndex: redesignOn ? 7900 : undefined,
         }}
         slotProps={
-          skin
+          redesignOn
             ? {
                 paper: {
                   className: "skin-detail-pop",

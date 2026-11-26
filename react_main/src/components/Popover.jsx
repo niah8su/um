@@ -12,6 +12,7 @@ import {
   getAlignmentColor,
 } from "components/Setup";
 import { useErrorAlert } from "components/Alerts";
+import { useSkinRedesign } from "components/useSkinRedesign";
 import { NameWithAvatar } from "pages/User/UserWidgets";
 
 import { Box, Divider, Link, Popover, Stack, Typography } from "@mui/material";
@@ -58,7 +59,7 @@ export function PopoverContent({ title, content, page = null, icon = <></>, subT
   }
 
   return (
-    <Stack direction="column" bgcolor="var(--scheme-color)">
+    <Stack direction="column" bgcolor="var(--scheme-color)" className={title === "Mark Role as" ? "skin-role-mark-body" : undefined}>
       {wrappedTitle}
       <Stack direction="column" spacing={1} padding={1}>
         {content}
@@ -89,6 +90,8 @@ export const InfoPopover = function ({
   // from stale props. Dropping the memo fixes both; it was not saving anything
   // worth the risk.
   const isPhone = useIsPhoneDevice();
+  const skin = useSkinRedesign();
+  const markRole = skin && title === "Mark Role as";
 
   // On a phone the details open as a sheet instead of a card anchored to the
   // icon: a card pinned to a 20px glyph is a poor target for a thumb. Wider
@@ -140,8 +143,10 @@ export const InfoPopover = function ({
         disableRestoreFocus
         slotProps={{
           paper: {
+            className: markRole ? "skin-detail-pop skin-role-mark" : undefined,
             sx: {
-              width: "320px",
+              width: markRole ? "auto" : "320px",
+              maxWidth: markRole ? "420px" : undefined,
             },
           },
         }}

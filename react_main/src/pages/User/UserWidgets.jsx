@@ -20,6 +20,7 @@ import { useProfileSheet } from "components/ProfileSheet";
 import ImageViewer from "components/ImageViewer";
 import { usePopoverOpen } from "hooks/usePopoverOpen";
 import { useSkinRedesign } from "components/useSkinRedesign";
+import { skinLightForcesBlack } from "utils/accessibleNameColors";
 import { useViewActive } from "hooks/useViewActivity";
 import { useAvatarImageUrl, AvatarPhoto } from "utils/avatarUrl";
 import { observeNameAnimation } from "utils/nameAnimationViewport";
@@ -656,7 +657,7 @@ export function NameWithAvatar(props) {
   const [userProfile, setUserProfile] = useState(null);
   const [isClicked, setIsClicked] = useState(false);
 
-  const autoColor = user.autoContrastColor(color);
+  const autoColor = skinLightForcesBlack(color) ? "#000000" : user.autoContrastColor(color);
   // Viewer setting: drop special name fonts. Colors and animations stay.
   const ignoreNameFonts = user.settings && user.settings.ignoreNameFonts;
   const nameFontClass =

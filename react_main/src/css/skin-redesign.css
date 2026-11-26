@@ -649,6 +649,46 @@ html.skin-redesign .skin-status-pick button.on { border-color: #59ad72; color: #
 html.skin-redesign .miniprofile .status-icon { width: 12px !important; height: 12px !important; border-width: 2px !important; }
 html.skin-redesign .miniprofile .status-icon.online { background-color: #59ad72; }
 
+html.skin-redesign .skin-role-mark {
+  background: var(--um-glass-solid) !important;
+  color: var(--um-ink);
+  border-radius: 16px;
+  border: 1px solid var(--um-line);
+}
+html.skin-redesign .skin-role-mark .skin-role-mark-body,
+html.skin-redesign .skin-role-mark .MuiStack-root { background: transparent; }
+html.skin-redesign .skin-role-mark .MuiOutlinedInput-root {
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--um-ink) 6%, transparent);
+}
+html.skin-redesign .skin-role-mark .small-role-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  grid-template-columns: none;
+}
+html.skin-redesign .skin-role-mark .role-icon-vivid-null {
+  background-image: none !important;
+  background-color: #6b7280;
+  border-radius: 8px;
+  position: relative;
+}
+html.skin-redesign .skin-role-mark .role-icon-vivid-null::after {
+  content: "?";
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #f3f4f6;
+  font-weight: 700;
+  font-size: 16px;
+}
+html.skin-redesign .game .player .role-icon-vivid-null {
+  filter: grayscale(1) brightness(0.72);
+  opacity: 0.8;
+}
+
 html.skin-redesign .poll-completes {
   text-align: center;
   font-size: 12px;

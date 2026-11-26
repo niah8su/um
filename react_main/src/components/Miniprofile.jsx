@@ -70,14 +70,6 @@ function Miniprofile(props) {
 
   const isSelf = currentUser.loggedIn && currentUser.id === id;
   const skin = useSkinRedesign();
-  const [ownStatus, setOwnStatus] = useState("");
-  useEffect(() => {
-    if (!skin || !isSelf) return;
-    try {
-      setOwnStatus(window.localStorage.getItem("um-skin-own-status") || "");
-    } catch (e) {}
-  }, [skin, isSelf]);
-  const shownStatus = isSelf && (ownStatus === "online" || ownStatus === "offline") ? ownStatus : user.status;
   const [isFriend, setIsFriend] = useState(user.isFriend || false);
   const [isFriendRequested, setIsFriendRequested] = useState(user.isFriendRequested || false);
   const [reportDialogOpen, setReportDialogOpen] = useState(false);
@@ -155,7 +147,7 @@ function Miniprofile(props) {
                 id={id}
                 avatarId={avatarId}
                 name={name}
-                onlineStatus={skin ? shownStatus || null : null}
+                onlineStatus={skin && user.status === "online" ? "online" : null}
                 lastActive={user.lastActive}
                 inGame={user.inGame}
               />
@@ -208,31 +200,6 @@ function Miniprofile(props) {
             <FamilyAvatarImage id={user.family.id} size={16} cacheVal={siteInfo.cacheVal} />
           ) : null}
           {user.family.name}
-        </div>
-      )}
-      {skin && isSelf && (
-        <div className="skin-status-pick">
-          <div>Select your status</div>
-          <button
-            type="button"
-            className={shownStatus === "online" ? "on" : ""}
-            onClick={() => {
-              try { window.localStorage.setItem("um-skin-own-status", "online"); } catch (e) {}
-              setOwnStatus("online");
-            }}
-          >
-            Online
-          </button>
-          <button
-            type="button"
-            className={shownStatus === "offline" ? "on" : ""}
-            onClick={() => {
-              try { window.localStorage.setItem("um-skin-own-status", "offline"); } catch (e) {}
-              setOwnStatus("offline");
-            }}
-          >
-            Offline
-          </button>
         </div>
       )}
       {/* Gate on `tier`, not on the object: an unrated player still gets a

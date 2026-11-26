@@ -44,9 +44,9 @@ html.skin-redesign body::before {
   z-index: -1;
   pointer-events: none;
   background:
-    radial-gradient(1100px 760px at 16% 34%, color-mix(in srgb, var(--um-grad-1, #4a1220) 36%, transparent), transparent 70%),
-    radial-gradient(980px 700px at 86% 86%, color-mix(in srgb, var(--um-grad-2, #12060c) 28%, transparent), transparent 68%),
-    #050308;
+    radial-gradient(1100px 760px at 16% 34%, color-mix(in srgb, var(--um-grad-1, #4a1220) 22%, transparent), transparent 70%),
+    radial-gradient(980px 700px at 86% 86%, color-mix(in srgb, var(--um-grad-2, #12060c) 16%, transparent), transparent 68%),
+    #020104;
 }
 
 html.skin-redesign.light-mode body::before {
@@ -488,7 +488,7 @@ html.skin-redesign .skin-side {
   width: 220px;
   display: flex;
   flex-direction: column;
-  padding: 96px 10px 12px;
+  padding: 64px 10px 12px;
   box-sizing: border-box;
   overflow: auto;
   background: var(--um-glass);
@@ -529,21 +529,6 @@ html.skin-redesign .skin-games-end { grid-column: 5; justify-self: end; }
 html.skin-redesign .skin-lobby-tabs { margin: 12px 0; padding: 8px 0; }
 html.skin-redesign .skin-lobby-tabs .MuiTab-root::before { content: none !important; display: none !important; }
 
-html.skin-redesign .skin-cmt-limit { display: flex; gap: 6px; }
-html.skin-redesign .skin-cmt-limit button {
-  border: 1px solid var(--um-line);
-  background: transparent;
-  color: inherit;
-  border-radius: 999px;
-  padding: 2px 8px;
-  font: inherit;
-  cursor: pointer;
-}
-html.skin-redesign .skin-cmt-limit button.on {
-  background: var(--um-accent);
-  color: var(--um-accent-ink, #fff);
-  border-color: transparent;
-}
 html.skin-redesign .comments-page .name-with-avatar { margin-left: -8px; }
 
 html.skin-redesign .miniprofile { display: flex; flex-direction: column; }
@@ -593,16 +578,23 @@ html.skin-redesign [data-testid="tutorial-overlay"] img.skin-golbolco {
 }
 
 html.skin-redesign .skin-side-toggle {
-  position: absolute;
-  top: 70px;
-  left: 8px;
-  width: 30px;
-  height: 30px;
+  position: static;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  margin: 0 auto 6px;
   border: 0;
   background: transparent;
   color: inherit;
   cursor: pointer;
   padding: 4px;
+}
+html.skin-redesign .skin-side-rule {
+  height: 1px;
+  background: var(--um-line);
+  margin: 0 4px 8px;
 }
 html.skin-redesign .skin-side-toggle svg,
 html.skin-redesign .skin-side-dock svg {
@@ -643,9 +635,6 @@ html.skin-redesign .skin-online a { display: flex; align-items: center; gap: 6px
 html.skin-redesign .skin-online i { width: 8px; height: 8px; border-radius: 50%; background: #59ad72; box-shadow: 0 0 6px #59ad72; display: inline-block; }
 html.skin-redesign .skin-family { text-transform: uppercase; }
 html.skin-redesign .skin-joined { text-transform: uppercase; }
-html.skin-redesign .skin-status-pick { border-top: 1px solid var(--um-line); border-bottom: 1px solid var(--um-line); padding: 8px 0; text-align: center; }
-html.skin-redesign .skin-status-pick button { border: 1px solid var(--um-line); background: transparent; color: inherit; border-radius: 999px; padding: 4px 10px; margin: 0 4px; cursor: pointer; font: inherit; font-size: 12px; }
-html.skin-redesign .skin-status-pick button.on { border-color: #59ad72; color: #59ad72; }
 html.skin-redesign .miniprofile .status-icon { width: 12px !important; height: 12px !important; border-width: 2px !important; }
 html.skin-redesign .miniprofile .status-icon.online { background-color: #59ad72; }
 
@@ -727,17 +716,39 @@ html.skin-redesign .skin-chat-title {
   font-size: 13px;
 }
 
-html.skin-redesign .comments-page .post {
+html.skin-redesign .comments-page { gap: 2px; }
+html.skin-redesign .comments-page .post,
+html.skin-redesign .comments-page .MuiPaper-root {
   position: relative;
-  width: 420px;
-  padding: 6px 8px 22px;
-  margin-top: 4px;
+  padding: 4px 6px !important;
+  margin-top: 2px;
 }
+html.skin-redesign .comments-page .avatar { margin-top: 8px; }
 html.skin-redesign .comments-page .emote-reactions {
   position: absolute;
-  right: 6px;
-  bottom: 4px;
+  top: 4px;
+  right: 4px;
+  bottom: auto;
   margin: 0;
+}
+html.skin-redesign .comments-page .emote-reactions-picker .dropdown-control {
+  padding: 8px;
+}
+html.skin-redesign .comments-page .page-nav { justify-content: center; }
+html.skin-redesign .comments-page .MuiIconButton-root {
+  width: 22px;
+  height: 22px;
+}
+html.skin-redesign:not(.light-mode) .comments-page .MuiIconButton-root {
+  color: rgba(246, 241, 234, 0.45);
+  background: rgba(255, 255, 255, 0.06);
+}
+html.skin-redesign .comments-page .md-content img,
+html.skin-redesign .comments-page .md-content video {
+  max-width: 100%;
+  height: auto;
+  display: block;
+  border-radius: 8px;
 }
 
 html.skin-redesign [data-testid="dm-window"][data-collapsed="true"] {

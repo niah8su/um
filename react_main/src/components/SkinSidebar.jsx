@@ -94,6 +94,7 @@ export default function SkinSidebar() {
       >
         <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16" /></svg>
       </button>
+      <div className="skin-side-rule" />
       <div className="skin-side-groups">
         {GROUPS.map((group) => (
           <section key={group.label}>

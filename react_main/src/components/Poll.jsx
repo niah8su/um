@@ -67,7 +67,11 @@ function Polls({
 
   return (
     <Stack spacing={2}>
-      {!isThreadPoll && <PageNav page={pollPage} onNav={onPollPageNav} />}
+      {!isThreadPoll && (
+        <Box className="skin-poll-pager">
+          <PageNav page={pollPage} onNav={onPollPageNav} />
+        </Box>
+      )}
       {allPolls.map((poll) => {
         const isActive = !poll.completed;
         const completedDate =
@@ -148,6 +152,7 @@ function Polls({
             </Stack>
 
             <Typography
+              className="poll-completes"
               variant="caption"
               color="text.secondary"
               sx={{ mt: 2, display: "block" }}
@@ -159,7 +164,11 @@ function Polls({
           </Box>
         );
       })}
-      {!isThreadPoll && <PageNav page={pollPage} onNav={onPollPageNav} />}
+      {!isThreadPoll && (
+        <Box className="skin-poll-pager">
+          <PageNav page={pollPage} onNav={onPollPageNav} />
+        </Box>
+      )}
     </Stack>
   );
 }

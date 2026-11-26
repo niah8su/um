@@ -74,7 +74,10 @@ export default function Comments(props) {
         setPage(Math.min(_page, taken.maxPage));
       })
       .catch((err) => {
-        if (isMountedRef.current) errorAlert(err);
+        if (isMountedRef.current) {
+          setLoaded(true);
+          errorAlert(err);
+        }
       });
   }
 
@@ -98,7 +101,10 @@ export default function Comments(props) {
         setPage(1);
       })
       .catch((err) => {
-        if (isMountedRef.current) errorAlert(err);
+        if (isMountedRef.current) {
+          setLoaded(true);
+          errorAlert(err);
+        }
       });
   }
 
@@ -200,7 +206,7 @@ export default function Comments(props) {
     setShowInput(false);
   }
 
-  const commentRows = comments.map((comment) => (
+  const commentRows = comments.filter((comment) => comment && comment.author && comment.id).map((comment) => (
     <Comment
       fullWidth={props?.fullWidth}
       location={comment.location || (isMulti ? undefined : location)}

@@ -39,6 +39,7 @@ import { useErrorAlert } from "../../components/Alerts";
 import { NameWithAvatar, StatusIcon } from "../User/UserWidgets";
 import { UserContext } from "../../Contexts";
 import { MaxChatMessageLength } from "../../Constants";
+import { useSkinRedesign } from "components/useSkinRedesign";
 import { Time, UserText, useOnOutsideClick } from "../../components/Basic";
 import {
   resolveDisplayNameColor,
@@ -109,6 +110,7 @@ export default function Chat({
   const tokenRequests = useRef(new LatestRequest());
   const registeredSocketRef = useRef(null);
   const user = useContext(UserContext);
+  const skin = useSkinRedesign();
   const errorAlert = useErrorAlert();
   const theme = useTheme();
 
@@ -732,7 +734,8 @@ export default function Chat({
               : null
           }
         ></Badge>
-        <Typography variant="subtitle2" sx={{ fontWeight: 600 }}>
+        <Typography variant="subtitle2" className={skin ? "skin-chat-title" : undefined} sx={{ fontWeight: 600 }}>
+          {skin ? <i className="fas fa-hashtag" aria-hidden="true" /> : null}
           Chat
         </Typography>
         </>

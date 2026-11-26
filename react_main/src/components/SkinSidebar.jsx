@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import { Link } from "react-router-dom";
 import { UserContext } from "Contexts";
 import { useSkinRedesign } from "./useSkinRedesign";
@@ -63,16 +63,27 @@ const LOGGED_IN = new Set(["/play/host", "/play/create", "/play/decks", "/play/w
 export default function SkinSidebar() {
   const skin = useSkinRedesign();
   const user = useContext(UserContext);
+  const loggedIn = Boolean(user && user.loggedIn);
+  const [collapsed, setCollapsed] = useState(true);
   if (!skin) return null;
+  const initial = String((user && (user.name || user.id)) || "?").trim().charAt(0).toUpperCase() || "?";
 
   return (
-    <nav className="skin-side" aria-label="Pages">
+    <nav className={collapsed ? "skin-side collapsed" : "skin-side"} aria-label="Pages">
+      <button
+        type="button"
+        className="skin-side-toggle"
+        aria-label={collapsed ? "Expand sidebar" : "Collapse sidebar"}
+        onClick={() => setCollapsed((open) => !open)}
+      >
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16" /></svg>
+      </button>
       <div className="skin-side-groups">
         {GROUPS.map((group) => (
           <section key={group.label}>
             <div className="skin-side-label">{group.label}</div>
             {group.items.map(([text, path]) => (
-              LOGGED_IN.has(path) && !user.loggedIn ? null : (
+              LOGGED_IN.has(path) && !loggedIn ? null : (
                 <Link key={path} to={path}>{text}</Link>
               )
             ))}
@@ -81,6 +92,15 @@ export default function SkinSidebar() {
       </div>
       <div className="skin-side-foot">
         <Link to="/user/settings">Settings</Link>
+      </div>
+      <div className="skin-side-dock">
+        <Link to="/play/create" aria-label="Create setup">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5v14M5 12h14" /></svg>
+        </Link>
+        <Link to="/play" aria-label="Games">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 5h6v6H5zM13 5h6v6h-6zM5 13h6v6H5zM16 16h2m-1-1v2" /></svg>
+        </Link>
+        <Link to={user && user.id ? `/user/${user.id}` : "/user"} aria-label="Profile" className="skin-side-ava">{initial}</Link>
       </div>
     </nav>
   );

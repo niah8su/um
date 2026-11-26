@@ -8,43 +8,52 @@ import { useSkinRedesign } from "./useSkinRedesign";
 const GROUPS = [
   {
     label: "Play",
+    icon: "M8 5.5v13l11-6.5z",
     items: [
-      ["Play", "/play"],
-      ["Tutorial", "/play/tutorial"],
       ["Host", "/play/host"],
-      ["Create Setup", "/play/create"],
-      ["Character Decks", "/play/decks"],
-      ["Word Decks", "/play/wordDecks"],
+      ["Create setup", "/play/create"],
+      ["Tutorial", "/play/tutorial"],
     ],
   },
   {
     label: "Community",
+    icon: "M8 11a3 3 0 1 0-3-3 3 3 0 0 0 3 3zm8 1a2.5 2.5 0 1 0-2.5-2.5A2.5 2.5 0 0 0 16 12z",
     items: [
       ["Forums", "/community/forums"],
-      ["Users", "/community/users"],
       ["Families", "/community/families"],
+      ["Users", "/community/users"],
       ["Feedback", "/community/feedback"],
     ],
   },
   {
     label: "Fame",
+    icon: "M12 3.5l2.2 4.6 5 .7-3.6 3.5.9 5.1L12 15.8 7.5 17.4l.9-5.1L4.8 8.8l5-.7z",
     items: [
       ["Hall of Fame", "/fame/hall-of-fame"],
-      ["Competitive", "/fame/competitive"],
       ["Stock Market", "/fame/stocks"],
-      ["Contributors", "/fame/contributors"],
-      ["Donors", "/fame/donors"],
+      ["Competitive", "/fame/competitive"],
     ],
   },
   {
     label: "Learn",
+    icon: "M5 5.5A2.5 2.5 0 0 1 7.5 3H20v16H7.5A2.5 2.5 0 0 0 5 21.5z",
     items: [
       ["Games", "/learn/games"],
       ["Glossary", "/learn/glossary"],
     ],
   },
   {
+    label: "You",
+    icon: "M12 12a4 4 0 1 0-4-4 4 4 0 0 0 4 4zm-7 8c.6-3 3-4.5 7-4.5s6.4 1.5 7 4.5",
+    items: [
+      ["Profile", "/user"],
+      ["Settings", "/user/settings"],
+      ["Inbox", "/user/notifications"],
+    ],
+  },
+  {
     label: "Policy",
+    icon: "M12 3l7 3v6c0 4.2-2.8 7.2-7 8.5C7.8 19.2 5 16.2 5 12V6z",
     items: [
       ["Rules", "/policy/rules"],
       ["Moderation", "/policy/moderation"],
@@ -52,9 +61,10 @@ const GROUPS = [
   },
   {
     label: "Activity",
+    icon: "M4 16l4-5 3 3 5-7 4 5",
     items: [
       ["Metrics", "/activity/metrics"],
-      ["Live Feed", "/activity/livefeed"],
+      ["Live feed", "/activity/livefeed"],
     ],
   },
 ];
@@ -94,22 +104,24 @@ export default function SkinSidebar() {
       >
         <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16" /></svg>
       </button>
-      <div className="skin-side-rule" />
+      <div className="skin-side-online" aria-label="Online users">
+        <i aria-hidden="true" />
+        <span className="skin-side-on">{online.length} online</span>
+      </div>
       <div className="skin-side-groups">
         {GROUPS.map((group) => (
           <section key={group.label}>
-            <div className="skin-side-label">{group.label}</div>
+            <div className="skin-side-label">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d={group.icon} /></svg>
+              {group.label}
+            </div>
             {group.items.map(([text, path]) => (
               LOGGED_IN.has(path) && !loggedIn ? null : (
-                <Link key={path} to={path}>{text}</Link>
+                <Link key={path} to={path === "/user" && user && user.id ? `/user/${user.id}` : path}>{text}</Link>
               )
             ))}
           </section>
         ))}
-      </div>
-      <div className="skin-online-count" aria-label="Online users">
-        <i aria-hidden="true" />
-        <span>{online.length}</span>
       </div>
       <div className="skin-side-foot">
         <Link to="/user/settings">Settings</Link>

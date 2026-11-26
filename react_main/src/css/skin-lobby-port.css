@@ -76,7 +76,6 @@ html.skin-redesign .skin-port .lobby-split {
   align-items: start;
 }
 html.skin-redesign .skin-port .panel,
-html.skin-redesign .skin-port .game-main,
 html.skin-redesign .skin-port .games-bar {
   background: linear-gradient(180deg, rgba(255,255,255,.08), rgba(255,255,255,.02) 42%), rgba(8,10,14,.55);
   border: 1px solid rgba(240,246,252,.14);
@@ -85,7 +84,6 @@ html.skin-redesign .skin-port .games-bar {
   backdrop-filter: blur(18px);
 }
 html.skin-redesign.light-mode .skin-port .panel,
-html.skin-redesign.light-mode .skin-port .game-main,
 html.skin-redesign.light-mode .skin-port .games-bar {
   background: linear-gradient(180deg, rgba(255,255,255,.78), rgba(255,255,255,.4)), rgba(255,255,255,.55);
   border-color: rgba(208,215,222,.95);
@@ -112,11 +110,35 @@ html.skin-redesign .skin-port .game {
   margin-bottom: 8px;
 }
 html.skin-redesign .skin-port .stub {
-  width: 6px;
-  min-width: 6px;
+  width: 8px !important;
+  min-width: 8px !important;
   border-radius: 6px 0 0 6px;
   flex: none;
+  align-self: stretch;
 }
+html.skin-redesign .skin-port .tone-ranked .stub { background: #FF82A9 !important; }
+html.skin-redesign .skin-port .tone-competitive .stub { background: #edb334 !important; }
+html.skin-redesign .skin-port .tone-sandbox .stub { background: #d6c15a !important; }
+html.skin-redesign .skin-port .tone-minigames .stub { background: #7BEDFF !important; }
+html.skin-redesign .skin-port .tone-survivor .stub { background: #5cb85c !important; }
+html.skin-redesign .skin-port .tone-roleplay .stub { background: #735cb7 !important; }
+html.skin-redesign .skin-port .tone-main .stub,
+html.skin-redesign .skin-port .tone-unranked .stub { background: #d3d3d3 !important; }
+html.skin-redesign .skin-port .tone-ranked .game-main { background: rgba(255,130,169,.28) !important; box-shadow: inset 8px 0 0 #FF82A9 !important; }
+html.skin-redesign .skin-port .tone-competitive .game-main { box-shadow: inset 8px 0 0 #edb334 !important; }
+html.skin-redesign .skin-port .tone-sandbox .game-main { box-shadow: inset 8px 0 0 #d6c15a !important; }
+html.skin-redesign .skin-port .tone-minigames .game-main { box-shadow: inset 8px 0 0 #7BEDFF !important; }
+html.skin-redesign .skin-port .tone-survivor .game-main { box-shadow: inset 8px 0 0 #5cb85c !important; }
+html.skin-redesign .skin-port .tone-roleplay .game-main { box-shadow: inset 8px 0 0 #735cb7 !important; }
+html.skin-redesign .skin-port .tone-main .game-main,
+html.skin-redesign .skin-port .tone-unranked .game-main { box-shadow: inset 8px 0 0 #d3d3d3 !important; }
+html.skin-redesign .skin-port .tone-competitive .game-main { background: rgba(237,179,52,.22) !important; }
+html.skin-redesign .skin-port .tone-sandbox .game-main { background: rgba(214,193,90,.22) !important; }
+html.skin-redesign .skin-port .tone-minigames .game-main { background: rgba(123,237,255,.18) !important; }
+html.skin-redesign .skin-port .tone-survivor .game-main { background: rgba(92,184,92,.2) !important; }
+html.skin-redesign .skin-port .tone-roleplay .game-main { background: rgba(115,92,183,.22) !important; }
+html.skin-redesign .skin-port .tone-main .game-main,
+html.skin-redesign .skin-port .tone-unranked .game-main { background: rgba(211,211,211,.16) !important; }
 html.skin-redesign .skin-port .game-main {
   flex: 1;
   min-width: 0;
@@ -337,7 +359,7 @@ html.skin-redesign .skin-port .games-bar > .pager { grid-column: 1; justify-self
 html.skin-redesign .skin-port .games-word {
   grid-column: 3;
   justify-self: center;
-  color: var(--um-accent);
+  color: #e6edf3 !important;
   font-family: "Roboto", "Segoe UI", sans-serif;
   font-size: 16px;
   font-weight: 400;
@@ -382,15 +404,67 @@ html.skin-redesign .skin-port .panel {
 html.skin-redesign .skin-port .bar-actions { margin-left: auto; flex: none; }
 html.skin-redesign .skin-port .bar-actions .MuiButton-root {
   width: auto !important;
+  height: 34px !important;
+  min-height: 34px !important;
   border-radius: 8px !important;
-  min-height: 34px;
-  padding: 8px 16px !important;
-  text-transform: uppercase;
-  font-weight: 700;
-  background: var(--um-accent) !important;
+  padding: 0 12px !important;
+  font-size: 11px !important;
+  font-weight: 700 !important;
+  letter-spacing: 0.04em !important;
+  line-height: 1 !important;
+  text-transform: uppercase !important;
+  background: linear-gradient(180deg, color-mix(in srgb, var(--um-accent) 78%, #fff), color-mix(in srgb, var(--um-accent) 88%, #1a1a1a)) !important;
   color: #fff !important;
-  box-shadow: none;
+  box-shadow: 0 1px 2px rgba(0,0,0,.16) !important;
 }
+html.skin-redesign .skin-port .player-count,
+html.skin-redesign .skin-port .player-count * {
+  font-size: 12px !important;
+  font-weight: 700 !important;
+  line-height: 1 !important;
+  letter-spacing: 0 !important;
+  color: inherit !important;
+}
+html.skin-redesign .skin-port .page-nav .MuiIconButton-root {
+  color: var(--um-accent) !important;
+  width: 22px;
+  height: 22px;
+  border-radius: 4px;
+}
+html.skin-redesign .skin-port .page-nav .MuiIconButton-root[style] {
+  background: #161b22 !important;
+  color: #e6edf3 !important;
+  border: 1px solid rgba(255,255,255,.18);
+}
+html.skin-redesign.light-mode .skin-port .page-nav .MuiIconButton-root[style] {
+  background: #fff !important;
+  color: #1f2328 !important;
+  border-color: #d0d7de;
+}
+html.skin-redesign .skin-port .games-end a.btn {
+  background: rgba(255,255,255,.06) !important;
+  color: #e6edf3 !important;
+  border: 1px solid rgba(255,255,255,.16) !important;
+  box-shadow: none !important;
+  text-decoration: none;
+}
+html.skin-redesign.light-mode .skin-port .games-end a.btn {
+  background: rgba(255,255,255,.7) !important;
+  color: #1f2328 !important;
+  border-color: #d0d7de !important;
+}
+html.skin-redesign .skin-port .refresh-btn,
+html.skin-redesign .skin-port .refresh-btn .MuiIconButton-root,
+html.skin-redesign .skin-port .refresh-btn i {
+  color: #3fb950 !important;
+  width: 28px;
+  height: 28px;
+  font-size: 16px !important;
+}
+html.skin-redesign .skin-port .lobby-split {
+  grid-template-columns: minmax(0, 1fr) 360px !important;
+}
+html.skin-redesign.light-mode .skin-port .games-word { color: #1f2328 !important; }
 html.skin-redesign .skin-port .bar-actions .skin-eye {
   width: 34px !important;
   min-width: 34px !important;

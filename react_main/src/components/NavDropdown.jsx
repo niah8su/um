@@ -112,7 +112,7 @@ export default function NavDropdown({
     </IconButton>
   ) : (
     <Button
-      className={skin ? "skin-nav-btn" : undefined}
+      className={skin ? `skin-nav-btn${isActive ? " is-active" : ""}` : undefined}
       variant="text"
       {...menuTriggerProps}
       sx={{

@@ -169,7 +169,7 @@ export default function SkinLobby({
             {loading && games.length === 0 ? null : games.map((game) => {
               const [tagClass, tagLabel] = tagFor(game);
               return (
-              <article key={game.id} className={`game${game.competitive ? " comp" : ""}`}>
+              <article key={game.id} className={`game tone-${tagClass}${game.competitive ? " comp" : ""}`}>
                 <div className="stub" style={{ background: getRowStubColor(game) }} />
                 <div className="game-main" style={{ background: getRowColor(game, false) }}>
                   <div className="bar-stack">

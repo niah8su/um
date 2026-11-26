@@ -401,13 +401,9 @@ export function UserProvider({
   const { mode, systemMode, setMode } = useColorScheme();
   useEffect(() => {
     const resolved = mode === "system" ? systemMode : mode;
-    document.documentElement.classList.remove(
-      "dark-mode",
-      "light-mode"
-    );
-    if (resolved === "light" || resolved === "dark") {
-      document.documentElement.classList.add(`${resolved}-mode`);
-    }
+    const root = document.documentElement;
+    root.classList.toggle("light-mode", resolved === "light");
+    root.classList.toggle("dark-mode", resolved === "dark");
   }, [mode, systemMode]);
 
   useEffect(() => {
@@ -420,8 +416,9 @@ export function UserProvider({
         user.settings.siteColorScheme === "retro"
           ? "dark"
           : user.settings.siteColorScheme;
-      // Apply the saved scheme when it changes. Skip when MUI already matches,
-      // so a click is not immediately written back to the previous value.
+      // Follow the saved scheme only when that setting changes. Depending on
+      // `mode` here snaps a click back to the previous scheme, then forward
+      // again once the setting state catches up.
       if (
         ["system", "light", "dark"].includes(normalized) &&
         mode !== normalized
@@ -429,7 +426,8 @@ export function UserProvider({
         setMode(normalized);
       }
     }
-  }, [user.loaded, user.loggedIn, user.settings?.siteColorScheme, mode, setMode]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [user.loaded, user.loggedIn, user.settings?.siteColorScheme]);
 
   const fonts = resolveFontFamilySetting(
     user.settings?.fontFamily || "default"

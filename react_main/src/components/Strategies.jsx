@@ -28,6 +28,7 @@ import { VoteWidget } from "components/VoteWidget";
 import { NameWithAvatar } from "pages/User/UserWidgets";
 import { Loading } from "components/Loading";
 import { useIsPhoneDevice } from "hooks/useIsPhoneDevice";
+import { useSkinRedesign } from "components/useSkinRedesign";
 import { useStrategyWindows } from "components/strategyWindows/StrategyWindowsContext";
 import surprisedFace from "images/emotes/surprised.webp";
 import sadFace from "images/emotes/sad.webp";
@@ -63,6 +64,15 @@ function StrategiesBase({
   const errorAlert = useErrorAlert();
   const strategyWindows = useStrategyWindows();
   const isPhoneDevice = useIsPhoneDevice();
+  const skin = useSkinRedesign();
+  const [skinOpen, setSkinOpen] = useState(false);
+  useEffect(() => {
+    const onPop = (event) => {
+      if (event.detail !== "strategies") setSkinOpen(false);
+    };
+    window.addEventListener("um-skin-pop", onPop);
+    return () => window.removeEventListener("um-skin-pop", onPop);
+  }, []);
   // The pop-out button only makes sense where the app shell can actually
   // host windows (Main.jsx) and where there is a mouse to drag them with.
   const canPopout =
@@ -743,6 +753,33 @@ function StrategiesBase({
       <div className="side-menu-content">{listContent}</div>
     </div>
   );
+
+  if (skin && variant === "panel") {
+    return (
+      <>
+        <button
+          type="button"
+          className="skin-strategies-btn"
+          onClick={() => {
+            setSkinOpen((open) => {
+              const next = !open;
+              if (next) {
+                window.dispatchEvent(
+                  new CustomEvent("um-skin-pop", { detail: "strategies" })
+                );
+              }
+              return next;
+            });
+          }}
+        >
+          Strategies
+        </button>
+        {skinOpen && <div className="skin-strategies-pop">{sideMenu}</div>}
+        {dialog}
+        {reader}
+      </>
+    );
+  }
 
   return (
     <>

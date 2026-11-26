@@ -367,6 +367,13 @@ export default function Settings() {
       showIf: (deps) => deps.user.perms.viewDeleted,
     },
     {
+      // NEW FEATURE: switches the whole site to the redesign. Legacy stays the default.
+      label: "make ultimafia better again",
+      ref: "makeUltimafiaBetterAgain",
+      type: "boolean",
+      groupName: "Appearance",
+    },
+    {
       label: "Site Color Scheme",
       ref: "siteColorScheme",
       type: "select",

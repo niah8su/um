@@ -24,6 +24,7 @@ import { GameContext, SiteInfoContext } from "../../Contexts";
 import { mafiaAudioConfig } from "../../audio/audioConfigs";
 import { SideMenu } from "./Game";
 import { Button, Stack, Typography } from "@mui/material";
+import { useSkinRedesign } from "../../components/useSkinRedesign";
 
 function MissionScoreKeeper() {
   const game = useContext(GameContext);
@@ -151,6 +152,7 @@ export function GuidesMovedHint({ onOpenGuides }) {
 
 export default function MafiaGame() {
   const game = useContext(GameContext);
+  const skin = useSkinRedesign();
   const siteInfo = useContext(SiteInfoContext);
   const isPhoneDevice = useIsPhoneDevice();
 
@@ -567,11 +569,13 @@ export default function MafiaGame() {
                     descriptors={actionDescriptorData.regularActionDescriptors}
                   />
                 )}
-                <StrategiesPanel
-                  setupId={setupId}
-                  visible={Boolean(setupId)}
-                  title={setupTitle}
-                />
+                {!skin && (
+                  <StrategiesPanel
+                    setupId={setupId}
+                    visible={Boolean(setupId)}
+                    title={setupTitle}
+                  />
+                )}
               </>
             ) : (
               <ActionList
@@ -587,6 +591,13 @@ export default function MafiaGame() {
             <LastWillEntry />
             <PinnedMessages />
             <Notes />
+            {skin && (
+              <StrategiesPanel
+                setupId={setupId}
+                visible={Boolean(setupId)}
+                title={setupTitle}
+              />
+            )}
           </>
         }
       />

@@ -158,6 +158,8 @@ var schemas = {
       ignoreDeathSounds: { type: Boolean, default: false },
       vanityUrl: { type: String, default: "" },
       backgroundRepeatMode: { type: String, default: "repeat" },
+      // NEW FEATURE: opt-in site redesign. Default off; legacy UI stays.
+      makeUltimafiaBetterAgain: { type: Boolean, default: false },
     },
     accounts: {
       discord: String,

@@ -50,6 +50,9 @@ import { useHostedGameSession } from "./hooks/useHostedGameSession";
 import { browserReservesBottomSafeArea } from "./utils/platform";
 import "css/main.css";
 import "css/accessibility.css";
+import "css/skin-redesign.css";
+import SkinController from "./components/SkinController";
+import SkinAppearance from "./components/SkinAppearance";
 
 // Navigation icons removed - now using text-only navigation
 import {
@@ -340,6 +343,7 @@ function Main(props) {
             setUserLoading={setUserLoading}
             setSiteTheme={setSiteTheme}
           >
+            <SkinController />
             <SnowstormController />
             <Routes>
               <Route path="/" element={<Navigate to="/welcome" />} />
@@ -455,6 +459,7 @@ export function Header({ setShowAnnouncementTemporarily }) {
             ]}
           />
           <SiteLogo small flexible />
+          <SkinAppearance />
           {/* User section */}
           <div style={{ flex: "1 0" }}>
             {/* Signed-out auth lives in the phone bottom navigation; the header
@@ -539,6 +544,7 @@ export function Header({ setShowAnnouncementTemporarily }) {
                   { text: "Live Feed", path: "/activity/livefeed" },
                 ]}
               />
+            <SkinAppearance />
             <Box sx={{
               marginLeft: "auto !important",
             }}>

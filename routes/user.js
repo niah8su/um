@@ -2595,6 +2595,7 @@ router.post("/settings/update", async function (req, res) {
       "accessibleNameColors",
       "ignoreNameFonts",
       "ignoreDeathSounds",
+      "makeUltimafiaBetterAgain",
     ]);
     if (BOOLEAN_SETTINGS.has(prop)) {
       value = value === true || value === "true";

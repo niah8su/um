@@ -13,6 +13,7 @@ import { useAppLocation } from "../hooks/useViewActivity";
 import { SheetController } from "../lib/sheetController.js";
 
 import { useIsPhoneDevice } from "../hooks/useIsPhoneDevice";
+import { useSkinRedesign } from "./useSkinRedesign";
 
 // A sheet for content that would otherwise be an anchored popover: the phone
 // answer to "tap a thing, see its details" -- a bottom sheet, reachable by
@@ -29,6 +30,7 @@ export const SheetContext = createContext({
 
 export function SheetProvider({ children }) {
   const isPhone = useIsPhoneDevice();
+  const skin = useSkinRedesign();
   const location = useAppLocation();
 
   // Kept while the drawer animates shut, so the closing sheet still shows its
@@ -118,6 +120,7 @@ export function SheetProvider({ children }) {
         anchor={isPhone ? "bottom" : "right"}
         open={open}
         onClose={closeSheet}
+        sx={skin ? { zIndex: 8000 } : undefined}
         slotProps={{
           transition: {
             onExited: () => {

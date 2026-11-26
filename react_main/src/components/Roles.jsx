@@ -20,6 +20,7 @@ import {
   Divider,
 } from "@mui/material";
 import { usePopoverOpen } from "../hooks/usePopoverOpen";
+import { useSkinRedesign } from "./useSkinRedesign";
 import { Loading } from "./Loading";
 import { useIsPhoneDevice } from "../hooks/useIsPhoneDevice";
 import { PopoverContent } from "./Popover";
@@ -300,6 +301,7 @@ export function RoleCount({
   const siteInfo = useContext(SiteInfoContext);
   const [roleData, setRoleData] = useState(null);
   const isPhoneDevice = useIsPhoneDevice();
+  const skin = useSkinRedesign();
 
   const {
     popoverOpen: canOpenPopover,
@@ -309,6 +311,8 @@ export function RoleCount({
     handleMouseEnter,
     handleMouseLeave,
     closePopover,
+    holdPopover,
+    releasePopover,
   } = usePopoverOpen();
 
   const handleRoleCountClick = (e) => {
@@ -652,7 +656,20 @@ export function RoleCount({
       {layoutContent}
       <Popover
         open={popoverOpen}
-        sx={{ pointerEvents: openByClick ? "auto" : "none" }}
+        sx={{
+          pointerEvents: openByClick || skin ? "auto" : "none",
+          zIndex: skin ? 7900 : undefined,
+        }}
+        slotProps={
+          skin
+            ? {
+                paper: {
+                  onMouseEnter: holdPopover,
+                  onMouseLeave: releasePopover,
+                },
+              }
+            : undefined
+        }
         anchorEl={anchorEl}
         anchorOrigin={{
           vertical: "bottom",

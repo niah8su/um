@@ -1,4 +1,4 @@
-import { useContext, useEffect, useState } from "react";
+import { useContext, useEffect, useRef, useState } from "react";
 import { useAppLocation, useViewActive } from "./useViewActivity";
 import { activateOnEnterOrSpace } from "../utils/keyboard";
 import { InGameContext } from "Contexts";
@@ -10,9 +10,26 @@ export const usePopoverOpen = () => {
   const [anchorEl, setAnchorEl] = useState(null);
   const [openByHover, setOpenByHover] = useState(false);
   const [openByClick, setOpenByClick] = useState(false);
+  const closeTimer = useRef(null);
   const popoverOpen = active && Boolean(anchorEl);
 
+  const clearCloseTimer = () => {
+    if (closeTimer.current) {
+      window.clearTimeout(closeTimer.current);
+      closeTimer.current = null;
+    }
+  };
+  const scheduleHoverClose = () => {
+    clearCloseTimer();
+    closeTimer.current = window.setTimeout(() => {
+      setAnchorEl(null);
+      setOpenByClick(false);
+      setOpenByHover(false);
+    }, 280);
+  };
+
   const handleMouseEnter = (e) => {
+    clearCloseTimer();
     if (!openByClick) {
       setOpenByHover(true);
       openPopover(e);
@@ -20,10 +37,23 @@ export const usePopoverOpen = () => {
   };
   const handleMouseLeave = () => {
     if (openByHover) {
+      if (document.documentElement.classList.contains("skin-redesign")) {
+        scheduleHoverClose();
+        return;
+      }
       closePopover();
     }
   };
+  const holdPopover = () => {
+    clearCloseTimer();
+  };
+  const releasePopover = () => {
+    if (document.documentElement.classList.contains("skin-redesign")) {
+      scheduleHoverClose();
+    }
+  };
   const handleClick = (e) => {
+    clearCloseTimer();
     setOpenByClick(true);
     setOpenByHover(false);
     openPopover(e);
@@ -33,6 +63,7 @@ export const usePopoverOpen = () => {
     setAnchorEl(e.currentTarget);
   };
   const closePopover = () => {
+    clearCloseTimer();
     setAnchorEl(null);
     setOpenByClick(false);
     setOpenByHover(false);
@@ -49,6 +80,8 @@ export const usePopoverOpen = () => {
     setOpenByHover(false);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [location.key, location.pathname, location.search, location.hash, inGame, active]);
+
+  useEffect(() => () => clearCloseTimer(), []);
 
   const handleKeyDown = (e) => {
     activateOnEnterOrSpace(e, handleClick);
@@ -74,6 +107,8 @@ export const usePopoverOpen = () => {
     handleClick,
     handleKeyDown,
     closePopover,
+    holdPopover,
+    releasePopover,
     interactiveProps,
   };
 };

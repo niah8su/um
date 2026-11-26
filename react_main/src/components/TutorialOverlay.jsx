@@ -5,6 +5,7 @@ import { Box, Button, IconButton, Paper, Stack, Typography } from "@mui/material
 import { useSocketListeners } from "pages/Game/Game";
 import { UserContext } from "../Contexts";
 import { HIGHLIGHT_CLASS, HIGHLIGHT_CSS, resolveHighlights } from "../lib/tutorialHighlight";
+import { useSkinRedesign } from "./useSkinRedesign";
 
 const POS_KEY = "tutorialBoxPos";
 
@@ -17,6 +18,7 @@ const POS_KEY = "tutorialBoxPos";
 // and collapsed.
 export default function TutorialOverlay({ socket }) {
   const user = useContext(UserContext);
+  const skin = useSkinRedesign();
   const [step, setStep] = useState(null);
   const [canContinue, setCanContinue] = useState(false);
   const [collapsed, setCollapsed] = useState(false);
@@ -225,7 +227,15 @@ export default function TutorialOverlay({ socket }) {
         onPointerCancel={onPointerUp}
         sx={{ cursor: "move", touchAction: "none", userSelect: "none" }}
       >
-        <Typography sx={{ fontSize: 20, lineHeight: 1.2 }}>📘</Typography>
+        {skin ? (
+          <img
+            className="skin-golbolco"
+            src="/images/tutorial-bots/Golbolco.webp"
+            alt=""
+          />
+        ) : (
+          <Typography sx={{ fontSize: 20, lineHeight: 1.2 }}>📘</Typography>
+        )}
         <Box sx={{ flex: 1, minWidth: 0 }}>
           <Typography variant="subtitle2" noWrap sx={{ color: "#7fb6ff" }}>
             Tutorial <span style={{ opacity: 0.6, fontWeight: 400 }}>· drag to move</span>

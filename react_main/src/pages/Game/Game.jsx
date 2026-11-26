@@ -82,6 +82,8 @@ import { useAudio } from "../../hooks/useAudio";
 import { coreAudioConfig } from "../../audio/audioConfigs";
 
 import "css/game.css";
+import { useSkinRedesign } from "../../components/useSkinRedesign";
+import SkinAppearance from "../../components/SkinAppearance";
 import EmotePicker from "../../components/EmotePicker";
 import "./Game.css";
 import { Loading } from "../../components/Loading";
@@ -1918,7 +1920,7 @@ export function TopBar({ forceShow = false } = {}) {
   );
 
   const stateSwitcher = (
-    <Stack direction="column" spacing={1} sx={{
+    <Stack direction="column" spacing={1} className="skin-states" sx={{
       alignItems: "stretch",
       justifyContent: "center",
       flex: isPhoneDevice || !showStateSwitcher ? "none" : "1 1 0",
@@ -1990,6 +1992,7 @@ export function TopBar({ forceShow = false } = {}) {
         direction="row"
         spacing={1}
         useFlexGap
+        className="skin-topbar"
         sx={{
           px: 1,
           pb: 1,
@@ -6920,6 +6923,7 @@ function SettingsForm({ handleClose = null, onLeave = null }) {
 }
 
 export function SettingsMenu() {
+  const skin = useSkinRedesign();
   const [expanded, setExpanded] = useState(false);
 
   const handleClose = () => {
@@ -6929,6 +6933,45 @@ export function SettingsMenu() {
   const handleToggle = () => {
     setExpanded((prev) => !prev);
   };
+
+  useEffect(() => {
+    const onPop = (event) => {
+      if (event.detail !== "settings") setExpanded(false);
+    };
+    window.addEventListener("um-skin-pop", onPop);
+    return () => window.removeEventListener("um-skin-pop", onPop);
+  }, []);
+
+  if (skin) {
+    return (
+      <>
+        <button
+          type="button"
+          className="skin-gear"
+          aria-label="Settings"
+          onClick={() => {
+            setExpanded((prev) => {
+              const next = !prev;
+              if (next) {
+                window.dispatchEvent(
+                  new CustomEvent("um-skin-pop", { detail: "settings" })
+                );
+              }
+              return next;
+            });
+          }}
+        >
+          <i className="fas fa-cog" />
+        </button>
+        {expanded && (
+          <div className="skin-settings-pop" role="dialog" aria-label="Settings">
+            <SkinAppearance />
+            <SettingsForm handleClose={handleClose} />
+          </div>
+        )}
+      </>
+    );
+  }
 
   return (
     <SideMenu

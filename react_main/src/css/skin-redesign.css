@@ -44,9 +44,9 @@ html.skin-redesign body::before {
   z-index: -1;
   pointer-events: none;
   background:
-    radial-gradient(1100px 760px at 16% 34%, color-mix(in srgb, var(--um-grad-1, #4a1220) 22%, transparent), transparent 70%),
-    radial-gradient(980px 700px at 86% 86%, color-mix(in srgb, var(--um-grad-2, #12060c) 16%, transparent), transparent 68%),
-    #020104;
+    radial-gradient(1100px 760px at 16% 34%, color-mix(in srgb, var(--um-grad-1, #4a1220) 16%, transparent), transparent 70%),
+    radial-gradient(980px 700px at 86% 86%, color-mix(in srgb, var(--um-grad-2, #12060c) 10%, transparent), transparent 68%),
+    #000000;
 }
 
 html.skin-redesign.light-mode body::before {
@@ -391,7 +391,7 @@ html.skin-redesign .game .main,
 html.skin-redesign .game .center-panel,
 html.skin-redesign .game .speech-display { min-height: 0; overflow: auto; }
 /* Newspaper keeps the repo paper, type, and ink in both modes. */
-html.skin-redesign body { background-color: #050308; }
+html.skin-redesign body { background-color: #000000; }
 html.skin-redesign.light-mode body { background-color: #f7f4f1; color: #1c1917; }
 html.skin-redesign.light-mode .game-session {
   background: linear-gradient(180deg, #e8893a 0%, #f0b429 48%, #ffe7a3 100%) !important;
@@ -444,7 +444,7 @@ html.skin-redesign .skin-side {
   width: 220px;
   display: flex;
   flex-direction: column;
-  padding: 64px 10px 12px;
+  padding: 128px 10px 12px;
   box-sizing: border-box;
   overflow: auto;
   background: var(--um-glass);
@@ -549,7 +549,30 @@ html.skin-redesign .skin-welcome img {
   border-radius: 6px;
 }
 
-html.skin-redesign .miniprofile { display: flex; flex-direction: column; }
+html.skin-redesign .miniprofile { display: flex; flex-direction: column; position: relative; }
+html.skin-redesign .skin-card-x {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  z-index: 9;
+  width: 22px;
+  height: 22px;
+  border: 0;
+  background: transparent;
+  color: inherit;
+  cursor: pointer;
+  font-size: 16px;
+  line-height: 1;
+  padding: 0;
+}
+html.skin-redesign .name-with-avatar { cursor: pointer; }
+html.skin-redesign .MuiPopover-paper .MuiAccordionSummary-expandIconWrapper { display: none; }
+html.skin-redesign .skin-online-row {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 2px 4px;
+}
 html.skin-redesign .miniprofile > * { order: 6; }
 html.skin-redesign .miniprofile > .mui-popover-title { order: 1; font-size: 14px; }
 html.skin-redesign .miniprofile > .pronouns { order: 2; }
@@ -625,14 +648,19 @@ html.skin-redesign [data-testid="tutorial-overlay"] img.skin-golbolco {
   flex-shrink: 0;
 }
 
+html.skin-redesign .MuiAppBar-root img[alt="Site logo"] {
+  display: block;
+  margin-top: 6px;
+}
 html.skin-redesign .skin-side-toggle {
-  position: static;
+  position: relative;
+  z-index: 2;
   display: flex;
   align-items: center;
   justify-content: center;
   width: 32px;
   height: 32px;
-  margin: 0 auto 6px;
+  margin: 12px auto 8px;
   border: 0;
   background: transparent;
   color: inherit;

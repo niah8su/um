@@ -127,6 +127,11 @@ function Miniprofile(props) {
   return (
     <div className="miniprofile">
       {skin ? <span className="skin-card-beam" aria-hidden="true"><i /></span> : null}
+      {skin && props.onClose ? (
+        <button type="button" className="skin-card-x" aria-label="Close profile" onClick={props.onClose}>
+          ×
+        </button>
+      ) : null}
       <div className="mui-popover-title">
         <Stack
           direction="row"

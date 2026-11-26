@@ -699,6 +699,7 @@ export function NameWithAvatar(props) {
   const { openProfile } = useProfileSheet();
   const [userProfile, setUserProfile] = useState(null);
   const [isClicked, setIsClicked] = useState(false);
+  const popToken = useRef({});
 
   const autoColor = skinLightForcesBlack(color) ? "#000000" : user.autoContrastColor(color);
   // Viewer setting: drop special name fonts. Colors and animations stay.
@@ -840,11 +841,29 @@ export function NameWithAvatar(props) {
     </Stack>
   );
 
+  useEffect(() => {
+    if (!skin) return undefined;
+    const onPop = (event) => {
+      const owner = event.detail && event.detail.owner;
+      if (owner === popToken.current) return;
+      setIsClicked(false);
+      closePopover();
+    };
+    window.addEventListener("um-skin-pop", onPop);
+    return () => window.removeEventListener("um-skin-pop", onPop);
+  }, [skin, closePopover]);
+
+  const openSkinCard = (event) => {
+    if (event && event.preventDefault) event.preventDefault();
+    window.dispatchEvent(new CustomEvent("um-skin-pop", {
+      detail: { kind: "profile", owner: popToken.current },
+    }));
+    handlePopoverClick(event);
+    setIsClicked(true);
+  };
+
   const onNameEnter = (e) => {
-    if (isPhone) return;
-    if (skin) {
-      window.dispatchEvent(new CustomEvent("um-skin-pop", { detail: "profile" }));
-    }
+    if (isPhone || skin) return;
     handleMouseEnter(e);
   };
 
@@ -883,7 +902,15 @@ export function NameWithAvatar(props) {
     >
       {userProfile && (
         <React.Suspense fallback={null}>
-          <Miniprofile user={userProfile} game={game} key={userProfile.id} />
+          <Miniprofile
+            user={userProfile}
+            game={game}
+            key={userProfile.id}
+            onClose={() => {
+              setIsClicked(false);
+              closePopover();
+            }}
+          />
         </React.Suspense>
       )}
     </Popover>
@@ -896,8 +923,12 @@ export function NameWithAvatar(props) {
         <div
           className={`name-with-avatar no-link`}
           target={newTab ? "_blank" : ""}
-          onMouseEnter={skinCard ? onNameEnter : undefined}
-          onMouseLeave={skinCard && !isPhone ? handleMouseLeave : undefined}
+          onClick={skinCard ? openSkinCard : undefined}
+          onKeyDown={skinCard ? (event) => {
+            if (event.key === "Enter" || event.key === " ") openSkinCard(event);
+          } : undefined}
+          role={skinCard ? "button" : undefined}
+          tabIndex={skinCard ? 0 : undefined}
         >
           {contents}
         </div>
@@ -917,6 +948,11 @@ export function NameWithAvatar(props) {
         return;
       }
 
+      if (skin) {
+        openSkinCard(e);
+        return;
+      }
+
       handlePopoverClick(e);
 
       setIsClicked(popoverOpen);
@@ -929,8 +965,8 @@ export function NameWithAvatar(props) {
             isClicked ? " name-with-avatar-clicked" : ""
           }`}
           onClick={handlePlayerClick}
-          onMouseEnter={isPhone ? undefined : onNameEnter}
-          onMouseLeave={isPhone ? undefined : handleMouseLeave}
+          onMouseEnter={isPhone || skin ? undefined : onNameEnter}
+          onMouseLeave={isPhone || skin ? undefined : handleMouseLeave}
         >
           {contents}
         </div>
@@ -945,8 +981,7 @@ export function NameWithAvatar(props) {
           className={`name-with-avatar`}
           to={profileLink}
           target={newTab ? "_blank" : ""}
-          onMouseEnter={skinCard ? onNameEnter : undefined}
-          onMouseLeave={skinCard && !isPhone ? handleMouseLeave : undefined}
+          onClick={skinCard ? openSkinCard : undefined}
         >
           {contents}
         </Link>

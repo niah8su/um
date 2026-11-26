@@ -368,7 +368,7 @@ export default function Settings() {
     },
     {
       // NEW FEATURE: switches the whole site to the redesign. Legacy stays the default.
-      label: "make ultimafia better again",
+      label: "Make Ultimafia Great Again",
       ref: "makeUltimafiaBetterAgain",
       type: "boolean",
       groupName: "Appearance",

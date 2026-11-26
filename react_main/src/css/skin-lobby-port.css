@@ -664,6 +664,28 @@ html.skin-redesign .skin-port .lobby-tabs button[data-lobby="all"].on {
   border-color: var(--um-accent) !important;
   box-shadow: 0 0 14px color-mix(in srgb, var(--um-accent) 45%, transparent) !important;
 }
+html.skin-redesign .skin-port .lobby-tabs {
+  gap: 4px !important;
+  padding: 8px 4px !important;
+}
+html.skin-redesign .skin-port .lobby-tabs button {
+  box-sizing: border-box !important;
+  height: 39px !important;
+  min-height: 0 !important;
+  padding: 8px 14px !important;
+  gap: 5px !important;
+  font-size: 11px !important;
+  font-weight: 500 !important;
+  letter-spacing: 1.32px !important;
+  line-height: 13px !important;
+  border-radius: 8px !important;
+}
+html.skin-redesign .skin-port .lobby-tabs .tab-ico {
+  width: 13px !important;
+  height: 13px !important;
+  min-width: 13px !important;
+  flex: none;
+}
 html.skin-redesign .skin-port .lobby-tabs .tab-ico,
 html.skin-redesign .skin-port .mark-ico {
   width: 14px;
@@ -678,10 +700,12 @@ html.skin-redesign .skin-port .mark-ico.mark-heart:not(.gold) { color: #e23b3b; 
 html.skin-redesign .skin-port .type-tag {
   position: static !important;
   margin: 0 !important;
-  width: 88px !important;
-  min-width: 88px !important;
-  max-width: 88px !important;
-  height: 16px !important;
+  box-sizing: border-box !important;
+  width: 95px !important;
+  min-width: 95px !important;
+  max-width: 95px !important;
+  height: 17px !important;
+  min-height: 17px !important;
   padding: 2px 4px !important;
   border-radius: 4px !important;
   border: 1px solid var(--tag-border, currentColor) !important;
@@ -689,7 +713,7 @@ html.skin-redesign .skin-port .type-tag {
   color: var(--tag-color, currentColor) !important;
   font-size: 8px !important;
   font-weight: 600 !important;
-  letter-spacing: 0.1em !important;
+  letter-spacing: 0.8px !important;
   line-height: 1 !important;
   text-transform: uppercase !important;
 }
@@ -744,26 +768,57 @@ html.skin-redesign .skin-port .setup-copy {
   position: relative;
   z-index: 2;
 }
-html.skin-redesign .skin-port .roles,
-html.skin-redesign .skin-port .roles .setup,
-html.skin-redesign .skin-port .roles .MuiCard-root,
-html.skin-redesign .skin-port .roles .MuiStack-root {
+html.skin-redesign .skin-port .roles {
+  display: flex !important;
+  align-items: center !important;
   min-width: 0 !important;
-  max-width: 100% !important;
-  width: 100% !important;
   overflow: hidden !important;
-  max-height: 44px !important;
-  height: auto !important;
-  flex-wrap: wrap !important;
-  align-content: center;
+  max-height: 20px !important;
+}
+html.skin-redesign .skin-port .roles .setup,
+html.skin-redesign .skin-port .roles .MuiCard-root {
+  width: auto !important;
+  max-width: 100% !important;
+  min-width: 0 !important;
+  overflow: hidden !important;
+  background: transparent !important;
+}
+html.skin-redesign .skin-port .roles .MuiStack-root:has(.role) {
+  display: flex !important;
+  flex-direction: row !important;
+  flex-wrap: nowrap !important;
+  align-items: center !important;
+  justify-content: flex-start !important;
+  gap: 2px !important;
+  width: auto !important;
+  max-width: 100% !important;
+  height: 17px !important;
+  max-height: 17px !important;
+  min-height: 0 !important;
+  overflow: hidden !important;
+  margin: 0 !important;
+  padding: 0 !important;
+}
+html.skin-redesign .skin-port .roles .MuiStack-root:has(.role) > * {
+  flex: 0 0 17px !important;
+  width: 17px !important;
+  height: 17px !important;
+  min-width: 17px !important;
+  max-width: 17px !important;
+  position: relative !important;
+  margin: 0 !important;
+  overflow: hidden !important;
 }
 html.skin-redesign .skin-port .roles .role,
 html.skin-redesign .skin-port .roles img {
-  width: 18px !important;
-  height: 18px !important;
-  min-width: 18px !important;
+  width: 17px !important;
+  height: 17px !important;
+  min-width: 17px !important;
+  max-width: 17px !important;
+  position: relative !important;
+  flex: none !important;
+  margin: 0 !important;
 }
-html.skin-redesign .skin-port .roles .role { flex: none; }
 html.skin-redesign .page-nav {
   display: inline-flex !important;
   align-items: center;
@@ -932,6 +987,88 @@ html.skin-redesign .skin-port .yn {
 }
 html.skin-redesign .skin-port .yn.yes { stroke: #3fb950; }
 html.skin-redesign .skin-port .yn.no { stroke: #f85149; }
+html.skin-redesign .skin-port .setup-name,
+html.skin-redesign .skin-port .setup-name span {
+  font-family: Roboto, "Segoe UI", sans-serif !important;
+  font-size: 12px !important;
+  font-weight: 600 !important;
+  letter-spacing: 0.06em !important;
+  text-transform: uppercase !important;
+  line-height: 1.25 !important;
+}
+html.skin-redesign .skin-port .bar-stack,
+html.skin-redesign .skin-port .setup-row {
+  align-self: center !important;
+  align-items: center !important;
+}
+html.skin-redesign .skin-port .help-btn,
+html.skin-redesign .skin-port .help-btn.sq-btn,
+html.skin-redesign.light-mode .skin-port .help-btn.sq-btn,
+html.skin-redesign .skin-port .refresh-btn {
+  width: 28px !important;
+  height: 28px !important;
+  min-width: 28px !important;
+  border: 0 !important;
+  background: transparent !important;
+  box-shadow: none !important;
+  border-radius: 8px !important;
+}
+html.skin-redesign .skin-port .help-btn,
+html.skin-redesign .skin-port .help-btn svg {
+  color: var(--um-accent) !important;
+}
+html.skin-redesign .page-nav .MuiIconButton-root[style] {
+  background: rgba(22, 18, 24, .72) !important;
+  border: 1px solid rgba(255, 255, 255, .16) !important;
+  border-radius: 6px !important;
+  color: var(--um-accent) !important;
+  font-weight: 700 !important;
+  backdrop-filter: blur(8px);
+}
+html.skin-redesign.light-mode .page-nav .MuiIconButton-root[style] {
+  background: rgba(255, 255, 255, .82) !important;
+  border-color: #d0d7de !important;
+  color: var(--um-accent) !important;
+}
+html.skin-redesign .skin-port .announce,
+html.skin-redesign .skin-new-here {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  gap: 10px;
+  align-items: flex-start;
+  padding: 10px 12px;
+  margin: 0 0 8px;
+  border-radius: 12px;
+  border: 1px solid color-mix(in srgb, var(--um-accent) 45%, transparent);
+  background: linear-gradient(180deg, color-mix(in srgb, var(--um-accent) 18%, transparent), color-mix(in srgb, var(--um-accent) 8%, transparent)), rgba(22, 18, 34, .55);
+  box-shadow: inset 0 1px 0 rgba(255,255,255,.16);
+  backdrop-filter: blur(16px);
+  font-size: 13px;
+  line-height: 1.4;
+  color: #e6edf3;
+}
+html.skin-redesign.light-mode .skin-port .announce,
+html.skin-redesign.light-mode .skin-new-here {
+  background: linear-gradient(180deg, color-mix(in srgb, var(--um-accent) 12%, transparent), rgba(255,255,255,.55)), rgba(255,255,255,.7);
+  color: #1f2328;
+}
+html.skin-redesign .skin-new-here .ann-nav { display: flex; flex-direction: column; gap: 2px; }
+html.skin-redesign .skin-new-here .ann-arrow svg { width: 14px; height: 14px; fill: none; stroke: currentColor; stroke-width: 1.6; }
+html.skin-redesign .skin-new-here .horn { width: 18px; height: 18px; fill: currentColor; flex: none; }
+html.skin-redesign .skin-new-here .ann-body { flex: 1; min-width: 0; }
+html.skin-redesign .skin-new-here .ann-body p { margin: 0; }
+html.skin-redesign .skin-new-here .ann-body a { color: var(--um-accent); }
+html.skin-redesign .skin-new-here .ann-x {
+  width: 22px; height: 22px; border: 0; border-radius: 4px;
+  background: rgba(255,255,255,.06); color: inherit; cursor: pointer;
+  display: inline-flex; align-items: center; justify-content: center;
+}
+html.skin-redesign .skin-new-here .ann-x svg { width: 12px; height: 12px; fill: none; stroke: currentColor; stroke-width: 1.6; }
+@media (max-width: 1100px) {
+  html.skin-redesign .skin-port .lobby-side { display: none !important; }
+  html.skin-redesign .skin-port .lobby-split { grid-template-columns: minmax(0, 1fr) !important; }
+}
 html.skin-redesign .skin-port .poll-q {
   position: relative;
   margin: 0;

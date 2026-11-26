@@ -12,6 +12,7 @@ import {
 } from "@mui/material";
 
 import { UserContext } from "../Contexts";
+import { useSkinRedesign } from "./useSkinRedesign";
 
 // Soft prompt for new accounts to play the tutorial before ranked games.
 // The server decides who's eligible (user.tutorialPrompt: joined after the
@@ -27,10 +28,37 @@ export function useTutorialPrompt() {
 
 export function TutorialLobbyBanner() {
   const eligible = useTutorialPrompt();
+  const skin = useSkinRedesign();
   const [dismissed, setDismissed] = useState(
     () => localStorage.getItem(BANNER_KEY) === "1"
   );
   if (!eligible || dismissed) return null;
+
+  if (skin) {
+    return (
+      <div className="announce skin-new-here" data-testid="tutorial-banner">
+        <div className="ann-nav" aria-hidden="true">
+          <span className="ann-arrow"><svg viewBox="0 0 24 24"><path d="M6 14l6-6 6 6" /></svg></span>
+          <span className="ann-arrow"><svg viewBox="0 0 24 24"><path d="M6 10l6 6 6-6" /></svg></span>
+        </div>
+        <svg className="horn" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 10v4h3l6 4V6L7 10zM16 9a4 4 0 0 1 0 6" /></svg>
+        <div className="ann-body">
+          <p>New here? <Link to="/play/tutorial">Play a quick guided game</Link> against bots before jumping into ranked.</p>
+        </div>
+        <button
+          type="button"
+          className="ann-x"
+          aria-label="Dismiss"
+          onClick={() => {
+            localStorage.setItem(BANNER_KEY, "1");
+            setDismissed(true);
+          }}
+        >
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 7l10 10M17 7L7 17" /></svg>
+        </button>
+      </div>
+    );
+  }
 
   return (
     <Alert

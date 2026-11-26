@@ -21,9 +21,8 @@ const RP =
 function face(color, tagBg, tagBorder) {
   return {
     color,
-    // Dark chips are mixed onto a dark base so the fill stays visible on the row.
-    // A 16% transparent tint disappears and leaves only the outline.
-    tagBg: tagBg || `color-mix(in srgb, ${color} 46%, #24160e)`,
+    // Same mix the preview computes: 16% of the type color over the row.
+    tagBg: tagBg || `color-mix(in srgb, ${color} 16%, transparent)`,
     tagBorder: tagBorder || color,
   };
 }

@@ -170,6 +170,13 @@ function Main(props) {
   const isPhoneDevice = useIsPhoneDevice();
 
   const location = useLocation();
+  useEffect(() => {
+    const root = document.documentElement;
+    if (!root.classList.contains("skin-redesign")) return undefined;
+    root.classList.add("um-loading");
+    const timer = window.setTimeout(() => root.classList.remove("um-loading"), 900);
+    return () => window.clearTimeout(timer);
+  }, [location.pathname]);
   // Size the phone shell and game session to the visual viewport.
   useAppViewport();
 

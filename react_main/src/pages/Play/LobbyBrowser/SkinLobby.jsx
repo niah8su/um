@@ -241,7 +241,7 @@ export default function SkinLobby({
             <div className="games-end">
               {!user.settings?.hideTutorialButton && (
                 <Link className="sq-btn help-btn" to="/play/tutorial" data-testid="tutorial-link" aria-label="Tutorial" title="Tutorial">
-                  <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" strokeWidth="1.6" /><path fill="currentColor" d="M11 17h2v-2h-2zm1-10a3.2 3.2 0 0 0-3.2 3h1.8a1.4 1.4 0 1 1 2.5 1c-.8.6-1.5 1-1.5 2.2V14h1.6v-.5c0-.6.4-.9 1.1-1.4A3.2 3.2 0 0 0 12 7z" /></svg>
+                  <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M11.2 17.2h1.6v-1.7h-1.6zm.2-3.2h1.6c0-1.7 2.5-1.6 2.5-3.5A2.7 2.7 0 0 0 12 7.6 2.7 2.7 0 0 0 9.1 10h1.7a1.2 1.2 0 1 1 2.1.8c-.7.5-1.5 1-1.5 2.6z" /></svg>
                 </Link>
               )}
               <button type="button" className="icon-btn refresh-btn" aria-label="Refresh the games list" onClick={refreshGames}>
@@ -285,7 +285,7 @@ export default function SkinLobby({
                         <div className="lobby-sub">{game.lobbyName}</div>
                       </div>
                       <div className="roles">
-                        {game.setup && <Setup setup={game.setup} expandIcons />}
+                        {game.setup && <Setup setup={game.setup} />}
                       </div>
                     </div>
                   </div>

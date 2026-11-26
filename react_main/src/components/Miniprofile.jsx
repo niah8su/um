@@ -126,6 +126,7 @@ function Miniprofile(props) {
 
   return (
     <div className="miniprofile">
+      {skin ? <span className="skin-card-beam" aria-hidden="true"><i /></span> : null}
       <div className="mui-popover-title">
         <Stack
           direction="row"

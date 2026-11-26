@@ -422,6 +422,8 @@ export function Avatar(props) {
   const inGame = props.inGame;
 
   const siteInfo = useContext(SiteInfoContext);
+  const skin = useSkinRedesign();
+  const [sampledGlow, setSampledGlow] = useState("");
   // Last image URL that failed to load (missing upload etc.); fall back to the
   // default no-avatar look for it.
   const [failedSrc, setFailedSrc] = useState(null);
@@ -507,6 +509,46 @@ export function Avatar(props) {
     style.backgroundImage = "none";
   }
 
+  useEffect(() => {
+    if (!skin || !photoSrc) {
+      setSampledGlow("");
+      return undefined;
+    }
+    let cancel = false;
+    const img = new Image();
+    img.crossOrigin = "anonymous";
+    img.onload = () => {
+      if (cancel) return;
+      try {
+        const canvas = document.createElement("canvas");
+        const size = 16;
+        canvas.width = size;
+        canvas.height = size;
+        const ctx = canvas.getContext("2d");
+        ctx.drawImage(img, 0, 0, size, size);
+        const data = ctx.getImageData(0, 0, size, size).data;
+        let r = 0;
+        let g = 0;
+        let b = 0;
+        let n = 0;
+        for (let i = 0; i < data.length; i += 4) {
+          if (data[i + 3] < 80) continue;
+          r += data[i];
+          g += data[i + 1];
+          b += data[i + 2];
+          n += 1;
+        }
+        if (n) {
+          setSampledGlow(`0 0 14px 3px rgba(${(r / n) | 0},${(g / n) | 0},${(b / n) | 0},.8)`);
+        }
+      } catch (e) {}
+    };
+    img.src = photoSrc;
+    return () => {
+      cancel = true;
+    };
+  }, [skin, photoSrc]);
+
   // Santa hat: Only show during December (turns off on January 1)
   const isDecember = new Date().getMonth() + 1 === 12; // getMonth() returns 0-11
 
@@ -542,6 +584,7 @@ export function Avatar(props) {
         height: `${avatarSize}px`,
         borderRadius: isSquare ? "0px" : "50%",
         border: border,
+        boxShadow: skin && sampledGlow ? sampledGlow : undefined,
       }}
     >
       <AvatarPhoto src={photoSrc} onError={setFailedSrc} />

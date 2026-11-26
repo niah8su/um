@@ -57,6 +57,7 @@ html.skin-redesign.light-mode body::before {
 }
 
 html.skin-redesign .app-shell,
+html.skin-redesign .site-wrapper,
 html.skin-redesign .game-session,
 html.skin-redesign .game {
   background: transparent !important;
@@ -375,28 +376,19 @@ html.skin-redesign .game-session .MuiButtonGroup-root .MuiIconButton-root img {
 }
 
 html.skin-redesign .game .message .content.server {
-  color: var(--um-accent);
-  border-radius: 999px;
-  padding: 6px 12px 6px 28px;
+  color: var(--um-ink);
+  border-radius: 4px;
+  padding: 2px 8px;
 }
 
 html.skin-redesign .game .message .content.server::before {
-  border-radius: 999px;
-  border-color: color-mix(in srgb, var(--um-accent) 45%, transparent);
-  background: color-mix(in srgb, var(--um-accent) 12%, var(--um-glass-solid));
+  border-radius: 4px;
+  border-color: rgba(255, 255, 255, 0.14);
+  background: rgba(0, 0, 0, 0.55);
 }
 
 html.skin-redesign .game .message .content.server::after {
-  content: "\f70e";
-  font-family: "Font Awesome 5 Free";
-  font-weight: 900;
-  position: absolute;
-  left: 8px;
-  top: 50%;
-  transform: translateY(-50%);
-  z-index: 1;
-  font-size: 12px;
-  color: var(--um-accent);
+  content: none;
 }
 
 html.skin-redesign .game .message .content.server .role,
@@ -448,11 +440,12 @@ html.skin-redesign .ios-beta-ticker__viewport { justify-content: flex-start; wid
 html.skin-redesign .skin-game-header { display: flex; flex-direction: column; width: 100%; }
 html.skin-redesign .skin-game-header .ios-beta-ticker { width: 100%; }
 
-/* Competitive row: dark mode only. A rounded brass bar, olive at the edges and pale gold through the center. */
+/* Competitive row: dark mode only. Same stripe as the other rows, brass fill. */
 html.skin-redesign:not(.light-mode) .metallic-gold {
   position: relative;
   overflow: hidden;
-  border-radius: 999px !important;
+  align-self: stretch;
+  border-radius: var(--mui-shape-borderRadius) 0 0 var(--mui-shape-borderRadius) !important;
   background: linear-gradient(
     90deg,
     #5a4612 0%,
@@ -611,19 +604,49 @@ html.skin-redesign .miniprofile .avatar {
   position: relative;
 }
 html.skin-redesign .miniprofile .avatar::before,
-html.skin-redesign .skin-detail-pop .avatar::before {
-  content: "";
-  position: absolute;
-  inset: -2px;
-  border-radius: inherit;
-  background: conic-gradient(transparent 0 68%, var(--um-accent) 84%, transparent 100%);
-  animation: skin-ava-beam 2.2s linear infinite;
-  z-index: 0;
-  filter: drop-shadow(0 0 5px var(--um-accent));
-  pointer-events: none;
+html.skin-redesign .skin-detail-pop .avatar::before { content: none !important; }
+html.skin-redesign .miniprofile > .pie-chart,
+html.skin-redesign .miniprofile .pie-chart {
+  transform: scale(2);
+  transform-origin: center top;
+  opacity: .82;
+  margin-bottom: 190px;
 }
-html.skin-redesign .miniprofile .avatar > * { position: relative; z-index: 1; }
-@keyframes skin-ava-beam { to { transform: rotate(360deg); } }
+html.skin-redesign .skin-detail-pop { width: 460px; max-width: 92vw; position: relative; overflow: hidden; }
+html.skin-redesign .skin-card-beam {
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  overflow: hidden;
+  pointer-events: none;
+  z-index: 8;
+  padding: 2px;
+  -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+  mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  mask-composite: exclude;
+}
+html.skin-redesign .skin-card-beam i {
+  position: absolute;
+  inset: -60%;
+  background: conic-gradient(transparent 0 72%, var(--um-accent) 88%, transparent 100%);
+  animation: skin-card-beam 2.2s linear infinite;
+}
+@keyframes skin-card-beam { to { transform: rotate(360deg); } }
+html.skin-redesign .skin-family {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 4px;
+  opacity: .55;
+}
+html.skin-redesign.light-mode .skin-family,
+html.skin-redesign.light-mode .skin-joined { opacity: 1; color: rgba(28, 25, 23, .55); }
+html.skin-redesign .miniprofile .avatar > .MuiBox-root {
+  transform: none !important;
+  right: 0 !important;
+  bottom: 0 !important;
+}
 html.skin-redesign .miniprofile .trophy-icon { width: 18px; height: 18px; }
 
 html.skin-redesign .game > .main { flex: 1; min-height: 0; overflow: hidden; }
@@ -871,10 +894,10 @@ html.skin-redesign .game .panel {
 html.skin-redesign .game .user-name-text { color: inherit !important; }
 
 html.skin-redesign .game .message { align-items: flex-start; margin-bottom: 10px; }
-html.skin-redesign .game .message .message-inner-aligned,
-html.skin-redesign .game .message .message-inner-nameplated,
-html.skin-redesign .game .message .message-inner-onelined,
-html.skin-redesign .game .message .message-inner-inline {
+html.skin-redesign .game .message:not(:has(.content.server)) .message-inner-aligned,
+html.skin-redesign .game .message:not(:has(.content.server)) .message-inner-nameplated,
+html.skin-redesign .game .message:not(:has(.content.server)) .message-inner-onelined,
+html.skin-redesign .game .message:not(:has(.content.server)) .message-inner-inline {
   display: flex !important;
   flex-direction: column !important;
   align-items: flex-start;

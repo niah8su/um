@@ -656,18 +656,36 @@ html.skin-redesign .skin-welcome img {
 html.skin-redesign .miniprofile { display: flex; flex-direction: column; position: relative; }
 html.skin-redesign .skin-card-x {
   position: absolute;
-  top: 8px;
-  right: 8px;
+  top: 4px;
+  right: 4px;
   z-index: 9;
   width: 22px;
   height: 22px;
   border: 0;
+  border-radius: 4px;
   background: transparent;
   color: inherit;
   cursor: pointer;
   font-size: 16px;
   line-height: 1;
   padding: 0;
+}
+html.skin-redesign .miniprofile .mui-popover-title,
+html.skin-redesign .miniprofile .skin-card-head {
+  background: transparent !important;
+  background-color: transparent !important;
+  box-shadow: none !important;
+}
+html.skin-redesign .miniprofile .skin-card-beam { display: none !important; }
+html.skin-redesign .miniprofile .MuiButton-contained,
+html.skin-redesign .skin-detail-pop .MuiButton-contained {
+  background: transparent !important;
+  background-image: none !important;
+  color: var(--um-accent) !important;
+  border: 1px solid color-mix(in srgb, var(--um-accent) 55%, transparent) !important;
+  box-shadow: none !important;
+  text-transform: none !important;
+  border-radius: 8px !important;
 }
 html.skin-redesign .name-with-avatar { cursor: pointer; }
 html.skin-redesign .MuiPopover-paper .MuiAccordionSummary-expandIconWrapper { display: none; }
@@ -719,26 +737,26 @@ html.skin-redesign .MuiPopover-paper.skin-detail-pop {
   overflow: hidden;
   padding: 8px 10px 10px !important;
   border-radius: 10px !important;
-  background: rgba(13, 17, 23, .78) !important;
-  background-color: rgba(13, 17, 23, .78) !important;
+  background: rgba(13, 17, 23, .92) !important;
+  background-color: rgba(13, 17, 23, .92) !important;
   backdrop-filter: blur(18px) saturate(1.4);
   border: 1px solid rgba(240, 246, 252, .18) !important;
   box-shadow: 0 12px 32px rgba(0, 0, 0, .45);
 }
 html.skin-redesign.light-mode .MuiPopover-paper.skin-detail-pop {
-  background: rgba(255, 255, 255, .9) !important;
-  background-color: rgba(255, 255, 255, .9) !important;
+  background: rgba(255, 255, 255, .94) !important;
+  background-color: rgba(255, 255, 255, .94) !important;
   border-color: #d0d7de !important;
   color: #1f2328;
 }
 html.skin-redesign .skin-card-head {
   position: relative;
-  padding: 2px 4px 22px 0;
+  padding: 2px 34px 22px 0;
   margin-bottom: 6px;
-  border-bottom: 1px solid rgba(255, 255, 255, .14);
+  border-bottom: 1px solid rgba(255, 255, 255, .14) !important;
 }
 html.skin-redesign.light-mode .skin-card-head {
-  border-bottom-color: rgba(31, 35, 40, .14);
+  border-bottom-color: rgba(31, 35, 40, .14) !important;
 }
 html.skin-redesign .skin-card-copy {
   min-width: 0;

@@ -315,7 +315,8 @@ html.skin-redesign .skin-port .roles {
   gap: 2px;
   flex: none;
   align-items: center;
-  max-width: 42%;
+  width: 100%;
+  max-width: none;
   max-height: 36px;
   overflow: hidden;
 }
@@ -777,37 +778,46 @@ html.skin-redesign .skin-port .roles {
 }
 html.skin-redesign .skin-port .roles .setup,
 html.skin-redesign .skin-port .roles .MuiCard-root {
-  width: auto !important;
+  width: 100% !important;
   max-width: 100% !important;
   min-width: 0 !important;
   overflow: hidden !important;
   background: transparent !important;
 }
+html.skin-redesign .skin-port .roles {
+  max-height: 26px !important;
+}
 html.skin-redesign .skin-port .roles .MuiStack-root:has(> * > .role) {
   display: flex !important;
   flex-direction: row !important;
   flex-wrap: nowrap !important;
-  align-items: center !important;
+  align-items: flex-end !important;
   justify-content: flex-start !important;
-  gap: 2px !important;
-  width: max-content !important;
+  gap: 6px !important;
+  width: 100% !important;
   max-width: 100% !important;
-  height: 17px !important;
-  max-height: 17px !important;
+  height: 24px !important;
+  max-height: 24px !important;
   min-height: 0 !important;
   overflow: hidden !important;
   margin: 0 !important;
   padding: 0 !important;
 }
 html.skin-redesign .skin-port .roles .MuiStack-root:has(> * > .role) > * {
-  flex: 0 0 17px !important;
-  width: 17px !important;
-  height: 17px !important;
-  min-width: 17px !important;
-  max-width: 17px !important;
+  flex: 0 0 24px !important;
+  width: 24px !important;
+  height: 24px !important;
+  min-width: 24px !important;
+  max-width: 24px !important;
   position: relative !important;
   margin: 0 !important;
   overflow: hidden !important;
+}
+html.skin-redesign .skin-port .roles .digits-wrapper {
+  left: auto;
+  right: 0;
+  top: auto;
+  bottom: 0;
 }
 html.skin-redesign .skin-port .roles .role,
 html.skin-redesign .skin-port .roles img {

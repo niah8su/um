@@ -6,6 +6,7 @@ import { filterProfanity } from "../../components/Basic";
 import { PageNav } from "../../components/Nav";
 import { TextEditor } from "../../components/Form";
 import { UserContext } from "../../Contexts";
+import { useSkinRedesign } from "components/useSkinRedesign";
 
 import "css/forums.css";
 import "css/comments.css";
@@ -37,6 +38,74 @@ export default function Comments(props) {
 
   const user = useContext(UserContext);
   const errorAlert = useErrorAlert();
+  const skin = useSkinRedesign();
+  // NEW FEATURE behind the redesign toggle: how many comments to show at once.
+  const [shown, setShown] = useState(10);
+
+  function buildQuery(_page) {
+    const parts = [`page=${_page}`];
+    if (isMulti) {
+      parts.push(`locations=${location.map(encodeURIComponent).join(",")}`);
+    } else {
+      parts.push(`location=${encodeURIComponent(location)}`);
+    }
+    return parts.join("&");
+  }
+
+  function takeComments(data) {
+    const fetched = Array.isArray(data) ? data : data.comments || [];
+    for (let comment of fetched)
+      comment.content = filterProfanity(comment.content, user.settings, "\\*");
+    return {
+      comments: fetched,
+      maxPage: Array.isArray(data) ? 1 : data.maxPage || 1,
+    };
+  }
+
+  function onCommentsPageNav(_page) {
+    axios
+      .get(`/api/comment?${buildQuery(_page)}`)
+      .then((res) => {
+        if (!isMountedRef.current) return;
+        setLoaded(true);
+        const taken = takeComments(res.data || {});
+        setComments(taken.comments);
+        setMaxPage(taken.maxPage);
+        setPage(Math.min(_page, taken.maxPage));
+      })
+      .catch((err) => {
+        if (isMountedRef.current) errorAlert(err);
+      });
+  }
+
+  function loadShown(count) {
+    const pagesNeeded = Math.ceil(count / 10);
+    const requests = [];
+    for (let p = 1; p <= pagesNeeded; p++) requests.push(axios.get(`/api/comment?${buildQuery(p)}`));
+    Promise.all(requests)
+      .then((responses) => {
+        if (!isMountedRef.current) return;
+        let all = [];
+        let max = 1;
+        responses.forEach((res) => {
+          const taken = takeComments(res.data || {});
+          all = all.concat(taken.comments);
+          max = taken.maxPage;
+        });
+        setLoaded(true);
+        setComments(all.slice(0, count));
+        setMaxPage(max);
+        setPage(1);
+      })
+      .catch((err) => {
+        if (isMountedRef.current) errorAlert(err);
+      });
+  }
+
+  function reloadComments() {
+    if (skin) loadShown(shown);
+    else onCommentsPageNav(page);
+  }
 
   useEffect(() => {
     setComments([]);
@@ -45,8 +114,9 @@ export default function Comments(props) {
     draftGeneration.current++;
     imageRef.current = null;
     setImage(null);
-    onCommentsPageNav(1);
-  }, [locationKey]);
+    if (skin) loadShown(shown);
+    else onCommentsPageNav(1);
+  }, [locationKey, skin, shown]);
 
   // Cleanup on unmount
   useEffect(() => {
@@ -65,47 +135,6 @@ export default function Comments(props) {
     setImagePreview(url);
     return () => URL.revokeObjectURL(url);
   }, [image]);
-
-  function buildQuery(_page) {
-    const parts = [`page=${_page}`];
-    if (isMulti) {
-      parts.push(`locations=${location.map(encodeURIComponent).join(",")}`);
-    } else {
-      parts.push(`location=${encodeURIComponent(location)}`);
-    }
-    return parts.join("&");
-  }
-
-  function onCommentsPageNav(_page) {
-    axios
-      .get(`/api/comment?${buildQuery(_page)}`)
-      .then((res) => {
-        if (!isMountedRef.current) return;
-
-        setLoaded(true);
-        const data = res.data || {};
-        const fetched = Array.isArray(data) ? data : data.comments || [];
-        const fetchedMaxPage = Array.isArray(data)
-          ? 1
-          : data.maxPage || 1;
-
-        for (let comment of fetched)
-          comment.content = filterProfanity(
-            comment.content,
-            user.settings,
-            "\\*"
-          );
-
-        setComments(fetched);
-        setMaxPage(fetchedMaxPage);
-        setPage(Math.min(_page, fetchedMaxPage));
-      })
-      .catch((err) => {
-        if (isMountedRef.current) {
-          errorAlert(err);
-        }
-      });
-  }
 
   function onImageSelect(file) {
     if (postingRef.current) return;
@@ -146,7 +175,8 @@ export default function Comments(props) {
       .post("/api/comment", body)
       .then(() => {
         if (stillCurrent()) {
-          onCommentsPageNav(1);
+          if (skin) loadShown(shown);
+          else onCommentsPageNav(1);
           setPostContent("");
           setShowInput(false);
           removeImage();
@@ -178,8 +208,8 @@ export default function Comments(props) {
       comment={comment}
       comments={comments}
       setComments={setComments}
-      onDelete={() => onCommentsPageNav(page)}
-      onRestore={() => onCommentsPageNav(page)}
+      onDelete={reloadComments}
+      onRestore={reloadComments}
       key={comment.id}
     />
   ));
@@ -209,12 +239,27 @@ export default function Comments(props) {
         ) : (
           <Box />
         )}
-        <PageNav
-          inverted
-          page={page}
-          maxPage={maxPage}
-          onNav={onCommentsPageNav}
-        />
+        {skin ? (
+          <div className="skin-cmt-limit" role="group" aria-label="Comments shown">
+            {[10, 15, 20, 100].map((count) => (
+              <button
+                type="button"
+                key={count}
+                className={shown === count ? "on" : undefined}
+                onClick={() => setShown(count)}
+              >
+                {count}
+              </button>
+            ))}
+          </div>
+        ) : (
+          <PageNav
+            inverted
+            page={page}
+            maxPage={maxPage}
+            onNav={onCommentsPageNav}
+          />
+        )}
       </Stack>
     </Paper>
   );
@@ -228,12 +273,14 @@ export default function Comments(props) {
           justifyContent: "center",
         }}
       >
-        <PageNav
-          inverted
-          page={page}
-          maxPage={maxPage}
-          onNav={onCommentsPageNav}
-        />
+        {skin ? null : (
+          <PageNav
+            inverted
+            page={page}
+            maxPage={maxPage}
+            onNav={onCommentsPageNav}
+          />
+        )}
       </Stack>
     </Paper>
   );

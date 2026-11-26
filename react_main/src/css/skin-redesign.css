@@ -438,6 +438,106 @@ html.skin-redesign .ios-beta-ticker__track { animation-duration: 14s !important;
 html.skin-redesign .skin-topbar { min-height: 0 !important; padding-bottom: 4px; }
 html.skin-redesign .skin-topbar .setup { position: static !important; left: auto !important; top: auto !important; transform: none !important; padding: 4px 8px !important; }
 
+html.skin-redesign .skin-side {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 35;
+  width: 220px;
+  display: flex;
+  flex-direction: column;
+  padding: 96px 10px 12px;
+  box-sizing: border-box;
+  overflow: auto;
+  background: var(--um-glass);
+  backdrop-filter: blur(16px);
+  border-right: 1px solid var(--um-line);
+  color: var(--um-ink);
+}
+html.skin-redesign .skin-side-groups { flex: 1 1 auto; }
+html.skin-redesign .skin-side section { padding: 8px 0; border-top: 1px solid var(--um-line); }
+html.skin-redesign .skin-side section:first-child { border-top: 0; }
+html.skin-redesign .skin-side-label { font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; margin: 0 0 4px; }
+html.skin-redesign .skin-side a { display: block; padding: 4px 8px; color: inherit; text-decoration: none; }
+html.skin-redesign .skin-side a:hover { background: color-mix(in srgb, var(--um-accent) 16%, transparent); }
+html.skin-redesign .skin-side-foot { margin-top: auto; padding-top: 8px; border-top: 1px solid var(--um-line); }
+html.skin-redesign .site-wrapper { margin-left: 220px; }
+@media (max-width: 899px) {
+  html.skin-redesign .skin-side { display: none; }
+  html.skin-redesign .site-wrapper { margin-left: 0; }
+}
+
+html.skin-redesign .skin-games-bar {
+  display: grid !important;
+  grid-template-columns: 1fr auto 1fr;
+  align-items: center;
+  padding: 10px 8px;
+}
+html.skin-redesign .skin-games-bar > :first-child { justify-self: start; }
+html.skin-redesign .skin-games-bar > :last-child { justify-self: end; }
+
+html.skin-redesign .skin-lobby-tabs { margin: 12px 0; padding: 8px 0; }
+html.skin-redesign .skin-lobby-tabs .MuiTab-root { position: relative; }
+html.skin-redesign .skin-lobby-tabs .MuiTab-root::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: 8px;
+  padding: 1.5px;
+  background: conic-gradient(from var(--tab-beam, 0deg), transparent 0deg, transparent 250deg, var(--um-accent) 340deg, transparent 360deg);
+  -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+  mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  mask-composite: exclude;
+  animation: skin-tab-beam 9s linear infinite;
+  opacity: 0;
+  pointer-events: none;
+}
+html.skin-redesign .skin-lobby-tabs .Mui-selected::before,
+html.skin-redesign .skin-lobby-tabs .MuiTab-root:hover::before { opacity: 1; }
+@property --tab-beam { syntax: "<angle>"; inherits: false; initial-value: 0deg; }
+@keyframes skin-tab-beam { to { --tab-beam: 360deg; } }
+
+html.skin-redesign .skin-cmt-limit { display: flex; gap: 6px; }
+html.skin-redesign .skin-cmt-limit button {
+  border: 1px solid var(--um-line);
+  background: transparent;
+  color: inherit;
+  border-radius: 999px;
+  padding: 2px 8px;
+  font: inherit;
+  cursor: pointer;
+}
+html.skin-redesign .skin-cmt-limit button.on {
+  background: var(--um-accent);
+  color: var(--um-accent-ink, #fff);
+  border-color: transparent;
+}
+html.skin-redesign .comments-page .name-with-avatar { margin-left: -8px; }
+
+html.skin-redesign .miniprofile { display: flex; flex-direction: column; }
+html.skin-redesign .miniprofile > * { order: 6; }
+html.skin-redesign .miniprofile > .mui-popover-title { order: 1; font-size: 14px; }
+html.skin-redesign .miniprofile > .pronouns { order: 2; }
+html.skin-redesign .miniprofile > .pie-chart { order: 3; opacity: .82; transform: scale(1.12); transform-origin: center top; }
+html.skin-redesign .miniprofile > .score-info { order: 4; }
+html.skin-redesign .miniprofile > section { order: 5; }
+html.skin-redesign .miniprofile .avatar {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  border: 2px solid var(--um-accent);
+  box-sizing: border-box;
+}
+html.skin-redesign .miniprofile .trophy-icon { width: 18px; height: 18px; }
+
+html.skin-redesign .game > .main { flex: 1; min-height: 0; overflow: hidden; }
+html.skin-redesign .game .center-panel { display: flex; flex-direction: column; min-height: 0; overflow: hidden; }
+html.skin-redesign .game .speech-display { flex: 1; min-height: 0; overflow: auto; }
+
 html.skin-redesign [data-testid="tutorial-overlay"] img.skin-golbolco {
   width: 40px;
   height: 40px;

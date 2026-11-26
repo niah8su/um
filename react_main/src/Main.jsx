@@ -53,6 +53,7 @@ import "css/accessibility.css";
 import "css/skin-redesign.css";
 import SkinController from "./components/SkinController";
 import SkinAppearance from "./components/SkinAppearance";
+import SkinSidebar from "./components/SkinSidebar";
 
 // Navigation icons removed - now using text-only navigation
 import {
@@ -213,6 +214,7 @@ function Main(props) {
           : { minHeight: "100dvh" }),
       }}
     >
+      <SkinSidebar />
       <CookieBanner />
       <IosBetaTicker />
       <Header

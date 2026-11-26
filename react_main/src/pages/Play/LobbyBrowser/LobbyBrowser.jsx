@@ -5,6 +5,7 @@ import { useViewNavigate as useNavigate } from "hooks/useViewActivity";
 import axios from "axios";
 
 import { UserContext, InGameContext } from "Contexts";
+import { useSkinRedesign } from "components/useSkinRedesign";
 import { getPageNavFilterArg, PageNav } from "components/Nav";
 import { useErrorAlert } from "components/Alerts";
 import { camelCase } from "../../../utils";
@@ -82,6 +83,7 @@ export default function LobbyBrowser() {
   const isMountedRef = useRef(true);
 
   const user = useContext(UserContext);
+  const skin = useSkinRedesign();
   const lobbies = lobbiesFor(user);
   const inGame = useContext(InGameContext);
   const active = useViewActive();
@@ -307,6 +309,7 @@ export default function LobbyBrowser() {
 
   const lobbyTabs = (
     <Tabs
+      className={skin ? "skin-lobby-tabs" : undefined}
       value={lobbyName}
       onChange={(_, newValue) => setLobbyName(newValue)}
     >
@@ -384,6 +387,7 @@ export default function LobbyBrowser() {
   const buttons = (
     <Paper>
       <Stack
+        className={skin ? "skin-games-bar" : undefined}
         direction="row"
         sx={{
           width: "100%",

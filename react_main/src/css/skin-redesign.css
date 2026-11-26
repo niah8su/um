@@ -453,7 +453,7 @@ html.skin-redesign .skin-topbar { position: relative; }
 
 html.skin-redesign .skin-side {
   position: fixed;
-  top: var(--um-ticker-h, 28px);
+  top: calc(var(--um-ticker-h, 28px) + 48px);
   bottom: 0;
   left: 0;
   z-index: 35;
@@ -527,7 +527,22 @@ html.skin-redesign .skin-side section {
   border-top: 1px solid rgba(255,255,255,.08);
   padding: 8px 2px;
 }
-html.skin-redesign .skin-side.collapsed .skin-side-online { display: none; }
+html.skin-redesign .skin-side.collapsed .skin-side-online {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  border: 0;
+  padding: 8px 0;
+}
+html.skin-redesign .skin-side-dock button {
+  background: none;
+  border: 0;
+  color: inherit;
+  padding: 0;
+  cursor: pointer;
+}
+html.skin-redesign .skin-side-dock svg { width: 18px; height: 18px; fill: currentColor; }
 html.skin-redesign .skin-side-groups { flex: 1 1 auto; }
 html.skin-redesign .skin-side section { padding: 8px 0; border-top: 1px solid var(--um-line); }
 html.skin-redesign .skin-side section:first-child { border-top: 0; }
@@ -780,8 +795,8 @@ html.skin-redesign .skin-side.collapsed .skin-side-groups,
 html.skin-redesign .skin-side.collapsed .skin-side-foot { display: none; }
 html.skin-redesign:has(.skin-side.collapsed) .site-wrapper { padding-left: 46px; }
 html.skin-redesign:has(.skin-side.collapsed) .MuiAppBar-root.skin-appbar {
-  left: 46px !important;
-  width: calc(100% - 46px) !important;
+  left: 0 !important;
+  width: 100% !important;
 }
 html.skin-redesign .skin-side-dock {
   margin-top: auto;
@@ -1229,7 +1244,7 @@ html.skin-redesign .ios-beta-ticker {
   letter-spacing: 0.08em;
 }
 html.skin-redesign .app-shell:has(.ios-beta-ticker) {
-  padding-top: var(--um-ticker-h);
+  padding-top: calc(var(--um-ticker-h) + 48px);
   box-sizing: border-box;
 }
 html.skin-redesign .skin-appbar {
@@ -1241,7 +1256,7 @@ html.skin-redesign .app-shell:has(.ios-beta-ticker) .skin-appbar {
   top: var(--um-ticker-h) !important;
 }
 html.skin-redesign .app-shell:has(.ios-beta-ticker) .skin-side {
-  top: var(--um-ticker-h);
+  top: calc(var(--um-ticker-h) + 48px);
 }
 html.skin-redesign .skin-game-header .ios-beta-ticker {
   position: relative;
@@ -1552,8 +1567,8 @@ html.skin-redesign .skin-port {
 }
 html.skin-redesign .MuiAppBar-root.skin-appbar {
   position: fixed !important;
-  left: 232px !important;
-  width: calc(100% - 232px) !important;
+  left: 0 !important;
+  width: 100% !important;
   right: 0 !important;
   background: rgba(1, 4, 9, .78) !important;
   backdrop-filter: blur(22px) saturate(1.35) !important;

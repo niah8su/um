@@ -99,7 +99,12 @@ function WhoPop({ game }) {
   const playerCount = players ? players.length : (game.players || 0);
   return (
     <div className="who-pop" role="dialog" aria-label="Game details">
-      <button type="button" className="who-x" aria-label="Close">×</button>
+      <button type="button" className="who-x" aria-label="Close" onClick={(event) => {
+        event.preventDefault();
+        event.stopPropagation();
+        const row = event.currentTarget.closest(".game");
+        if (row) row.classList.add("who-shut");
+      }}>×</button>
       <section>
         <h4>Players</h4>
         {players && players.length ? (
@@ -255,7 +260,11 @@ export default function SkinLobby({
             {loading && games.length === 0 ? null : games.map((game) => {
               const [tagClass, tagLabel] = tagFor(game);
               return (
-              <article key={game.id} className={`game tone-${tagClass}${game.competitive ? " comp" : ""}`}>
+              <article
+                key={game.id}
+                className={`game tone-${tagClass}${game.competitive ? " comp" : ""}`}
+                onMouseLeave={(event) => event.currentTarget.classList.remove("who-shut")}
+              >
                 <div className="stub" style={{ background: getRowStubColor(game) }} />
                 <div className="game-main" style={{ background: getRowColor(game, false) }}>
                   <WhoPop game={game} />

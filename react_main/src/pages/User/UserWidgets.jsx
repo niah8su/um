@@ -856,6 +856,7 @@ export function NameWithAvatar(props) {
 
   const openSkinCard = (event) => {
     if (event && event.preventDefault) event.preventDefault();
+    if (event && event.stopPropagation) event.stopPropagation();
     const rect = event && event.currentTarget && event.currentTarget.getBoundingClientRect();
     if (rect) {
       setPopSide(rect.left > window.innerWidth * 0.55 ? "left" : "right");
@@ -988,6 +989,7 @@ export function NameWithAvatar(props) {
           className={`name-with-avatar`}
           to={profileLink}
           target={newTab ? "_blank" : ""}
+          onMouseDown={skinCard ? (event) => event.preventDefault() : undefined}
           onClick={skinCard ? openSkinCard : undefined}
         >
           {contents}

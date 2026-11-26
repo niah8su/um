@@ -131,9 +131,16 @@ export default function SkinSidebar() {
           <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5v14M5 12h14" /></svg>
         </Link>
         <Link to="/user/settings" aria-label="Settings">
-          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 8.5a3.5 3.5 0 1 0 0 7 3.5 3.5 0 0 0 0-7zM4 12l2-1 1-2 2 .5 2-1.5h2L15 9.5 17 9l1 2 2 1-2 1-1 2-2-.5-2 1.5h-2L9 14.5 7 15l-1-2z" /></svg>
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l2-2a4.5 4.5 0 0 1-6 6L8.5 18.5 5.5 15.5 10.7 10.3a4.5 4.5 0 0 1 6-6l-2 2z" /></svg>
         </Link>
-        <Link to={user && user.id ? `/user/${user.id}` : "/user"} aria-label="Profile" className="skin-side-ava">{initial}</Link>
+        <button type="button" aria-label="Sign out" onClick={() => {
+          axios.post("/api/user/logout").finally(() => {
+            if (user && user.clear) user.clear();
+            window.location.assign("/");
+          });
+        }}>
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M10 7V5H5v14h5v-2H7V7h3zm2 10 5-5-5-5v3H9v4h3v3z" /></svg>
+        </button>
       </div>
     </nav>
   );

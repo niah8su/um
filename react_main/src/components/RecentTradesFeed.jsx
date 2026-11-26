@@ -138,7 +138,7 @@ export default function RecentTradesFeed() {
 
   return (
     <div className="box-panel">
-      <Typography variant="h3" sx={{ display: "flex", alignItems: "center", gap: 1 }}>
+      <Typography className="skin-mod-title" variant="h3" sx={{ display: "flex", alignItems: "center", gap: 1 }}>
         <i className="fas fa-stamp" style={{ fontSize: "0.9em", opacity: 0.8 }} />
         Stamp Exchange
       </Typography>

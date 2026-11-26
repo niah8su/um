@@ -276,8 +276,7 @@ html.skin-redesign .skin-port .player-count .pill-eye { position: relative; z-in
 html.skin-redesign .skin-port .bar-meta { display: flex; align-items: center; gap: 4px; }
 html.skin-redesign .skin-port .bar-meta img { width: 18px; height: 18px; }
 html.skin-redesign .skin-port .state-slot img { width: 16px; height: 16px; }
-html.skin-redesign .skin-port .roles button,
-html.skin-redesign .skin-port .roles .MuiIconButton-root { display: none !important; }
+html.skin-redesign .skin-port .roles .setup > .MuiStack-root > button.MuiButton-root { display: none !important; }
 html.skin-redesign .skin-port .player-count span { position: relative; z-index: 1; }
 html.skin-redesign .skin-port .bar-mid { flex: 1; min-width: 0; align-self: center; }
 html.skin-redesign .skin-port .setup-row {
@@ -532,3 +531,120 @@ html.skin-redesign .skin-port .sq-btn {
   cursor: pointer;
 }
 html.skin-redesign .skin-port .sq-btn .btn-ico { width: 18px; height: 18px; fill: none; stroke: currentColor; stroke-width: 1.8; }
+html.skin-redesign .skin-port .lobby-tabs {
+  display: flex !important;
+  position: relative;
+  z-index: 3;
+  overflow: visible;
+  max-width: 100%;
+}
+html.skin-redesign .skin-port .game { position: relative; overflow: visible; }
+html.skin-redesign .skin-port .game-main {
+  border-radius: 6px !important;
+  overflow: visible;
+}
+html.skin-redesign .skin-port .tone-ranked .game-main { border: 1px solid #FF82A9 !important; }
+html.skin-redesign .skin-port .tone-sandbox .game-main { border: 1px solid #d6c15a !important; }
+html.skin-redesign .skin-port .tone-competitive .game-main { border: 1px solid #edb334 !important; }
+html.skin-redesign .skin-port .tone-minigames .game-main { border: 1px solid #7BEDFF !important; }
+html.skin-redesign .skin-port .tone-survivor .game-main { border: 1px solid #5cb85c !important; }
+html.skin-redesign .skin-port .tone-roleplay .game-main { border: 1px solid #735cb7 !important; }
+html.skin-redesign .skin-port .tone-unranked .game-main,
+html.skin-redesign .skin-port .tone-main .game-main { border: 1px solid #d3d3d3 !important; }
+html.skin-redesign .skin-port .mark-ico,
+html.skin-redesign .skin-port .gicon,
+html.skin-redesign .skin-port .game-icon,
+html.skin-redesign .skin-port .state-ico,
+html.skin-redesign .skin-port .state-ico .ico {
+  border: 0 !important;
+  background: none !important;
+  box-shadow: none !important;
+  outline: none !important;
+  border-radius: 0 !important;
+}
+html.skin-redesign .skin-port .roles {
+  overflow: visible !important;
+  max-height: none !important;
+  flex-wrap: wrap;
+}
+html.skin-redesign .skin-port .who-pop {
+  display: none;
+  position: absolute;
+  z-index: 40;
+  right: 8px;
+  top: calc(100% - 8px);
+  width: 280px;
+  max-height: 360px;
+  overflow: auto;
+  padding: 8px 12px 12px;
+  border-radius: 10px;
+  background: rgba(13, 17, 23, .97);
+  border: 1px solid rgba(240,246,252,.16);
+  color: #e6edf3;
+  box-shadow: 0 16px 40px rgba(0,0,0,.45);
+}
+html.skin-redesign.light-mode .skin-port .who-pop {
+  background: rgba(255,255,255,.97);
+  color: #1f2328;
+  border-color: #d0d7de;
+}
+html.skin-redesign .skin-port .game:hover .who-pop,
+html.skin-redesign .skin-port .game.who-hold .who-pop,
+html.skin-redesign .skin-port .who-pop:hover { display: block; }
+html.skin-redesign .skin-port .game.who-shut .who-pop { display: none; }
+html.skin-redesign .skin-port .who-pop h4 {
+  color: var(--um-accent);
+  text-transform: uppercase;
+  letter-spacing: .08em;
+  font-size: 11px;
+  font-weight: 700;
+  margin: 8px 0 4px;
+  padding-top: 6px;
+  border-top: 1px solid rgba(255,255,255,.12);
+}
+html.skin-redesign .skin-port .who-pop h4:first-of-type { border-top: 0; margin-top: 0; }
+html.skin-redesign .skin-port .who-pop p,
+html.skin-redesign .skin-port .who-pop li { margin: 0; font-size: 12px; font-weight: 400; }
+html.skin-redesign .skin-port .who-x {
+  position: absolute;
+  top: 6px;
+  right: 8px;
+  border: 0;
+  background: transparent;
+  color: inherit;
+  cursor: pointer;
+  font-size: 16px;
+}
+html.skin-redesign .skin-port .page-nav .MuiIconButton-root {
+  width: 18px !important;
+  height: 18px !important;
+  color: var(--um-accent) !important;
+  padding: 0 !important;
+}
+html.skin-redesign .skin-port .page-nav .MuiIconButton-root i { font-size: 12px !important; font-weight: 300; }
+html.skin-redesign .skin-port .page-nav .MuiIconButton-root[style] {
+  width: 22px !important;
+  height: 22px !important;
+  border-radius: 4px !important;
+  background: #161b22 !important;
+  color: var(--um-accent) !important;
+}
+html.skin-redesign .skin-mod-title,
+html.skin-redesign .skin-port .skin-mod-title {
+  display: flex !important;
+  align-items: center;
+  gap: 8px;
+  color: var(--um-accent) !important;
+  text-transform: uppercase;
+  letter-spacing: .08em;
+  font-size: 13px !important;
+  font-weight: 700 !important;
+  border-bottom: 1px solid var(--um-accent) !important;
+}
+html.skin-redesign .skin-mod-ico {
+  width: 16px;
+  height: 16px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.7;
+}

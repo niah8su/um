@@ -1888,6 +1888,7 @@ html.skin-redesign:has(.skin-side:not(.collapsed)) .skin-appbar .skin-bar {
 html.skin-redesign .skin-appbar .nav {
   justify-content: center !important;
   width: 100%;
+  transform: translateX(-16px);
 }
 html.skin-redesign.um-loading .skin-appbar {
   overflow: hidden;

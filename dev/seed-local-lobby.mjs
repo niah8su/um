@@ -128,6 +128,56 @@ async function main() {
     console.log("finished games copied", games.length);
   }
 
+  const showcase = [
+    ["seed-type-unranked", "Main", "Main", false, false, "Unranked Sample"],
+    ["seed-type-ranked", "Main", "Main", true, false, "Ranked Sample"],
+    ["seed-type-sandbox", "Sandbox", "Sandbox", false, false, "Sandbox Sample"],
+    ["seed-type-competitive", "Competitive", "Competitive", false, true, "Competitive Sample"],
+    ["seed-type-minigames", "Games", "Minigames", false, false, "Minigames Sample"],
+    ["seed-type-survivor", "Survivor", "Survivor", false, false, "Survivor Sample"],
+    ["seed-type-roleplay", "Roleplay", "Roleplay", false, false, "Roleplay Sample"],
+  ];
+  for (let i = 0; i < showcase.length; i++) {
+    const [id, lobby, lobbyName, ranked, competitive, name] = showcase[i];
+    let setupId = null;
+    const setupKey = "setup-" + id;
+    const existingSetup = await setups.findOne({ id: setupKey });
+    if (existingSetup) setupId = existingSetup._id;
+    else {
+      setupId = new ObjectId();
+      await setups.insertOne({
+        _id: setupId,
+        id: setupKey,
+        name,
+        gameType: "Mafia",
+        roles: [{ Villager: 3, Mafioso: 1, Cop: 1, Doctor: 1 }],
+        closed: false,
+        count: {},
+        total: 6,
+        localSeed: MARK,
+      });
+    }
+    if (!(await gameCol.findOne({ id }))) {
+      await gameCol.insertOne({
+        id,
+        type: "Mafia",
+        lobby,
+        lobbyName,
+        setup: setupId,
+        ranked,
+        competitive,
+        private: false,
+        spectating: true,
+        endTime: Date.now() - i * 60000,
+        winnersInfo: { players: [], groups: [] },
+        players: [],
+        localSeed: MARK,
+      });
+    }
+  }
+  console.log("showcase rows", showcase.map((row) => row[2] + (row[3] ? " ranked" : row[4] ? " competitive" : "")).join(", "));
+  console.log("Open and in-progress games live in Redis inside the games process, so this seed only writes finished rows for each tag.");
+
   const commentRows = comments && comments.comments ? comments.comments : [];
   for (const comment of commentRows) {
     const author = await ensureUser(comment.author);

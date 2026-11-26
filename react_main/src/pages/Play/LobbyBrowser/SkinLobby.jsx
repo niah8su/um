@@ -17,6 +17,7 @@ import Comments from "../../Community/Comments";
 import { TutorialLobbyBanner } from "components/TutorialPrompt";
 import { PageNav } from "components/Nav";
 import {
+  COUNT_BADGE,
   LOBBY_TAGS,
   TagGlyph,
   lobbyTabId,
@@ -222,7 +223,7 @@ export default function SkinLobby({
             <TagGlyph id={tabId} />
             {spec.label}
             {openGamesCounts[lobby.name] ? (
-              <span className="count-pip">{openGamesCounts[lobby.name]}</span>
+              <span className="count-pip" style={COUNT_BADGE}>{openGamesCounts[lobby.name]}</span>
             ) : null}
           </button>
           );

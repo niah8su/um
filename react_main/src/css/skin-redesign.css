@@ -696,15 +696,46 @@ html.skin-redesign .miniprofile .avatar::before,
 html.skin-redesign .skin-detail-pop .avatar::before { content: none !important; }
 html.skin-redesign .miniprofile > .pie-chart,
 html.skin-redesign .miniprofile .pie-chart {
-  transform: scale(1);
-  transform-origin: center top;
-  opacity: .82;
-  margin-bottom: 8px;
+  transform: none;
+  width: 100px;
+  height: 100px;
+  margin: 0 auto 4px;
+  opacity: .9;
+  overflow: hidden;
 }
-html.skin-redesign .skin-detail-pop { width: 320px; max-width: 92vw; overflow: hidden; padding: 8px 10px !important; }
+html.skin-redesign .miniprofile .pie-chart svg {
+  width: 100px !important;
+  height: 100px !important;
+  max-width: 100px !important;
+  max-height: 100px !important;
+  display: block;
+}
+html.skin-redesign .MuiPopover-paper.skin-detail-pop {
+  width: 250px !important;
+  max-width: 92vw;
+  overflow: hidden;
+  padding: 8px 10px 10px !important;
+  border-radius: 10px !important;
+  background: rgba(13, 17, 23, .78) !important;
+  background-color: rgba(13, 17, 23, .78) !important;
+  backdrop-filter: blur(18px) saturate(1.4);
+  border: 1px solid rgba(240, 246, 252, .18) !important;
+  box-shadow: 0 12px 32px rgba(0, 0, 0, .45);
+}
+html.skin-redesign.light-mode .MuiPopover-paper.skin-detail-pop {
+  background: rgba(255, 255, 255, .9) !important;
+  background-color: rgba(255, 255, 255, .9) !important;
+  border-color: #d0d7de !important;
+  color: #1f2328;
+}
 html.skin-redesign .skin-card-head {
   position: relative;
-  padding: 4px 8px 18px 2px;
+  padding: 2px 4px 22px 0;
+  margin-bottom: 6px;
+  border-bottom: 1px solid rgba(255, 255, 255, .14);
+}
+html.skin-redesign.light-mode .skin-card-head {
+  border-bottom-color: rgba(31, 35, 40, .14);
 }
 html.skin-redesign .skin-card-copy {
   min-width: 0;
@@ -755,14 +786,15 @@ html.skin-redesign .skin-card-family {
 html.skin-redesign .skin-card-family img { width: 16px; height: 16px; border-radius: 50%; }
 html.skin-redesign .skin-card-joined {
   position: absolute;
-  right: 8px;
-  bottom: 2px;
+  right: 2px;
+  bottom: 6px;
   font-size: 10px;
   font-weight: 300;
   letter-spacing: 0.16em;
   text-transform: uppercase;
   opacity: .55;
   line-height: 1;
+  pointer-events: none;
 }
 html.skin-redesign .skin-card-meta {
   display: flex;

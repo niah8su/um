@@ -56,15 +56,16 @@ html.skin-redesign .skin-port .lobby-tabs button[data-lobby="roleplay"].on { col
 html.skin-redesign .skin-port .tab-ico { width: 14px; height: 14px; flex: none; }
 html.skin-redesign .skin-port .count-pip {
   margin-left: 5px;
-  min-width: 16px;
-  height: 16px;
-  padding: 0 5px;
+  min-width: 12px;
+  height: 12px;
+  padding: 0 4px;
   border-radius: 999px;
-  background: #D4A704;
+  background: #e23b3b;
   color: #fff;
-  font-size: 12px;
+  font-size: 10px;
   font-weight: 700;
-  line-height: 16px;
+  line-height: 12px;
+  letter-spacing: 0;
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -684,6 +685,8 @@ html.skin-redesign .skin-port .type-tag {
   padding: 2px 4px !important;
   border-radius: 4px !important;
   border: 1px solid var(--tag-border, currentColor) !important;
+  background: var(--tag-bg) !important;
+  color: var(--tag-color, currentColor) !important;
   font-size: 8px !important;
   font-weight: 600 !important;
   letter-spacing: 0.1em !important;
@@ -730,18 +733,35 @@ html.skin-redesign .skin-port .game[style]:hover .game-main {
   box-shadow: var(--row-hover-shadow) !important;
 }
 html.skin-redesign .skin-port .setup-row {
-  grid-template-columns: 26px minmax(96px, 28%) minmax(0, 1fr) !important;
-  gap: 6px !important;
+  display: grid !important;
+  grid-template-columns: 28px minmax(132px, 38%) minmax(0, 1fr) !important;
+  gap: 8px !important;
+  align-items: center;
 }
-html.skin-redesign .skin-port .setup-copy { min-width: 0; }
+html.skin-redesign .skin-port .setup-copy {
+  min-width: 0;
+  overflow: hidden;
+  position: relative;
+  z-index: 2;
+}
 html.skin-redesign .skin-port .roles,
 html.skin-redesign .skin-port .roles .setup,
 html.skin-redesign .skin-port .roles .MuiCard-root,
 html.skin-redesign .skin-port .roles .MuiStack-root {
-  overflow: visible !important;
-  max-height: none !important;
+  min-width: 0 !important;
+  max-width: 100% !important;
+  width: 100% !important;
+  overflow: hidden !important;
+  max-height: 44px !important;
   height: auto !important;
   flex-wrap: wrap !important;
+  align-content: center;
+}
+html.skin-redesign .skin-port .roles .role,
+html.skin-redesign .skin-port .roles img {
+  width: 18px !important;
+  height: 18px !important;
+  min-width: 18px !important;
 }
 html.skin-redesign .skin-port .roles .role { flex: none; }
 html.skin-redesign .page-nav {

@@ -21,10 +21,30 @@ const RP =
 function face(color, tagBg, tagBorder) {
   return {
     color,
-    tagBg: tagBg || `color-mix(in srgb, ${color} 16%, transparent)`,
+    // Dark chips are mixed onto a dark base so the fill stays visible on the row.
+    // A 16% transparent tint disappears and leaves only the outline.
+    tagBg: tagBg || `color-mix(in srgb, ${color} 46%, #24160e)`,
     tagBorder: tagBorder || color,
   };
 }
+
+export const COUNT_BADGE = {
+  background: "#e23b3b",
+  color: "#fff",
+  fontSize: "10px",
+  fontWeight: 700,
+  lineHeight: "12px",
+  height: "12px",
+  minWidth: "12px",
+  padding: "0 4px",
+  borderRadius: "999px",
+  marginLeft: "5px",
+  letterSpacing: "0",
+  display: "inline-flex",
+  alignItems: "center",
+  justifyContent: "center",
+  boxSizing: "border-box",
+};
 function tab(color, bg, shadow, border) {
   return { color, bg, shadow: shadow || "none", border: border || "transparent" };
 }
@@ -40,6 +60,7 @@ export const LOBBY_TAGS = {
   },
   main: {
     label: "Main",
+    icon: "#e23b3b",
     tabPath: HEART,
     markPath: HEART,
     tab: {
@@ -49,6 +70,7 @@ export const LOBBY_TAGS = {
   },
   ranked: {
     label: "Ranked",
+    icon: "#e23b3b",
     markPath: HEART,
     markClass: "mark-heart",
     row: {
@@ -60,6 +82,7 @@ export const LOBBY_TAGS = {
   },
   competitive: {
     label: "Competitive",
+    icon: "#edb334",
     tabPath: HEART,
     markPath: HEART,
     markClass: "mark-heart gold",
@@ -76,6 +99,7 @@ export const LOBBY_TAGS = {
   },
   sandbox: {
     label: "Sandbox",
+    icon: "#d6c15a",
     tabPath: PAIL,
     markPath: PAIL,
     fillRule: "evenodd",
@@ -93,6 +117,7 @@ export const LOBBY_TAGS = {
   },
   minigames: {
     label: "Minigames",
+    icon: "#5ec8d6",
     tabPath: DICE,
     markPath: DICE,
     fillRule: "evenodd",
@@ -110,6 +135,7 @@ export const LOBBY_TAGS = {
   },
   survivor: {
     label: "Survivor",
+    icon: "#6fbf6f",
     tabPath: TORCH,
     markPath: TORCH,
     fillRule: "evenodd",
@@ -127,6 +153,7 @@ export const LOBBY_TAGS = {
   },
   roleplay: {
     label: "Roleplay",
+    icon: "#c084fc",
     tabPath: PEOPLE,
     markPath: RP,
     markClass: "mark-fill",
@@ -143,6 +170,7 @@ export const LOBBY_TAGS = {
   },
   unranked: {
     label: "Unranked",
+    icon: "#8b949e",
     markCircle: true,
     markClass: "mark-fill neutral",
     row: {
@@ -207,6 +235,8 @@ export function tagPillStyle(id, light) {
     color: tone.color,
     background: tone.tagBg,
     borderColor: tone.tagBorder,
+    "--tag-color": tone.color,
+    "--tag-bg": tone.tagBg,
     "--tag-border": tone.tagBorder,
   };
 }
@@ -239,16 +269,17 @@ export function tabFaceStyle(id, light) {
 export function TagGlyph({ id, which = "tab" }) {
   const spec = LOBBY_TAGS[id] || LOBBY_TAGS.unranked;
   const cls = which === "mark" ? `mark-ico ${spec.markClass || ""}` : "tab-ico";
+  const paint = spec.icon ? { color: spec.icon } : undefined;
   if (which === "mark" && spec.markCircle) {
     return (
-      <svg className={cls} viewBox="0 0 24 24" aria-hidden="true">
+      <svg className={cls} style={paint} viewBox="0 0 24 24" aria-hidden="true">
         <circle cx="12" cy="12" r="5" fill="currentColor" />
       </svg>
     );
   }
   const d = which === "mark" ? spec.markPath || spec.tabPath : spec.tabPath || spec.markPath;
   return (
-    <svg className={cls} viewBox="0 0 24 24" aria-hidden="true">
+    <svg className={cls} style={paint} viewBox="0 0 24 24" aria-hidden="true">
       <path fill="currentColor" fillRule={spec.fillRule || "nonzero"} d={d} />
     </svg>
   );

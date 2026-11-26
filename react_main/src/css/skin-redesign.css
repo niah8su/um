@@ -1337,12 +1337,33 @@ html.skin-redesign .skin-head-end {
   align-items: center;
   gap: 10px;
 }
+html.skin-redesign .skin-bar {
+  min-height: 56px;
+  padding: 6px 12px !important;
+  gap: 8px !important;
+}
 html.skin-redesign .skin-nav-btn {
   background: transparent !important;
   box-shadow: none !important;
   min-width: 0 !important;
-  padding: 4px 8px !important;
+  padding: 6px 8px !important;
   border-radius: 8px !important;
+  gap: 6px;
+}
+html.skin-redesign .skin-nav-ico {
+  width: 16px;
+  height: 16px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.6;
+  stroke-linejoin: round;
+  stroke-linecap: round;
+  flex: none;
+}
+html.skin-redesign .skin-nav-btn[aria-expanded="true"],
+html.skin-redesign .skin-nav-btn:hover {
+  background: color-mix(in srgb, var(--um-accent) 16%, transparent) !important;
+  color: var(--um-accent);
 }
 html.skin-redesign .skin-nav-label {
   font-family: "Segoe UI", Roboto, sans-serif !important;

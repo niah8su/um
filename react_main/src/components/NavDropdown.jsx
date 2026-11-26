@@ -85,6 +85,19 @@ export default function NavDropdown({
     onClick: handleClick,
   };
 
+  const skinIcon = skin && !customTrigger && !isMobileMenu ? (
+    <svg className="skin-nav-ico" viewBox="0 0 24 24" aria-hidden="true">
+      {label === "Play" && <path fill="currentColor" stroke="none" d="M8 5.5v13l11-6.5z" />}
+      {label === "Community" && (
+        <path d="M8 11a3 3 0 1 0-3-3 3 3 0 0 0 3 3zm8 1a2.5 2.5 0 1 0-2.5-2.5A2.5 2.5 0 0 0 16 12zM3 19c.4-2.6 2.6-4 5-4s4.6 1.4 5 4M14 15.1c.6-.1 1.3-.1 2 0 2 .2 3.6 1.4 4 3.4" />
+      )}
+      {label === "Fame" && <path fill="currentColor" stroke="none" d="M12 3.5l2.2 4.6 5 .7-3.6 3.5.9 5.1L12 15.8 7.5 17.4l.9-5.1L4.8 8.8l5-.7z" />}
+      {label === "Learn" && <path d="M5 5.5A2.5 2.5 0 0 1 7.5 3H20v16H7.5A2.5 2.5 0 0 0 5 21.5z" />}
+      {label === "Policy" && <path d="M12 3l7 3v6c0 4.2-2.8 7.2-7 8.5C7.8 19.2 5 16.2 5 12V6z" />}
+      {label === "Activity" && <path d="M4 16l4-5 3 3 5-7 4 5" />}
+    </svg>
+  ) : null;
+
   const triggerContent = customTrigger ? (
     <IconButton
       {...menuTriggerProps}
@@ -114,6 +127,7 @@ export default function NavDropdown({
       }}
       endIcon={<i className="fas fa-caret-down" aria-hidden="true" />}
     >
+      {skinIcon}
       <Typography className={skin ? "skin-nav-label" : undefined} variant="h3">{label}</Typography>
     </Button>
   );

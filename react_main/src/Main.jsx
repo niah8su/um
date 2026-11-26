@@ -494,7 +494,7 @@ export function Header({ setShowAnnouncementTemporarily }) {
 
       {/* Desktop AppBar */}
       {!isPhoneDevice && (
-        <Stack direction="row" spacing={2} sx={{
+        <Stack className="skin-bar" direction="row" spacing={2} sx={{
           alignItems: "center",
           px: 1,
           py: 0.5,

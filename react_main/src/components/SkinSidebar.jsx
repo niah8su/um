@@ -1,5 +1,6 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import axios from "axios";
 import { UserContext } from "Contexts";
 import { useSkinRedesign } from "./useSkinRedesign";
 
@@ -65,6 +66,21 @@ export default function SkinSidebar() {
   const user = useContext(UserContext);
   const loggedIn = Boolean(user && user.loggedIn);
   const [collapsed, setCollapsed] = useState(true);
+  const [online, setOnline] = useState([]);
+  useEffect(() => {
+    if (!skin) return undefined;
+    let stop = false;
+    axios
+      .get("/api/user/online")
+      .then((res) => {
+        if (stop || !Array.isArray(res.data)) return;
+        setOnline(res.data.filter((row) => row && row.name && row.status !== "offline"));
+      })
+      .catch(() => {});
+    return () => {
+      stop = true;
+    };
+  }, [skin]);
   if (!skin) return null;
   const initial = String((user && (user.name || user.id)) || "?").trim().charAt(0).toUpperCase() || "?";
 
@@ -88,6 +104,14 @@ export default function SkinSidebar() {
               )
             ))}
           </section>
+        ))}
+      </div>
+      <div className="skin-online" aria-label="Online users">
+        {online.map((row) => (
+          <Link key={row.id} to={row.id ? `/user/${row.id}` : "/community/users"}>
+            <i aria-hidden="true" />
+            {row.name}
+          </Link>
         ))}
       </div>
       <div className="skin-side-foot">

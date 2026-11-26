@@ -435,7 +435,19 @@ html.skin-redesign .game .center-panel,
 html.skin-redesign .game .speech-display { min-height: 0; overflow: auto; }
 html.skin-redesign .newspaper { background: #f4efe4 !important; color: #1c1917 !important; border: 1px solid #1c1917; box-shadow: 0 10px 28px rgba(0,0,0,.35); }
 html.skin-redesign .newspaper * { color: #1c1917 !important; }
-html.skin-redesign .ios-beta-ticker__track { animation-duration: 18s !important; }
+html.skin-redesign body { background-color: #050308; }
+html.skin-redesign.light-mode body { background-color: #f7f4f1; color: #1c1917; }
+html.skin-redesign.light-mode .game-session {
+  background: linear-gradient(180deg, #e8893a 0%, #f0b429 48%, #ffe7a3 100%) !important;
+}
+html.skin-redesign.light-mode .game .center-panel {
+  border: 1px solid rgba(90, 42, 8, 0.28);
+  border-radius: 12px;
+}
+html.skin-redesign .ios-beta-ticker,
+html.skin-redesign .ios-beta-ticker__viewport { justify-content: flex-start; width: 100%; }
+html.skin-redesign .skin-game-header { display: flex; flex-direction: column; width: 100%; }
+html.skin-redesign .skin-game-header .ios-beta-ticker { width: 100%; }
 
 /* Competitive row: dark mode only. A rounded brass bar, olive at the edges and pale gold through the center. */
 html.skin-redesign:not(.light-mode) .metallic-gold {
@@ -505,12 +517,14 @@ html.skin-redesign .site-wrapper {
 
 html.skin-redesign .skin-games-bar {
   display: grid !important;
-  grid-template-columns: 1fr auto 1fr;
+  grid-template-columns: auto 1fr auto 1fr auto;
   align-items: center;
   padding: 10px 8px;
+  width: 100%;
 }
-html.skin-redesign .skin-games-bar > :first-child { justify-self: start; }
-html.skin-redesign .skin-games-bar > :last-child { justify-self: end; }
+html.skin-redesign .skin-games-pager { grid-column: 1; justify-self: start; }
+html.skin-redesign .skin-games-word { grid-column: 3; justify-self: center; }
+html.skin-redesign .skin-games-end { grid-column: 5; justify-self: end; }
 
 html.skin-redesign .skin-lobby-tabs { margin: 12px 0; padding: 8px 0; }
 html.skin-redesign .skin-lobby-tabs .MuiTab-root::before { content: none !important; display: none !important; }
@@ -623,7 +637,17 @@ html.skin-redesign .skin-side-ava {
   font-size: 13px;
 }
 
-html.skin-redesign .skin-games-bar { column-gap: 56px; }
+html.skin-redesign .skin-online { display: flex; flex-direction: column; gap: 4px; max-height: 220px; overflow: auto; margin: 8px 0; }
+html.skin-redesign .skin-side.collapsed .skin-online { display: none; }
+html.skin-redesign .skin-online a { display: flex; align-items: center; gap: 6px; color: #59ad72; font-size: 12px; font-weight: 600; padding: 2px 4px; }
+html.skin-redesign .skin-online i { width: 8px; height: 8px; border-radius: 50%; background: #59ad72; box-shadow: 0 0 6px #59ad72; display: inline-block; }
+html.skin-redesign .skin-family { text-transform: uppercase; }
+html.skin-redesign .skin-joined { text-transform: uppercase; }
+html.skin-redesign .skin-status-pick { border-top: 1px solid var(--um-line); border-bottom: 1px solid var(--um-line); padding: 8px 0; text-align: center; }
+html.skin-redesign .skin-status-pick button { border: 1px solid var(--um-line); background: transparent; color: inherit; border-radius: 999px; padding: 4px 10px; margin: 0 4px; cursor: pointer; font: inherit; font-size: 12px; }
+html.skin-redesign .skin-status-pick button.on { border-color: #59ad72; color: #59ad72; }
+html.skin-redesign .miniprofile .status-icon { width: 12px !important; height: 12px !important; border-width: 2px !important; }
+html.skin-redesign .miniprofile .status-icon.online { background-color: #59ad72; }
 
 html.skin-redesign .poll-completes {
   text-align: center;

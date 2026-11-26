@@ -1476,6 +1476,7 @@ export default function Profile() {
           </Stack>
           {joined && (
             <Typography
+              className="skin-joined"
               variant="caption"
               sx={{
                 filter: "opacity(.75)",
@@ -1549,6 +1550,7 @@ export default function Profile() {
             }}
           >
             <Stack
+              className="skin-family"
               direction={isPhoneDevice ? "row" : "column"}
               spacing={isPhoneDevice ? 1 : 0}
               sx={{

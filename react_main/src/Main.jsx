@@ -144,6 +144,19 @@ const Banned = lazyWithRetry(() => import("pages/Banned/Banned"));
 
 // The game session is rendered outside the route table, so the route table must
 // not treat a game URL as an unknown site path and redirect away from it.
+class SkinGuard extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = { failed: false };
+  }
+  static getDerivedStateFromError() {
+    return { failed: true };
+  }
+  render() {
+    return this.state.failed ? null : this.props.children;
+  }
+}
+
 function Main(props) {
   const errorContent = props.errorContent;
 
@@ -214,7 +227,9 @@ function Main(props) {
           : { minHeight: "100dvh" }),
       }}
     >
-      <SkinSidebar />
+      <SkinGuard>
+        <SkinSidebar />
+      </SkinGuard>
       <CookieBanner />
       <IosBetaTicker />
       <Header

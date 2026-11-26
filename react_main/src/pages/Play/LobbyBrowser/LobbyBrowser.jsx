@@ -395,11 +395,13 @@ export default function LobbyBrowser() {
           justifyContent: "space-between",
         }}
       >
-        <PageNav page={page} onNav={(nextPage) => getGameList(listType, nextPage, null, { reload: nextPage === page })} />
-        <Typography variant="h3" color="primary">
+        <Box className="skin-games-pager">
+          <PageNav page={page} onNav={(nextPage) => getGameList(listType, nextPage, null, { reload: nextPage === page })} />
+        </Box>
+        <Typography className="skin-games-word" variant="h3" color="primary">
           Games
         </Typography>
-        <Stack direction="row" spacing={1} alignItems="center">
+        <Stack className="skin-games-end" direction="row" spacing={1} alignItems="center">
           {!user.settings?.hideTutorialButton && (
             <Button component={Link} to="/play/tutorial" size="small" variant="outlined" data-testid="tutorial-link">
               📘 Tutorial

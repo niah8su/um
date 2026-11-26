@@ -41,7 +41,7 @@ function TickerItems({ copies, hidden }) {
   );
 }
 
-export default function IosBetaTicker() {
+export default function IosBetaTicker({ forceShow = false } = {}) {
   const location = useLocation();
   const [dismissed, setDismissed] = useState(readDismissed);
   const viewportRef = useRef(null);
@@ -50,7 +50,7 @@ export default function IosBetaTicker() {
   const [durationSec, setDurationSec] = useState(40);
 
   const onGamePage = location.pathname.startsWith("/game/");
-  const show = IOS_BETA_TICKER_ENABLED && !dismissed && !onGamePage;
+  const show = IOS_BETA_TICKER_ENABLED && !dismissed && (forceShow || !onGamePage);
 
   useLayoutEffect(() => {
     if (!show) return undefined;

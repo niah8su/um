@@ -12,6 +12,8 @@ import React, {
 import { useParams, Navigate, Link, useLocation, useNavigate } from "react-router-dom";
 import update from "immutability-helper";
 import axios from "axios";
+import IosBetaTicker from "../../components/IosBetaTicker";
+import { useSkinRedesign } from "../../components/useSkinRedesign";
 import ReactLoading from "react-loading";
 
 import { UserText } from "../../components/Basic";
@@ -1873,6 +1875,7 @@ export function TopBar({ forceShow = false } = {}) {
 
   const theme = useTheme();
   const isPhoneDevice = useIsPhoneDevice();
+  const skin = useSkinRedesign();
   const gameId = game.gameId;
   const errorAlert = useErrorAlert();
   const siteInfo = useContext(SiteInfoContext);
@@ -1988,7 +1991,7 @@ export function TopBar({ forceShow = false } = {}) {
 
   if (!isPhoneDevice) {
     // DESKTOP ================================================================
-    return (
+    const bar = (
       <Stack
         direction="row"
         spacing={1}
@@ -2022,6 +2025,13 @@ export function TopBar({ forceShow = false } = {}) {
           {buttonGroup}
         </Stack>
       </Stack>
+    );
+    if (!skin) return bar;
+    return (
+      <header className="site-header skin-game-header">
+        <IosBetaTicker forceShow />
+        {bar}
+      </header>
     );
   } else {
     // MOBILE ================================================================

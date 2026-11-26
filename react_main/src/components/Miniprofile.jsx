@@ -10,6 +10,8 @@ import { Avatar } from "pages/User/UserWidgets";
 
 import { TIER_ICONS, getConservativeRank } from "utils/skillRating";
 import { UserContext, SiteInfoContext } from "Contexts";
+import { useSkinRedesign } from "components/useSkinRedesign";
+import { FamilyAvatarImage } from "utils/avatarUrl";
 import ReportDialog from "components/ReportDialog";
 import TrophyCase from "components/TrophyCase";
 import { useErrorAlert } from "components/Alerts";
@@ -67,6 +69,15 @@ function Miniprofile(props) {
     Object.keys(siteInfo.achievementsRaw?.Mafia || {}).length || 40;
 
   const isSelf = currentUser.loggedIn && currentUser.id === id;
+  const skin = useSkinRedesign();
+  const [ownStatus, setOwnStatus] = useState("");
+  useEffect(() => {
+    if (!skin || !isSelf) return;
+    try {
+      setOwnStatus(window.localStorage.getItem("um-skin-own-status") || "");
+    } catch (e) {}
+  }, [skin, isSelf]);
+  const shownStatus = isSelf && (ownStatus === "online" || ownStatus === "offline") ? ownStatus : user.status;
   const [isFriend, setIsFriend] = useState(user.isFriend || false);
   const [isFriendRequested, setIsFriendRequested] = useState(user.isFriendRequested || false);
   const [reportDialogOpen, setReportDialogOpen] = useState(false);
@@ -144,6 +155,9 @@ function Miniprofile(props) {
                 id={id}
                 avatarId={avatarId}
                 name={name}
+                onlineStatus={skin ? shownStatus || null : null}
+                lastActive={user.lastActive}
+                inGame={user.inGame}
               />
               <div
                 className={`user-name`}
@@ -187,6 +201,40 @@ function Miniprofile(props) {
         prefilledArgs={reportPrefilledArgs}
       />
       {!hasDefaultPronouns && <div className="pronouns">({pronouns})</div>}
+      {skin && user.family && user.family.name && (
+        <div className="skin-family">
+          Member of{" "}
+          {user.family.avatar ? (
+            <FamilyAvatarImage id={user.family.id} size={16} cacheVal={siteInfo.cacheVal} />
+          ) : null}
+          {user.family.name}
+        </div>
+      )}
+      {skin && isSelf && (
+        <div className="skin-status-pick">
+          <div>Select your status</div>
+          <button
+            type="button"
+            className={shownStatus === "online" ? "on" : ""}
+            onClick={() => {
+              try { window.localStorage.setItem("um-skin-own-status", "online"); } catch (e) {}
+              setOwnStatus("online");
+            }}
+          >
+            Online
+          </button>
+          <button
+            type="button"
+            className={shownStatus === "offline" ? "on" : ""}
+            onClick={() => {
+              try { window.localStorage.setItem("um-skin-own-status", "offline"); } catch (e) {}
+              setOwnStatus("offline");
+            }}
+          >
+            Offline
+          </button>
+        </div>
+      )}
       {/* Gate on `tier`, not on the object: an unrated player still gets a
           skillRating payload, but it carries only the progress counter -- reading
           mu/sigma off it would render "(CR: NaN)". */}

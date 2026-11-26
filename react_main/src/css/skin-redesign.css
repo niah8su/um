@@ -681,7 +681,7 @@ html.skin-redesign .miniprofile .MuiButton-contained,
 html.skin-redesign .skin-detail-pop .MuiButton-contained {
   background: transparent !important;
   background-image: none !important;
-  color: var(--um-accent) !important;
+  color: color-mix(in srgb, var(--um-accent) 48%, var(--um-ink)) !important;
   border: 1px solid color-mix(in srgb, var(--um-accent) 55%, transparent) !important;
   box-shadow: none !important;
   text-transform: none !important;

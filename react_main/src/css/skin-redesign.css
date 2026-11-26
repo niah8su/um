@@ -256,20 +256,7 @@ html.skin-redesign .game-state-icon {
   overflow: hidden;
 }
 
-@media (min-width: 1100px) {
-  html.skin-redesign .skin-topbar {
-    position: relative;
-  }
-
-  html.skin-redesign .skin-states {
-    position: absolute;
-    left: 50%;
-    top: 50%;
-    transform: translate(-50%, -50%);
-    z-index: 2;
-    width: auto;
-  }
-}
+/* Phase icons stay in the header grid. Absolute centering piled them on the logo. */
 
 html.skin-redesign .game,
 html.skin-redesign .game-session,
@@ -308,29 +295,7 @@ html.skin-redesign .game-session .setup .setup-name {
   font-weight: 500;
 }
 
-@media (min-width: 1100px) {
-  html.skin-redesign .skin-topbar {
-    min-height: 112px;
-  }
-
-  html.skin-redesign .skin-states {
-    top: 8px;
-    transform: translateX(-50%);
-    padding: 8px;
-  }
-
-  html.skin-redesign .skin-topbar .setup {
-    position: absolute;
-    left: 50%;
-    top: 56px;
-    transform: translateX(-50%);
-    padding: 8px;
-    margin: 0;
-    background: transparent !important;
-    border: 0 !important;
-    box-shadow: none !important;
-  }
-}
+/* Setup stays in the right-hand cluster, beside Leave. */
 
 html.skin-redesign:not(.light-mode) .game-session .MuiIconButton-root,
 html.skin-redesign:not(.light-mode) .game .MuiIconButton-root,
@@ -468,8 +433,7 @@ html.skin-redesign:not(.light-mode) .metallic-gold::after {
   pointer-events: none;
   background: linear-gradient(180deg, rgba(255, 255, 255, 0.38), transparent 30%, transparent 72%, rgba(0, 0, 0, 0.18));
 }
-html.skin-redesign .skin-topbar { min-height: 0 !important; padding-bottom: 4px; }
-html.skin-redesign .skin-topbar .setup { position: static !important; left: auto !important; top: auto !important; transform: none !important; padding: 4px 8px !important; }
+html.skin-redesign .skin-topbar { position: relative; }
 
 html.skin-redesign .skin-side {
   position: fixed;
@@ -847,44 +811,142 @@ html.skin-redesign [data-testid="dm-window"][data-collapsed="true"] [data-testid
   z-index: 2;
 }
 
-html.skin-redesign .skin-game-header { width: 100%; }
+/* Game header spans the viewport. The three panels stay in a centered column. */
+html.skin-redesign .game-session {
+  max-width: none !important;
+  width: auto !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  left: 0;
+  right: 0;
+  box-sizing: border-box;
+}
+html.skin-redesign .game {
+  width: 100%;
+  height: 100%;
+  max-height: none;
+  padding-top: 0 !important;
+  box-sizing: border-box;
+}
+html.skin-redesign .skin-game-header {
+  display: flex;
+  flex-direction: column;
+  flex: 0 0 auto;
+  align-self: stretch;
+  width: 100%;
+  max-width: none;
+  min-width: 0;
+}
+html.skin-redesign .skin-game-header .ios-beta-ticker {
+  display: flex !important;
+  width: 100% !important;
+  max-width: none !important;
+  align-self: stretch;
+  box-sizing: border-box;
+}
 html.skin-redesign .skin-game-header .ios-beta-ticker__viewport {
-  display: block !important;
+  display: flex !important;
+  flex: 1 1 auto;
+  width: auto !important;
+  max-width: none !important;
+  min-width: 0;
+  justify-content: flex-start !important;
   overflow: hidden;
   text-align: left;
 }
 html.skin-redesign .skin-game-header .ios-beta-ticker__track { margin-left: 0; }
 html.skin-redesign .skin-game-header .skin-topbar {
   display: grid !important;
-  grid-template-columns: auto minmax(0, 1fr) auto;
+  grid-template-columns: minmax(0, 1fr) minmax(0, auto) minmax(0, 1fr);
   align-items: center;
+  column-gap: 16px;
   width: 100%;
-  min-height: 56px !important;
+  min-height: 64px;
+  padding: 8px 16px !important;
+  box-sizing: border-box;
+  position: relative !important;
 }
-html.skin-redesign .skin-topbar .skin-logo { grid-column: 1; justify-self: start; }
-html.skin-redesign .skin-topbar .skin-logo img { display: block; height: 42px; width: auto; }
+html.skin-redesign .skin-topbar > .MuiStack-root { margin: 0 !important; min-width: 0; }
+html.skin-redesign .skin-topbar .skin-logo {
+  grid-column: 1;
+  justify-self: start;
+  align-self: center;
+  position: static !important;
+  flex: none !important;
+  width: auto;
+  max-width: 100%;
+  overflow: hidden;
+}
+html.skin-redesign .skin-topbar .skin-logo img {
+  display: block;
+  height: 42px;
+  width: auto;
+  max-width: 100%;
+}
 html.skin-redesign .skin-topbar .skin-states {
+  grid-column: 2;
+  justify-self: center;
+  align-self: center;
   position: static !important;
   left: auto !important;
   top: auto !important;
   transform: none !important;
-  grid-column: 2;
-  justify-self: center;
+  width: max-content;
+  max-width: min(560px, 46vw);
+  min-width: 0 !important;
+  flex: none !important;
+  z-index: auto !important;
+  overflow: hidden;
+}
+html.skin-redesign .skin-topbar .skin-states .MuiPaper-root,
+html.skin-redesign .skin-topbar .skin-states .MuiStack-root {
   width: auto;
+  max-width: 100%;
+  min-width: 0 !important;
+  background: transparent !important;
+  box-shadow: none !important;
+}
+html.skin-redesign .skin-topbar .skin-head-tools {
+  grid-column: 3;
+  justify-self: end;
+  align-self: center;
+  display: flex !important;
+  flex-direction: row !important;
+  flex-wrap: nowrap !important;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 12px;
+  width: auto;
+  max-width: 100%;
   min-width: 0;
-  flex: none;
+  overflow: hidden;
 }
-html.skin-redesign .skin-topbar > .MuiStack-root:last-child { grid-column: 3; justify-self: end; }
-html.skin-redesign .skin-topbar .setup { position: static !important; transform: none !important; }
-
-html.skin-redesign .game-session {
+html.skin-redesign .skin-topbar .setup {
+  position: static !important;
+  left: auto !important;
+  top: auto !important;
+  transform: none !important;
+  flex: 0 1 auto;
+  width: auto !important;
+  max-width: min(28rem, 100%) !important;
+  min-width: 0 !important;
+  margin: 0 !important;
+  overflow: hidden;
+}
+html.skin-redesign .skin-topbar .MuiButtonGroup-root,
+html.skin-redesign .skin-topbar .skin-leave {
+  flex: 0 0 auto;
+  white-space: nowrap;
+}
+html.skin-redesign .game .main {
+  width: min(1080px, calc(100% - 32px));
   max-width: 1080px;
-  margin: 12px auto 72px;
-  padding: 0 24px 80px;
+  max-height: min(760px, calc(100vh - 180px));
+  margin-left: auto;
+  margin-right: auto;
+  align-self: center;
   box-sizing: border-box;
-  height: auto;
 }
-html.skin-redesign .game { height: calc(100vh - 180px); max-height: 760px; }
 html.skin-redesign .game .center-panel,
 html.skin-redesign .game .speech-display,
 html.skin-redesign .game .panel {

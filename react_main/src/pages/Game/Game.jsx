@@ -2012,6 +2012,7 @@ export function TopBar({ forceShow = false } = {}) {
           direction="row"
           spacing={1}
           key="miscWrapper"
+          className="skin-head-tools"
           ref={game.scrollDownTriggerRef}
           sx={{
             alignItems: "center",

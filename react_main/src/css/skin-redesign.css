@@ -475,11 +475,15 @@ html.skin-redesign.light-mode .skin-side {
 }
 html.skin-redesign .skin-side-online {
   display: flex;
+  flex-direction: row;
   align-items: center;
-  gap: 8px;
-  padding: 8px 4px 10px;
-  border-top: 1px solid rgba(255,255,255,.1);
-  margin-top: 6px;
+  justify-content: center;
+  gap: 4px;
+  width: 100%;
+  padding: 6px 0 8px;
+  border-top: 0;
+  margin-top: 2px;
+  white-space: nowrap;
 }
 html.skin-redesign .skin-side-online i {
   width: 8px;
@@ -529,11 +533,19 @@ html.skin-redesign .skin-side section {
 }
 html.skin-redesign .skin-side.collapsed .skin-side-online {
   display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  border: 0;
+  padding: 6px 0;
+  white-space: nowrap;
+}
+html.skin-redesign .skin-foot-credits {
+  display: flex;
   flex-direction: column;
   align-items: center;
   gap: 4px;
-  border: 0;
-  padding: 8px 0;
 }
 html.skin-redesign .skin-side-dock button {
   background: none;
@@ -691,6 +703,68 @@ html.skin-redesign .miniprofile .pie-chart {
   margin-bottom: 8px;
 }
 html.skin-redesign .skin-detail-pop { width: 320px; max-width: 92vw; overflow: hidden; padding: 8px 10px !important; }
+html.skin-redesign .skin-card-head {
+  position: relative;
+  padding: 4px 8px 18px 2px;
+}
+html.skin-redesign .skin-card-copy {
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 4px;
+  padding-top: 2px;
+}
+html.skin-redesign .skin-card-line {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 6px;
+  min-width: 0;
+}
+html.skin-redesign .skin-card-line .user-name {
+  font-size: 15px;
+  font-weight: 700;
+  line-height: 1.2;
+}
+html.skin-redesign .skin-card-div {
+  width: 1px;
+  height: 12px;
+  background: rgba(255,255,255,.35);
+  flex: none;
+}
+html.skin-redesign.light-mode .skin-card-div { background: rgba(31,35,40,.28); }
+html.skin-redesign .skin-card-pronouns,
+html.skin-redesign .skin-card-games {
+  font-size: 12px;
+  font-weight: 500;
+  line-height: 1.2;
+  color: rgba(255,255,255,.88);
+}
+html.skin-redesign.light-mode .skin-card-pronouns,
+html.skin-redesign.light-mode .skin-card-games { color: #1f2328; }
+html.skin-redesign .skin-card-trophies { display: flex; gap: 4px; }
+html.skin-redesign .skin-card-trophies .trophy-icon { width: 18px; height: 18px; }
+html.skin-redesign .skin-card-family {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 12px;
+  font-weight: 600;
+  opacity: 1;
+}
+html.skin-redesign .skin-card-family img { width: 16px; height: 16px; border-radius: 50%; }
+html.skin-redesign .skin-card-joined {
+  position: absolute;
+  right: 8px;
+  bottom: 2px;
+  font-size: 10px;
+  font-weight: 300;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  opacity: .55;
+  line-height: 1;
+}
 html.skin-redesign .skin-card-meta {
   display: flex;
   flex-wrap: wrap;
@@ -1609,7 +1683,7 @@ html.skin-redesign.light-mode .MuiAppBar-root .skin-nav-btn .skin-nav-label.MuiT
   color: #57606a !important;
 }
 html.skin-redesign .MuiAppBar-root .skin-nav-btn.is-active {
-  background: rgba(120, 28, 36, .85) !important;
+  background: color-mix(in srgb, var(--um-accent) 85%, transparent) !important;
   border-radius: 8px !important;
 }
 html.skin-redesign .MuiAppBar-root .skin-nav-btn.is-active .skin-nav-label.MuiTypography-h3 {

@@ -664,7 +664,7 @@ export function RoleCount({
           redesignOn
             ? {
                 paper: {
-                  className: "skin-detail-pop",
+                  className: "skin-detail-pop skin-role-pop",
                   onMouseEnter: holdPopover,
                   onMouseLeave: releasePopover,
                 },

@@ -780,7 +780,7 @@ function Footer() {
           </MuiLink>
           .
         </Typography>
-        <Stack direction={isPhoneDevice ? "column" : "row"} spacing={isPhoneDevice ? 0.5 : 2} sx={{
+        <Stack className={skin ? "skin-foot-credits" : undefined} direction={skin || isPhoneDevice ? "column" : "row"} spacing={skin || isPhoneDevice ? 0.5 : 2} sx={{
         }}>
           <Typography variant="body2">
             © {year} UltiMafia

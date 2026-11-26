@@ -132,12 +132,12 @@ function Miniprofile(props) {
           ×
         </button>
       ) : null}
-      <div className="mui-popover-title">
+      <div className={skin ? "mui-popover-title skin-card-head" : "mui-popover-title"}>
         <Stack
           direction="row"
           spacing={1}
           sx={{
-            alignItems: "center",
+            alignItems: "flex-start",
             width: "100%",
             justifyContent: "space-between",
           }}
@@ -147,7 +147,7 @@ function Miniprofile(props) {
             to={profileLink}
             style={{ flex: 1, minWidth: 0 }}
           >
-            <Stack direction="row" spacing={1}>
+            <Stack direction="row" spacing={1} sx={{ alignItems: "flex-start" }}>
               <Avatar
                 hasImage={avatar}
                 id={id}
@@ -157,6 +157,39 @@ function Miniprofile(props) {
                 lastActive={user.lastActive}
                 inGame={user.inGame}
               />
+              {skin ? (
+                <div className="skin-card-copy">
+                  <div className="skin-card-line">
+                    <span className="user-name" style={color ? { color } : undefined}>{name}</span>
+                    {!hasDefaultPronouns && (
+                      <>
+                        <span className="skin-card-div" aria-hidden="true" />
+                        <span className="skin-card-pronouns">({pronouns})</span>
+                      </>
+                    )}
+                    {totalGames > 0 && (
+                      <>
+                        <span className="skin-card-div" aria-hidden="true" />
+                        <span className="skin-card-games">{totalGames} games</span>
+                      </>
+                    )}
+                  </div>
+                  {user.trophies?.length > 0 && (
+                    <div className="skin-card-trophies">
+                      <TrophyCase trophies={user.trophies} showHeading={false} wrapInPanel={false} keyboardAccessible />
+                    </div>
+                  )}
+                  {user.family && user.family.name && (
+                    <div className="skin-card-family">
+                      Member of{" "}
+                      {user.family.avatar ? (
+                        <FamilyAvatarImage id={user.family.id} size={16} cacheVal={siteInfo.cacheVal} />
+                      ) : null}
+                      {user.family.name}
+                    </div>
+                  )}
+                </div>
+              ) : (
               <div
                 className={`user-name`}
                 style={{
@@ -166,26 +199,8 @@ function Miniprofile(props) {
                 }}
               >
                 {name}
-                {skin && (
-                  <div className="skin-card-meta">
-                    {totalGames > 0 && <span className="skin-games">{totalGames} games</span>}
-                    {user.family && user.family.name && (
-                      <span className="skin-family">
-                        Member of{" "}
-                        {user.family.avatar ? (
-                          <FamilyAvatarImage id={user.family.id} size={14} cacheVal={siteInfo.cacheVal} />
-                        ) : null}
-                        {user.family.name}
-                      </span>
-                    )}
-                    {user.joined && (
-                      <span className="skin-joined">
-                        Joined {new Date(Number(user.joined)).toLocaleDateString()}
-                      </span>
-                    )}
-                  </div>
-                )}
               </div>
+              )}
             </Stack>
           </Link>
           {!isSelf && currentUser.loggedIn && (
@@ -211,13 +226,18 @@ function Miniprofile(props) {
             </Stack>
           )}
         </Stack>
+        {skin && user.joined && (
+          <div className="skin-card-joined">
+            Joined {new Date(Number(user.joined)).toLocaleDateString()}
+          </div>
+        )}
       </div>
       <ReportDialog
         open={reportDialogOpen}
         onClose={() => setReportDialogOpen(false)}
         prefilledArgs={reportPrefilledArgs}
       />
-      {!hasDefaultPronouns && <div className="pronouns">({pronouns})</div>}
+      {!skin && !hasDefaultPronouns && <div className="pronouns">({pronouns})</div>}
       {!skin && user.family && user.family.name && (
         <div className="skin-family">
           Member of{" "}
@@ -267,7 +287,7 @@ function Miniprofile(props) {
           })}
         </Box>
       )}
-      {user.trophies?.length > 0 && (
+      {!skin && user.trophies?.length > 0 && (
         <Box component="section" aria-label="Trophies" sx={{ p: 1 }}>
           <TrophyCase trophies={user.trophies} showHeading={false} wrapInPanel={false} keyboardAccessible />
         </Box>

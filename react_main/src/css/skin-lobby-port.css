@@ -648,3 +648,345 @@ html.skin-redesign .skin-mod-ico {
   stroke: currentColor;
   stroke-width: 1.7;
 }
+
+/* Values come from lobbyTagMap.js. These rules only apply the variables. */
+html.skin-redesign .skin-port .lobby-tabs button[data-lobby].on,
+html.skin-redesign .skin-port .lobby-tabs button[data-lobby]:hover {
+  color: var(--tab-on) !important;
+  background: var(--tab-on-bg) !important;
+  box-shadow: var(--tab-on-shadow) !important;
+  border-color: var(--tab-on-border) !important;
+}
+html.skin-redesign .skin-port .lobby-tabs button[data-lobby="all"].on {
+  color: #fff !important;
+  background: color-mix(in srgb, var(--um-accent) 85%, transparent) !important;
+  border-color: var(--um-accent) !important;
+  box-shadow: 0 0 14px color-mix(in srgb, var(--um-accent) 45%, transparent) !important;
+}
+html.skin-redesign .skin-port .lobby-tabs .tab-ico,
+html.skin-redesign .skin-port .mark-ico {
+  width: 14px;
+  height: 14px;
+  fill: currentColor;
+  color: inherit;
+  flex: none;
+}
+html.skin-redesign .skin-port .mark-ico { width: 18px; height: 18px; }
+html.skin-redesign .skin-port .mark-ico.gold { color: #edb334; }
+html.skin-redesign .skin-port .mark-ico.mark-heart:not(.gold) { color: #e23b3b; }
+html.skin-redesign .skin-port .type-tag {
+  position: static !important;
+  margin: 0 !important;
+  width: 88px !important;
+  min-width: 88px !important;
+  max-width: 88px !important;
+  height: 16px !important;
+  padding: 2px 4px !important;
+  border-radius: 4px !important;
+  border: 1px solid currentColor !important;
+  font-size: 8px !important;
+  font-weight: 600 !important;
+  letter-spacing: 0.1em !important;
+  line-height: 1 !important;
+  text-transform: uppercase !important;
+}
+html.skin-redesign .skin-port .bar-stack {
+  position: relative !important;
+  display: flex !important;
+  flex-direction: row !important;
+  align-items: center !important;
+  justify-content: flex-start !important;
+  gap: 4px !important;
+  width: auto !important;
+  min-width: 118px !important;
+  max-width: none !important;
+  padding: 0 2px !important;
+}
+html.skin-redesign .skin-port .tag-col {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 4px;
+  min-width: 0;
+}
+html.skin-redesign .skin-port .bar-meta {
+  width: auto !important;
+  justify-content: flex-start !important;
+  align-items: center;
+  gap: 4px;
+}
+html.skin-redesign .skin-port .game[style] .stub {
+  background: var(--row-stub) !important;
+  box-shadow: none !important;
+}
+html.skin-redesign .skin-port .game[style] .game-main {
+  background: var(--row-bg) !important;
+  border: 1px solid var(--row-border) !important;
+  box-shadow: none !important;
+}
+html.skin-redesign .skin-port .game[style]:hover .game-main {
+  background: var(--row-hover-bg) !important;
+  border-color: var(--row-hover-border) !important;
+  box-shadow: var(--row-hover-shadow) !important;
+}
+html.skin-redesign .skin-port .setup-row {
+  grid-template-columns: 26px minmax(96px, 28%) minmax(0, 1fr) !important;
+  gap: 6px !important;
+}
+html.skin-redesign .skin-port .setup-copy { min-width: 0; }
+html.skin-redesign .skin-port .roles,
+html.skin-redesign .skin-port .roles .setup,
+html.skin-redesign .skin-port .roles .MuiCard-root,
+html.skin-redesign .skin-port .roles .MuiStack-root {
+  overflow: visible !important;
+  max-height: none !important;
+  height: auto !important;
+  flex-wrap: wrap !important;
+}
+html.skin-redesign .skin-port .roles .role { flex: none; }
+html.skin-redesign .page-nav {
+  display: inline-flex !important;
+  align-items: center;
+  gap: 2px;
+}
+html.skin-redesign .page-nav .MuiIconButton-root {
+  width: 22px !important;
+  height: 22px !important;
+  min-width: 22px !important;
+  padding: 0 !important;
+  overflow: visible !important;
+  color: var(--um-accent) !important;
+}
+html.skin-redesign .page-nav .MuiIconButton-root i,
+html.skin-redesign .page-nav .MuiIconButton-root .fas {
+  font-family: "Font Awesome 5 Free" !important;
+  font-weight: 900 !important;
+  font-size: 14px !important;
+  line-height: 1 !important;
+  width: auto !important;
+  height: auto !important;
+  color: var(--um-accent) !important;
+  display: inline-block !important;
+  opacity: 1 !important;
+}
+html.skin-redesign .page-nav .MuiIconButton-root[style] {
+  width: 22px !important;
+  height: 22px !important;
+  border-radius: 4px !important;
+  background: #161b22 !important;
+  color: var(--um-accent) !important;
+  border: 1px solid color-mix(in srgb, var(--um-accent) 55%, transparent) !important;
+}
+html.skin-redesign.light-mode .page-nav .MuiIconButton-root[style] {
+  background: #fff !important;
+  color: var(--um-accent) !important;
+}
+html.skin-redesign .skin-port .games-bar,
+html.skin-redesign .skin-port .games-end,
+html.skin-redesign .skin-port .games-bar > .pager {
+  align-items: center !important;
+}
+html.skin-redesign .skin-port .help-btn,
+html.skin-redesign .skin-port .help-btn.sq-btn,
+html.skin-redesign.light-mode .skin-port .help-btn.sq-btn {
+  border: 0 !important;
+  background: transparent !important;
+  box-shadow: none !important;
+  width: 28px !important;
+  height: 28px !important;
+  min-width: 0 !important;
+  align-self: center !important;
+  padding: 0 !important;
+}
+html.skin-redesign .skin-port .refresh-btn {
+  border: 0 !important;
+  background: transparent !important;
+  box-shadow: none !important;
+  align-self: center !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  width: 28px !important;
+  height: 28px !important;
+  padding: 0 !important;
+}
+html.skin-redesign .skin-port .who-pop {
+  display: none;
+  position: absolute;
+  left: 12px;
+  top: calc(100% + 6px);
+  z-index: 50;
+  width: min(300px, 80vw);
+  max-width: 300px;
+  max-height: 70vh;
+  overflow: auto;
+  padding: 6px 8px 7px;
+  border-radius: 8px;
+  border: 1px solid #8b949e;
+  background-color: rgba(13, 17, 23, .97);
+  color: #e6edf3;
+  box-shadow: 0 10px 24px rgba(0,0,0,.35);
+  backdrop-filter: blur(18px) saturate(1.45);
+}
+html.skin-redesign.light-mode .skin-port .who-pop {
+  background-color: rgba(255, 255, 255, .97);
+  color: #1f2328;
+}
+html.skin-redesign .skin-port .game:hover .who-pop,
+html.skin-redesign .skin-port .game.who-hold .who-pop,
+html.skin-redesign .skin-port .who-pop:hover { display: block; }
+html.skin-redesign .skin-port .game.who-shut .who-pop,
+html.skin-redesign .skin-port .game.who-shut:hover .who-pop { display: none; }
+html.skin-redesign .skin-port .who-x {
+  position: absolute;
+  top: 4px;
+  right: 4px;
+  width: 18px;
+  height: 18px;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: inherit;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+html.skin-redesign .skin-port .who-x svg {
+  width: 12px;
+  height: 12px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.5;
+  stroke-linecap: round;
+}
+html.skin-redesign .skin-port .who-sec {
+  padding: 3px 0;
+  border-top: 1px solid rgba(139, 148, 158, .45);
+}
+html.skin-redesign .skin-port .who-sec:first-of-type { border-top: 0; padding-top: 0; }
+html.skin-redesign .skin-port .who-title {
+  margin: 0 0 1px;
+  padding: 2px 18px 2px 0;
+  border: 0;
+  background: transparent;
+  color: var(--um-accent);
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  line-height: 1.2;
+}
+html.skin-redesign .skin-port .who-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 6px;
+  font-size: 11px;
+  line-height: 1.25;
+  padding: 1px 0;
+}
+html.skin-redesign .skin-port .who-pop ul { margin: 1px 0 0; padding: 0; list-style: none; }
+html.skin-redesign .skin-port .who-player {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  padding: 1px 0;
+  font-size: 12px;
+  line-height: 1.2;
+}
+html.skin-redesign .skin-port .who-ava {
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  object-fit: cover;
+  flex: none;
+}
+html.skin-redesign .skin-port .yn {
+  width: 14px;
+  height: 14px;
+  fill: none;
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+html.skin-redesign .skin-port .yn.yes { stroke: #3fb950; }
+html.skin-redesign .skin-port .yn.no { stroke: #f85149; }
+html.skin-redesign .skin-port .poll-q {
+  position: relative;
+  margin: 0;
+  padding: 16px 46px 8px;
+  text-align: center;
+  font-size: 14px;
+  font-weight: 700;
+  line-height: 1.45;
+  color: #fff;
+}
+html.skin-redesign.light-mode .skin-port .poll-q { color: #1f2328; }
+html.skin-redesign .skin-port .poll-quote {
+  position: absolute;
+  z-index: 1;
+  margin: 0;
+  font-family: Georgia, Palatino, serif;
+  font-size: 44px;
+  font-weight: 700;
+  line-height: 1;
+  color: color-mix(in srgb, var(--um-accent) 48%, #8b949e);
+  pointer-events: none;
+}
+html.skin-redesign .skin-port .poll-q .poll-quote:first-child { top: 0; left: 2px; }
+html.skin-redesign .skin-port .poll-q .poll-quote:last-child { right: 2px; bottom: 0; }
+html.skin-redesign .skin-port .poll-opt {
+  width: min(220px, 78%);
+  margin: 0 auto 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 7px 16px;
+  background: transparent;
+  color: var(--um-accent);
+  border: 1.5px solid var(--um-accent);
+  border-radius: 8px;
+  font-weight: 700;
+  cursor: pointer;
+}
+html.skin-redesign .skin-port .poll-opt:hover {
+  background: color-mix(in srgb, var(--um-accent) 12%, transparent);
+}
+html.skin-redesign .skin-port .poll-bar {
+  height: 3px;
+  width: min(220px, 78%);
+  margin: 0 auto 8px;
+  border-radius: 99px;
+  background: rgba(255,255,255,.12);
+  overflow: hidden;
+}
+html.skin-redesign .skin-port .poll-bar i { display: block; height: 100%; }
+html.skin-redesign .skin-port .poll-bar.yes i { background: #3fb950; }
+html.skin-redesign .skin-port .poll-bar.no i { background: var(--um-accent); }
+html.skin-redesign .skin-port .poll-done {
+  text-align: center;
+  font-size: 12px;
+  font-style: italic;
+  font-weight: 400;
+  color: #8b949e;
+  padding: 10px 8px;
+}
+html.skin-redesign .skin-role-pop.MuiPaper-root {
+  width: 340px;
+  max-width: 92vw;
+  padding: 8px 10px;
+  background: rgba(13, 17, 23, .94) !important;
+  border: 1px solid color-mix(in srgb, var(--um-accent) 45%, transparent) !important;
+  backdrop-filter: blur(16px);
+}
+html.skin-redesign.light-mode .skin-role-pop.MuiPaper-root {
+  background: rgba(255, 255, 255, .96) !important;
+  color: #1f2328;
+}
+html.skin-redesign .skin-role-pop .mui-popover-title,
+html.skin-redesign .skin-role-pop h2 {
+  color: var(--um-accent) !important;
+  font-size: 16px !important;
+  line-height: 1.25;
+}

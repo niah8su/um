@@ -47,11 +47,13 @@ export default function Setup(props) {
 
   // On mobile, always wrap icons onto multiple rows instead of pruning — narrow
   // containers often compute 0 fitting icons, which otherwise hides all roles.
-  const wrapIcons = isPhoneDevice || (maxIconsPerRow && maxIconsPerRow <= 2);
+  const expandIcons = Boolean(props.expandIcons);
+  const wrapIcons = expandIcons || isPhoneDevice || (maxIconsPerRow && maxIconsPerRow <= 2);
   // Mobile shows every icon (no cap); desktop caps at a single row or 3 rows if
   // the container is narrow enough to trigger wrapping.
-  const maxIconsTotal =
-    maxIconsPerRow === null
+  const maxIconsTotal = expandIcons
+    ? null
+    : maxIconsPerRow === null
       ? null
       : isPhoneDevice
       ? null
@@ -85,7 +87,7 @@ export default function Setup(props) {
   // interleaved writes so they resolve against a single layout pass.
   useLayoutEffect(() => {
     const container = iconContainerRef.current;
-    if (!container || !container.lastChild) {
+    if (expandIcons || !container || !container.lastChild) {
       return;
     }
 
@@ -110,7 +112,7 @@ export default function Setup(props) {
     // Skip the state update (and the extra render plus layout pass it forces)
     // when the answer has not changed.
     setMaxIconsPerRow((prev) => (prev === numFittingIcons ? prev : numFittingIcons));
-  }, [iconContainerRef]);
+  }, [iconContainerRef, expandIcons]);
 
   // Extract events from all setup types
   const { rolesDividedByAlignment, rolesDividedByRoleset, banishedRoles, events, eventsPerRoleset } =
@@ -354,10 +356,10 @@ export default function Setup(props) {
           <Stack
             direction="column"
             sx={{
-              p: 1,
+              p: expandIcons ? 0 : 1,
               flex: "1 1",
               alignItems: "stretch",
-              overflowX: "hidden",
+              overflowX: expandIcons ? "visible" : "hidden",
             }}
           >
             <Typography variant="body2" className="setup-name">

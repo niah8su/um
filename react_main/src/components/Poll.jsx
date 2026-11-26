@@ -14,6 +14,7 @@ import { useErrorAlert } from "components/Alerts";
 import { getPageNavFilterArg, PageNav } from "components/Nav";
 import { NameWithAvatar } from "pages/User/UserWidgets";
 import LobbySidebarPanel from "pages/Play/LobbyBrowser/LobbySidebarPanel";
+import { useSkinRedesign } from "components/useSkinRedesign";
 
 function VoterAvatars({ optionIndex, poll }) {
   if (!poll.voterInfo || !poll.voterInfo[optionIndex]) {
@@ -57,6 +58,7 @@ function Polls({
   isAllLobbies,
   handleVote,
 }) {
+  const skin = useSkinRedesign();
   if (allPolls.length === 0) {
     return isThreadPoll ? null : (
       <Typography variant="body2" color="text.secondary">
@@ -83,12 +85,15 @@ function Polls({
             ? new Date(poll.expiresAt).toLocaleDateString()
             : null;
 
+        const counts = poll.voteCounts || [];
+        const lead = counts.reduce((best, n) => (n > best ? n : best), 0);
         return (
           <Box
             key={poll.id}
-            sx={{ p: 2, border: 1, borderColor: "divider", borderRadius: 1 }}
+            className={skin ? "skin-poll" : undefined}
+            sx={skin ? { p: 0, border: 0 } : { p: 2, border: 1, borderColor: "divider", borderRadius: 1 }}
           >
-            {isAllLobbies && poll.lobby && (
+            {isAllLobbies && poll.lobby && !skin && (
               <Typography
                 variant="caption"
                 color="primary"
@@ -97,19 +102,43 @@ function Polls({
                 {poll.lobby}
               </Typography>
             )}
-            <Typography variant="body2" color="text.secondary" sx={{ mb: 2 }}>
-              {poll.question}
-            </Typography>
+            {skin ? (
+              <div className="poll-q">
+                <span className="poll-quote" aria-hidden="true">“</span>
+                {poll.question}
+                <span className="poll-quote" aria-hidden="true">”</span>
+              </div>
+            ) : (
+              <Typography variant="body2" color="text.secondary" sx={{ mb: 2 }}>
+                {poll.question}
+              </Typography>
+            )}
 
             <Stack spacing={1}>
               {poll.options.map((option, index) => {
-                const voteCount = poll.voteCounts ? poll.voteCounts[index] : 0;
-                const totalVotes = poll.voteCounts
-                  ? poll.voteCounts.reduce((a, b) => a + b, 0)
-                  : 0;
+                const voteCount = counts[index] || 0;
+                const totalVotes = counts.reduce((a, b) => a + b, 0);
                 const percentage =
                   totalVotes > 0 ? (voteCount / totalVotes) * 100 : 0;
                 const isUserVote = poll.userVote === index;
+                const leading = voteCount > 0 && voteCount === lead;
+                if (skin) {
+                  return (
+                    <Box key={index}>
+                      <button
+                        type="button"
+                        className="poll-opt"
+                        onClick={() => !poll.completed && handleVote(index, poll.id)}
+                        disabled={poll.completed}
+                      >
+                        {option}
+                      </button>
+                      <div className={`poll-bar ${leading ? "yes" : "no"}`}>
+                        <i style={{ width: `${percentage}%` }} />
+                      </div>
+                    </Box>
+                  );
+                }
 
                 return (
                   <Box key={index}>
@@ -152,10 +181,10 @@ function Polls({
             </Stack>
 
             <Typography
-              className="poll-completes"
+              className={skin ? "poll-done" : "poll-completes"}
               variant="caption"
               color="text.secondary"
-              sx={{ mt: 2, display: "block" }}
+              sx={{ mt: skin ? 0 : 2, display: "block" }}
             >
               {isActive && expiresDate && `Completes on ${expiresDate}`}
               {isActive && !expiresDate && "Active indefinitely"}

@@ -106,7 +106,7 @@ export default function SkinSidebar() {
       </button>
       <div className="skin-side-online" aria-label="Online users">
         <i aria-hidden="true" />
-        <span className="skin-side-on">{online.length} online</span>
+        <span className="skin-side-on">{online.length}</span>
       </div>
       <div className="skin-side-groups">
         {GROUPS.map((group) => (

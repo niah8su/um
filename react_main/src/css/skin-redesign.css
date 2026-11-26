@@ -410,6 +410,34 @@ html.skin-redesign [data-testid="tutorial-overlay"] {
   color: var(--um-ink);
 }
 
+html.skin-redesign .miniprofile { font-size: 13px; }
+html.skin-redesign .miniprofile .mui-popover-title { font-size: 14px; }
+html.skin-redesign .miniprofile .avatar,
+html.skin-redesign .miniprofile .user-name + .avatar,
+html.skin-redesign .skin-detail-pop .avatar {
+  border: 2px solid var(--um-accent);
+  box-sizing: border-box;
+}
+html.skin-redesign .miniprofile .pie-chart { opacity: .82; transform: scale(1.08); transform-origin: center top; }
+html.skin-redesign .miniprofile .trophy-icon,
+html.skin-redesign .miniprofile .trophy-tile .trophy-icon { width: 22px; height: 22px; }
+html.skin-redesign .game .message .content { font-family: Arial, Helvetica, sans-serif; padding: 4px 8px; }
+html.skin-redesign .game .message .content.server.server-plain,
+html.skin-redesign .game .message .content.server.server-plain::before { border: 0; background: transparent; box-shadow: none; }
+html.skin-redesign .game .message .content.server.server-report,
+html.skin-redesign .game .message .content.server.server-report::before { color: #e6c200; border-color: #e6c200; }
+html.skin-redesign .game-session { overflow: hidden; }
+html.skin-redesign .game { height: 100%; min-height: 0; display: flex; flex-direction: column; overflow: hidden; }
+html.skin-redesign .game .main,
+html.skin-redesign .game .center-panel,
+html.skin-redesign .game .speech-display { min-height: 0; overflow: auto; }
+html.skin-redesign .newspaper { background: #f4efe4; color: #1c1917; border: 1px solid #1c1917; box-shadow: 0 10px 28px rgba(0,0,0,.35); }
+html.skin-redesign .ios-beta-ticker { justify-content: center; }
+html.skin-redesign .ios-beta-ticker__viewport { justify-content: center; }
+html.skin-redesign .ios-beta-ticker__track { animation-duration: 14s !important; }
+html.skin-redesign .skin-topbar { min-height: 0 !important; padding-bottom: 4px; }
+html.skin-redesign .skin-topbar .setup { position: static !important; left: auto !important; top: auto !important; transform: none !important; padding: 4px 8px !important; }
+
 html.skin-redesign [data-testid="tutorial-overlay"] img.skin-golbolco {
   width: 40px;
   height: 40px;

@@ -3070,7 +3070,12 @@ function getContentClasses(message) {
 
   // Second: get class for kind of message
   if (message.isQuote) contentClasses.push("quote");
-  else if (isServerMessage) contentClasses.push("server");
+  else if (isServerMessage) {
+    contentClasses.push("server");
+    const serverText = message.content || "";
+    if (/has joined\.|has left\.|is ready\./.test(serverText)) contentClasses.push("server-plain");
+    else if (/^:(journ|invest):/.test(serverText)) contentClasses.push("server-report");
+  }
   else if (isVoteMessage) contentClasses.push("vote-record");
 
   // Make content clickable if it's quotable

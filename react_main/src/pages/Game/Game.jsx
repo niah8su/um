@@ -1908,7 +1908,7 @@ export function TopBar({ forceShow = false } = {}) {
   const showStateSwitcher = !singleState && stateCount > 1;
 
   const logo = (
-    <Stack direction="row" sx={{
+    <Stack className="skin-logo" direction="row" sx={{
       // With a history strip beside it, the wordmark is a fixed-size image and
       // growing would only take width the strip can use.
       flex: isPhoneDevice

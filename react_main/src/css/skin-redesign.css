@@ -433,8 +433,7 @@ html.skin-redesign .game { height: 100%; min-height: 0; display: flex; flex-dire
 html.skin-redesign .game .main,
 html.skin-redesign .game .center-panel,
 html.skin-redesign .game .speech-display { min-height: 0; overflow: auto; }
-html.skin-redesign .newspaper { background: #f4efe4 !important; color: #1c1917 !important; border: 1px solid #1c1917; box-shadow: 0 10px 28px rgba(0,0,0,.35); }
-html.skin-redesign .newspaper * { color: #1c1917 !important; }
+/* Newspaper keeps the repo paper, type, and ink in both modes. */
 html.skin-redesign body { background-color: #050308; }
 html.skin-redesign.light-mode body { background-color: #f7f4f1; color: #1c1917; }
 html.skin-redesign.light-mode .game-session {
@@ -823,4 +822,114 @@ html.skin-redesign [data-testid="dm-window"][data-collapsed="true"] [data-testid
   width: 22px;
   height: 22px;
   z-index: 2;
+}
+
+html.skin-redesign .skin-game-header { width: 100%; }
+html.skin-redesign .skin-game-header .ios-beta-ticker__viewport {
+  display: block !important;
+  overflow: hidden;
+  text-align: left;
+}
+html.skin-redesign .skin-game-header .ios-beta-ticker__track { margin-left: 0; }
+html.skin-redesign .skin-game-header .skin-topbar {
+  display: grid !important;
+  grid-template-columns: auto minmax(0, 1fr) auto;
+  align-items: center;
+  width: 100%;
+  min-height: 56px !important;
+}
+html.skin-redesign .skin-topbar .skin-logo { grid-column: 1; justify-self: start; }
+html.skin-redesign .skin-topbar .skin-logo img { display: block; height: 42px; width: auto; }
+html.skin-redesign .skin-topbar .skin-states {
+  position: static !important;
+  left: auto !important;
+  top: auto !important;
+  transform: none !important;
+  grid-column: 2;
+  justify-self: center;
+  width: auto;
+  min-width: 0;
+  flex: none;
+}
+html.skin-redesign .skin-topbar > .MuiStack-root:last-child { grid-column: 3; justify-self: end; }
+html.skin-redesign .skin-topbar .setup { position: static !important; transform: none !important; }
+
+html.skin-redesign .game-session {
+  max-width: 1080px;
+  margin: 12px auto 72px;
+  padding: 0 24px 80px;
+  box-sizing: border-box;
+  height: auto;
+}
+html.skin-redesign .game { height: calc(100vh - 180px); max-height: 760px; }
+html.skin-redesign .game .center-panel,
+html.skin-redesign .game .speech-display,
+html.skin-redesign .game .panel {
+  background: rgba(12, 10, 14, 0.28) !important;
+}
+
+html.skin-redesign .game .user-name-text { color: inherit !important; }
+
+html.skin-redesign .game .message { align-items: flex-start; margin-bottom: 10px; }
+html.skin-redesign .game .message .message-inner-aligned,
+html.skin-redesign .game .message .message-inner-nameplated,
+html.skin-redesign .game .message .message-inner-onelined,
+html.skin-redesign .game .message .message-inner-inline {
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: flex-start;
+  gap: 2px;
+  width: 100%;
+}
+html.skin-redesign .game .message .nameplate,
+html.skin-redesign .game .message .nameplate-aligned {
+  display: inline-flex;
+  flex-flow: row nowrap;
+  align-items: baseline;
+  max-width: none;
+  min-width: 0;
+  border: 0;
+  padding: 0;
+  gap: 6px;
+}
+html.skin-redesign .game .message .nameplate > div {
+  position: static !important;
+  left: auto !important;
+  font-size: 11px;
+  opacity: 0.65;
+  order: 2;
+}
+html.skin-redesign .game .message .nameplate .name-with-avatar { order: 1; }
+
+html.skin-redesign .game .message .content.server {
+  flex-grow: 0 !important;
+  width: fit-content;
+  max-width: 100%;
+  padding: 2px 8px !important;
+}
+html.skin-redesign .game .message .content.server::before {
+  border-radius: 3px;
+  background-color: rgba(0, 0, 0, 0.55);
+  border-color: rgba(255, 255, 255, 0.14);
+}
+html.skin-redesign .game .message .content.server.server-plain,
+html.skin-redesign .game .message .content.server.server-plain::before {
+  border: 0;
+  background: transparent;
+  box-shadow: none;
+}
+
+html.skin-redesign .game .message:has(.vote-record) { justify-content: flex-end; }
+html.skin-redesign .game .message:has(.vote-record) .content.vote-record {
+  margin-left: auto;
+  text-align: right;
+  width: 100%;
+}
+
+html.skin-redesign .game .message .content.quote { opacity: 0.72; }
+html.skin-redesign .game .fa-quote-left,
+html.skin-redesign .game .fa-quote-right {
+  font-size: 22px;
+  opacity: 0.65;
+  margin: 0 6px;
 }

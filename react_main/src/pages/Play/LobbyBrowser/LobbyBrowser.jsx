@@ -30,6 +30,7 @@ import {
 } from "@mui/material";
 import { useLoading } from "../../../hooks/useLoading";
 import { GameRow } from "./GameRow";
+import SkinLobby from "./SkinLobby";
 import { useIsPhoneDevice } from "../../../hooks/useIsPhoneDevice";
 import { RecentlyPlayedSetups } from "./RecentlyPlayedSetups";
 import { RecentForumReplies } from "components/RecentForumReplies";
@@ -433,6 +434,31 @@ export default function LobbyBrowser() {
       <RecentTradesFeed />
     </>
   );
+
+  const commentLocation = lobbyName === "All"
+    ? lobbies.filter((l) => l.name !== "All" && !l.developerOnly).map((l) => l.name === "Main" ? "lobby" : `lobby-${l.name}`)
+    : lobbyName === "Main" ? "lobby" : `lobby-${lobbyName}`;
+
+  if (skin) {
+    return (
+      <SkinLobby
+        lobbies={lobbies}
+        lobbyName={lobbyName}
+        setLobbyName={setLobbyName}
+        openGamesCounts={openGamesCounts}
+        games={games}
+        loading={loading}
+        page={page}
+        onPage={(nextPage) => getGameList(listType, nextPage, null, { reload: nextPage === page })}
+        refreshGames={refreshGames}
+        refreshButtonIsSpinning={refreshButtonIsSpinning}
+        user={user}
+        commentLocation={commentLocation}
+        postLocation={lobbyName === "All" ? "lobby" : undefined}
+        glowingHostButton={glowingHostButton}
+      />
+    );
+  }
 
   return (
     <Stack direction="column" spacing={1}>

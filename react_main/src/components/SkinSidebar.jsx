@@ -94,7 +94,6 @@ export default function SkinSidebar() {
       >
         <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16" /></svg>
       </button>
-      <div className="skin-side-word">Menu</div>
       <div className="skin-side-rule" />
       <div className="skin-side-groups">
         {GROUPS.map((group) => (
@@ -119,8 +118,8 @@ export default function SkinSidebar() {
         <Link to="/play/create" aria-label="Create setup">
           <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5v14M5 12h14" /></svg>
         </Link>
-        <Link to="/play" aria-label="Games">
-          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 5h6v6H5zM13 5h6v6h-6zM5 13h6v6H5zM16 16h2m-1-1v2" /></svg>
+        <Link to="/user/settings" aria-label="Settings">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 8.5a3.5 3.5 0 1 0 0 7 3.5 3.5 0 0 0 0-7zM4 12l2-1 1-2 2 .5 2-1.5h2L15 9.5 17 9l1 2 2 1-2 1-1 2-2-.5-2 1.5h-2L9 14.5 7 15l-1-2z" /></svg>
         </Link>
         <Link to={user && user.id ? `/user/${user.id}` : "/user"} aria-label="Profile" className="skin-side-ava">{initial}</Link>
       </div>

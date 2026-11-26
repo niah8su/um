@@ -168,6 +168,8 @@ export const GameStatus = (props) => {
     </Box>
   );
 
+  if (props.buttonsOnly) return gameButtonWrapped;
+
   return (
     <Stack
       direction="row"

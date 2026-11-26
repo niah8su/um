@@ -41,7 +41,12 @@ function userDoc(author) {
 }
 
 async function main() {
-  const games = await get("/api/game/list?list=finished&lobby=All&page=1");
+  const games = [];
+  for (let page = 1; page <= 3; page++) {
+    const batch = await get("/api/game/list?list=finished&lobby=All&page=" + page);
+    if (!Array.isArray(batch) || batch.length === 0) break;
+    games.push(...batch);
+  }
   const comments = await get("/api/comment/?location=lobby");
   const forums = await get("/api/forums/categories");
   await get("/api/poll/list/All?page=1");
@@ -266,6 +271,42 @@ async function main() {
   } else {
     console.log("No local users yet. Log in once on localhost, then run this script again so the bell is filled for that account.");
   }
+
+  await db.collection("chatmessages").deleteMany({ localSeed: MARK });
+  let channel = await db.collection("chatchannels").findOne({ public: true });
+  if (!channel) {
+    channel = {
+      id: "local-seed-lobby",
+      name: "Lobby",
+      public: true,
+      memberIds: [],
+      rank: 0,
+      position: 0,
+      lastMessageDate: Date.now(),
+      localSeed: MARK,
+    };
+    await db.collection("chatchannels").insertOne(channel);
+    console.log("created public lobby channel", channel.id);
+  }
+  const lines = [
+    "7/15 on Classic Town if anyone wants in.",
+    "Joining in a minute.",
+    "Competitive round is on day 2.",
+  ];
+  if (people.length) {
+    await db.collection("chatmessages").insertMany(lines.map((content, i) => ({
+      id: "seed-chat-" + i,
+      senderId: people[i % people.length].id,
+      date: Date.now() - (lines.length - i) * 60000,
+      channel: channel.id,
+      content,
+      localSeed: MARK,
+    })));
+    console.log("lobby chat lines", lines.length, "on channel", channel.id);
+  } else {
+    console.log("no local users; lobby chat lines skipped until an account exists");
+  }
+  console.log("Golbolco welcome chat was not seeded. That floating window is not a feature in this repo.");
 
   await client.close();
 }

@@ -30,6 +30,14 @@ async function get(path) {
   return JSON.parse(text);
 }
 
+// Setup.roles is a JSON string in the schema. An array is dropped on read
+// and the lobby then crashes on roles.length.
+function storedRoles(roles) {
+  if (typeof roles === "string") return roles;
+  if (Array.isArray(roles)) return JSON.stringify(roles);
+  return "[]";
+}
+
 function userDoc(author) {
   if (!author || !author.id) return null;
   return {
@@ -97,7 +105,7 @@ async function main() {
             id: game.setup.id,
             name: game.setup.name,
             gameType: game.setup.gameType,
-            roles: game.setup.roles || [],
+            roles: storedRoles(game.setup.roles),
             closed: !!game.setup.closed,
             useRoleGroups: !!game.setup.useRoleGroups,
             roleGroupSizes: game.setup.roleGroupSizes || [],
@@ -150,7 +158,7 @@ async function main() {
         id: setupKey,
         name,
         gameType: "Mafia",
-        roles: [{ Villager: 3, Mafioso: 1, Cop: 1, Doctor: 1 }],
+        roles: storedRoles([{ "Villager:": 3, "Mafioso:": 1, "Cop:": 1, "Doctor:": 1 }]),
         closed: false,
         count: {},
         total: 6,

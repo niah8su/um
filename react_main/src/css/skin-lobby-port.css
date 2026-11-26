@@ -53,15 +53,18 @@ html.skin-redesign .skin-port .lobby-tabs button[data-lobby="surv"]:hover,
 html.skin-redesign .skin-port .lobby-tabs button[data-lobby="surv"].on { color: #6fbf6f; background: rgba(111,191,111,.18); }
 html.skin-redesign .skin-port .lobby-tabs button[data-lobby="roleplay"]:hover,
 html.skin-redesign .skin-port .lobby-tabs button[data-lobby="roleplay"].on { color: #c084fc; background: rgba(192,132,252,.18); }
+html.skin-redesign .skin-port .tab-ico { width: 14px; height: 14px; flex: none; }
 html.skin-redesign .skin-port .count-pip {
-  margin-left: 6px;
+  margin-left: 5px;
   min-width: 16px;
   height: 16px;
-  padding: 0 4px;
-  border-radius: 99px;
-  background: var(--um-accent);
+  padding: 0 5px;
+  border-radius: 999px;
+  background: #D4A704;
   color: #fff;
-  font-size: 10px;
+  font-size: 12px;
+  font-weight: 700;
+  line-height: 16px;
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -140,20 +143,38 @@ html.skin-redesign .skin-port .bar-stack {
   padding-top: 6px;
   box-sizing: border-box;
 }
+html.skin-redesign .skin-port .bar-stack {
+  width: 168px;
+  min-width: 168px;
+  max-width: 168px;
+  padding: 6px 8px 0;
+  box-sizing: border-box;
+  gap: 4px;
+}
 html.skin-redesign .skin-port .type-tag {
   display: inline-flex;
   align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+  width: 95px;
+  min-width: 95px;
+  max-width: 95px;
+  height: 17px;
+  min-height: 17px;
+  padding: 2px 4px;
+  font-family: "Roboto", "Segoe UI", sans-serif;
   font-size: 8px;
+  font-weight: 600;
   letter-spacing: 0.1em;
-  text-transform: uppercase;
-  font-weight: 800;
   line-height: 1;
-  padding: 3px 6px;
-  border-radius: 6px;
+  text-transform: uppercase;
+  text-align: center;
+  border-radius: 4px;
   border: 1px solid currentColor;
   background: color-mix(in srgb, currentColor 16%, transparent);
   align-self: flex-start;
   white-space: nowrap;
+  overflow: hidden;
 }
 html.skin-redesign.light-mode .skin-port .type-tag.ranked { background: #ffb3bd; color: #9f1239; }
 html.skin-redesign.light-mode .skin-port .type-tag.competitive { background: #ffe08a; color: #854d0e; }
@@ -171,15 +192,45 @@ html.skin-redesign .skin-port .type-tag.survivor { color: #6fbf6f; }
 html.skin-redesign .skin-port .type-tag.roleplay { color: #c084fc; }
 html.skin-redesign .skin-port .type-tag.main,
 html.skin-redesign .skin-port .type-tag.unranked { color: #8b949e; }
+html.skin-redesign .skin-port .mark-ico {
+  width: 18px;
+  height: 18px;
+  flex: none;
+  display: block;
+}
+html.skin-redesign .skin-port .state-slot {
+  width: 16px;
+  height: 16px;
+  flex: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+html.skin-redesign .skin-port .state-slot img { width: 16px; height: 16px; }
+html.skin-redesign .skin-port .gicon,
+html.skin-redesign .skin-port .setup-row .game-icon {
+  width: 30px;
+  height: 30px;
+  flex: none;
+  image-rendering: crisp-edges;
+}
+html.skin-redesign .skin-port .setup-copy {
+  border-left: 1px solid rgba(139, 148, 158, .28);
+  padding: 2px 0 2px 8px;
+  margin-left: 4px;
+}
 html.skin-redesign .skin-port .player-count {
   position: relative;
-  width: auto;
+  width: 100px;
   min-width: 100px;
-  max-width: 140px;
-  min-height: 28px;
+  max-width: 100px;
+  height: 22px;
+  min-height: 22px;
   white-space: nowrap;
-  padding: 0 6px;
+  padding: 0 4px;
   box-sizing: border-box;
+  flex: none;
+  font-size: 12px;
   border-radius: 4px;
   overflow: hidden;
   display: flex;
@@ -202,6 +253,7 @@ html.skin-redesign .skin-port .player-count .fill {
 html.skin-redesign .skin-port .player-count .pill-eye { position: relative; z-index: 1; flex: none; }
 html.skin-redesign .skin-port .bar-meta { display: flex; align-items: center; gap: 4px; }
 html.skin-redesign .skin-port .bar-meta img { width: 18px; height: 18px; }
+html.skin-redesign .skin-port .state-slot img { width: 16px; height: 16px; }
 html.skin-redesign .skin-port .roles button,
 html.skin-redesign .skin-port .roles .MuiIconButton-root { display: none !important; }
 html.skin-redesign .skin-port .player-count span { position: relative; z-index: 1; }
@@ -269,31 +321,57 @@ html.skin-redesign .skin-port .lobby-split {
   align-items: start;
 }
 html.skin-redesign .skin-port .games-bar {
-  display: flex;
+  display: grid;
+  grid-template-columns: auto 1fr auto 1fr auto;
   align-items: center;
-  justify-content: space-between;
   gap: 8px;
-  padding-top: 10px;
-  padding-bottom: 10px;
+  padding: 10px 6px !important;
+  min-height: 54px;
+  box-sizing: border-box;
   background: var(--panel);
   border: 1px solid var(--panel-line);
   border-radius: 8px;
   box-shadow: var(--panel-shadow);
 }
+html.skin-redesign .skin-port .games-bar > .pager { grid-column: 1; justify-self: start; }
 html.skin-redesign .skin-port .games-word {
+  grid-column: 3;
+  justify-self: center;
   color: var(--um-accent);
-  font-size: 1.17em;
-  font-weight: 700;
+  font-family: "Roboto", "Segoe UI", sans-serif;
+  font-size: 16px;
+  font-weight: 400;
+  letter-spacing: 0.08em;
+  line-height: 24px;
+  text-transform: uppercase;
   margin: 0;
+}
+html.skin-redesign .skin-port .games-end { grid-column: 5; justify-self: end; display: flex; align-items: center; gap: 8px; }
+html.skin-redesign .skin-port .games-end .btn {
+  height: 32px;
+  padding: 0 12px;
+  border-radius: 8px;
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: .04em;
 }
 html.skin-redesign .skin-port .refresh-btn {
   width: 32px;
   height: 32px;
   padding: 0;
   border: 0;
+  border-radius: 8px;
   background: transparent;
   color: inherit;
 }
+html.skin-redesign .skin-port .mark-ico.ranked,
+html.skin-redesign .skin-port .mark-ico.main { color: #e23b3b; }
+html.skin-redesign .skin-port .mark-ico.comp { color: #edb334; }
+html.skin-redesign .skin-port .mark-ico.sandbox { color: #d6c15a; }
+html.skin-redesign .skin-port .mark-ico.games,
+html.skin-redesign .skin-port .mark-ico.minigames { color: #5ec8d6; }
+html.skin-redesign .skin-port .mark-ico.survivor { color: #6fbf6f; }
+html.skin-redesign .skin-port .mark-ico.roleplay { color: #c084fc; }
 html.skin-redesign .skin-port .panel {
   padding: 16px 18px;
   background: var(--panel);

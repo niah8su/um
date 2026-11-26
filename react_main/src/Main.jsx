@@ -387,7 +387,7 @@ export function Header({ setShowAnnouncementTemporarily }) {
   };
 
   return (
-    <AppBar position="sticky" sx={{
+    <AppBar className="skin-appbar" position="sticky" sx={{
       backgroundColor: "background.paper",
       color: "text.primary",
     }}>
@@ -561,10 +561,10 @@ export function Header({ setShowAnnouncementTemporarily }) {
                   { text: "Live Feed", path: "/activity/livefeed" },
                 ]}
               />
-            <SkinAppearance />
-            <Box sx={{
+            <Box className="skin-head-end" sx={{
               marginLeft: "auto !important",
             }}>
+              <SkinAppearance />
               {user.loggedIn ? (
                 <UserNavSection
                   openAnnouncements={openAnnouncements}

@@ -148,6 +148,7 @@ export const Announcement = ({
     <Stack direction="row" spacing={1}>
       {ScrollButtons}
       <Alert
+        className="skin-announce"
         severity="info"
         variant="outlined"
         sx={{

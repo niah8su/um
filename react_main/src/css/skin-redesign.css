@@ -12,7 +12,7 @@ html.skin-redesign {
   --um-accent-ink: #ffffff;
   --um-grad-1: #4a1220;
   --um-grad-2: #12060c;
-  --um-glass: rgba(22, 16, 20, 0.46);
+  --um-glass: rgba(8, 10, 14, 0.42);
   --um-glass-solid: rgba(28, 20, 24, 0.94);
   --um-ink: #f6f1ea;
   --um-line: rgba(246, 241, 234, 0.16);
@@ -20,7 +20,7 @@ html.skin-redesign {
 }
 
 html.skin-redesign.light-mode {
-  --um-accent: #b54a4a;
+  --um-accent: #8e2f2f;
   --um-accent-ink: #ffffff;
   --um-grad-1: #fff4f2;
   --um-grad-2: #f3f6fb;
@@ -44,9 +44,9 @@ html.skin-redesign body::before {
   z-index: -1;
   pointer-events: none;
   background:
-    radial-gradient(1100px 760px at 16% 34%, color-mix(in srgb, var(--um-grad-1, #4a1220) 16%, transparent), transparent 70%),
-    radial-gradient(980px 700px at 86% 86%, color-mix(in srgb, var(--um-grad-2, #12060c) 10%, transparent), transparent 68%),
-    #000000;
+    radial-gradient(1100px 760px at 16% 22%, color-mix(in srgb, var(--um-grad-1, #4a1220) 58%, transparent), transparent 68%),
+    radial-gradient(980px 700px at 86% 88%, color-mix(in srgb, var(--um-grad-2, #12060c) 42%, transparent), transparent 70%),
+    #07060a;
 }
 
 html.skin-redesign.light-mode body::before {
@@ -391,8 +391,21 @@ html.skin-redesign .game .main,
 html.skin-redesign .game .center-panel,
 html.skin-redesign .game .speech-display { min-height: 0; overflow: auto; }
 /* Newspaper keeps the repo paper, type, and ink in both modes. */
-html.skin-redesign body { background-color: #000000; }
-html.skin-redesign.light-mode body { background-color: #f7f4f1; color: #1c1917; }
+html.skin-redesign body {
+  background-color: transparent;
+  background-image:
+    radial-gradient(1100px 760px at 16% 22%, color-mix(in srgb, var(--um-grad-1, #4a1220) 58%, transparent), transparent 68%),
+    radial-gradient(980px 700px at 86% 88%, color-mix(in srgb, var(--um-grad-2, #12060c) 42%, transparent), transparent 70%);
+  background-color: #07060a;
+  background-attachment: fixed;
+}
+html.skin-redesign.light-mode body {
+  background-color: #f7f5f2;
+  background-image:
+    radial-gradient(1100px 760px at 14% 20%, color-mix(in srgb, var(--um-grad-1, #fff4f2) 70%, transparent), transparent 70%),
+    radial-gradient(980px 700px at 88% 90%, color-mix(in srgb, var(--um-grad-2, #f3f6fb) 55%, transparent), transparent 70%);
+  color: #1c1917;
+}
 html.skin-redesign.light-mode .game-session {
   background: linear-gradient(180deg, #e8893a 0%, #f0b429 48%, #ffe7a3 100%) !important;
 }
@@ -650,7 +663,9 @@ html.skin-redesign [data-testid="tutorial-overlay"] img.skin-golbolco {
 
 html.skin-redesign .MuiAppBar-root img[alt="Site logo"] {
   display: block;
-  margin-top: 6px;
+  height: 42px;
+  width: auto;
+  margin-top: 0;
 }
 html.skin-redesign .skin-side-toggle {
   position: relative;
@@ -1144,13 +1159,16 @@ html.skin-redesign .play .MuiListItem-root > .MuiBox-root:first-child {
   min-width: 6px !important;
   align-self: stretch;
 }
-html.skin-redesign .play .shiny-container,
-html.skin-redesign .play .shiny-container > .MuiStack-root,
 html.skin-redesign .play .setup,
 html.skin-redesign .play .setup .MuiStack-root {
   background: transparent !important;
   background-color: transparent !important;
   box-shadow: none !important;
+}
+html.skin-redesign .play .setup > .MuiStack-root > .MuiDivider-root { display: none; }
+html.skin-redesign .play .setup > .MuiStack-root > button { padding: 2px 4px !important; min-width: 0; }
+html.skin-redesign .play .shiny-container > .MuiStack-root {
+  border-radius: 12px;
 }
 html.skin-redesign .play .skin-join {
   position: relative;
@@ -1245,6 +1263,83 @@ html.skin-redesign .comments-page .fa-arrow-down {
 html.skin-redesign.light-mode .comments-page .fa-arrow-up,
 html.skin-redesign.light-mode .comments-page .fa-arrow-down {
   text-shadow: 0 1px 0 rgba(255, 255, 255, 0.8);
+}
+
+html.skin-redesign .play .MuiPaper-root,
+html.skin-redesign .play .MuiListItem-root,
+html.skin-redesign .comments-page .MuiPaper-root,
+html.skin-redesign .skin-welcome .MuiPaper-root,
+html.skin-redesign .skin-announce {
+  background: linear-gradient(180deg, rgba(255,255,255,.10), rgba(255,255,255,.03) 42%), rgba(8, 10, 14, .48) !important;
+  backdrop-filter: blur(22px) saturate(1.45) !important;
+  -webkit-backdrop-filter: blur(22px) saturate(1.45) !important;
+  border: 1px solid rgba(240, 246, 252, .16) !important;
+  box-shadow: 0 8px 24px rgba(0,0,0,.28), inset 0 1px 0 rgba(255,255,255,.12) !important;
+  border-radius: 12px !important;
+}
+html.skin-redesign.light-mode .play .MuiPaper-root,
+html.skin-redesign.light-mode .play .MuiListItem-root,
+html.skin-redesign.light-mode .comments-page .MuiPaper-root,
+html.skin-redesign.light-mode .skin-welcome .MuiPaper-root,
+html.skin-redesign.light-mode .skin-announce {
+  background: linear-gradient(180deg, rgba(255,255,255,.78), rgba(255,255,255,.4)), rgba(255,255,255,.55) !important;
+  border: 1px solid rgba(208, 215, 222, .95) !important;
+  box-shadow: 0 8px 24px rgba(31,35,40,.08), inset 0 1px 0 rgba(255,255,255,.9) !important;
+  color: #1c1917;
+}
+html.skin-redesign .skin-appbar {
+  background: rgba(7, 6, 10, .55) !important;
+  backdrop-filter: blur(22px) saturate(1.35) !important;
+  border-bottom: 1px solid rgba(240,246,252,.14);
+  min-height: 64px;
+}
+html.skin-redesign.light-mode .skin-appbar {
+  background: rgba(247, 245, 242, .72) !important;
+  border-bottom-color: rgba(28,25,23,.12);
+}
+html.skin-redesign .skin-head-end {
+  display: flex !important;
+  align-items: center;
+  gap: 10px;
+}
+html.skin-redesign .skin-colors input[type="color"] {
+  width: 18px;
+  height: 18px;
+  border-radius: 4px;
+}
+html.skin-redesign .player-count {
+  border-radius: 999px;
+  overflow: hidden;
+  min-height: 28px;
+  font-size: 13px;
+}
+html.skin-redesign .player-count progress {
+  border-radius: 999px;
+  border: 1px solid rgba(255,255,255,.22);
+  background-color: rgba(255,255,255,.08);
+}
+html.skin-redesign.light-mode .player-count progress {
+  border-color: rgba(28,25,23,.16);
+  background-color: rgba(255,255,255,.55);
+}
+html.skin-redesign .play .MuiButton-contained {
+  background: var(--um-accent) !important;
+  background-image: none !important;
+  box-shadow: none !important;
+  color: var(--um-accent-ink, #fff) !important;
+}
+html.skin-redesign .play .MuiButton-contained:hover {
+  box-shadow: 0 0 14px color-mix(in srgb, var(--um-accent) 55%, transparent) !important;
+}
+html.skin-redesign .play .MuiTypography-h3 {
+  padding-bottom: 8px;
+  margin-bottom: 8px;
+  border-bottom: 1px solid rgba(240,246,252,.16);
+  font-size: 12px !important;
+}
+html.skin-redesign.light-mode .play .MuiTypography-h3 {
+  border-bottom-color: rgba(28,25,23,.12);
+  color: #1c1917 !important;
 }
 
 html.skin-redesign .skin-welcome {

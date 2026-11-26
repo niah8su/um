@@ -178,6 +178,25 @@ export const GameStatus = (props) => {
   );
 
   if (props.buttonsOnly) {
+    if (skin && props.game.status === "Finished") {
+      return (
+        <>
+          <Link className="sq-btn" to={buttonUrl} aria-label="Review game" title="Review game">
+            <svg className="btn-ico" viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M7 3.5h7l4 4V20a1.5 1.5 0 0 1-1.5 1.5h-9.5A1.5 1.5 0 0 1 5.5 20V5A1.5 1.5 0 0 1 7 3.5z" />
+              <path d="M14 3.5V8h4.5M8 12h8M8 16h6" />
+            </svg>
+          </Link>
+          {user.loggedIn && props.onRehost && (
+            <button type="button" className="sq-btn" aria-label="Rehost game" title="Rehost game" onClick={() => props.onRehost(props.game)}>
+              <svg className="btn-ico" viewBox="0 0 24 24" aria-hidden="true">
+                <path d="M12 5V2l5 4-5 4V7a5 5 0 1 0 4.9 6h2.1A7 7 0 1 1 12 5z" />
+              </svg>
+            </button>
+          )}
+        </>
+      );
+    }
     if (skin) {
       return (
         <>

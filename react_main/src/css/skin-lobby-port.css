@@ -145,9 +145,9 @@ html.skin-redesign .skin-port .game-main {
   display: flex;
   gap: 8px;
   align-items: center;
-  height: 78px;
-  min-height: 78px;
-  max-height: 78px;
+  height: auto;
+  min-height: 96px;
+  max-height: none;
   padding: 0 10px;
   border-radius: 0 8px 8px 0;
   overflow: hidden;
@@ -178,11 +178,11 @@ html.skin-redesign .skin-port .type-tag {
   align-items: center;
   justify-content: center;
   box-sizing: border-box;
-  width: 95px;
-  min-width: 95px;
-  max-width: 95px;
-  height: 17px;
-  min-height: 17px;
+  width: 88px;
+  min-width: 88px;
+  max-width: 88px;
+  height: 16px;
+  min-height: 16px;
   padding: 2px 4px;
   font-family: "Roboto", "Segoe UI", sans-serif;
   font-size: 8px;
@@ -280,7 +280,18 @@ html.skin-redesign .skin-port .roles button,
 html.skin-redesign .skin-port .roles .MuiIconButton-root { display: none !important; }
 html.skin-redesign .skin-port .player-count span { position: relative; z-index: 1; }
 html.skin-redesign .skin-port .bar-mid { flex: 1; min-width: 0; align-self: center; }
-html.skin-redesign .skin-port .setup-row { display: flex; align-items: center; gap: 6px; min-width: 0; }
+html.skin-redesign .skin-port .setup-row {
+  display: grid;
+  grid-template-columns: 30px minmax(0, 1fr) minmax(0, 1fr);
+  align-items: center;
+  gap: 8px;
+  width: 100%;
+}
+html.skin-redesign .skin-port .roles {
+  justify-content: flex-start;
+  margin-left: 0 !important;
+  max-width: none;
+}
 html.skin-redesign .skin-port .setup-copy { flex: 1 1 140px; min-width: 0; }
 html.skin-redesign .skin-port .setup-name {
   text-transform: uppercase;
@@ -487,3 +498,37 @@ html.skin-redesign .skin-side-word { display: none; }
 html.skin-redesign .skin-side-dock {
   flex-direction: column;
 }
+html.skin-redesign .skin-port .panel .MuiPaper-root,
+html.skin-redesign .skin-port .lobby-side .MuiPaper-root {
+  background: transparent !important;
+  background-image: none !important;
+  border: 0 !important;
+  box-shadow: none !important;
+  padding: 0 !important;
+}
+html.skin-redesign .skin-port .MuiTypography-h3 {
+  color: var(--um-accent) !important;
+  font-family: Roboto, "Segoe UI", sans-serif !important;
+  font-size: 13px !important;
+  font-weight: 700 !important;
+  letter-spacing: .08em !important;
+  text-transform: uppercase;
+  border-bottom: 1px solid var(--um-accent) !important;
+  padding-bottom: 4px;
+  margin-bottom: 8px;
+}
+html.skin-redesign .skin-port .sq-btn {
+  width: 34px;
+  height: 34px;
+  min-width: 34px;
+  padding: 0;
+  border-radius: 4px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: transparent;
+  color: inherit;
+  border: 1px solid rgba(255,255,255,.22);
+  cursor: pointer;
+}
+html.skin-redesign .skin-port .sq-btn .btn-ico { width: 18px; height: 18px; fill: none; stroke: currentColor; stroke-width: 1.8; }

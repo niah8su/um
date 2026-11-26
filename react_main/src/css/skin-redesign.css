@@ -16,7 +16,7 @@ html.skin-redesign {
   --um-glass-solid: rgba(28, 20, 24, 0.94);
   --um-ink: #f6f1ea;
   --um-line: rgba(246, 241, 234, 0.16);
-  font-family: "Segoe UI", system-ui, sans-serif;
+  font-family: Roboto, "Segoe UI", sans-serif;
 }
 
 html.skin-redesign.light-mode {
@@ -32,8 +32,11 @@ html.skin-redesign.light-mode {
 }
 
 html.skin-redesign,
-html.skin-redesign body {
-  font-family: "Segoe UI", system-ui, sans-serif !important;
+html.skin-redesign body,
+html.skin-redesign button,
+html.skin-redesign input,
+html.skin-redesign textarea {
+  font-family: Roboto, "Segoe UI", sans-serif !important;
   color: var(--um-ink);
 }
 
@@ -672,7 +675,20 @@ html.skin-redesign .miniprofile .pie-chart {
   opacity: .82;
   margin-bottom: 8px;
 }
-html.skin-redesign .skin-detail-pop { width: 460px; max-width: 92vw; overflow: hidden; }
+html.skin-redesign .skin-detail-pop { width: 320px; max-width: 92vw; overflow: hidden; padding: 8px 10px !important; }
+html.skin-redesign .skin-card-meta {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 6px 10px;
+  margin-top: 2px;
+  font-size: 11px;
+  line-height: 1.2;
+  opacity: .8;
+}
+html.skin-redesign .skin-card-meta .skin-family,
+html.skin-redesign .skin-card-meta .skin-joined,
+html.skin-redesign .skin-card-meta .skin-games { opacity: 1; margin: 0; text-transform: none; font-weight: 500; }
 html.skin-redesign .MuiPopover-root { z-index: 8000 !important; }
 html.skin-redesign .skin-card-beam {
   position: absolute;

@@ -166,6 +166,25 @@ function Miniprofile(props) {
                 }}
               >
                 {name}
+                {skin && (
+                  <div className="skin-card-meta">
+                    {totalGames > 0 && <span className="skin-games">{totalGames} games</span>}
+                    {user.family && user.family.name && (
+                      <span className="skin-family">
+                        Member of{" "}
+                        {user.family.avatar ? (
+                          <FamilyAvatarImage id={user.family.id} size={14} cacheVal={siteInfo.cacheVal} />
+                        ) : null}
+                        {user.family.name}
+                      </span>
+                    )}
+                    {user.joined && (
+                      <span className="skin-joined">
+                        Joined {new Date(Number(user.joined)).toLocaleDateString()}
+                      </span>
+                    )}
+                  </div>
+                )}
               </div>
             </Stack>
           </Link>
@@ -199,7 +218,7 @@ function Miniprofile(props) {
         prefilledArgs={reportPrefilledArgs}
       />
       {!hasDefaultPronouns && <div className="pronouns">({pronouns})</div>}
-      {skin && user.family && user.family.name && (
+      {!skin && user.family && user.family.name && (
         <div className="skin-family">
           Member of{" "}
           {user.family.avatar ? (

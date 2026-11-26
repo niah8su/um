@@ -1,11 +1,11 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { GameStatus } from "./GameRow";
 import Setup from "components/Setup";
 import { RefreshButton } from "./RefreshButton";
 import { Time } from "components/Basic";
-import StateIcon from "components/StateIcon";
 import GameIcon from "components/GameIcon";
+import HostGameDialogue from "components/HostGameDialogue";
 import { getRowColor, getRowStubColor } from "./gameRowColors";
 import { FeaturedSetup } from "./FeaturedSetup";
 import { RecentlyPlayedSetups } from "./RecentlyPlayedSetups";
@@ -46,27 +46,46 @@ function TabIcon({ id }) {
   return <svg {...common}><circle cx="9" cy="9" r="3" fill="currentColor" /><circle cx="16" cy="10" r="2.4" fill="currentColor" /><path fill="currentColor" d="M4 18c.8-2.4 2.6-3.5 5-3.5s4.2 1.1 5 3.5M13 18c.5-1.6 1.6-2.4 3-2.4 1.2 0 2.2.6 2.8 1.8" /></svg>;
 }
 
+const HEART = "M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z";
+const MARKS = {
+  ranked: HEART,
+  comp: HEART,
+  competitive: HEART,
+  sandbox: "M3 21.2h18v1.4H3zM5.2 20.6l1.6-8.2h2.1V9.6h1.5v2.8h3.2V9.6h1.5v2.8h2.1l1.6 8.2H5.2zM11.2 2.4h1.6V7h-1.6zM12.8 2.8 16.4 4.2 12.8 5.6zM10.6 15.4c0-1 .8-1.6 1.6-1.6s1.6.6 1.6 1.6V20.6h-3.2v-5.2z",
+  games: "M6 3h12a3 3 0 0 1 3 3v12a3 3 0 0 1-3 3H6a3 3 0 0 1-3-3V6a3 3 0 0 1 3-3zm2.1 4.2a1.25 1.25 0 1 0 .01 0zm7.8 0a1.25 1.25 0 1 0 .01 0zM12 10.7a1.25 1.25 0 1 0 .01 0zM8.1 14.3a1.25 1.25 0 1 0 .01 0zm7.8 0a1.25 1.25 0 1 0 .01 0z",
+  minigames: "M6 3h12a3 3 0 0 1 3 3v12a3 3 0 0 1-3 3H6a3 3 0 0 1-3-3V6a3 3 0 0 1 3-3zm2.1 4.2a1.25 1.25 0 1 0 .01 0zm7.8 0a1.25 1.25 0 1 0 .01 0zM12 10.7a1.25 1.25 0 1 0 .01 0zM8.1 14.3a1.25 1.25 0 1 0 .01 0zm7.8 0a1.25 1.25 0 1 0 .01 0z",
+  survivor: "M12 1.2c2.6 2.4 4.4 4.1 4.4 6.6a4.4 4.4 0 0 1-8.8 0c0-2.5 1.8-4.2 4.4-6.6zM11.1 5.4c.7.8 1.2 1.3 1.2 2.1a1.3 1.3 0 0 1-2.6 0c0-.8.5-1.3 1.4-2.1zM5.6 11.4h12.8l-1.4 2.6H7zM7.6 14.8h8.8l-.5 1.3H8.1zM9.2 16.8h5.6L12 22.4z",
+  roleplay: "M12 21.2s-7.6-4.7-7.6-10.2C4.4 8 6.3 6.2 8.6 6.2c1.4 0 2.6.7 3.4 1.8 0.8-1.1 2-1.8 3.4-1.8 2.3 0 4.2 1.8 4.2 4.8 0 5.5-7.6 10.2-7.6 10.2z",
+  main: "M4 9.5c0-3 2.4-5 5.2-5 1.6 0 2.6.6 2.8 1.6.2-1 1.2-1.6 2.8-1.6 2.8 0 5.2 2 5.2 5 0 2.2-1 4.4-2.4 6.2-1.2 1.5-2.6 2.6-3.6 3.2-1 .6-1.6.8-2 .8s-1-.2-2-.8c-1-.6-2.4-1.7-3.6-3.2C5 13.9 4 11.7 4 9.5z",
+};
+
 function MarkIcon({ game }) {
-  const kind = game.competitive
-    ? "comp"
-    : game.ranked
-      ? "ranked"
-      : String(game.lobby || "").toLowerCase();
-  const heart = "M12 20s-6.5-4.1-6.5-9A3.6 3.6 0 0 1 12 8a3.6 3.6 0 0 1 6.5 3c0 4.9-6.5 9-6.5 9z";
-  const paths = {
-    ranked: heart,
-    comp: heart,
-    sandbox: "M6 9h12l-1 10H7L6 9zm2-3h8v3H8z",
-    games: "M7 4h10v10H7zM9 16h2v4H9zm4 0h2v4h-2z",
-    minigames: "M7 4h10v10H7zM9 16h2v4H9zm4 0h2v4h-2z",
-    survivor: "M12 3l2 6h6l-5 4 2 6-5-4-5 4 2-6-5-4h6z",
-    roleplay: "M5 8a7 7 0 0 1 14 0v3H5zM8 14h8v3a4 4 0 0 1-8 0z",
-    main: heart,
-  };
+  const kind = game.competitive ? "comp" : game.ranked ? "ranked" : String(game.lobby || "main").toLowerCase();
+  const gold = kind === "comp";
   return (
-    <svg className={`mark-ico ${kind}`} viewBox="0 0 24 24" aria-hidden="true">
-      <path fill="currentColor" d={paths[kind] || "M12 6a6 6 0 1 0 .01 0z"} />
+    <svg className={`mark-ico ${gold ? "mark-heart gold" : kind === "ranked" ? "mark-heart" : "mark-fill"}`} viewBox="0 0 24 24" aria-hidden="true">
+      <path fill={gold ? "#edb334" : kind === "ranked" ? "#e23b3b" : "currentColor"} d={MARKS[kind] || MARKS.main} />
     </svg>
+  );
+}
+
+function StateMark({ game }) {
+  const name = String(game.gameState || (game.status === "Finished" ? "Postgame" : "Day"));
+  const night = /night/i.test(name);
+  const done = game.status === "Finished" || /post/i.test(name);
+  return (
+    <span className="state-ico" title={name}>
+      {done ? (
+        <svg className="ico" viewBox="0 0 24 24" aria-hidden="true"><rect x="6" y="6" width="12" height="12" rx="1" fill="currentColor" /></svg>
+      ) : night ? (
+        <svg className="ico" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" fillRule="evenodd" d="M15.2 2.8a9 9 0 1 0 .02 0z M17.6 5.6a6.4 6.4 0 1 1-.02 0z" /></svg>
+      ) : (
+        <svg className="ico" viewBox="0 0 24 24" aria-hidden="true">
+          <circle cx="12" cy="12" r="4" fill="currentColor" />
+          <path fill="currentColor" d="M11 1h2v3h-2zm0 19h2v3h-2zM1 11h3v2H1zm19 0h3v2h-3zM4.2 5.6l1.4-1.4 2.1 2.1-1.4 1.4zm12.1 12.1 1.4-1.4 2.1 2.1-1.4 1.4zM4.2 18.4l2.1-2.1 1.4 1.4-2.1 2.1zm12.1-12.1 2.1-2.1 1.4 1.4-2.1 2.1z" />
+        </svg>
+      )}
+    </span>
   );
 }
 
@@ -115,8 +134,17 @@ export default function SkinLobby({
   postLocation,
   glowingHostButton,
 }) {
+  const [rehost, setRehost] = useState(null);
   return (
     <div className="view-player skin-port">
+      {rehost && rehost.setup && (
+        <HostGameDialogue
+          open
+          setOpen={(open) => { if (!open) setRehost(null); }}
+          setup={rehost.setup}
+          defaultLobby={rehost.lobby}
+        />
+      )}
       <div className="lobby-tabs" role="tablist" aria-label="Lobbies">
         {lobbies.filter((lobby) => !lobby.hidden).map((lobby) => {
           const tabId = ({
@@ -178,12 +206,7 @@ export default function SkinLobby({
                       <MarkIcon game={game} />
                       <CountPill game={game} />
                       <span className="state-slot">
-                        {(game.gameState || game.status === "Finished") && (
-                          <StateIcon
-                            stateName={game.gameState || "Postgame"}
-                            winnerGroups={(game.winnersInfo && game.winnersInfo.groups) || []}
-                          />
-                        )}
+                        <StateMark game={game} />
                       </span>
                     </div>
                   </div>
@@ -202,7 +225,12 @@ export default function SkinLobby({
                     </div>
                   </div>
                   <div className="bar-actions">
-                    <GameStatus game={game} buttonsOnly showGameState={false} />
+                    <GameStatus
+                      game={game}
+                      buttonsOnly
+                      showGameState={false}
+                      onRehost={(row) => setRehost(row)}
+                    />
                   </div>
                 </div>
               </article>

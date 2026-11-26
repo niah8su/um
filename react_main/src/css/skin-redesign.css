@@ -531,6 +531,68 @@ html.skin-redesign .skin-lobby-tabs .MuiTab-root::before { content: none !import
 
 html.skin-redesign .comments-page .name-with-avatar { margin-left: -8px; }
 
+/* Logged-out welcome: the approved glass home page. */
+html.skin-redesign .skin-welcome {
+  max-width: 900px;
+  padding-bottom: 16px;
+}
+html.skin-redesign .skin-welcome > .MuiTypography-root {
+  text-transform: uppercase;
+  font-weight: 300;
+  letter-spacing: 0.12em;
+  font-size: 0.62rem;
+  text-align: center;
+  padding: 12px 0;
+}
+html.skin-redesign .skin-welcome .MuiPaper-root {
+  background: var(--um-glass) !important;
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid var(--um-line);
+  box-shadow: none;
+  border-radius: 8px;
+  min-height: 0 !important;
+}
+html.skin-redesign .skin-welcome .MuiInput-root {
+  border: 1px solid var(--um-line);
+  border-radius: 6px;
+  padding: 6px 10px;
+}
+html.skin-redesign .skin-welcome .MuiInput-underline:before,
+html.skin-redesign .skin-welcome .MuiInput-underline:after { border-bottom: 0 !important; }
+html.skin-redesign .skin-welcome .MuiInputLabel-root {
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  font-size: 11px;
+}
+html.skin-redesign .skin-welcome form .MuiButton-root {
+  width: 100%;
+  margin-top: 12px;
+  background: var(--um-accent);
+  color: var(--um-accent-ink, #fff);
+}
+html.skin-redesign .skin-welcome [data-provider] {
+  display: inline-flex !important;
+  width: 44px !important;
+  min-width: 44px !important;
+  height: 40px;
+  padding: 0 !important;
+  margin: 14px 5px 0 !important;
+  font-size: 0 !important;
+  justify-content: center;
+  border-radius: 8px !important;
+  vertical-align: middle;
+}
+html.skin-redesign .skin-welcome [data-provider] img,
+html.skin-redesign .skin-welcome [data-provider] svg,
+html.skin-redesign .skin-welcome [data-provider] i {
+  margin: 0 !important;
+  font-size: 18px;
+}
+html.skin-redesign .skin-welcome img {
+  border-radius: 6px;
+}
+
 html.skin-redesign .miniprofile { display: flex; flex-direction: column; }
 html.skin-redesign .miniprofile > * { order: 6; }
 html.skin-redesign .miniprofile > .mui-popover-title { order: 1; font-size: 14px; }

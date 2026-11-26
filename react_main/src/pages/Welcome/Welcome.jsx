@@ -21,6 +21,7 @@ import { useSnackbar } from "hooks/useSnackbar";
 import { Loading } from "../../components/Loading";
 import { useIsPhoneDevice } from "hooks/useIsPhoneDevice";
 import { UserContext } from "Contexts";
+import { useSkinRedesign } from "components/useSkinRedesign";
 
 // localStorage.setItem('firebase:debug', 'true');
 
@@ -33,6 +34,7 @@ if (localStorage.getItem("showChatTab") !== null) {
 
 export const Welcome = () => {
   const user = useContext(UserContext);
+  const skin = useSkinRedesign();
   const [isLoading, setIsLoading] = useState(true);
   const isPhoneDevice = useIsPhoneDevice();
   const snackbarHook = useSnackbar();
@@ -110,6 +112,7 @@ export const Welcome = () => {
   return (
     <>
       <Container
+        className={skin ? "skin-welcome" : undefined}
         maxWidth="md"
         sx={{
           paddingLeft: paddingX,

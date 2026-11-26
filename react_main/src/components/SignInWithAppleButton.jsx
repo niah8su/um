@@ -37,6 +37,7 @@ export default function SignInWithAppleButton({
 }) {
   return (
     <Button
+      data-provider="apple"
       fullWidth
       onClick={onClick}
       disabled={disabled}

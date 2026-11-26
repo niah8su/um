@@ -199,6 +199,74 @@ async function main() {
   }
   console.log("forum threads copied", uniqueThreads.length);
   console.log("Polls and stamp trades were not copied. The public poll list returned an error and stamp trades require a login. This script does not log in.");
+
+  await db.collection("polls").deleteMany({ localSeed: MARK });
+  await db.collection("pollvotes").deleteMany({ localSeed: MARK });
+  const pollId = "local-seed-poll";
+  await db.collection("polls").insertOne({
+    id: pollId,
+    lobby: "Main",
+    question: "Would you be interested in a Wacky Words / Wacky People tournament for December where the prompts are Christmas-themed?",
+    options: ["YES", "NO"],
+    creator: "local-seed",
+    created: Date.now(),
+    completed: false,
+    expiresAt: Date.UTC(2026, 10, 12),
+    localSeed: MARK,
+  });
+  const votes = [];
+  for (let i = 0; i < 11; i++) votes.push({ pollId, userId: "seed-yes-" + i, optionIndex: 0, votedAt: Date.now(), localSeed: MARK });
+  for (let i = 0; i < 8; i++) votes.push({ pollId, userId: "seed-no-" + i, optionIndex: 1, votedAt: Date.now(), localSeed: MARK });
+  await db.collection("pollvotes").insertMany(votes);
+  console.log("poll seeded", pollId);
+
+  const people = await users.find({ id: { $exists: true, $ne: null } }).limit(8).toArray();
+  await db.collection("stamptrades").deleteMany({ localSeed: MARK });
+  const roles = ["Villager", "Mafioso", "Cop", "Doctor", "Jester"];
+  if (people.length) {
+    const trades = roles.map((role, i) => ({
+      id: "seed-gift-" + i,
+      initiator: people[0]._id,
+      initiatorId: people[0].id,
+      initiatorGameType: "Mafia",
+      initiatorRole: role,
+      recipient: people[Math.min(1, people.length - 1)]._id,
+      recipientId: people[Math.min(1, people.length - 1)].id,
+      status: "COMPLETED",
+      createdAt: Date.now() - i * 3600000,
+      completedAt: Date.now() - i * 3600000,
+      localSeed: MARK,
+    }));
+    await db.collection("stamptrades").insertMany(trades);
+    console.log("stamp gifts", trades.length);
+  } else {
+    console.log("no local users yet; stamp gifts skipped until an account exists");
+  }
+
+  if (people.length) {
+    await users.updateMany(
+      { id: { $in: people.map((u) => u.id) } },
+      { $set: { dailyChallenges: ["Basic2", "Hard1"] } }
+    );
+    console.log("daily challenges set on", people.map((u) => u.id).join(", "));
+  }
+
+  await db.collection("notifications").deleteMany({ localSeed: MARK });
+  const notifs = [];
+  for (const u of people) {
+    notifs.push(
+      { id: "seed-n1-" + u.id, user: u.id, isChat: false, read: false, content: "You have a friend request.", date: Date.now(), link: "/user/notifications", localSeed: MARK },
+      { id: "seed-n2-" + u.id, user: u.id, isChat: false, read: false, content: "Someone replied to your forum thread.", date: Date.now() - 60000, link: "/community/forums", localSeed: MARK },
+      { id: "seed-n3-" + u.id, user: u.id, isChat: false, read: false, content: "You were invited to a game.", date: Date.now() - 120000, link: "/play", localSeed: MARK }
+    );
+  }
+  if (notifs.length) {
+    await db.collection("notifications").insertMany(notifs);
+    console.log("notifications for", people.map((u) => u.name + " (" + u.id + ")").join(", "));
+  } else {
+    console.log("No local users yet. Log in once on localhost, then run this script again so the bell is filled for that account.");
+  }
+
   await client.close();
 }
 

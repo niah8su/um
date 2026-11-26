@@ -309,7 +309,7 @@ function Miniprofile(props) {
           <div className="score-info-row score-info-smallicon">
             <img src={ACHIEVEMENTS_ICON} />
           </div>
-          <div className="score-info-row">{user.achievements.length}/{totalAchievements}</div>
+          <div className="score-info-row">{(user.achievements || []).length}/{totalAchievements}</div>
         </div>
       </div>
     </div>

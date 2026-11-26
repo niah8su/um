@@ -59,7 +59,8 @@ function Polls({
   handleVote,
 }) {
   const skin = useSkinRedesign();
-  if (allPolls.length === 0) {
+  const polls = Array.isArray(allPolls) ? allPolls : [];
+  if (polls.length === 0) {
     return isThreadPoll ? null : (
       <Typography variant="body2" color="text.secondary">
         No polls for this lobby.
@@ -74,7 +75,7 @@ function Polls({
           <PageNav page={pollPage} onNav={onPollPageNav} />
         </Box>
       )}
-      {allPolls.map((poll) => {
+      {polls.map((poll) => {
         const isActive = !poll.completed;
         const completedDate =
           poll.completed && poll.completedAt
@@ -115,7 +116,7 @@ function Polls({
             )}
 
             <Stack spacing={1}>
-              {poll.options.map((option, index) => {
+              {(Array.isArray(poll.options) ? poll.options : []).map((option, index) => {
                 const voteCount = counts[index] || 0;
                 const totalVotes = counts.reduce((a, b) => a + b, 0);
                 const percentage =
@@ -280,11 +281,12 @@ export function Poll({ lobby, threadId, locked }) {
       );
       if (!isMountedRef.current) return;
 
-      const { currentPoll, activePolls, polls } = response.data;
+      const { currentPoll, activePolls } = response.data;
+      const history = Array.isArray(response.data.polls) ? response.data.polls : [];
 
       setCurrentPoll(currentPoll);
       setActivePolls(activePolls || []);
-      setPolls(polls);
+      setPolls(history);
 
       // Combine active polls with history for display
       let combined = [];
@@ -292,23 +294,23 @@ export function Poll({ lobby, threadId, locked }) {
       if (pollPage === 1) {
         if (isAllLobbies && activePolls && activePolls.length > 0) {
           // For "All" lobby, show all active polls first
-          const filteredPolls = polls.filter(
+          const filteredPolls = history.filter(
             (p) => !activePolls.some((ap) => ap.id === p.id)
           );
           combined = [...activePolls, ...filteredPolls];
         } else if (currentPoll) {
           // For specific lobby, show current poll first
-          const filteredPolls = polls.filter((p) => p.id !== currentPoll.id);
+          const filteredPolls = history.filter((p) => p.id !== currentPoll.id);
           combined = [currentPoll, ...filteredPolls];
         } else {
-          combined = polls;
+          combined = history;
         }
       } else {
         // Pages beyond 1 only show history
-        combined = polls;
+        combined = history;
       }
 
-      setAllPolls(combined);
+      setAllPolls(Array.isArray(combined) ? combined : []);
     } catch (error) {
       if (isMountedRef.current) {
         errorAlert();
@@ -333,12 +335,13 @@ export function Poll({ lobby, threadId, locked }) {
     axios
       .get(`/api/poll/list/${lobby}?${filterArg}`)
       .then((res) => {
-        const { currentPoll, activePolls, polls } = res.data;
+        const { currentPoll, activePolls } = res.data;
+        const history = Array.isArray(res.data.polls) ? res.data.polls : [];
 
-        if (res.data.polls.length || (activePolls && activePolls.length)) {
+        if (history.length || (activePolls && activePolls.length)) {
           setCurrentPoll(currentPoll);
           setActivePolls(activePolls || []);
-          setPolls(res.data.polls);
+          setPolls(history);
           setPollPage(page);
 
           // Combine for display
@@ -346,23 +349,23 @@ export function Poll({ lobby, threadId, locked }) {
 
           if (page === 1) {
             if (isAllLobbies && activePolls && activePolls.length > 0) {
-              const filteredPolls = polls.filter(
+              const filteredPolls = history.filter(
                 (p) => !activePolls.some((ap) => ap.id === p.id)
               );
               combined = [...activePolls, ...filteredPolls];
             } else if (currentPoll) {
-              const filteredPolls = polls.filter(
+              const filteredPolls = history.filter(
                 (p) => p.id !== currentPoll.id
               );
               combined = [currentPoll, ...filteredPolls];
             } else {
-              combined = polls;
+              combined = history;
             }
           } else {
-            combined = polls;
+            combined = history;
           }
 
-          setAllPolls(combined);
+          setAllPolls(Array.isArray(combined) ? combined : []);
         }
         setLoading(false);
       })
@@ -400,7 +403,7 @@ export function Poll({ lobby, threadId, locked }) {
   }
 
   // Don't show empty thread polls
-  if (isThreadPoll && allPolls.length === 0) {
+  if (isThreadPoll && (!Array.isArray(allPolls) || allPolls.length === 0)) {
     return null;
   }
 

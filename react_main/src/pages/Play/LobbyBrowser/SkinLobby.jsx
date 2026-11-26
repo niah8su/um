@@ -27,6 +27,7 @@ import {
   tagPillStyle,
   useSiteLight,
 } from "./lobbyTagMap";
+import { lobbyGames } from "./setupRoles";
 import "css/skin-lobby-port.css";
 
 function StateMark({ game }) {
@@ -196,6 +197,7 @@ export default function SkinLobby({
 }) {
   const [rehost, setRehost] = useState(null);
   const light = useSiteLight();
+  const rows = lobbyGames(games);
   return (
     <div className="view-player skin-port">
       {rehost && rehost.setup && (
@@ -250,7 +252,7 @@ export default function SkinLobby({
             </div>
           </div>
           <div className="game-list">
-            {loading && games.length === 0 ? null : games.map((game) => {
+            {loading && rows.length === 0 ? null : rows.map((game) => {
               const tagId = rowTagId(game);
               const spec = LOBBY_TAGS[tagId];
               return (
@@ -301,7 +303,7 @@ export default function SkinLobby({
               </article>
               );
             })}
-            {!loading && games.length === 0 && (
+            {!loading && rows.length === 0 && (
               <p className="empty-games">No games played recently.</p>
             )}
           </div>

@@ -23,6 +23,7 @@ import { useTheme } from "@mui/material/styles";
 
 import "css/setup.css";
 import "css/roles.css";
+import { normalizeSetupRoles } from "pages/Play/LobbyBrowser/setupRoles";
 import { usePopover, InfoPopover } from "components/Popover";
 import { usePopoverOpen } from "hooks/usePopoverOpen";
 import { PopoverContent } from "./Popover";
@@ -61,8 +62,9 @@ export default function Setup(props) {
       ? maxIconsPerRow * 3
       : maxIconsPerRow;
 
-  if (typeof props.setup.roles == "string")
-    props.setup.roles = JSON.parse(props.setup.roles);
+  props.setup.roles = normalizeSetupRoles(props.setup.roles);
+  if (props.setup.count == null) props.setup.count = {};
+  if (!Array.isArray(props.setup.roleGroupSizes)) props.setup.roleGroupSizes = [];
 
   const backgroundColor = props.backgroundColor || undefined;
   const classList = props.classList || "";
@@ -122,7 +124,7 @@ export default function Setup(props) {
   var overSize = false;
 
   if (props.setup.closed && !useRoleGroups) {
-    for (let alignment of Object.keys(rolesDividedByAlignment[0])) {
+    for (let alignment of Object.keys(rolesDividedByAlignment[0] || {})) {
       const count = props.setup.count[alignment];
       if (count > 0) {
         roleCounts.push(
@@ -195,7 +197,7 @@ export default function Setup(props) {
   }
 
   function selectSetup(index) {
-    let roleNames = Object.keys(rolesDividedByRoleset[index]);
+    let roleNames = Object.keys(rolesDividedByRoleset[index] || {});
     // Filter out events from role display
     const filteredRoleNames = roleNames.filter((role) => {
       const roleName = role.split(":")[0];
@@ -721,15 +723,15 @@ function RoleBox({ children, color, legend = null }) {
 }
 
 export function FullRoleList({ setup, compact = false }) {
-  const roles = setup.roles;
-  const gameType = setup.gameType;
+  const roles = normalizeSetupRoles(setup && setup.roles);
+  const gameType = setup && setup.gameType;
 
   const siteInfo = useContext(SiteInfoContext);
 
   const multi =
     (!setup.closed || setup.useRoleGroups) &&
     !setup.useRoleGroups &&
-    setup.roles.length > 1;
+    roles.length > 1;
 
   const { rolesDividedByAlignment, banishedRoles, events, eventsPerRoleset } =
     getRolesByAlignment(siteInfo, gameType, roles);
@@ -791,13 +793,13 @@ export function FullRoleList({ setup, compact = false }) {
           alignItems: "center",
         }}
       >
-        {setup.roles.length > 1 && (
+        {roles.length > 1 && (
           <RoleCount
             key={i}
-            count={setup.roleGroupSizes[i]}
+            count={(setup.roleGroupSizes || [])[i]}
             showPopover={false}
             role={INDEXED_ROLE_GROUP_LABELS[i]}
-            roleGroup={setup.roles[i]}
+            roleGroup={roles[i]}
             gameType={gameType}
           />
         )}

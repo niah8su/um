@@ -20,6 +20,7 @@ import {
   Typography,
 } from "@mui/material";
 import { useIsPhoneDevice } from "hooks/useIsPhoneDevice";
+import { useSkinRedesign } from "components/useSkinRedesign";
 import { getRowColor, getSetupBackgroundColor } from "./gameRowColors.js";
 import StateIcon from "components/StateIcon";
 
@@ -27,6 +28,7 @@ export const GameStatus = (props) => {
   const navigate = useNavigate();
   const user = useContext(UserContext);
   const isPhoneDevice = useIsPhoneDevice();
+  const skin = useSkinRedesign();
   const showGameState = props.showGameState;
 
   // Testing lobby games are only listed for Developers/Owners, and the
@@ -188,10 +190,11 @@ export const GameStatus = (props) => {
         />
       )}
       <Stack
-        direction="column"
+        className={skin ? "skin-status-actions" : undefined}
+        direction={skin ? "row" : "column"}
         sx={{
           gap: { xs: 0.5, sm: 1 },
-          alignItems: "stretch",
+          alignItems: skin ? "center" : "stretch",
           justifyContent: "center",
           alignSelf: "stretch",
           ml: 1,

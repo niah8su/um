@@ -1169,17 +1169,71 @@ html.skin-redesign .skin-game-header .ios-beta-ticker {
   z-index: 2;
 }
 
-html.skin-redesign .skin-lobby-tabs { border-bottom: 1px solid var(--um-line); }
+html.skin-redesign .skin-lobby-tabs { border-bottom: 0; min-height: 36px; }
+html.skin-redesign .skin-lobby-tabs .MuiTabs-flexContainer { gap: 6px; }
 html.skin-redesign .skin-lobby-tabs .MuiTab-root {
   text-transform: uppercase;
-  letter-spacing: 0.08em;
+  letter-spacing: 0.06em;
   font-size: 12px;
-  min-height: 36px;
+  font-weight: 700;
+  min-height: 32px;
+  height: 32px;
+  border-radius: 999px;
+  border: 1px solid rgba(255,255,255,.16);
   color: var(--um-ink);
   font-family: "Segoe UI", system-ui, sans-serif;
+  background: rgba(255,255,255,.04);
+  padding: 0 12px;
 }
-html.skin-redesign .skin-lobby-tabs .Mui-selected { color: var(--um-accent) !important; }
-html.skin-redesign .skin-lobby-tabs .MuiTabs-indicator { background-color: var(--um-accent); }
+html.skin-redesign.light-mode .skin-lobby-tabs .MuiTab-root {
+  border-color: rgba(28,25,23,.14);
+  background: rgba(255,255,255,.55);
+  color: #1c1917;
+}
+html.skin-redesign .skin-lobby-tabs .Mui-selected {
+  color: var(--um-accent) !important;
+  background: color-mix(in srgb, var(--um-accent) 18%, transparent) !important;
+  border-color: color-mix(in srgb, var(--um-accent) 45%, transparent);
+}
+html.skin-redesign .skin-lobby-tabs .MuiTabs-indicator { display: none; }
+html.skin-redesign .play .shiny-container > .MuiStack-root {
+  min-height: 52px !important;
+  max-height: none;
+  padding: 4px 8px !important;
+  align-items: center !important;
+  flex-wrap: nowrap !important;
+}
+html.skin-redesign .play .shiny-container > .MuiStack-root > .MuiStack-root {
+  flex-direction: row !important;
+  align-items: center !important;
+  width: auto !important;
+  flex: 0 1 auto !important;
+  gap: 8px !important;
+}
+html.skin-redesign .play .setup > .MuiStack-root > .MuiStack-root {
+  flex-direction: row !important;
+  align-items: center !important;
+  padding: 0 4px !important;
+  gap: 8px !important;
+}
+html.skin-redesign .play .setup .setup-name {
+  text-transform: uppercase;
+  font-weight: 700;
+  white-space: nowrap;
+  margin: 0;
+}
+html.skin-redesign .play .game-state-icon { width: 28px !important; height: 28px !important; }
+html.skin-redesign .skin-status-actions {
+  flex-direction: row !important;
+  align-items: center !important;
+  width: auto !important;
+  flex: 0 0 auto !important;
+}
+html.skin-redesign .skin-status-actions .MuiBox-root { width: auto !important; }
+html.skin-redesign .skin-announce-row { width: 100%; align-items: flex-start; }
+html.skin-redesign .skin-announce {
+  border-radius: 12px !important;
+}
 
 html.skin-redesign .play .MuiListItem-root {
   border: 1px solid var(--um-line);

@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { createPortal } from "react-dom";
 import { Alert, Box, IconButton, Stack } from "@mui/material";
 import {
   getAnnouncement,
@@ -23,6 +24,13 @@ export const Announcement = ({
   const [loadingFirstTime, setLoadingFirstTime] = useState(true);
   const [loading, setLoading] = useState(true);
   const isPhoneDevice = useIsPhoneDevice();
+  const [announceSlot, setAnnounceSlot] = useState(null);
+  useEffect(() => {
+    const sync = () => setAnnounceSlot(document.getElementById("skin-lobby-announce"));
+    sync();
+    window.addEventListener("skin-announce-slot", sync);
+    return () => window.removeEventListener("skin-announce-slot", sync);
+  }, []);
 
   useEffect(() => {
     (async () => {
@@ -144,8 +152,8 @@ export const Announcement = ({
     urlifyText(announcement?.content)
   );
 
-  return (
-    <Stack direction="row" spacing={1}>
+  const announcementUi = (
+    <Stack direction="row" spacing={1} className="skin-announce-row">
       {ScrollButtons}
       <Alert
         className="skin-announce"
@@ -170,4 +178,6 @@ export const Announcement = ({
       </Alert>
     </Stack>
   );
+  if (announceSlot) return createPortal(announcementUi, announceSlot);
+  return announcementUi;
 };

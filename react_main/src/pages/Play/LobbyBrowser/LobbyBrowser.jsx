@@ -270,6 +270,12 @@ export default function LobbyBrowser() {
     };
   }, [inGame, active]);
 
+  useEffect(() => {
+    if (!skin) return undefined;
+    window.dispatchEvent(new Event("skin-announce-slot"));
+    return undefined;
+  }, [skin, lobbyName]);
+
   const refreshGames = async () => {
     if (!isMountedRef.current) return;
 
@@ -415,9 +421,23 @@ export default function LobbyBrowser() {
     </Paper>
   );
 
+  const sideModules = (
+    <>
+      <FeaturedSetup lobby={lobbyName} glowingHostButton={glowingHostButton} />
+      <RecentlyPlayedSetups lobby={lobbyName} />
+      <CompetitiveRounds />
+      <DailyChallenges />
+      <RecentForumReplies />
+      <Chat />
+      <Poll lobby={lobbyName} />
+      <RecentTradesFeed />
+    </>
+  );
+
   return (
     <Stack direction="column" spacing={1}>
       {lobbyTabs}
+      {skin && <div id="skin-lobby-announce" />}
       <Grid2 container rowSpacing={2} columnSpacing={2}>
         <Grid2 size={{ xs: 12, md: 8 }}>
           <Stack spacing={2}>
@@ -445,17 +465,7 @@ export default function LobbyBrowser() {
         </Grid2>
         <Grid2 size={{ xs: 12, md: 4 }}>
           <Stack spacing={1}>
-            <FeaturedSetup
-              lobby={lobbyName}
-              glowingHostButton={glowingHostButton}
-            />
-            <CompetitiveRounds />
-            <DailyChallenges />
-            <RecentlyPlayedSetups lobby={lobbyName} />
-            <RecentForumReplies />
-            <Chat />
-            <Poll lobby={lobbyName} />
-            <RecentTradesFeed />
+            {sideModules}
           </Stack>
         </Grid2>
       </Grid2>

@@ -663,9 +663,11 @@ html.skin-redesign [data-testid="tutorial-overlay"] img.skin-golbolco {
 
 html.skin-redesign .MuiAppBar-root img[alt="Site logo"] {
   display: block;
-  height: 42px;
+  height: 40px;
+  max-height: 40px;
   width: auto;
-  margin-top: 0;
+  margin: 0;
+  object-fit: contain;
 }
 html.skin-redesign .skin-side-toggle {
   position: relative;
@@ -1129,9 +1131,42 @@ html.skin-redesign .MuiAppBar-root .MuiButton-text:hover::after { opacity: 1; }
 html.skin-redesign .MuiAppBar-root .MuiButton-text:hover::before {
   animation: skin-nav-beam 6.8s cubic-bezier(0.45, 0.05, 0.55, 0.95) infinite;
 }
+html.skin-redesign {
+  --um-ticker-h: 28px;
+}
 html.skin-redesign .ios-beta-ticker {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 5000;
+  width: 100%;
+  height: var(--um-ticker-h);
+  margin: 0;
   background: color-mix(in srgb, var(--um-accent) 16%, transparent) !important;
   letter-spacing: 0.08em;
+}
+html.skin-redesign .app-shell:has(.ios-beta-ticker) {
+  padding-top: var(--um-ticker-h);
+  box-sizing: border-box;
+}
+html.skin-redesign .skin-appbar {
+  top: 0 !important;
+  z-index: 40;
+  overflow: hidden;
+}
+html.skin-redesign .app-shell:has(.ios-beta-ticker) .skin-appbar {
+  top: var(--um-ticker-h) !important;
+}
+html.skin-redesign .app-shell:has(.ios-beta-ticker) .skin-side {
+  top: var(--um-ticker-h);
+}
+html.skin-redesign .skin-game-header .ios-beta-ticker {
+  position: relative;
+  top: auto;
+  left: auto;
+  right: auto;
+  z-index: 2;
 }
 
 html.skin-redesign .skin-lobby-tabs { border-bottom: 1px solid var(--um-line); }
@@ -1301,6 +1336,55 @@ html.skin-redesign .skin-head-end {
   display: flex !important;
   align-items: center;
   gap: 10px;
+}
+html.skin-redesign .skin-nav-btn {
+  background: transparent !important;
+  box-shadow: none !important;
+  min-width: 0 !important;
+  padding: 4px 8px !important;
+  border-radius: 8px !important;
+}
+html.skin-redesign .skin-nav-label {
+  font-family: "Segoe UI", Roboto, sans-serif !important;
+  font-size: 15px !important;
+  font-weight: 700 !important;
+  letter-spacing: 0 !important;
+  text-transform: uppercase;
+}
+html.skin-redesign .skin-nav-btn .MuiButton-endIcon { margin-left: 2px; opacity: .65; }
+html.skin-redesign .skin-nav-btn .MuiButton-endIcon i { font-size: 10px; }
+html.skin-redesign .skin-appbar .nav { gap: 0 !important; }
+html.skin-redesign .skin-head-end .MuiButton-outlined,
+html.skin-redesign .skin-head-end .MuiButton-contained {
+  border-radius: 999px !important;
+  text-transform: none !important;
+  min-height: 32px;
+  box-shadow: none !important;
+}
+html.skin-redesign .skin-head-end .MuiButton-contained {
+  background: var(--um-accent) !important;
+  color: #fff !important;
+}
+html.skin-redesign .player-count {
+  width: 92px;
+  min-height: 30px;
+  border-radius: 8px;
+  font-size: 13px;
+  font-weight: 700;
+}
+html.skin-redesign .player-count progress {
+  border-radius: 8px;
+  border: 1px solid rgba(255,255,255,.18);
+  background: rgba(255,255,255,.06);
+  color: var(--um-accent);
+}
+html.skin-redesign .player-count progress::-webkit-progress-value,
+html.skin-redesign .player-count progress::-moz-progress-bar {
+  background: color-mix(in srgb, var(--um-accent) 72%, #fff);
+}
+html.skin-redesign .site-wrapper > .MuiStack-root {
+  width: min(1120px, calc(100% - 32px)) !important;
+  max-width: 1120px !important;
 }
 html.skin-redesign .skin-colors input[type="color"] {
   width: 18px;

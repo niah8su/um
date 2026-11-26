@@ -73,16 +73,18 @@ export default function SkinAppearance() {
 
   function toggleMode() {
     const next = light ? "dark" : "light";
-    setMode(next);
+    // Update the saved scheme in the same turn as the color mode so the
+    // settings sync does not snap the page back to the previous scheme.
     if (user.loggedIn && user.updateSetting) {
+      user.updateSetting("siteColorScheme", next);
       axios
         .post("/api/user/settings/update", {
           prop: "siteColorScheme",
           value: next,
         })
-        .then(() => user.updateSetting("siteColorScheme", next))
         .catch(() => {});
     }
+    setMode(next);
   }
 
   const accentKey = light ? "accentLight" : "accent";

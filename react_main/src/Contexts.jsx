@@ -420,11 +420,16 @@ export function UserProvider({
         user.settings.siteColorScheme === "retro"
           ? "dark"
           : user.settings.siteColorScheme;
-      if (["system", "light", "dark"].includes(normalized)) {
+      // Apply the saved scheme when it changes. Skip when MUI already matches,
+      // so a click is not immediately written back to the previous value.
+      if (
+        ["system", "light", "dark"].includes(normalized) &&
+        mode !== normalized
+      ) {
         setMode(normalized);
       }
     }
-  }, [user.loaded, user.loggedIn, user.settings?.siteColorScheme, setMode]);
+  }, [user.loaded, user.loggedIn, user.settings?.siteColorScheme, mode, setMode]);
 
   const fonts = resolveFontFamilySetting(
     user.settings?.fontFamily || "default"

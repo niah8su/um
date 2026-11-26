@@ -11,6 +11,7 @@ import {
 } from "@mui/material";
 import { useIsPhoneDevice } from "../hooks/useIsPhoneDevice";
 import { InGameContext } from "Contexts";
+import { useSkinRedesign } from "./useSkinRedesign";
 
 export default function NavDropdown({
   label,
@@ -25,6 +26,7 @@ export default function NavDropdown({
   const location = useLocation();
   const inGame = useContext(InGameContext);
   const isMobile = useIsPhoneDevice();
+  const skin = useSkinRedesign();
   const open = Boolean(anchorEl);
   const menuId = `nav-menu-${label || triggerAriaLabel || "custom"}`;
 
@@ -97,6 +99,7 @@ export default function NavDropdown({
     </IconButton>
   ) : (
     <Button
+      className={skin ? "skin-nav-btn" : undefined}
       variant="text"
       {...menuTriggerProps}
       sx={{
@@ -105,13 +108,13 @@ export default function NavDropdown({
         textTransform: "uppercase",
         color: "inherit",
         backgroundColor:
-          !isMobileMenu && isActive
+          !isMobileMenu && isActive && !skin
             ? "rgba(var(--mui-palette-primary-mainChannel) / var(--mui-palette-action-selectedOpacity));"
             : undefined,
       }}
       endIcon={<i className="fas fa-caret-down" aria-hidden="true" />}
     >
-      <Typography variant="h3">{label}</Typography>
+      <Typography className={skin ? "skin-nav-label" : undefined} variant="h3">{label}</Typography>
     </Button>
   );
 

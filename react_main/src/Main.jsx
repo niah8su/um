@@ -38,6 +38,7 @@ import { MobileNav } from "./components/MobileNav";
 import { ProfileSheetProvider } from "./components/ProfileSheet";
 import { SheetProvider } from "./components/Sheet";
 import ThemeColorMeta from "./components/ThemeColorMeta";
+import { useSkinRedesign } from "./components/useSkinRedesign";
 import RetainedSiteRoutes from "./components/RetainedSiteRoutes";
 import { DmWindowProvider } from "./components/dms/DmWindowContext";
 import FloatingDmWindow from "./components/dms/FloatingDmWindow";
@@ -717,10 +718,11 @@ function useUnreadNotifications() {
 
 function Footer() {
   const isPhoneDevice = useIsPhoneDevice();
+  const skin = useSkinRedesign();
   let year = new Date().getYear() + 1900;
 
   return (
-    <AppBar position="static" sx={{
+    <AppBar className={skin ? "skin-site-footer" : undefined} position="static" sx={{
       backgroundColor: "background.paper",
       color: "text.primary",
     }}>

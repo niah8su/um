@@ -1458,6 +1458,98 @@ html.skin-redesign.light-mode .skin-announce {
   box-shadow: 0 8px 24px rgba(31,35,40,.08), inset 0 1px 0 rgba(255,255,255,.9) !important;
   color: #1c1917;
 }
+html.skin-redesign .skin-port .panel .MuiPaper-root,
+html.skin-redesign.light-mode .skin-port .panel .MuiPaper-root,
+html.skin-redesign .skin-port .lobby-side .MuiPaper-root,
+html.skin-redesign.light-mode .skin-port .lobby-side .MuiPaper-root,
+html.skin-redesign.light-mode .skin-port .lobby-side .MuiCard-root,
+html.skin-redesign.light-mode .skin-port .lobby-side .setup {
+  background: transparent !important;
+  background-image: none !important;
+  border: 0 !important;
+  box-shadow: none !important;
+  backdrop-filter: none !important;
+}
+html.skin-redesign.light-mode .skin-port .lobby-side .setup {
+  border-bottom: 1px solid rgba(208, 215, 222, .8) !important;
+  border-radius: 0 !important;
+  padding: 8px 0 !important;
+}
+html.skin-redesign.light-mode .skin-port .sq-btn {
+  background: #fff !important;
+  border: 1px solid #d0d7de !important;
+  color: #1f2328 !important;
+}
+html.skin-redesign.light-mode .skin-port .sq-btn .btn-ico {
+  stroke: #1f2328;
+}
+html.skin-redesign .skin-site-footer {
+  background: transparent !important;
+  color: #6e7781 !important;
+  box-shadow: none !important;
+  border-top: 1px solid rgba(208, 215, 222, .9);
+}
+html.skin-redesign .skin-site-footer .MuiStack-root {
+  align-items: center;
+}
+html.skin-redesign .skin-site-footer a,
+html.skin-redesign .skin-site-footer .MuiLink-root {
+  color: var(--um-accent) !important;
+  font-family: Roboto, "Segoe UI", sans-serif !important;
+  font-size: 11px !important;
+  font-weight: 400 !important;
+  letter-spacing: 0.02em;
+  text-decoration: none;
+}
+html.skin-redesign .skin-site-footer a.MuiLink-root,
+html.skin-redesign .skin-site-footer .MuiTypography-root a {
+  color: var(--um-accent) !important;
+}
+html.skin-redesign .skin-site-footer .MuiStack-root > .MuiStack-root:first-child a,
+html.skin-redesign .skin-site-footer .MuiStack-root > .MuiStack-root:first-child a .iconify,
+html.skin-redesign .skin-site-footer .MuiStack-root > .MuiStack-root:first-child a .fab {
+  color: #57606a !important;
+}
+html.skin-redesign .skin-site-footer .MuiTypography-root {
+  color: #6e7781 !important;
+  font-family: Roboto, "Segoe UI", sans-serif !important;
+  font-size: 11px !important;
+  font-weight: 400 !important;
+  line-height: 1.45;
+}
+html.skin-redesign .skin-site-footer .fab,
+html.skin-redesign .skin-site-footer .iconify {
+  color: #57606a !important;
+  font-size: 16px !important;
+  width: 16px;
+  height: 16px;
+}
+html.skin-redesign .skin-site-footer a[href*="discord"] ,
+html.skin-redesign .skin-site-footer a[href*="discord"] .iconify {
+  color: #5865F2 !important;
+}
+html.skin-redesign .skin-bar.MuiStack-root {
+  display: grid !important;
+  grid-template-columns: auto minmax(0, 1fr);
+  align-items: center;
+  width: 100%;
+}
+html.skin-redesign .skin-bar .nav {
+  justify-content: center !important;
+  position: relative;
+}
+html.skin-redesign .skin-head-end {
+  position: absolute;
+  right: 8px;
+  top: 50%;
+  transform: translateY(-50%);
+}
+html.skin-redesign .skin-port {
+  max-width: 1080px;
+  margin-left: auto;
+  margin-right: auto;
+  overflow-x: hidden;
+}
 html.skin-redesign .MuiAppBar-root.skin-appbar {
   position: fixed !important;
   left: 232px !important;

@@ -3,7 +3,6 @@ import { Link } from "react-router-dom";
 import { GameStatus } from "./GameRow";
 import Setup from "components/Setup";
 import { RefreshButton } from "./RefreshButton";
-import { Time } from "components/Basic";
 import GameIcon from "components/GameIcon";
 import HostGameDialogue from "components/HostGameDialogue";
 import { getRowColor, getRowStubColor } from "./gameRowColors";
@@ -27,8 +26,7 @@ function tagFor(game) {
   if (game.lobby === "Games") return ["minigames", "Minigames"];
   if (game.lobby === "Survivor") return ["survivor", "Survivor"];
   if (game.lobby === "Roleplay") return ["roleplay", "Roleplay"];
-  if (game.lobby === "Main") return ["main", "Main"];
-  return ["unranked", game.lobby || "Game"];
+  return ["unranked", "Unranked"];
 }
 
 function tabLabel(lobby) {
@@ -89,13 +87,71 @@ function StateMark({ game }) {
   );
 }
 
+function yn(on) {
+  return on ? "✓" : "×";
+}
+
+function WhoPop({ game }) {
+  const lengths = game.stateLengths && typeof game.stateLengths === "object"
+    ? Object.entries(game.stateLengths)
+    : [];
+  const players = Array.isArray(game.players) ? game.players : null;
+  const playerCount = players ? players.length : (game.players || 0);
+  return (
+    <div className="who-pop" role="dialog" aria-label="Game details">
+      <button type="button" className="who-x" aria-label="Close">×</button>
+      <section>
+        <h4>Players</h4>
+        {players && players.length ? (
+          <ul>{players.map((name) => <li key={name}>{name}</li>)}</ul>
+        ) : (
+          <p>Count {playerCount}</p>
+        )}
+      </section>
+      <section>
+        <h4>Spectators</h4>
+        <p>Count {game.spectatorCount || 0}</p>
+        <p>Spectating {yn(game.spectating)}</p>
+      </section>
+      <section>
+        <h4>Time</h4>
+        <p>Created {game.endTime ? new Date(game.endTime).toLocaleString() : "—"}</p>
+        <p>Started {game.startTime ? new Date(game.startTime).toLocaleString() : "—"}</p>
+      </section>
+      {lengths.length > 0 && (
+        <section>
+          <h4>State lengths</h4>
+          {lengths.map(([key, val]) => (
+            <p key={key}>{key} {val} minutes</p>
+          ))}
+        </section>
+      )}
+      <section>
+        <h4>Common settings</h4>
+        <p>Ranked {yn(game.ranked)}</p>
+        <p>Competitive {yn(game.competitive)}</p>
+        <p>Spectating {yn(game.spectating)}</p>
+        <p>Guests allowed {yn(game.guests)}</p>
+        <p>Ready check {yn(game.readyCheck)}</p>
+        <p>No vegging {yn(game.noVeg)}</p>
+        <p>Anonymous {yn(game.anonymousGame)}</p>
+      </section>
+    </div>
+  );
+}
+
 function CountPill({ game }) {
   const total = (game.setup && game.setup.total) || 0;
   const taken = game.players || 0;
   if (game.status === "Finished") {
+    const ms = Math.max(0, Date.now() - (game.endTime || Date.now()));
+    const m = Math.floor(ms / 60000);
+    const h = Math.floor(m / 60);
+    const d = Math.floor(h / 24);
+    const label = d >= 1 ? `${d}d ago` : h >= 1 ? `${h}h ago` : m >= 1 ? `${m}m ago` : "just now";
     return (
       <div className="player-count">
-        <Time minSec millisec={Date.now() - (game.endTime || Date.now())} suffix=" ago" />
+        <span>{label}</span>
       </div>
     );
   }
@@ -186,7 +242,9 @@ export default function SkinLobby({
             <div className="games-word">Games</div>
             <div className="games-end">
               {!user.settings?.hideTutorialButton && (
-                <Link className="btn ghost small" to="/play/tutorial" data-testid="tutorial-link">Tutorial</Link>
+                <Link className="sq-btn help-btn" to="/play/tutorial" data-testid="tutorial-link" aria-label="Tutorial" title="Tutorial">
+                  <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" strokeWidth="1.6" /><path fill="currentColor" d="M11 17h2v-2h-2zm1-10a3.2 3.2 0 0 0-3.2 3h1.8a1.4 1.4 0 1 1 2.5 1c-.8.6-1.5 1-1.5 2.2V14h1.6v-.5c0-.6.4-.9 1.1-1.4A3.2 3.2 0 0 0 12 7z" /></svg>
+                </Link>
               )}
               <button type="button" className="icon-btn refresh-btn" aria-label="Refresh the games list" onClick={refreshGames}>
                 <RefreshButton isSpinning={refreshButtonIsSpinning} />
@@ -200,6 +258,7 @@ export default function SkinLobby({
               <article key={game.id} className={`game tone-${tagClass}${game.competitive ? " comp" : ""}`}>
                 <div className="stub" style={{ background: getRowStubColor(game) }} />
                 <div className="game-main" style={{ background: getRowColor(game, false) }}>
+                  <WhoPop game={game} />
                   <div className="bar-stack">
                     <div className={`type-tag ${tagClass}`}>{tagLabel}</div>
                     <div className="bar-meta">

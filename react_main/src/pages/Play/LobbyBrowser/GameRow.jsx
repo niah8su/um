@@ -102,6 +102,7 @@ export const GameStatus = (props) => {
       to={buttonUrl}
       state={membershipState}
       onClick={isRankedJoin ? tutorialGate.guard : undefined}
+      className="skin-join"
       variant={buttonVariant}
       color={buttonColor}
       disabled={buttonDisabled}

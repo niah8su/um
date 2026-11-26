@@ -96,7 +96,7 @@ export const Welcome = () => {
       } else {
         setIsLoading(false);
       }
-    });
+    }).catch(() => setIsLoading(false));
   }, []);
 
   const paddingX = isPhoneDevice ? 1 : 4;

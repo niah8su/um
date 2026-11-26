@@ -1046,3 +1046,223 @@ html.skin-redesign .game .fa-quote-right {
   opacity: 0.65;
   margin: 0 6px;
 }
+
+/* Real lobby and welcome. These selectors are the React components. */
+@property --nav-beam { syntax: "<angle>"; inherits: false; initial-value: 0deg; }
+@property --join-beam { syntax: "<angle>"; inherits: false; initial-value: 0deg; }
+@keyframes skin-nav-beam {
+  0% { --nav-beam: 97deg; }
+  100% { --nav-beam: 457deg; }
+}
+@keyframes skin-join-beam {
+  0% { --join-beam: 0deg; }
+  100% { --join-beam: 360deg; }
+}
+
+html.skin-redesign .MuiAppBar-root {
+  background: rgba(8, 10, 14, 0.42) !important;
+  color: var(--um-ink) !important;
+  box-shadow: none !important;
+  border-bottom: 1px solid var(--um-line);
+  backdrop-filter: blur(18px);
+}
+html.skin-redesign.light-mode .MuiAppBar-root {
+  background: rgba(255, 252, 250, 0.62) !important;
+  color: #1c1917 !important;
+}
+html.skin-redesign .MuiAppBar-root .MuiTypography-h3,
+html.skin-redesign .play .MuiTypography-h3,
+html.skin-redesign .skin-games-word {
+  font-family: "Segoe UI", system-ui, sans-serif !important;
+  font-weight: 700 !important;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--um-ink) !important;
+  font-size: 13px !important;
+}
+html.skin-redesign.light-mode .MuiAppBar-root .MuiTypography-h3,
+html.skin-redesign.light-mode .play .MuiTypography-h3 {
+  color: #1c1917 !important;
+}
+html.skin-redesign .MuiAppBar-root .MuiButton-text {
+  position: relative;
+  border-radius: 10px;
+  color: var(--um-ink);
+}
+html.skin-redesign .MuiAppBar-root .MuiButton-text::before,
+html.skin-redesign .MuiAppBar-root .MuiButton-text::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  pointer-events: none;
+  opacity: 0;
+}
+html.skin-redesign .MuiAppBar-root .MuiButton-text::after {
+  border: 1px solid color-mix(in srgb, var(--um-accent) 35%, transparent);
+}
+html.skin-redesign .MuiAppBar-root .MuiButton-text::before {
+  padding: 1.5px;
+  background: conic-gradient(from var(--nav-beam), transparent 0deg, transparent 300deg, color-mix(in srgb, var(--um-accent) 40%, #fff) 332deg, var(--um-accent) 348deg, transparent 360deg);
+  -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+  mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  mask-composite: exclude;
+}
+html.skin-redesign .MuiAppBar-root .MuiButton-text:hover::before,
+html.skin-redesign .MuiAppBar-root .MuiButton-text:hover::after { opacity: 1; }
+html.skin-redesign .MuiAppBar-root .MuiButton-text:hover::before {
+  animation: skin-nav-beam 6.8s cubic-bezier(0.45, 0.05, 0.55, 0.95) infinite;
+}
+html.skin-redesign .ios-beta-ticker {
+  background: color-mix(in srgb, var(--um-accent) 16%, transparent) !important;
+  letter-spacing: 0.08em;
+}
+
+html.skin-redesign .skin-lobby-tabs { border-bottom: 1px solid var(--um-line); }
+html.skin-redesign .skin-lobby-tabs .MuiTab-root {
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  font-size: 12px;
+  min-height: 36px;
+  color: var(--um-ink);
+  font-family: "Segoe UI", system-ui, sans-serif;
+}
+html.skin-redesign .skin-lobby-tabs .Mui-selected { color: var(--um-accent) !important; }
+html.skin-redesign .skin-lobby-tabs .MuiTabs-indicator { background-color: var(--um-accent); }
+
+html.skin-redesign .play .MuiListItem-root {
+  border: 1px solid var(--um-line);
+  border-radius: 12px;
+  overflow: hidden;
+  background: var(--um-glass) !important;
+  backdrop-filter: blur(16px);
+  margin-bottom: 8px;
+}
+html.skin-redesign .play .MuiListItem-root > .MuiBox-root:first-child {
+  width: 6px !important;
+  min-width: 6px !important;
+  align-self: stretch;
+}
+html.skin-redesign .play .shiny-container,
+html.skin-redesign .play .shiny-container > .MuiStack-root,
+html.skin-redesign .play .setup,
+html.skin-redesign .play .setup .MuiStack-root {
+  background: transparent !important;
+  background-color: transparent !important;
+  box-shadow: none !important;
+}
+html.skin-redesign .play .skin-join {
+  position: relative;
+  border-radius: 999px !important;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  min-height: 32px;
+}
+html.skin-redesign .play .skin-join::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  padding: 1.5px;
+  pointer-events: none;
+  opacity: 0;
+  background: conic-gradient(from var(--join-beam), transparent 0deg, transparent 300deg, color-mix(in srgb, var(--um-accent) 45%, #fff) 332deg, var(--um-accent) 348deg, transparent 360deg);
+  -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+  mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  mask-composite: exclude;
+}
+html.skin-redesign .play .skin-join:hover::before {
+  opacity: 1;
+  animation: skin-join-beam 5.6s cubic-bezier(0.4, 0, 1, 1) infinite;
+}
+
+html.skin-redesign .play .MuiPaper-root {
+  border: 1px solid var(--um-line);
+  border-radius: 12px;
+}
+html.skin-redesign .play .MuiTypography-h3 {
+  border-bottom-color: var(--um-line) !important;
+}
+
+html.skin-redesign .skin-side-word {
+  display: block;
+  width: 100%;
+  margin: 0 auto 6px;
+  text-align: center;
+  font-size: 9px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  font-weight: 700;
+}
+html.skin-redesign .skin-side-toggle { margin-left: auto; margin-right: auto; }
+html.skin-redesign .skin-online-count {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  color: #59ad72;
+  font-weight: 700;
+  font-size: 12px;
+  margin: 8px 0;
+}
+html.skin-redesign .skin-online-count i {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #59ad72;
+  box-shadow: 0 0 6px #59ad72;
+}
+html.skin-redesign .skin-side.collapsed .skin-online-count span { font-size: 11px; }
+
+html.skin-redesign .comments-page .post { position: relative; padding-top: 22px !important; }
+html.skin-redesign .comments-page .skin-c-time {
+  position: absolute;
+  top: 6px;
+  right: 8px;
+  margin: 0;
+  font-size: 10px;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  opacity: 0.7;
+}
+html.skin-redesign .comments-page .MuiDivider-root { border-color: transparent; opacity: 0.28; }
+html.skin-redesign .comments-page .md-content { margin-top: -6px; }
+html.skin-redesign .comments-page .emote-reactions {
+  top: auto;
+  right: 8px;
+  bottom: 10px;
+}
+html.skin-redesign .comments-page .fa-arrow-up,
+html.skin-redesign .comments-page .fa-arrow-down {
+  font-size: 11px !important;
+  opacity: 0.45;
+  width: 22px;
+  height: 22px;
+  text-shadow: 0 1px 0 rgba(255, 255, 255, 0.25);
+}
+html.skin-redesign.light-mode .comments-page .fa-arrow-up,
+html.skin-redesign.light-mode .comments-page .fa-arrow-down {
+  text-shadow: 0 1px 0 rgba(255, 255, 255, 0.8);
+}
+
+html.skin-redesign .skin-welcome {
+  width: min(1080px, 100%);
+}
+html.skin-redesign .skin-welcome > .MuiTypography-root {
+  font-family: "Segoe UI", system-ui, sans-serif;
+  color: var(--um-ink);
+}
+html.skin-redesign.light-mode .skin-welcome,
+html.skin-redesign.light-mode .skin-welcome .MuiTypography-root {
+  color: #1c1917;
+}
+html.skin-redesign .skin-welcome .MuiPaper-root {
+  border-radius: 16px;
+}
+html.skin-redesign .skin-welcome form .MuiButton-contained {
+  border-radius: 999px;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}

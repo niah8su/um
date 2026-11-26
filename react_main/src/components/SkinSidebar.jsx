@@ -3,7 +3,6 @@ import { Link } from "react-router-dom";
 import axios from "axios";
 import { UserContext } from "Contexts";
 import { useSkinRedesign } from "./useSkinRedesign";
-import { NameWithAvatar } from "pages/User/UserWidgets";
 
 // Same destinations and labels as the header menus. Shown only with the redesign.
 const GROUPS = [
@@ -95,6 +94,7 @@ export default function SkinSidebar() {
       >
         <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16" /></svg>
       </button>
+      <div className="skin-side-word">Menu</div>
       <div className="skin-side-rule" />
       <div className="skin-side-groups">
         {GROUPS.map((group) => (
@@ -108,13 +108,9 @@ export default function SkinSidebar() {
           </section>
         ))}
       </div>
-      <div className="skin-online" aria-label="Online users">
-        {online.map((row) => (
-          <span key={row.id} className="skin-online-row">
-            <i aria-hidden="true" />
-            <NameWithAvatar id={row.id} name={row.name} avatar={row.avatar} small />
-          </span>
-        ))}
+      <div className="skin-online-count" aria-label="Online users">
+        <i aria-hidden="true" />
+        <span>{online.length}</span>
       </div>
       <div className="skin-side-foot">
         <Link to="/user/settings">Settings</Link>

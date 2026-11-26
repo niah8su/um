@@ -71,7 +71,7 @@ export const Comment = (props) => {
                   vanityUrl={comment.author.vanityUrl}
                   color={theme.palette.text.primary}
                   subContent={
-                    <Box sx={{
+                    <Box className="skin-c-time" sx={{
                       opacity: "0.5",
                     }}>
                       <Time

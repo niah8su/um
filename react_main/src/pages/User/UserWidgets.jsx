@@ -699,6 +699,7 @@ export function NameWithAvatar(props) {
   const { openProfile } = useProfileSheet();
   const [userProfile, setUserProfile] = useState(null);
   const [isClicked, setIsClicked] = useState(false);
+  const [popSide, setPopSide] = useState("right");
   const popToken = useRef({});
 
   const autoColor = skinLightForcesBlack(color) ? "#000000" : user.autoContrastColor(color);
@@ -855,6 +856,10 @@ export function NameWithAvatar(props) {
 
   const openSkinCard = (event) => {
     if (event && event.preventDefault) event.preventDefault();
+    const rect = event && event.currentTarget && event.currentTarget.getBoundingClientRect();
+    if (rect) {
+      setPopSide(rect.left > window.innerWidth * 0.55 ? "left" : "right");
+    }
     window.dispatchEvent(new CustomEvent("um-skin-pop", {
       detail: { kind: "profile", owner: popToken.current },
     }));
@@ -888,11 +893,11 @@ export function NameWithAvatar(props) {
       anchorEl={anchorEl}
       anchorOrigin={{
         vertical: "center",
-        horizontal: "right",
+        horizontal: popSide,
       }}
       transformOrigin={{
         vertical: "center",
-        horizontal: "left",
+        horizontal: popSide === "left" ? "right" : "left",
       }}
       onClose={() => {
         setIsClicked(false);
@@ -900,7 +905,7 @@ export function NameWithAvatar(props) {
       }}
       disableScrollLock
     >
-      {userProfile && (
+      {userProfile ? (
         <React.Suspense fallback={null}>
           <Miniprofile
             user={userProfile}
@@ -912,6 +917,8 @@ export function NameWithAvatar(props) {
             }}
           />
         </React.Suspense>
+      ) : (
+        <div className="miniprofile skin-profile-pending">{name}</div>
       )}
     </Popover>
   ) : null;

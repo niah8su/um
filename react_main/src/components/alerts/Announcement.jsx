@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useLayoutEffect, useState } from "react";
 import { createPortal } from "react-dom";
 import { Alert, Box, IconButton, Stack } from "@mui/material";
 import {
@@ -25,12 +25,24 @@ export const Announcement = ({
   const [loading, setLoading] = useState(true);
   const isPhoneDevice = useIsPhoneDevice();
   const [announceSlot, setAnnounceSlot] = useState(null);
-  useEffect(() => {
-    const sync = () => setAnnounceSlot(document.getElementById("skin-lobby-announce"));
+  useLayoutEffect(() => {
+    let frames = 0;
+    let raf = 0;
+    const sync = () => {
+      const el = document.getElementById("skin-lobby-announce");
+      setAnnounceSlot(el);
+      if (!el && frames < 30) {
+        frames += 1;
+        raf = requestAnimationFrame(sync);
+      }
+    };
     sync();
     window.addEventListener("skin-announce-slot", sync);
-    return () => window.removeEventListener("skin-announce-slot", sync);
-  }, []);
+    return () => {
+      cancelAnimationFrame(raf);
+      window.removeEventListener("skin-announce-slot", sync);
+    };
+  }, [announcement, seenAnnouncement]);
 
   useEffect(() => {
     (async () => {

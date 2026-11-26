@@ -76,8 +76,8 @@ export const GameStatus = (props) => {
   } else if (props.game.status === "Finished") {
     buttonUrl = `/game/${props.game.id}`;
     buttonText = "Review";
-    buttonColor = "inherit"; //"rgba(211, 211, 211, 0.15)";
-    buttonVariant = "outlined";
+    buttonColor = skin && props.buttonsOnly ? "primary" : "inherit";
+    buttonVariant = skin && props.buttonsOnly ? "contained" : "outlined";
     buttonDisabled = false;
   }
 
@@ -125,13 +125,22 @@ export const GameStatus = (props) => {
       state={{ requestedMembership: "spectator" }}
       variant="outlined"
       color="inherit"
+      className={skin && props.buttonsOnly ? "skin-eye" : undefined}
+      aria-label="Spectate"
       sx={{
         p: 0.5,
-        width: "100%",
+        width: skin && props.buttonsOnly ? 34 : "100%",
+        minWidth: skin && props.buttonsOnly ? 34 : undefined,
+        height: skin && props.buttonsOnly ? 34 : undefined,
         fontWeight: "bold",
       }}
     >
-      Spectate
+      {skin && props.buttonsOnly ? (
+        <svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true">
+          <path fill="none" stroke="currentColor" strokeWidth="1.8" d="M2 12s4-6 10-6 10 6 10 6-4 6-10 6S2 12 2 12z" />
+          <circle cx="12" cy="12" r="2.4" fill="currentColor" stroke="none" />
+        </svg>
+      ) : "Spectate"}
     </Button>
   );
 
@@ -168,7 +177,24 @@ export const GameStatus = (props) => {
     </Box>
   );
 
-  if (props.buttonsOnly) return gameButtonWrapped;
+  if (props.buttonsOnly) {
+    if (skin) {
+      return (
+        <>
+          {canShowGameButton && !isFullOpenGame && GameButton}
+          {canShowGameButton && spectateButton}
+          {isRankedJoin && tutorialGate.dialog}
+          {props.game.broken && (
+            <i className="fas fa-car-crash" title="Broken" />
+          )}
+          {props.game.private && !isReviewableTestingGame && (
+            <i className="fas fa-lock" title="Private" />
+          )}
+        </>
+      );
+    }
+    return gameButtonWrapped;
+  }
 
   return (
     <Stack

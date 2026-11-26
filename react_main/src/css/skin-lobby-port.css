@@ -1,38 +1,58 @@
 /* Ported from lobby-draft-v3. Only loads with the skin lobby. */
 html.skin-redesign .skin-port {
-  font-family: "Segoe UI", Roboto, sans-serif;
-  color: var(--um-ink);
+  --panel: linear-gradient(180deg, rgba(255,255,255,.08), rgba(255,255,255,.02) 42%), rgba(8, 10, 14, .62);
+  --panel-line: rgba(240,246,252,.14);
+  --panel-shadow: 0 8px 24px rgba(0,0,0,.4), inset 0 1px 0 rgba(255,255,255,.1);
+  --radius: 8px;
+  font-family: "Roboto", "Segoe UI", sans-serif;
+  color: #e6edf3;
+}
+html.skin-redesign.light-mode .skin-port {
+  --panel: linear-gradient(180deg, rgba(255,255,255,.62), rgba(255,255,255,.28)), rgba(255,255,255,.42);
+  --panel-line: rgba(208,215,222,.95);
+  --panel-shadow: 0 8px 24px rgba(31,35,40,.08), inset 0 1px 0 rgba(255,255,255,.9);
+  color: #1f2328;
 }
 html.skin-redesign .skin-port .lobby-tabs {
   display: flex;
   flex-wrap: wrap;
   gap: 6px;
-  margin: 0 0 10px;
+  margin: 12px 0;
+  padding: 8px 4px;
 }
 html.skin-redesign .skin-port .lobby-tabs button {
-  border: 1px solid rgba(255,255,255,.16);
-  background: rgba(255,255,255,.05);
-  color: inherit;
-  border-radius: 999px;
-  min-height: 28px;
-  padding: 0 12px;
-  font: inherit;
-  font-size: 12px;
-  font-weight: 700;
-  letter-spacing: .04em;
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
   text-transform: uppercase;
+  letter-spacing: 0.12em;
+  font-weight: 500;
+  font-size: 11px;
+  font-family: "Roboto", "Segoe UI", sans-serif;
+  padding: 8px 14px;
+  border-radius: 8px;
+  background: transparent;
+  border: 1px solid transparent;
+  color: #d8dee6;
   cursor: pointer;
 }
-html.skin-redesign.light-mode .skin-port .lobby-tabs button {
-  background: rgba(255,255,255,.7);
-  border-color: rgba(28,25,23,.14);
-  color: #1c1917;
-}
+html.skin-redesign.light-mode .skin-port .lobby-tabs button { color: #1f2328; }
 html.skin-redesign .skin-port .lobby-tabs button.on {
-  color: var(--um-accent);
-  border-color: color-mix(in srgb, var(--um-accent) 55%, transparent);
-  background: color-mix(in srgb, var(--um-accent) 16%, transparent);
+  background: rgba(255,255,255,.1);
+  border-color: rgba(255,255,255,.22);
 }
+html.skin-redesign .skin-port .lobby-tabs button[data-lobby="main"]:hover,
+html.skin-redesign .skin-port .lobby-tabs button[data-lobby="main"].on { color: #ff6b6b; background: rgba(255,107,107,.18); box-shadow: 0 0 14px rgba(255,107,107,.45); }
+html.skin-redesign .skin-port .lobby-tabs button[data-lobby="sandbox"]:hover,
+html.skin-redesign .skin-port .lobby-tabs button[data-lobby="sandbox"].on { color: #f0d34a; background: rgba(240,211,74,.16); box-shadow: 0 0 14px rgba(240,211,74,.4); }
+html.skin-redesign .skin-port .lobby-tabs button[data-lobby="comp"]:hover,
+html.skin-redesign .skin-port .lobby-tabs button[data-lobby="comp"].on { color: #edb334; background: rgba(237,179,52,.18); box-shadow: 0 0 14px rgba(237,179,52,.45); }
+html.skin-redesign .skin-port .lobby-tabs button[data-lobby="mini"]:hover,
+html.skin-redesign .skin-port .lobby-tabs button[data-lobby="mini"].on { color: #58a6ff; background: rgba(88,166,255,.18); box-shadow: 0 0 14px rgba(88,166,255,.45); }
+html.skin-redesign .skin-port .lobby-tabs button[data-lobby="surv"]:hover,
+html.skin-redesign .skin-port .lobby-tabs button[data-lobby="surv"].on { color: #6fbf6f; background: rgba(111,191,111,.18); }
+html.skin-redesign .skin-port .lobby-tabs button[data-lobby="roleplay"]:hover,
+html.skin-redesign .skin-port .lobby-tabs button[data-lobby="roleplay"].on { color: #c084fc; background: rgba(192,132,252,.18); }
 html.skin-redesign .skin-port .count-pip {
   margin-left: 6px;
   min-width: 16px;
@@ -86,32 +106,231 @@ html.skin-redesign .skin-port .games-end { display: flex; align-items: center; g
 html.skin-redesign .skin-port .game {
   display: flex;
   align-items: stretch;
-  min-height: 52px;
-  margin: 0 0 6px;
+  margin-bottom: 8px;
 }
-html.skin-redesign .skin-port .stub { width: 6px; border-radius: 8px 0 0 8px; flex: none; }
+html.skin-redesign .skin-port .stub {
+  width: 6px;
+  min-width: 6px;
+  border-radius: 6px 0 0 6px;
+  flex: none;
+}
 html.skin-redesign .skin-port .game-main {
   flex: 1;
+  min-width: 0;
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  height: 78px;
+  min-height: 78px;
+  max-height: 78px;
+  padding: 0 10px;
+  border-radius: 0 8px 8px 0;
+  overflow: hidden;
+}
+html.skin-redesign .skin-port .bar-stack {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  align-self: stretch;
+  justify-content: center;
+  gap: 4px;
+  flex: none;
+  width: 148px;
+  min-width: 148px;
+  padding-top: 6px;
+  box-sizing: border-box;
+}
+html.skin-redesign .skin-port .type-tag {
+  display: inline-flex;
+  align-items: center;
+  font-size: 8px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  font-weight: 800;
+  line-height: 1;
+  padding: 3px 6px;
+  border-radius: 6px;
+  border: 1px solid currentColor;
+  background: color-mix(in srgb, currentColor 16%, transparent);
+  align-self: flex-start;
+  white-space: nowrap;
+}
+html.skin-redesign.light-mode .skin-port .type-tag.ranked { background: #ffb3bd; color: #9f1239; }
+html.skin-redesign.light-mode .skin-port .type-tag.competitive { background: #ffe08a; color: #854d0e; }
+html.skin-redesign.light-mode .skin-port .type-tag.sandbox { background: #fff3a3; color: #7a5b00; }
+html.skin-redesign.light-mode .skin-port .type-tag.minigames { background: #b6f0ff; color: #0e7490; }
+html.skin-redesign.light-mode .skin-port .type-tag.survivor { background: #b6f5c4; color: #166534; }
+html.skin-redesign.light-mode .skin-port .type-tag.roleplay { background: #e9d5ff; color: #6b21a8; }
+html.skin-redesign.light-mode .skin-port .type-tag.main,
+html.skin-redesign.light-mode .skin-port .type-tag.unranked { background: #f3f4f6; color: #424a53; }
+html.skin-redesign .skin-port .type-tag.ranked { color: #e23b3b; }
+html.skin-redesign .skin-port .type-tag.competitive { color: #edb334; }
+html.skin-redesign .skin-port .type-tag.sandbox { color: #d6c15a; }
+html.skin-redesign .skin-port .type-tag.minigames { color: #5ec8d6; }
+html.skin-redesign .skin-port .type-tag.survivor { color: #6fbf6f; }
+html.skin-redesign .skin-port .type-tag.roleplay { color: #c084fc; }
+html.skin-redesign .skin-port .type-tag.main,
+html.skin-redesign .skin-port .type-tag.unranked { color: #8b949e; }
+html.skin-redesign .skin-port .player-count {
+  position: relative;
+  width: auto;
+  min-width: 100px;
+  max-width: 140px;
+  min-height: 28px;
+  white-space: nowrap;
+  padding: 0 6px;
+  box-sizing: border-box;
+  border-radius: 4px;
+  overflow: hidden;
   display: flex;
   align-items: center;
+  justify-content: center;
+  gap: 4px;
+  font-size: 13px;
+  font-weight: 700;
+  border: 1px solid rgba(12,12,12,.15);
+  background: rgba(211,211,211,.15);
+}
+html.skin-redesign .skin-port .player-count .fill {
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  background: #0064b4;
+  opacity: .85;
+}
+html.skin-redesign .skin-port .player-count .pill-eye { position: relative; z-index: 1; flex: none; }
+html.skin-redesign .skin-port .bar-meta { display: flex; align-items: center; gap: 4px; }
+html.skin-redesign .skin-port .bar-meta img { width: 18px; height: 18px; }
+html.skin-redesign .skin-port .roles button,
+html.skin-redesign .skin-port .roles .MuiIconButton-root { display: none !important; }
+html.skin-redesign .skin-port .player-count span { position: relative; z-index: 1; }
+html.skin-redesign .skin-port .bar-mid { flex: 1; min-width: 0; align-self: center; }
+html.skin-redesign .skin-port .setup-row { display: flex; align-items: center; gap: 6px; min-width: 0; }
+html.skin-redesign .skin-port .setup-copy { flex: 1 1 140px; min-width: 0; }
+html.skin-redesign .skin-port .setup-name {
+  text-transform: uppercase;
+  font-weight: 700;
+  font-size: 13px;
+  letter-spacing: .02em;
+}
+html.skin-redesign .skin-port .setup-name > span {
+  display: block;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+html.skin-redesign .skin-port .lobby-sub {
+  font-size: 11px;
+  color: var(--muted, #8b949e);
+  line-height: 1.2;
+}
+html.skin-redesign .skin-port .roles {
+  display: flex;
+  gap: 2px;
+  flex: none;
+  align-items: center;
+  max-width: 42%;
+  max-height: 36px;
+  overflow: hidden;
+}
+html.skin-redesign .skin-port .roles .role,
+html.skin-redesign .skin-port .roles img {
+  width: 22px !important;
+  height: 22px !important;
+  min-width: 22px;
+}
+html.skin-redesign .skin-port .roles .setup,
+html.skin-redesign .skin-port .roles .setup .MuiStack-root,
+html.skin-redesign .skin-port .roles .setup .MuiPaper-root {
+  background: transparent !important;
+  border: 0 !important;
+  box-shadow: none !important;
+  padding: 0 !important;
+  margin: 0 !important;
+  min-height: 0 !important;
+}
+html.skin-redesign .skin-port .roles .setup-name,
+html.skin-redesign .skin-port .roles .MuiDivider-root,
+html.skin-redesign .skin-port .roles .setup > .MuiStack-root > button { display: none !important; }
+html.skin-redesign .skin-port .roles .MuiStack-root { flex-direction: row !important; }
+html.skin-redesign .skin-port .bar-actions {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 4px;
+  margin-left: auto;
+  flex: none;
+}
+html.skin-redesign .skin-port .lobby-split {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: 16px;
+  align-items: start;
+}
+html.skin-redesign .skin-port .games-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
   gap: 8px;
-  padding: 4px 8px;
-  min-width: 0;
-  border-radius: 0 12px 12px 0;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  background: var(--panel);
+  border: 1px solid var(--panel-line);
+  border-radius: 8px;
+  box-shadow: var(--panel-shadow);
+}
+html.skin-redesign .skin-port .games-word {
+  color: var(--um-accent);
+  font-size: 1.17em;
+  font-weight: 700;
+  margin: 0;
+}
+html.skin-redesign .skin-port .refresh-btn {
+  width: 32px;
+  height: 32px;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: inherit;
+}
+html.skin-redesign .skin-port .panel {
+  padding: 16px 18px;
+  background: var(--panel);
+  border-radius: 8px;
+  box-shadow: var(--panel-shadow);
+  border: 1px solid var(--panel-line);
 }
 html.skin-redesign .skin-port .bar-actions { margin-left: auto; flex: none; }
 html.skin-redesign .skin-port .bar-actions .MuiButton-root {
-  border-radius: 999px;
-  min-height: 30px;
+  width: auto !important;
+  border-radius: 8px !important;
+  min-height: 34px;
+  padding: 8px 16px !important;
   text-transform: uppercase;
   font-weight: 700;
-  letter-spacing: .04em;
-  background: var(--um-accent);
-  color: #fff;
+  background: var(--um-accent) !important;
+  color: #fff !important;
   box-shadow: none;
 }
-html.skin-redesign .skin-port .lobby-side { display: flex; flex-direction: column; gap: 10px; }
-html.skin-redesign .skin-port .lobby-side .panel { padding: 8px; }
+html.skin-redesign .skin-port .bar-actions .skin-eye {
+  width: 34px !important;
+  min-width: 34px !important;
+  height: 34px !important;
+  padding: 0 !important;
+  border-radius: 4px !important;
+  background: rgba(255,255,255,.08) !important;
+  border: 1px solid rgba(255,255,255,.14) !important;
+}
+html.skin-redesign .skin-port #skin-lobby-announce { margin: 0 0 8px; }
+html.skin-redesign .skin-port #skin-lobby-announce .skin-announce {
+  padding: 16px 18px;
+  border-radius: 12px;
+  width: 100%;
+}
+html.skin-redesign .skin-forum-ava .user-name { display: none !important; }
+html.skin-redesign .skin-port .lobby-side { display: flex; flex-direction: column; gap: 8px; }
+html.skin-redesign .skin-port .lobby-side .panel { padding: 16px 18px; }
 html.skin-redesign .skin-side-word { display: none; }
 html.skin-redesign .skin-side-dock {
   flex-direction: column;

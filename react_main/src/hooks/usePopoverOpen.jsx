@@ -48,6 +48,7 @@ export const usePopoverOpen = () => {
     clearCloseTimer();
   };
   const releasePopover = () => {
+    if (openByClick) return;
     if (document.documentElement.classList.contains("skin-redesign")) {
       scheduleHoverClose();
     }

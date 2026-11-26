@@ -612,7 +612,8 @@ html.skin-redesign .miniprofile .pie-chart {
   opacity: .82;
   margin-bottom: 190px;
 }
-html.skin-redesign .skin-detail-pop { width: 460px; max-width: 92vw; position: relative; overflow: hidden; }
+html.skin-redesign .skin-detail-pop { width: 460px; max-width: 92vw; overflow: hidden; }
+html.skin-redesign .MuiPopover-root { z-index: 8000 !important; }
 html.skin-redesign .skin-card-beam {
   position: absolute;
   inset: 0;
@@ -1377,14 +1378,14 @@ html.skin-redesign.light-mode .skin-announce {
   color: #1c1917;
 }
 html.skin-redesign .skin-appbar {
-  background: rgba(7, 6, 10, .55) !important;
+  background: rgba(1, 4, 9, .78) !important;
   backdrop-filter: blur(22px) saturate(1.35) !important;
   border-bottom: 1px solid rgba(240,246,252,.14);
-  min-height: 64px;
+  min-height: 56px;
 }
 html.skin-redesign.light-mode .skin-appbar {
-  background: rgba(247, 245, 242, .72) !important;
-  border-bottom-color: rgba(28,25,23,.12);
+  background: rgba(246, 248, 250, .62) !important;
+  border-bottom-color: rgba(208,215,222,.95);
 }
 html.skin-redesign .skin-head-end {
   display: flex !important;
@@ -1421,7 +1422,7 @@ html.skin-redesign .skin-nav-btn:hover {
 }
 html.skin-redesign .skin-nav-label {
   font-family: "Segoe UI", Roboto, sans-serif !important;
-  font-size: 15px !important;
+  font-size: 1.05rem !important;
   font-weight: 700 !important;
   letter-spacing: 0 !important;
   text-transform: uppercase;

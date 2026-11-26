@@ -3,13 +3,15 @@ import axios from "axios";
 import { Link } from "react-router-dom";
 
 import { Paper, Stack, Typography, Box } from "@mui/material";
-import { Avatar } from "pages/User/UserWidgets";
+import { Avatar, NameWithAvatar } from "pages/User/UserWidgets";
+import { useSkinRedesign } from "components/useSkinRedesign";
 import { Time } from "components/Basic";
 import LobbySidebarPanel from "pages/Play/LobbyBrowser/LobbySidebarPanel";
 import { useViewActive } from "../hooks/useViewActivity";
 
 export function RecentForumReplies() {
   const active = useViewActive();
+  const skin = useSkinRedesign();
   const [newestThreads, setNewestThreads] = useState([]);
   const [recentReplies, setRecentReplies] = useState([]);
 
@@ -100,12 +102,24 @@ export function RecentForumReplies() {
                 key={`thread-${item.threadId}-${item.date}`}
                 sx={{ display: "flex", alignItems: "center", gap: 1, minWidth: 0 }}
               >
-                <Avatar
-                  small
-                  hasImage={item.user?.avatar}
-                  id={item.user?.id}
-                  name={item.user?.name}
-                />
+                {skin && item.user?.id ? (
+                  <Box className="skin-forum-ava">
+                    <NameWithAvatar
+                      small
+                      noLink
+                      id={item.user.id}
+                      name={item.user.name}
+                      avatar={item.user.avatar}
+                    />
+                  </Box>
+                ) : (
+                  <Avatar
+                    small
+                    hasImage={item.user?.avatar}
+                    id={item.user?.id}
+                    name={item.user?.name}
+                  />
+                )}
                 <Box
                   sx={{
                     display: "flex",
@@ -151,12 +165,24 @@ export function RecentForumReplies() {
                 key={`reply-${item.replyId}-${item.date}`}
                 sx={{ display: "flex", alignItems: "center", gap: 1, minWidth: 0 }}
               >
-                <Avatar
-                  small
-                  hasImage={item.user?.avatar}
-                  id={item.user?.id}
-                  name={item.user?.name}
-                />
+                {skin && item.user?.id ? (
+                  <Box className="skin-forum-ava">
+                    <NameWithAvatar
+                      small
+                      noLink
+                      id={item.user.id}
+                      name={item.user.name}
+                      avatar={item.user.avatar}
+                    />
+                  </Box>
+                ) : (
+                  <Avatar
+                    small
+                    hasImage={item.user?.avatar}
+                    id={item.user?.id}
+                    name={item.user?.name}
+                  />
+                )}
                 <Box
                   sx={{
                     display: "flex",

@@ -139,15 +139,13 @@ export function PageNav(props) {
       >
         <i style={{ fontSize }} className="fas fa-angle-right" />
       </IconButton>
-      {!noRange && (
-        <IconButton
-          color="primary"
-          sx={IconButtonSx}
-          onClick={() => onClick(maxPage)}
-        >
-          <i style={{ fontSize }} className="fas fa-angle-double-right" />
-        </IconButton>
-      )}
+      <IconButton
+        color="primary"
+        sx={IconButtonSx}
+        onClick={() => onClick(noRange ? page : maxPage)}
+      >
+        <i style={{ fontSize }} className="fas fa-angle-double-right" />
+      </IconButton>
     </Box>
   );
 }

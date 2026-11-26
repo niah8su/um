@@ -683,7 +683,7 @@ html.skin-redesign .skin-port .type-tag {
   height: 16px !important;
   padding: 2px 4px !important;
   border-radius: 4px !important;
-  border: 1px solid currentColor !important;
+  border: 1px solid var(--tag-border, currentColor) !important;
   font-size: 8px !important;
   font-weight: 600 !important;
   letter-spacing: 0.1em !important;

@@ -30,7 +30,7 @@ export function applySkinColors(mode) {
   const saved = loadColors();
   const light = mode === "light";
   const root = document.documentElement;
-  const accent = saved[light ? "accentLight" : "accent"];
+  const accent = saved[light ? "accentLight" : "accent"] || saved.accent;
   const g1 = saved[light ? "g1Light" : "g1"];
   const g2 = saved[light ? "g2Light" : "g2"];
   if (accent) {

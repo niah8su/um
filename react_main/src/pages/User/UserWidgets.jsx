@@ -19,6 +19,7 @@ import { useIsPhoneDevice } from "hooks/useIsPhoneDevice";
 import { useProfileSheet } from "components/ProfileSheet";
 import ImageViewer from "components/ImageViewer";
 import { usePopoverOpen } from "hooks/usePopoverOpen";
+import { useSkinRedesign } from "components/useSkinRedesign";
 import { useViewActive } from "hooks/useViewActivity";
 import { useAvatarImageUrl, AvatarPhoto } from "utils/avatarUrl";
 import { observeNameAnimation } from "utils/nameAnimationViewport";
@@ -649,6 +650,8 @@ export function NameWithAvatar(props) {
   );
   const user = useContext(UserContext);
   const isPhone = useIsPhoneDevice();
+  const skin = useSkinRedesign();
+  const skinCard = Boolean(skin && id && props.name);
   const { openProfile } = useProfileSheet();
   const [userProfile, setUserProfile] = useState(null);
   const [isClicked, setIsClicked] = useState(false);
@@ -709,12 +712,14 @@ export function NameWithAvatar(props) {
     handleMouseEnter,
     handleMouseLeave,
     closePopover,
+    holdPopover,
+    releasePopover,
   } = usePopoverOpen();
 
-  const popoverOpen = includeMiniprofile && canOpenPopover;
+  const popoverOpen = (includeMiniprofile || skinCard) && canOpenPopover;
 
   useEffect(() => {
-    if (includeMiniprofile && id) {
+    if ((includeMiniprofile || skinCard) && id) {
       axios
         .get(`/api/user/${id}/profile`)
         .then((res) => {
@@ -727,7 +732,7 @@ export function NameWithAvatar(props) {
           );
         });
     }
-  }, []);
+  }, [id, skinCard, includeMiniprofile]);
 
   var contents = (
     <Stack
@@ -791,15 +796,69 @@ export function NameWithAvatar(props) {
     </Stack>
   );
 
+  const onNameEnter = (e) => {
+    if (isPhone) return;
+    if (skin) {
+      window.dispatchEvent(new CustomEvent("um-skin-pop", { detail: "profile" }));
+    }
+    handleMouseEnter(e);
+  };
+
+  const profilePopover = !isPhone && (includeMiniprofile || skinCard) ? (
+    <Popover
+      open={props.showPopover !== false && popoverOpen}
+      sx={{
+        pointerEvents: openByClick || skin ? "auto" : "none",
+        zIndex: skin ? 8000 : undefined,
+      }}
+      slotProps={
+        skin
+          ? {
+              paper: {
+                className: "skin-detail-pop",
+                onMouseEnter: holdPopover,
+                onMouseLeave: releasePopover,
+              },
+            }
+          : undefined
+      }
+      anchorEl={anchorEl}
+      anchorOrigin={{
+        vertical: "center",
+        horizontal: "right",
+      }}
+      transformOrigin={{
+        vertical: "center",
+        horizontal: "left",
+      }}
+      onClose={() => {
+        setIsClicked(false);
+        closePopover();
+      }}
+      disableScrollLock
+    >
+      {userProfile && (
+        <React.Suspense fallback={null}>
+          <Miniprofile user={userProfile} game={game} key={userProfile.id} />
+        </React.Suspense>
+      )}
+    </Popover>
+  ) : null;
+
   // noLink should take precedence over includeMiniprofile
   if (noLink) {
     return (
-      <div
-        className={`name-with-avatar no-link`}
-        target={newTab ? "_blank" : ""}
-      >
-        {contents}
-      </div>
+      <>
+        <div
+          className={`name-with-avatar no-link`}
+          target={newTab ? "_blank" : ""}
+          onMouseEnter={skinCard ? onNameEnter : undefined}
+          onMouseLeave={skinCard && !isPhone ? handleMouseLeave : undefined}
+        >
+          {contents}
+        </div>
+        {skinCard ? profilePopover : null}
+      </>
     );
   } else if (includeMiniprofile) {
     const handlePlayerClick = (e) => {
@@ -819,11 +878,6 @@ export function NameWithAvatar(props) {
       setIsClicked(popoverOpen);
     };
 
-    const handleMiniprofileClose = (e) => {
-      setIsClicked(false);
-      closePopover();
-    };
-
     return (
       <>
         <div
@@ -831,52 +885,29 @@ export function NameWithAvatar(props) {
             isClicked ? " name-with-avatar-clicked" : ""
           }`}
           onClick={handlePlayerClick}
-          onMouseEnter={isPhone ? undefined : handleMouseEnter}
+          onMouseEnter={isPhone ? undefined : onNameEnter}
           onMouseLeave={isPhone ? undefined : handleMouseLeave}
         >
           {contents}
         </div>
-        {!isPhone && (
-          <div>
-            <Popover
-              open={props.showPopover !== false && popoverOpen}
-              sx={{ pointerEvents: openByClick ? "auto" : "none" }}
-              anchorEl={anchorEl}
-              anchorOrigin={{
-                vertical: "center",
-                horizontal: "right",
-              }}
-              transformOrigin={{
-                vertical: "center",
-                horizontal: "left",
-              }}
-              onClose={handleMiniprofileClose}
-              disableScrollLock
-            >
-              {userProfile && (
-                <React.Suspense fallback={null}>
-                  <Miniprofile
-                    user={userProfile}
-                    game={game}
-                    key={userProfile.id}
-                  />
-                </React.Suspense>
-              )}
-            </Popover>
-          </div>
-        )}
+        {profilePopover}
       </>
     );
   } else {
     const profileLink = vanityUrl ? `/user/${vanityUrl}` : `/user/${id}`;
     return (
-      <Link
-        className={`name-with-avatar`}
-        to={profileLink}
-        target={newTab ? "_blank" : ""}
-      >
-        {contents}
-      </Link>
+      <>
+        <Link
+          className={`name-with-avatar`}
+          to={profileLink}
+          target={newTab ? "_blank" : ""}
+          onMouseEnter={skinCard ? onNameEnter : undefined}
+          onMouseLeave={skinCard && !isPhone ? handleMouseLeave : undefined}
+        >
+          {contents}
+        </Link>
+        {skinCard ? profilePopover : null}
+      </>
     );
   }
 }

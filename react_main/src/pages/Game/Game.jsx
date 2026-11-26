@@ -1976,6 +1976,7 @@ export function TopBar({ forceShow = false } = {}) {
 
       {!isPhoneDevice && (
         <Button
+          className="skin-leave"
           onClick={game.onLeaveGameClick}
           startIcon={<img src={exit} alt="Leave" />}
         >
@@ -6678,6 +6679,7 @@ export function LastWillEntry() {
 
 function SettingsForm({ handleClose = null, onLeave = null }) {
   const game = useContext(GameContext);
+  const skin = useSkinRedesign();
   const { settings, updateSettings } = game;
 
   const [formFields, updateFormFields] = useForm([
@@ -6860,7 +6862,29 @@ function SettingsForm({ handleClose = null, onLeave = null }) {
     game.players[game.self] &&
     game.players[game.self].userId === game.hostId;
 
-  const menuContent = (
+  const displayFields = formFields.filter((field) => field.type !== "range");
+  const audioFields = formFields.filter((field) => field.type === "range");
+  const menuContent = skin ? (
+    <Stack direction="column" spacing={1}>
+      <div className="skin-set-label">DISPLAY</div>
+      <Form compact fields={displayFields.slice(0, 1)} onChange={handleFieldChange} />
+      {canChangeSetup && (
+        <Button onClick={() => game.setChangeSetupDialogOpen(true)}>
+          Change Setup
+        </Button>
+      )}
+      <Form compact fields={displayFields.slice(1)} onChange={handleFieldChange} />
+      <Typography variant="caption" color="text.secondary">
+        Virtualization keeps long chats responsive by rendering only nearby messages.
+        To use browser Find (Ctrl/Cmd+F) or select the full history, turn off
+        Virtualize transcript and click Save. Loading the full history may be slower.
+      </Typography>
+      <div className="skin-set-label">AUDIO</div>
+      <Form compact fields={audioFields} onChange={handleFieldChange} />
+      <div className="skin-set-label">APPEARANCE</div>
+      <SkinAppearance />
+    </Stack>
+  ) : (
     <Stack direction="column" spacing={1}>
       <Form compact fields={formFields.slice(0, 1)} onChange={handleFieldChange} />
       {canChangeSetup && (
@@ -6965,7 +6989,6 @@ export function SettingsMenu() {
         </button>
         {expanded && (
           <div className="skin-settings-pop" role="dialog" aria-label="Settings">
-            <SkinAppearance />
             <SettingsForm handleClose={handleClose} />
           </div>
         )}

@@ -772,7 +772,7 @@ function StrategiesBase({
             });
           }}
         >
-          Strategies
+          NEED HELP?
         </button>
         {skinOpen && <div className="skin-strategies-pop">{sideMenu}</div>}
         {dialog}

@@ -1,4 +1,11 @@
 /* Opt-in redesign. Every rule is under .skin-redesign so the legacy UI is untouched. */
+@font-face {
+  font-family: "Lobby Grotesk";
+  src: url("../fonts/inter-500-latin.woff2") format("woff2");
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
 
 html.skin-redesign {
   --um-accent: #e23b3b;
@@ -86,10 +93,34 @@ html.skin-redesign .MuiDialog-paper,
 html.skin-redesign .skin-settings-pop,
 html.skin-redesign .skin-strategies-pop,
 html.skin-redesign .skin-profile-sheet {
-  background: var(--um-glass-solid) !important;
-  background-color: var(--um-glass-solid) !important;
+  background: rgba(22, 16, 20, 0.78) !important;
+  background-color: rgba(22, 16, 20, 0.78) !important;
   backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
   color: var(--um-ink);
+}
+
+html.skin-redesign.light-mode .MuiPopover-paper,
+html.skin-redesign.light-mode .MuiMenu-paper,
+html.skin-redesign.light-mode .MuiDialog-paper,
+html.skin-redesign.light-mode .skin-settings-pop,
+html.skin-redesign.light-mode .skin-strategies-pop,
+html.skin-redesign.light-mode .skin-profile-sheet {
+  background: rgba(255, 252, 250, 0.78) !important;
+  background-color: rgba(255, 252, 250, 0.78) !important;
+  color: #1c1917;
+}
+
+html.skin-redesign .skin-detail-pop {
+  background: rgba(28, 20, 24, 0.9) !important;
+  background-color: rgba(28, 20, 24, 0.9) !important;
+  color: #f6f1ea;
+}
+
+html.skin-redesign.light-mode .skin-detail-pop {
+  background: rgba(255, 252, 250, 0.9) !important;
+  background-color: rgba(255, 252, 250, 0.9) !important;
+  color: #1c1917;
 }
 
 html.skin-redesign .MuiMenu-paper,
@@ -156,11 +187,34 @@ html.skin-redesign .skin-strategies-btn {
   z-index: 6500;
   height: 44px;
   border-radius: 12px;
-  border: 1px solid var(--um-line);
-  background: var(--um-glass-solid);
-  color: var(--um-ink);
+  border: 1px solid transparent;
   cursor: pointer;
+}
+
+html.skin-redesign .skin-gear {
+  background: rgba(22, 16, 20, 0.78);
+  color: #f6f1ea;
   backdrop-filter: blur(16px);
+}
+
+html.skin-redesign.light-mode .skin-gear {
+  background: rgba(255, 252, 250, 0.86);
+  color: #1c1917;
+}
+
+html.skin-redesign .skin-leave.MuiButton-root,
+html.skin-redesign .skin-strategies-btn {
+  background: linear-gradient(180deg, color-mix(in srgb, color-mix(in srgb, var(--um-accent) 78%, #fff) 83%, transparent), color-mix(in srgb, color-mix(in srgb, var(--um-accent) 90%, #1a1a1a) 83%, transparent)) !important;
+  color: var(--um-accent-ink, #fff) !important;
+  box-shadow: none !important;
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  font-weight: 500;
+}
+
+html.skin-redesign .skin-leave.MuiButton-root:hover,
+html.skin-redesign .skin-strategies-btn:hover {
+  box-shadow: 0 0 16px color-mix(in srgb, var(--um-accent) 55%, transparent) !important;
 }
 
 html.skin-redesign .skin-gear {
@@ -216,16 +270,103 @@ html.skin-redesign .game-state-icon {
   }
 }
 
-html.skin-redesign .game-session .setup > .MuiStack-root {
-  flex-direction: column;
+html.skin-redesign .game,
+html.skin-redesign .game-session,
+html.skin-redesign .skin-settings-pop,
+html.skin-redesign .skin-strategies-pop {
+  font-family: "Lobby Grotesk", Inter, sans-serif !important;
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 1.55;
 }
 
+html.skin-redesign .game .user-name,
+html.skin-redesign .game .user-name-text,
+html.skin-redesign .game-session .user-name,
+html.skin-redesign .game-session .user-name-text,
+html.skin-redesign .skin-strategies-pop .user-name,
+html.skin-redesign .skin-strategies-pop .user-name-text,
+html.skin-redesign .skin-detail-pop .user-name,
+html.skin-redesign .skin-detail-pop .user-name-text {
+  font-weight: 500 !important;
+}
+
+html.skin-redesign .game-session .setup > .MuiStack-root {
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+html.skin-redesign .game-session .setup > .MuiStack-root > button,
 html.skin-redesign .game-session .setup .MuiDivider-vertical {
   display: none;
 }
 
 html.skin-redesign .game-session .setup .setup-name {
-  text-align: center;
+  text-align: left;
+  align-self: flex-start;
+  font-weight: 500;
+}
+
+@media (min-width: 1100px) {
+  html.skin-redesign .skin-topbar {
+    min-height: 112px;
+  }
+
+  html.skin-redesign .skin-states {
+    top: 8px;
+    transform: translateX(-50%);
+    padding: 8px;
+  }
+
+  html.skin-redesign .skin-topbar .setup {
+    position: absolute;
+    left: 50%;
+    top: 56px;
+    transform: translateX(-50%);
+    padding: 8px;
+    margin: 0;
+    background: transparent !important;
+    border: 0 !important;
+    box-shadow: none !important;
+  }
+}
+
+html.skin-redesign:not(.light-mode) .game-session .MuiIconButton-root,
+html.skin-redesign:not(.light-mode) .game .MuiIconButton-root,
+html.skin-redesign:not(.light-mode) .game .MuiSelect-select,
+html.skin-redesign:not(.light-mode) .game .MuiInputBase-root,
+html.skin-redesign:not(.light-mode) .game-session .MuiSelect-select,
+html.skin-redesign:not(.light-mode) .game-session .MuiInputBase-root,
+html.skin-redesign:not(.light-mode) .MuiMenu-paper,
+html.skin-redesign:not(.light-mode) .MuiMenu-paper .MuiMenuItem-root {
+  background-color: rgba(18, 14, 16, 0.82) !important;
+  color: #f6f1ea !important;
+}
+
+html.skin-redesign:not(.light-mode) .game .fas,
+html.skin-redesign:not(.light-mode) .game .far,
+html.skin-redesign:not(.light-mode) .game-session .fas,
+html.skin-redesign:not(.light-mode) .game-session .far,
+html.skin-redesign:not(.light-mode) .MuiMenu-paper .fas {
+  color: #f6f1ea;
+}
+
+html.skin-redesign.light-mode .game-session .MuiIconButton-root,
+html.skin-redesign.light-mode .game .MuiIconButton-root,
+html.skin-redesign.light-mode .game .MuiSelect-select,
+html.skin-redesign.light-mode .game .MuiInputBase-root,
+html.skin-redesign.light-mode .MuiMenu-paper,
+html.skin-redesign.light-mode .MuiMenu-paper .MuiMenuItem-root {
+  background-color: rgba(255, 252, 250, 0.9) !important;
+  color: #1c1917 !important;
+}
+
+html.skin-redesign .skin-set-label {
+  margin: 14px 0 8px;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
 }
 
 html.skin-redesign .game-session .MuiButtonGroup-root .MuiIconButton-root img {

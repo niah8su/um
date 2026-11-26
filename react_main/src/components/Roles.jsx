@@ -664,6 +664,7 @@ export function RoleCount({
           skin
             ? {
                 paper: {
+                  className: "skin-detail-pop",
                   onMouseEnter: holdPopover,
                   onMouseLeave: releasePopover,
                 },

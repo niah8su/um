@@ -232,27 +232,30 @@ async function main() {
         });
       }
     }
-    if (await threads.findOne({ id: thread.id })) continue;
-    const threadOid = new ObjectId();
-    await threads.insertOne({
-      _id: threadOid,
-      id: thread.id,
-      board: boardId,
-      author,
-      title: thread.title || "",
-      content: thread.content || "",
-      postDate: thread.postDate || Date.now(),
-      replyCount: thread.replyCount || 0,
-      deleted: false,
-      localSeed: MARK,
-    });
+    let stored = await threads.findOne({ id: thread.id });
+    if (!stored) {
+      const threadOid = new ObjectId();
+      stored = {
+        _id: threadOid,
+        id: thread.id,
+        board: boardId,
+        author,
+        title: thread.title || "",
+        content: thread.content || "",
+        postDate: thread.postDate || Date.now(),
+        replyCount: thread.replyCount || 0,
+        deleted: false,
+        localSeed: MARK,
+      };
+      await threads.insertOne(stored);
+    }
     for (const reply of (thread.replies || []).slice(0, 3)) {
       const replyAuthor = await ensureUser(reply.author);
       if (await replies.findOne({ id: reply.id })) continue;
       await replies.insertOne({
         id: reply.id,
         author: replyAuthor,
-        thread: threadOid,
+        thread: stored._id,
         content: reply.content || "",
         postDate: reply.postDate || Date.now(),
         deleted: false,
@@ -260,7 +263,53 @@ async function main() {
       });
     }
   }
-  console.log("forum threads copied", uniqueThreads.length);
+  // The lobby sidebar reads board.newestThreads and board.recentReplies through
+  // /api/forums/categories. Threads alone never show up there.
+  const seededThreads = await threads.find({ localSeed: MARK, deleted: { $ne: true } }).toArray();
+  const byBoard = new Map();
+  for (const row of seededThreads) {
+    if (!row.board) continue;
+    const key = String(row.board);
+    if (!byBoard.has(key)) byBoard.set(key, []);
+    byBoard.get(key).push(row);
+  }
+  const boardOids = [];
+  for (const list of byBoard.values()) {
+    list.sort((a, b) => (b.postDate || 0) - (a.postDate || 0));
+    const boardOid = list[0].board;
+    const replyDocs = await replies
+      .find({ thread: { $in: list.map((row) => row._id) }, deleted: { $ne: true } })
+      .sort({ postDate: -1 })
+      .limit(5)
+      .toArray();
+    await boards.updateOne(
+      { _id: boardOid },
+      {
+        $set: {
+          newestThreads: list.slice(0, 3).map((row) => row._id),
+          recentReplies: replyDocs.map((row) => row._id),
+        },
+      }
+    );
+    boardOids.push(boardOid);
+  }
+  if (boardOids.length) {
+    await db.collection("forumcategories").updateOne(
+      { id: "local-seed-forums" },
+      {
+        $set: {
+          id: "local-seed-forums",
+          name: "Site",
+          rank: 0,
+          position: 1,
+          boards: boardOids,
+          localSeed: MARK,
+        },
+      },
+      { upsert: true }
+    );
+  }
+  console.log("forum threads copied", uniqueThreads.length, "boards linked", boardOids.length);
   console.log("Polls and stamp trades were not copied. The public poll list returned an error and stamp trades require a login. This script does not log in.");
 
   await db.collection("polls").deleteMany({ localSeed: MARK });

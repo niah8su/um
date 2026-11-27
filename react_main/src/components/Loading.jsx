@@ -4,7 +4,6 @@ import { Box } from "@mui/material";
 import { useIsPhoneDevice } from "../hooks/useIsPhoneDevice";
 import { useTheme } from "@mui/material/styles";
 import { useSkinRedesign } from "./useSkinRedesign";
-import SiteLogo from "./SiteLogo";
 
 export const Loading = ({ small, extraSmall, fading }) => {
   const theme = useTheme();
@@ -26,8 +25,7 @@ export const Loading = ({ small, extraSmall, fading }) => {
     return (
       <Box className={fading ? "skin-loader is-leaving" : "skin-loader"} sx={{ height, bgcolor: "transparent" }}>
         <div className="skin-loader-card">
-          <SiteLogo />
-          <i className="skin-loader-beam" aria-hidden="true" />
+          <i className="skin-loader-spin" aria-hidden="true" />
         </div>
       </Box>
     );

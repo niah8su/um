@@ -787,6 +787,7 @@ export const Auth = ({ defaultTab = 0, open, onClose, asDialog = false }) => {
       />
       </div>
       <Typography
+        className={skin ? "skin-auth-terms" : undefined}
         color="text.secondary"
         sx={{
           fontSize: "11px",

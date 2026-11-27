@@ -298,6 +298,7 @@ export function RoleCount({
   }
 
   const roleRef = useRef();
+  const rolePopToken = useRef({});
   const siteInfo = useContext(SiteInfoContext);
   const [roleData, setRoleData] = useState(null);
   const isPhoneDevice = useIsPhoneDevice();
@@ -375,10 +376,32 @@ export function RoleCount({
       })
     : {};
 
+  useEffect(() => {
+    if (!redesignOn) return undefined;
+    const onPop = (event) => {
+      const detail = event.detail || {};
+      if (detail.kind !== "role" || detail.owner === rolePopToken.current) return;
+      closePopover();
+    };
+    window.addEventListener("um-skin-pop", onPop);
+    return () => window.removeEventListener("um-skin-pop", onPop);
+  }, [redesignOn, closePopover]);
+
   const popoverProps = {
     ...keyboardProps,
     onClick: handleRoleCountClick,
-    onMouseEnter: popoverDisabled ? undefined : handleMouseEnter,
+    onMouseEnter: popoverDisabled
+      ? undefined
+      : (event) => {
+          if (redesignOn) {
+            window.dispatchEvent(
+              new CustomEvent("um-skin-pop", {
+                detail: { kind: "role", owner: rolePopToken.current },
+              })
+            );
+          }
+          handleMouseEnter(event);
+        },
     onMouseLeave: popoverDisabled ? undefined : handleMouseLeave,
     style: {
       cursor: isInteractive ? "pointer" : "default",
@@ -657,8 +680,8 @@ export function RoleCount({
       <Popover
         open={popoverOpen}
         sx={{
-          pointerEvents: openByClick || redesignOn ? "auto" : "none",
-          zIndex: redesignOn ? 7900 : undefined,
+          pointerEvents: "none",
+          zIndex: redesignOn ? 8600 : undefined,
         }}
         slotProps={
           redesignOn
@@ -667,6 +690,7 @@ export function RoleCount({
                   className: "skin-detail-pop skin-role-pop",
                   onMouseEnter: holdPopover,
                   onMouseLeave: releasePopover,
+                  sx: { pointerEvents: "auto" },
                 },
               }
             : undefined

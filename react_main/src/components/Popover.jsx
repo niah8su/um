@@ -74,6 +74,8 @@ export const InfoPopover = function ({
   openByClick,
   anchorEl,
   closePopover,
+  holdPopover,
+  releasePopover,
   page,
   title,
   content,
@@ -92,6 +94,24 @@ export const InfoPopover = function ({
   const isPhone = useIsPhoneDevice();
   const skin = useSkinRedesign();
   const markRole = skin && title === "Mark Role as";
+  const setupPop = skin && typeof page === "string" && page.indexOf("/learn/setup/") === 0;
+
+  useEffect(() => {
+    if (!setupPop || !popoverOpen) return undefined;
+    const inside = (node) =>
+      node &&
+      node.closest &&
+      (node.closest(".skin-setup-pop") || node.closest(".skin-role-pop"));
+    function onOut(event) {
+      if (inside(event.relatedTarget)) {
+        if (holdPopover) holdPopover();
+        return;
+      }
+      if (releasePopover) releasePopover();
+    }
+    document.addEventListener("mouseout", onOut);
+    return () => document.removeEventListener("mouseout", onOut);
+  }, [setupPop, popoverOpen, holdPopover, releasePopover]);
 
   // On a phone the details open as a sheet instead of a card anchored to the
   // icon: a card pinned to a 20px glyph is a poor target for a thumb. Wider
@@ -128,7 +148,7 @@ export const InfoPopover = function ({
   return (
       <Popover
         open={showPopover !== false && popoverOpen}
-        sx={{ pointerEvents: openByClick ? "auto" : "none" }}
+        sx={{ pointerEvents: "none", zIndex: setupPop ? 8000 : undefined }}
         anchorEl={anchorEl}
         anchorOrigin={{
           vertical: "center",
@@ -143,10 +163,16 @@ export const InfoPopover = function ({
         disableRestoreFocus
         slotProps={{
           paper: {
-            className: markRole ? "skin-detail-pop skin-role-mark" : undefined,
+            className: setupPop
+              ? "skin-detail-pop skin-setup-pop"
+              : markRole
+              ? "skin-detail-pop skin-role-mark"
+              : undefined,
+            onMouseEnter: setupPop ? holdPopover : undefined,
             sx: {
               width: markRole ? "auto" : "320px",
               maxWidth: markRole ? "420px" : undefined,
+              pointerEvents: setupPop || openByClick ? "auto" : "none",
             },
           },
         }}
@@ -174,6 +200,8 @@ export function usePopover({ path, type, postprocessData, onData }) {
     handleMouseEnter,
     handleMouseLeave,
     closePopover,
+    holdPopover,
+    releasePopover,
   } = usePopoverOpen();
 
   const { reserveSheet } = useSheet();
@@ -271,6 +299,8 @@ export function usePopover({ path, type, postprocessData, onData }) {
     handleMouseEnter: isPhone ? undefined : handleMouseEnter,
     handleMouseLeave: isPhone ? undefined : handleMouseLeave,
     closePopover: closePopoverAndSheet,
+    holdPopover,
+    releasePopover,
     content,
     sheetRequestRef,
   };

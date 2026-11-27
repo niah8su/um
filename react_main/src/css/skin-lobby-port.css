@@ -1886,3 +1886,112 @@ html.skin-redesign .skin-port .help-btn .help-mark {
   line-height: 1;
   display: block;
 }
+
+/* Lobby rows keep one set of column widths on every tab. */
+html.skin-redesign .skin-port .lobby-split {
+  grid-template-columns: minmax(0, 1fr) 340px !important;
+}
+html.skin-redesign .skin-port .game-list {
+  min-height: 420px;
+}
+html.skin-redesign .skin-port .game {
+  height: 96px !important;
+  min-height: 96px !important;
+  max-height: 96px !important;
+}
+html.skin-redesign .skin-port .game-main {
+  display: grid !important;
+  grid-template-columns: 168px minmax(0, 1fr) 156px !important;
+  align-items: center !important;
+  height: 96px !important;
+  min-height: 96px !important;
+  max-height: 96px !important;
+}
+html.skin-redesign .skin-port .setup-row {
+  grid-template-columns: 30px minmax(0, 1fr) 168px !important;
+}
+html.skin-redesign .skin-port .roles {
+  width: 168px !important;
+  min-width: 168px !important;
+  max-width: 168px !important;
+  height: 36px !important;
+  max-height: 36px !important;
+  overflow: hidden !important;
+  flex-wrap: nowrap !important;
+}
+html.skin-redesign .skin-port .bar-actions {
+  width: 156px !important;
+  min-width: 156px !important;
+  max-width: 156px !important;
+  justify-content: flex-end !important;
+}
+html.skin-redesign .skin-port .bar-actions .MuiButton-root:not(.skin-eye) {
+  width: 112px !important;
+  min-width: 112px !important;
+  max-width: 112px !important;
+}
+html.skin-redesign .skin-port .bar-actions .skin-eye,
+html.skin-redesign .skin-port .bar-actions .sq-btn {
+  width: 34px !important;
+  min-width: 34px !important;
+  flex: none !important;
+}
+
+/* Chat title row matches the other module headers. */
+html.skin-redesign .skin-port .skin-chat-head {
+  width: 100%;
+  box-sizing: border-box;
+  padding: 2px 0 8px !important;
+  margin: 0 0 8px !important;
+  border-bottom: 1px solid rgba(255, 255, 255, .1) !important;
+}
+html.skin-redesign.light-mode .skin-port .skin-chat-head {
+  border-bottom-color: rgba(0, 0, 0, .1) !important;
+}
+html.skin-redesign .skin-port .skin-chat-head .skin-mod-title {
+  border-bottom: 0 !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  flex: 1 1 auto;
+  min-width: 0;
+  font-size: 13px !important;
+  font-weight: 700 !important;
+  letter-spacing: .08em !important;
+  text-transform: uppercase !important;
+  color: var(--um-accent) !important;
+}
+html.skin-redesign .skin-port .skin-chat-head .MuiInputBase-root {
+  height: 28px;
+  min-height: 28px;
+}
+
+/* Comment reaction stays in place and only shows on hover or a tap. */
+html.skin-redesign .comments-page .emote-reactions-picker {
+  visibility: hidden;
+  opacity: 0;
+  pointer-events: none;
+}
+html.skin-redesign .comments-page .MuiPaper-root:hover .emote-reactions-picker,
+html.skin-redesign .comments-page .MuiPaper-root.is-armed .emote-reactions-picker,
+html.skin-redesign .comments-page .emote-reactions-picker:focus-within {
+  visibility: visible;
+  opacity: 1;
+  pointer-events: auto;
+}
+html.skin-redesign .comments-page .name-with-avatar > .MuiStack-root {
+  border-left: 0 !important;
+  padding-left: 0 !important;
+  margin-left: 0 !important;
+}
+html.skin-redesign .comments-page .name-with-avatar > .MuiStack-root > .MuiStack-root {
+  border-left: 1px solid rgba(255, 255, 255, .08);
+  margin-left: 12px;
+  padding-left: 8px;
+  padding-top: 8px;
+}
+html.skin-redesign.light-mode .comments-page .name-with-avatar > .MuiStack-root > .MuiStack-root {
+  border-left-color: rgba(0, 0, 0, .08);
+}
+html.skin-redesign .comments-page .MuiPaper-root {
+  padding-top: 16px !important;
+}

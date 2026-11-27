@@ -10,6 +10,7 @@ import { VoteWidget } from "components/VoteWidget";
 import { EmoteReactions } from "components/EmoteReactions";
 import "css/emote-reactions.css";
 import { NameWithAvatar } from "../User/UserWidgets";
+import { useSkinRedesign } from "components/useSkinRedesign";
 
 import { Box, Divider, Grid, IconButton, Paper, Stack } from "@mui/material";
 import { useTheme } from "@mui/material/styles";
@@ -25,6 +26,7 @@ export const Comment = (props) => {
 
   const user = useContext(UserContext);
   const errorAlert = useErrorAlert();
+  const skin = useSkinRedesign();
 
   var content = comment.content;
 
@@ -53,7 +55,14 @@ export const Comment = (props) => {
   return (
     <Grid container>
       <Grid item xs={12} md={props?.fullWidth ? 12 : 6}>
-        <Paper sx={{ p: 1 }} className={`${comment.deleted ? "deleted" : ""}`}>
+        <Paper
+          sx={{ p: 1 }}
+          className={`${comment.deleted ? "deleted" : ""}`}
+          onClick={skin ? (event) => {
+            if (window.matchMedia("(hover: hover) and (pointer: fine)").matches) return;
+            event.currentTarget.classList.toggle("is-armed");
+          } : undefined}
+        >
           <Stack direction="row" spacing={1} alignItems="flex-start">
             <VoteWidget
               item={comment}

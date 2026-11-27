@@ -124,6 +124,7 @@ export const Welcome = () => {
         }}
       >
         <Typography
+          className={skin ? "skin-welcome-tag" : undefined}
           variant={isPhoneDevice ? "body1" : "h4"}
           align="center"
           color="text.secondary"
@@ -133,7 +134,7 @@ export const Welcome = () => {
             py: 2,
           }}
         >
-          The classic social deduction game, <Box component="span" sx={{ color: "primary.main" }}>online.</Box>
+          The classic social deduction game, <Box component="span" className={skin ? "skin-tag-em" : undefined} sx={{ color: "primary.main" }}>online.</Box>
         </Typography>
         <Grid2 container rowSpacing={1} columnSpacing={1}>
           <Grid2 size={{ xs: 12, md: 4 }}>

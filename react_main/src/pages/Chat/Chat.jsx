@@ -713,6 +713,7 @@ export default function Chat({
       }}
     >
       <Stack
+        className={skin ? "skin-chat-head" : undefined}
         direction="row"
         alignItems="center"
         spacing={1.5}
@@ -734,8 +735,8 @@ export default function Chat({
               : null
           }
         ></Badge>
-        <Typography variant="subtitle2" className={skin ? "skin-chat-title" : undefined} sx={{ fontWeight: 600 }}>
-          {skin ? <i className="fas fa-hashtag" aria-hidden="true" /> : null}
+        <Typography variant="subtitle2" className={skin ? "skin-mod-title skin-chat-title" : undefined} sx={{ fontWeight: 600 }}>
+          {skin ? <svg className="skin-mod-ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 6h14v9H8l-3 3V6z" /></svg> : null}
           Chat
         </Typography>
         </>

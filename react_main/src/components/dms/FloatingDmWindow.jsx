@@ -14,6 +14,7 @@ import {
 } from "../../utils/dmWindow";
 import { useIsPhoneDevice } from "../../hooks/useIsPhoneDevice";
 import { UserContext } from "../../Contexts";
+import { useSkinRedesign } from "../useSkinRedesign";
 
 // Floating DM window. Same drag-by-header / collapse pattern as the tutorial
 // box (components/TutorialOverlay.jsx); the body is the homepage chatbox
@@ -23,6 +24,7 @@ import { UserContext } from "../../Contexts";
 export default function FloatingDmWindow() {
   const dm = useDmWindow();
   const user = useContext(UserContext);
+  const skin = useSkinRedesign();
   const isPhone = useIsPhoneDevice();
   const boxRef = useRef(null);
   const drag = useRef(null);
@@ -156,6 +158,7 @@ export default function FloatingDmWindow() {
     <Paper
       ref={boxRef}
       elevation={10}
+      className={skin ? "skin-dm" : undefined}
       data-testid="dm-window"
       data-collapsed={dm.collapsed ? "true" : "false"}
       sx={{

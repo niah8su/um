@@ -87,7 +87,7 @@ export default function NavDropdown({
 
   const skinIcon = skin && !customTrigger && !isMobileMenu ? (
     <svg className="skin-nav-ico" viewBox="0 0 24 24" aria-hidden="true">
-      {label === "Play" && <path fill="currentColor" stroke="none" d="M8 5.5v13l11-6.5z" />}
+      {label === "Play" && <path d="M8 5.5v13l11-6.5z" />}
       {label === "Community" && (
         <path d="M8 11a3 3 0 1 0-3-3 3 3 0 0 0 3 3zm8 1a2.5 2.5 0 1 0-2.5-2.5A2.5 2.5 0 0 0 16 12zM3 19c.4-2.6 2.6-4 5-4s4.6 1.4 5 4M14 15.1c.6-.1 1.3-.1 2 0 2 .2 3.6 1.4 4 3.4" />
       )}

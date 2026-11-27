@@ -7,8 +7,34 @@ import { Time } from "../../../components/Basic";
 import { useErrorAlert } from "../../../components/Alerts";
 import { ViewsAndReplies } from "./Forums";
 import { ListSkeleton } from "../../../components/Skeletons";
+import { useSkinRedesign } from "components/useSkinRedesign";
+
+function SkinLatest({ thread }) {
+  if (!thread) return <span className="skin-board-empty">No threads yet</span>;
+  return (
+    <>
+      <Link className="skin-board-title" to={`/community/forums/thread/${thread.id}`}>
+        {thread.title}
+      </Link>
+      <div className="skin-board-by">
+        <NameWithAvatar
+          small
+          id={thread.author.id}
+          name={thread.author.name}
+          avatar={thread.author.avatar}
+          vanityUrl={thread.author.vanityUrl}
+        />
+        <span className="skin-board-when">
+          <Time millisec={Date.now() - thread.postDate} />
+          {` ago`}
+        </span>
+      </div>
+    </>
+  );
+}
 
 export default function Categories(props) {
+  const skin = useSkinRedesign();
   const [categoryInfo, setCategoryInfo] = useState([]);
   const [loaded, setLoaded] = useState(false);
   const errorAlert = useErrorAlert();
@@ -87,6 +113,50 @@ export default function Categories(props) {
         </div>
       ));
 
+      if (skin) {
+        const latest = (board.newestThreads || [])[0];
+        const replies = board.recentReplies || [];
+        return (
+          <div className="skin-board" key={board.id}>
+            <span className={`skin-board-ico fa-${board.icon || "comments"}`} aria-hidden="true" />
+            <Link className="skin-board-info" to={`/community/forums/board/${board.id}`}>
+              <div className="skin-board-name">{board.name}</div>
+              <div className="skin-board-desc">{board.description}</div>
+            </Link>
+            {latest && (
+              <div className="skin-board-counts">
+                <ViewsAndReplies
+                  viewCount={latest.viewCount || 0}
+                  replyCount={latest.replyCount || 0}
+                />
+              </div>
+            )}
+            <div className="skin-board-latest">
+              <SkinLatest thread={latest} />
+              {replies.length > 0 && (
+                <div className="skin-board-more" role="tooltip">
+                  <div className="skin-board-more-label">Recent Replies</div>
+                  {replies.map((reply) => (
+                    <Link
+                      key={reply.id}
+                      to={`/community/forums/thread/${reply.thread.id}?reply=${reply.id}`}
+                    >
+                      <span>{reply.thread.title}</span>
+                      <span>
+                        {reply.author.name}
+                        {" · "}
+                        <Time millisec={Date.now() - reply.postDate} />
+                        {` ago`}
+                      </span>
+                    </Link>
+                  ))}
+                </div>
+              )}
+            </div>
+          </div>
+        );
+      }
+
       return (
         <div className="board" key={board.id}>
           <i className={`fas fa-fw fa-${board.icon || "comments"} board-icon`} />
@@ -128,9 +198,9 @@ export default function Categories(props) {
     });
 
     return (
-      <div className="span-panel forum-category" key={category.id}>
-        <div className="title">{category.name}</div>
-        <div className="boards">{boards}</div>
+      <div className={skin ? "skin-forum-cat" : "span-panel forum-category"} key={category.id}>
+        <div className={skin ? "skin-forum-kicker" : "title"}>{category.name}</div>
+        <div className={skin ? "skin-forum-panel" : "boards"}>{boards}</div>
       </div>
     );
   });

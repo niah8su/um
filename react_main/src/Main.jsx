@@ -390,6 +390,81 @@ export function Header({ setShowAnnouncementTemporarily }) {
   const user = useContext(UserContext);
   const isPhoneDevice = useIsPhoneDevice();
   const location = useLocation();
+  const skin = useSkinRedesign();
+  useEffect(() => {
+    if (!skin) return undefined;
+    const root = document.body;
+    let barShown = true;
+    let lastY = window.scrollY;
+    let scrollAcc = 0;
+    const setBar = (show) => {
+      if (show === barShown) return;
+      barShown = show;
+      root.classList.toggle("nav-away", !show);
+    };
+    const onMove = (event) => {
+      if (event.clientY < 20) setBar(true);
+    };
+    const onScroll = () => {
+      const y = window.scrollY;
+      const dy = y - lastY;
+      lastY = y;
+      if (y < 36) {
+        scrollAcc = 0;
+        setBar(true);
+        return;
+      }
+      scrollAcc += dy;
+      if (scrollAcc > 28) {
+        scrollAcc = 0;
+        setBar(false);
+      } else if (scrollAcc < -18) {
+        scrollAcc = 0;
+        setBar(true);
+      }
+    };
+    const header = document.querySelector(".skin-appbar");
+    const onEnter = () => setBar(true);
+    document.addEventListener("mousemove", onMove);
+    window.addEventListener("scroll", onScroll, { passive: true });
+    if (header) header.addEventListener("mouseenter", onEnter);
+    const tip = document.createElement("div");
+    tip.id = "skin-float-tip";
+    tip.hidden = true;
+    document.body.appendChild(tip);
+    const placeTip = (el) => {
+      const text = el.getAttribute("title") || el.getAttribute("data-tip");
+      if (!text) return;
+      tip.textContent = text;
+      tip.hidden = false;
+      const box = el.getBoundingClientRect();
+      const left = box.left + box.width / 2 - tip.offsetWidth / 2;
+      tip.style.left = Math.max(8, Math.round(left)) + "px";
+      tip.style.top = Math.max(8, Math.round(box.top - tip.offsetHeight - 8)) + "px";
+    };
+    const onOver = (event) => {
+      const el = event.target.closest && event.target.closest("[title], [data-tip]");
+      if (!el || !document.documentElement.classList.contains("skin-redesign")) return;
+      placeTip(el);
+    };
+    const onOut = (event) => {
+      const el = event.target.closest && event.target.closest("[title], [data-tip]");
+      if (!el) return;
+      if (event.relatedTarget && el.contains(event.relatedTarget)) return;
+      tip.hidden = true;
+    };
+    document.addEventListener("mouseover", onOver);
+    document.addEventListener("mouseout", onOut);
+    return () => {
+      document.removeEventListener("mousemove", onMove);
+      window.removeEventListener("scroll", onScroll);
+      document.removeEventListener("mouseover", onOver);
+      document.removeEventListener("mouseout", onOut);
+      if (header) header.removeEventListener("mouseenter", onEnter);
+      root.classList.remove("nav-away");
+      tip.remove();
+    };
+  }, [skin]);
   const isOnWelcomePage = location.pathname === "/welcome" || location.pathname === "/";
 
   const openAnnouncements = () => {

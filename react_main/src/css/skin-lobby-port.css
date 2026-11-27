@@ -113,13 +113,12 @@ html.skin-redesign .skin-port .game {
   margin-bottom: 8px;
 }
 html.skin-redesign .skin-port .stub {
-  width: 8px !important;
-  min-width: 8px !important;
+  width: 6px !important;
+  min-width: 6px !important;
   height: auto !important;
   align-self: stretch !important;
-  border-radius: 8px 0 0 8px !important;
-  flex: 0 0 8px !important;
-  overflow: hidden;
+  border-radius: 6px 0 0 6px !important;
+  flex: 0 0 6px !important;
 }
 html.skin-redesign .skin-port .tone-ranked .stub { background: #FF82A9 !important; }
 html.skin-redesign .skin-port .tone-competitive .stub { background: #edb334 !important; }
@@ -546,7 +545,7 @@ html.skin-redesign .skin-port .lobby-tabs {
 }
 html.skin-redesign .skin-port .game { position: relative; overflow: visible; }
 html.skin-redesign .skin-port .game-main {
-  border-radius: 0 8px 8px 0 !important;
+  border-radius: 0 6px 6px 0 !important;
   border-left: 0 !important;
   overflow: hidden;
 }
@@ -779,7 +778,7 @@ html.skin-redesign .skin-port .game[style] .game-main {
   box-shadow: none !important;
 }
 html.skin-redesign .skin-port .game[style] .stub {
-  border-radius: 8px 0 0 8px !important;
+  border-radius: 6px 0 0 6px !important;
 }
 html.skin-redesign .skin-port .tone-ranked:hover .game-main,
 html.skin-redesign .skin-port .tone-main:hover .game-main {
@@ -1291,7 +1290,17 @@ html.skin-redesign .skin-forum-kicker {
 html.skin-redesign.light-mode .skin-forum-kicker {
   color: #1c1917 !important;
 }
-html.skin-redesign .skin-forum-title { color: var(--um-accent) !important; font-weight: 600; }
+html.skin-redesign:not(.light-mode) .skin-forum-title { color: var(--um-link, #ff8f8f) !important; font-weight: 600; }
+html.skin-redesign.light-mode .skin-forum-title { color: var(--um-accent) !important; font-weight: 600; }
+html.skin-redesign .lobby-side > .panel:empty {
+  display: none !important;
+  padding: 0 !important;
+  margin: 0 !important;
+  border: 0 !important;
+  background: none !important;
+  box-shadow: none !important;
+  min-height: 0 !important;
+}
 html.skin-redesign .skin-module .MuiTypography-caption {
   color: #8b949e !important;
   font-size: 11px !important;

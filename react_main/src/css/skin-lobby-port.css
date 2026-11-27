@@ -106,16 +106,20 @@ html.skin-redesign .skin-port .games-word {
 }
 html.skin-redesign .skin-port .games-end { display: flex; align-items: center; gap: 8px; }
 html.skin-redesign .skin-port .game {
-  display: flex;
-  align-items: stretch;
+  display: flex !important;
+  flex-direction: row !important;
+  flex-flow: row nowrap !important;
+  align-items: stretch !important;
   margin-bottom: 8px;
 }
 html.skin-redesign .skin-port .stub {
   width: 8px !important;
   min-width: 8px !important;
-  border-radius: 6px 0 0 6px;
-  flex: none;
-  align-self: stretch;
+  height: auto !important;
+  align-self: stretch !important;
+  border-radius: 8px 0 0 8px !important;
+  flex: 0 0 8px !important;
+  overflow: hidden;
 }
 html.skin-redesign .skin-port .tone-ranked .stub { background: #FF82A9 !important; }
 html.skin-redesign .skin-port .tone-competitive .stub { background: #edb334 !important; }
@@ -542,8 +546,9 @@ html.skin-redesign .skin-port .lobby-tabs {
 }
 html.skin-redesign .skin-port .game { position: relative; overflow: visible; }
 html.skin-redesign .skin-port .game-main {
-  border-radius: 6px !important;
-  overflow: visible;
+  border-radius: 0 8px 8px 0 !important;
+  border-left: 0 !important;
+  overflow: hidden;
 }
 html.skin-redesign .skin-port .tone-ranked .game-main,
 html.skin-redesign .skin-port .tone-sandbox .game-main,
@@ -770,7 +775,11 @@ html.skin-redesign .skin-port .game[style] .stub {
 html.skin-redesign .skin-port .game[style] .game-main {
   background: var(--row-bg) !important;
   border: 1px solid var(--panel-line) !important;
+  border-left: 0 !important;
   box-shadow: none !important;
+}
+html.skin-redesign .skin-port .game[style] .stub {
+  border-radius: 8px 0 0 8px !important;
 }
 html.skin-redesign .skin-port .tone-ranked:hover .game-main,
 html.skin-redesign .skin-port .tone-main:hover .game-main {
@@ -1275,11 +1284,18 @@ html.skin-redesign .skin-port .coin { width: 20px; height: 20px; margin-left: 4p
 html.skin-redesign .skin-forum-kicker {
   text-transform: uppercase !important;
   letter-spacing: 0.08em !important;
-  font-size: 11px !important;
+  font-size: 12px !important;
   font-weight: 700 !important;
-  color: #8b949e !important;
+  color: #f6f1ea !important;
+}
+html.skin-redesign.light-mode .skin-forum-kicker {
+  color: #1c1917 !important;
 }
 html.skin-redesign .skin-forum-title { color: var(--um-accent) !important; font-weight: 600; }
+html.skin-redesign .skin-module .MuiTypography-caption {
+  color: #8b949e !important;
+  font-size: 11px !important;
+}
 html.skin-redesign .skin-letter-ava {
   width: 24px;
   height: 24px;

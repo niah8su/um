@@ -1875,8 +1875,16 @@ html.skin-redesign .skin-nav-btn:hover {
 }
 html.skin-redesign.light-mode .skin-nav-btn[aria-expanded="true"],
 html.skin-redesign.light-mode .skin-nav-btn:hover {
-  color: var(--um-accent) !important;
+  color: #fff !important;
   background: color-mix(in srgb, var(--um-accent) 16%, #fff) !important;
+}
+html.skin-redesign .MuiAppBar-root .skin-nav-btn:hover .skin-nav-label.MuiTypography-h3,
+html.skin-redesign .MuiAppBar-root .skin-nav-btn[aria-expanded="true"] .skin-nav-label.MuiTypography-h3,
+html.skin-redesign.light-mode .MuiAppBar-root .skin-nav-btn:hover .skin-nav-label.MuiTypography-h3,
+html.skin-redesign.light-mode .MuiAppBar-root .skin-nav-btn[aria-expanded="true"] .skin-nav-label.MuiTypography-h3,
+html.skin-redesign .MuiAppBar-root .skin-nav-btn.is-active:hover .skin-nav-label.MuiTypography-h3,
+html.skin-redesign.light-mode .MuiAppBar-root .skin-nav-btn.is-active:hover .skin-nav-label.MuiTypography-h3 {
+  color: #fff !important;
 }
 html.skin-redesign .MuiMenu-paper {
   padding: 6px !important;
@@ -2993,4 +3001,68 @@ html.skin-redesign .page-nav .MuiIconButton-root.is-current:hover {
 }
 html.skin-redesign .page-nav .MuiIconButton-root.is-current .MuiTypography-root {
   color: var(--um-accent-ink, #fff) !important;
+}
+
+/* Forum Activity matches the lobby preview: accent header, light section labels. */
+html.skin-redesign .play .skin-mod-title.MuiTypography-h3,
+html.skin-redesign.light-mode .play .skin-mod-title.MuiTypography-h3,
+html.skin-redesign .skin-port .skin-mod-title {
+  color: var(--um-accent) !important;
+  border-bottom-color: var(--um-accent) !important;
+}
+html.skin-redesign .skin-forum-kicker {
+  color: #f6f1ea !important;
+  font-size: 12px !important;
+  font-weight: 700 !important;
+  letter-spacing: 0.08em !important;
+  text-transform: uppercase !important;
+}
+html.skin-redesign.light-mode .skin-forum-kicker {
+  color: #1c1917 !important;
+}
+html.skin-redesign .skin-module .MuiTypography-caption {
+  color: #8b949e !important;
+  font-size: 11px !important;
+  font-weight: 400 !important;
+}
+html.skin-redesign .skin-forum-title {
+  color: var(--um-accent) !important;
+  font-weight: 600 !important;
+}
+
+/* One glass surface per module. A paper or card inside that surface does not grow a second border. */
+html.skin-redesign .panel > .MuiPaper-root:not(.MuiPopover-paper):not(.MuiMenu-paper):not(.MuiDialog-paper):not(.MuiAppBar-root),
+html.skin-redesign .panel > .MuiCard-root,
+html.skin-redesign .box-panel .MuiPaper-root:not(.MuiPopover-paper):not(.MuiMenu-paper):not(.MuiDialog-paper):not(.MuiAppBar-root),
+html.skin-redesign .box-panel .MuiCard-root,
+html.skin-redesign .box-panel .content,
+html.skin-redesign .game .left-panel .MuiPaper-root:not(.MuiPopover-paper):not(.MuiMenu-paper):not(.MuiDialog-paper):not(.MuiAppBar-root),
+html.skin-redesign .game .center-panel .MuiPaper-root:not(.MuiPopover-paper):not(.MuiMenu-paper):not(.MuiDialog-paper):not(.MuiAppBar-root),
+html.skin-redesign .game .right-panel .MuiPaper-root:not(.MuiPopover-paper):not(.MuiMenu-paper):not(.MuiDialog-paper):not(.MuiAppBar-root),
+html.skin-redesign .game .left-panel .MuiAccordion-root,
+html.skin-redesign .game .right-panel .MuiAccordion-root,
+html.skin-redesign .MuiPaper-root:not(.MuiDialog-paper):not(.MuiPopover-paper):not(.MuiMenu-paper) .MuiPaper-root:not(.MuiDialog-paper):not(.MuiPopover-paper):not(.MuiMenu-paper),
+html.skin-redesign .MuiPaper-root:not(.MuiDialog-paper):not(.MuiPopover-paper):not(.MuiMenu-paper) .MuiCard-root,
+html.skin-redesign .play .MuiPaper-root .MuiListItem-root,
+html.skin-redesign.light-mode .panel > .MuiPaper-root:not(.MuiPopover-paper):not(.MuiMenu-paper):not(.MuiDialog-paper):not(.MuiAppBar-root),
+html.skin-redesign.light-mode .panel > .MuiCard-root,
+html.skin-redesign.light-mode .box-panel .MuiPaper-root:not(.MuiPopover-paper):not(.MuiMenu-paper):not(.MuiDialog-paper):not(.MuiAppBar-root),
+html.skin-redesign.light-mode .box-panel .MuiCard-root,
+html.skin-redesign.light-mode .box-panel .content,
+html.skin-redesign.light-mode .game .left-panel .MuiPaper-root:not(.MuiPopover-paper):not(.MuiMenu-paper):not(.MuiDialog-paper):not(.MuiAppBar-root),
+html.skin-redesign.light-mode .game .center-panel .MuiPaper-root:not(.MuiPopover-paper):not(.MuiMenu-paper):not(.MuiDialog-paper):not(.MuiAppBar-root),
+html.skin-redesign.light-mode .game .right-panel .MuiPaper-root:not(.MuiPopover-paper):not(.MuiMenu-paper):not(.MuiDialog-paper):not(.MuiAppBar-root),
+html.skin-redesign.light-mode .MuiPaper-root:not(.MuiDialog-paper):not(.MuiPopover-paper):not(.MuiMenu-paper) .MuiPaper-root:not(.MuiDialog-paper):not(.MuiPopover-paper):not(.MuiMenu-paper),
+html.skin-redesign.light-mode .MuiPaper-root:not(.MuiDialog-paper):not(.MuiPopover-paper):not(.MuiMenu-paper) .MuiCard-root,
+html.skin-redesign.light-mode .play .MuiPaper-root .MuiListItem-root,
+html.skin-redesign .fame-competitive .MuiPaper-root,
+html.skin-redesign.light-mode .fame-competitive .MuiPaper-root {
+  background: transparent !important;
+  background-color: transparent !important;
+  background-image: none !important;
+  border: 0 !important;
+  box-shadow: none !important;
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+  border-radius: 0 !important;
 }

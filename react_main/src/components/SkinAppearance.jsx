@@ -33,6 +33,7 @@ export function applySkinColors(mode) {
   const accent = saved[light ? "accentLight" : "accent"] || saved.accent;
   const g1 = saved[light ? "g1Light" : "g1"];
   const g2 = saved[light ? "g2Light" : "g2"];
+  const tint = saved[light ? "tintLight" : "tint"] || saved.tint;
   if (accent) {
     root.style.setProperty("--um-accent", accent);
     root.style.setProperty(
@@ -47,34 +48,22 @@ export function applySkinColors(mode) {
   else root.style.removeProperty("--um-grad-1");
   if (g2) root.style.setProperty("--um-grad-2", g2);
   else root.style.removeProperty("--um-grad-2");
+  if (tint) root.style.setProperty("--um-tint", tint);
+  else root.style.removeProperty("--um-tint");
+  const amt = saved.tintAmt;
+  if (amt != null && amt !== "") root.style.setProperty("--um-tint-amt", `${amt}%`);
+  else root.style.removeProperty("--um-tint-amt");
+  root.classList.toggle("bg-anim", saved.animate === true);
 }
 
-export default function SkinAppearance() {
-  const skin = useSkinRedesign();
+export function useSkinScheme() {
   const user = useContext(UserContext);
   const { mode, systemMode, setMode } = useColorScheme();
   const resolved = mode === "system" ? systemMode : mode;
   const light = resolved === "light";
-  const [colors, setColors] = useState(loadColors);
-
-  useEffect(() => {
-    if (skin) applySkinColors(resolved || "dark");
-  }, [skin, resolved, colors]);
-
-  if (!skin) return null;
-
-  function setColor(key, value) {
-    const next = { ...colors, [key]: value };
-    setColors(next);
-    try {
-      window.localStorage.setItem(STORE, JSON.stringify(next));
-    } catch (e) {}
-  }
 
   function toggleMode() {
     const next = light ? "dark" : "light";
-    // Update the saved scheme in the same turn as the color mode so the
-    // settings sync does not snap the page back to the previous scheme.
     if (user.loggedIn && user.updateSetting) {
       user.updateSetting("siteColorScheme", next);
       axios
@@ -87,41 +76,94 @@ export default function SkinAppearance() {
     setMode(next);
   }
 
+  return { light, resolved, toggleMode };
+}
+
+export function SkinAppearanceFields() {
+  const { resolved, light } = useSkinScheme();
+  const [colors, setColors] = useState(loadColors);
+  const skin = useSkinRedesign();
+
+  useEffect(() => {
+    if (skin) applySkinColors(resolved || "dark");
+  }, [skin, resolved, colors]);
+
+  function setColor(key, value) {
+    const next = { ...colors, [key]: value };
+    setColors(next);
+    try {
+      window.localStorage.setItem(STORE, JSON.stringify(next));
+    } catch (e) {}
+  }
+
   const accentKey = light ? "accentLight" : "accent";
   const g1Key = light ? "g1Light" : "g1";
   const g2Key = light ? "g2Light" : "g2";
+  const tintKey = light ? "tintLight" : "tint";
 
   return (
-    <span className="skin-colors">
-      <input
-        type="color"
-        aria-label="accent"
-        title="accent"
-        value={colors[accentKey] || (light ? "#c92626" : "#9a0404")}
-        onChange={(e) => setColor(accentKey, e.target.value)}
-      />
-      <input
-        type="color"
-        aria-label="Color 1"
-        title="Color 1"
-        value={colors[g1Key] || (light ? "#d2cccb" : "#4a1220")}
-        onChange={(e) => setColor(g1Key, e.target.value)}
-      />
-      <input
-        type="color"
-        aria-label="Color 2"
-        title="Color 2"
-        value={colors[g2Key] || (light ? "#d2cccb" : "#12060c")}
-        onChange={(e) => setColor(g2Key, e.target.value)}
-      />
-      <button
-        type="button"
-        className="skin-mode"
-        aria-label={light ? "Dark" : "Light"}
-        onClick={toggleMode}
-      >
-        <i className={light ? "fas fa-moon" : "fas fa-sun"} />
-      </button>
-    </span>
+    <div className="skin-appear-fields">
+      <label>
+        <span>Accent</span>
+        <input
+          type="color"
+          aria-label="Accent color"
+          value={colors[accentKey] || (light ? "#c92626" : "#9a0404")}
+          onChange={(e) => setColor(accentKey, e.target.value)}
+        />
+      </label>
+      <label>
+        <span>Color 1</span>
+        <input
+          type="color"
+          aria-label="Color 1"
+          value={colors[g1Key] || (light ? "#d2cccb" : "#4a1220")}
+          onChange={(e) => setColor(g1Key, e.target.value)}
+        />
+      </label>
+      <label>
+        <span>Color 2</span>
+        <input
+          type="color"
+          aria-label="Color 2"
+          value={colors[g2Key] || (light ? "#d2cccb" : "#12060c")}
+          onChange={(e) => setColor(g2Key, e.target.value)}
+        />
+      </label>
+      <label>
+        <span>Tint</span>
+        <input
+          type="color"
+          aria-label="Tint"
+          value={colors[tintKey] || (light ? "#e7b4b4" : "#4a1220")}
+          onChange={(e) => setColor(tintKey, e.target.value)}
+        />
+      </label>
+      <label className="skin-appear-strength">
+        <span>Strength</span>
+        <input
+          type="range"
+          min="0"
+          max="80"
+          aria-label="Tint strength"
+          value={colors.tintAmt != null ? colors.tintAmt : light ? 0 : 18}
+          onChange={(e) => setColor("tintAmt", Number(e.target.value))}
+        />
+      </label>
+      <label className="skin-appear-anim">
+        <input
+          type="checkbox"
+          checked={colors.animate === true}
+          onChange={(e) => setColor("animate", e.target.checked)}
+        />
+        <span>Animated background</span>
+      </label>
+    </div>
   );
+}
+
+export default function SkinAppearance() {
+  const skin = useSkinRedesign();
+  if (!skin) return null;
+  return <SkinAppearanceFields />;
 }

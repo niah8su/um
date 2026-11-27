@@ -58,7 +58,7 @@ export function RecentForumReplies() {
 
         threads.sort((a, b) => (b.date || 0) - (a.date || 0));
         replies.sort((a, b) => (b.date || 0) - (a.date || 0));
-        setNewestThreads(threads.slice(0, 1));
+        setNewestThreads(threads.slice(0, 2));
         setRecentReplies(replies.slice(0, 5));
       } catch (e) {
         // Silently ignore; show empty state below
@@ -84,18 +84,21 @@ export function RecentForumReplies() {
     };
   }, [active]);
 
+  const threadRows = skin ? newestThreads.slice(0, 2) : newestThreads.slice(0, 1);
+  const replyRows = skin ? recentReplies.slice(0, 3) : recentReplies;
+
   return (
     <LobbySidebarPanel title="Forum Activity">
       <Typography className={skin ? "skin-forum-kicker" : undefined} variant="subtitle2" sx={{ fontWeight: 700, mb: 0.5 }}>
         Newest Thread
       </Typography>
-      {newestThreads.length === 0 ? (
+      {threadRows.length === 0 ? (
         <Typography variant="body2" sx={{ mb: 1 }}>
           No recent replies.
         </Typography>
       ) : (
         <Stack spacing={1} sx={{ mb: 1 }}>
-          {newestThreads.map((item) => {
+          {threadRows.map((item) => {
             const link = `/community/forums/thread/${item.threadId}`;
             return (
               <Box
@@ -147,11 +150,11 @@ export function RecentForumReplies() {
       <Typography className={skin ? "skin-forum-kicker" : undefined} variant="subtitle2" sx={{ fontWeight: 700, mb: 0.5 }}>
         Recent Replies
       </Typography>
-      {recentReplies.length === 0 ? (
+      {replyRows.length === 0 ? (
         <Typography variant="body2">No recent replies.</Typography>
       ) : (
         <Stack spacing={1}>
-          {recentReplies.map((item) => {
+          {replyRows.map((item) => {
             const link = `/community/forums/thread/${item.threadId}?reply=${item.replyId}`;
             return (
               <Box

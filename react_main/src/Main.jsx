@@ -53,7 +53,6 @@ import "css/main.css";
 import "css/accessibility.css";
 import "css/skin-redesign.css";
 import SkinController from "./components/SkinController";
-import SkinAppearance from "./components/SkinAppearance";
 import SkinSidebar from "./components/SkinSidebar";
 
 // Navigation icons removed - now using text-only navigation
@@ -487,7 +486,6 @@ export function Header({ setShowAnnouncementTemporarily }) {
             ]}
           />
           <SiteLogo small flexible />
-          <SkinAppearance />
           {/* User section */}
           <div style={{ flex: "1 0" }}>
             {/* Signed-out auth lives in the phone bottom navigation; the header
@@ -575,7 +573,6 @@ export function Header({ setShowAnnouncementTemporarily }) {
             <Box className="skin-head-end" sx={{
               marginLeft: "auto !important",
             }}>
-              <SkinAppearance />
               {user.loggedIn ? (
                 <UserNavSection
                   openAnnouncements={openAnnouncements}

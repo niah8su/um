@@ -1466,15 +1466,27 @@ html.skin-redesign .skin-pop-setups > .MuiBox-root,
 html.skin-redesign.light-mode .skin-pop-setups > .MuiBox-root {
   align-items: flex-start !important;
   gap: 6px;
-  padding: 8px 8px 6px !important;
-  border-radius: 6px !important;
-  border: 1px solid rgba(255, 255, 255, .14) !important;
-  background: rgba(255, 255, 255, .04) !important;
+  padding: 8px 2px !important;
+  border: 0 !important;
+  border-radius: 0 !important;
+  border-top: 1px solid rgba(255, 255, 255, .12) !important;
+  background: transparent !important;
   box-shadow: none !important;
 }
+html.skin-redesign .skin-pop-setups > .MuiBox-root:first-child { border-top: 0 !important; }
+html.skin-redesign .skin-port .skin-pop-setups > .MuiBox-root:not(:first-child) {
+  border-top: 1px solid rgba(255, 255, 255, .16) !important;
+}
+html.skin-redesign.light-mode .skin-port .skin-pop-setups > .MuiBox-root:not(:first-child) {
+  border-top: 1px solid rgba(0, 0, 0, .14) !important;
+}
 html.skin-redesign.light-mode .skin-pop-setups > .MuiBox-root {
-  border-color: rgba(0, 0, 0, .1) !important;
-  background: rgba(255, 255, 255, .35) !important;
+  border-top-color: rgba(0, 0, 0, .1) !important;
+  background: transparent !important;
+}
+html.skin-redesign .skin-pop-setups .setup-name,
+html.skin-redesign .skin-pop-setups .setup-name span {
+  font-size: 11px !important;
 }
 html.skin-redesign .skin-pop-setups .setup,
 html.skin-redesign .skin-pop-setups .setup .MuiStack-root,
@@ -1534,8 +1546,8 @@ html.skin-redesign .skin-module .skin-poll-pager:first-child {
 html.skin-redesign .comments-page .post,
 html.skin-redesign .comments-page .MuiPaper-root,
 html.skin-redesign.light-mode .comments-page .MuiPaper-root {
-  padding: 16px 14px 18px !important;
-  border-radius: 6px !important;
+  padding: 10px 12px 12px !important;
+  border-radius: 4px !important;
 }
 html.skin-redesign .comments-page .md-content,
 html.skin-redesign .comments-page .user-name,
@@ -1545,16 +1557,18 @@ html.skin-redesign .comments-page .md-content p {
 }
 html.skin-redesign .comments-page .skin-c-time,
 html.skin-redesign.light-mode .comments-page .skin-c-time {
-  top: 8px;
-  right: 12px;
+  position: static !important;
+  display: block;
+  margin: 0;
   color: #8b949e !important;
   opacity: 1 !important;
-  font-size: 11px !important;
-  z-index: 2;
-  pointer-events: none;
+  font-size: 10px !important;
+  letter-spacing: 0 !important;
+  text-transform: none !important;
+  line-height: 1.2;
 }
 html.skin-redesign .comments-page .MuiPaper-root > .MuiStack-root > .MuiStack-root:nth-child(2) > .MuiStack-root:first-child {
-  padding-right: 78px;
+  padding-right: 22px;
 }
 html.skin-redesign .comments-page .MuiPaper-root > .MuiStack-root > .MuiStack-root:first-child {
   align-items: center !important;
@@ -1582,20 +1596,47 @@ html.skin-redesign .comments-page .fa-arrow-down::before {
   text-align: center;
   line-height: 1;
 }
-html.skin-redesign .comments-page .emote-reactions {
+html.skin-redesign .comments-page .name-with-avatar {
+  align-items: flex-start !important;
+}
+html.skin-redesign .comments-page .name-with-avatar > .MuiStack-root {
+  align-items: flex-start !important;
+  gap: 0 !important;
+}
+html.skin-redesign .comments-page .MuiPaper-root > .MuiStack-root {
+  align-items: flex-start !important;
+  gap: 8px !important;
+}
+html.skin-redesign .comments-page .MuiPaper-root > .MuiStack-root > .MuiStack-root:nth-child(2) {
+  gap: 2px !important;
+  align-items: flex-start !important;
+  min-width: 0;
+}
+html.skin-redesign .comments-page .MuiDivider-root { display: none !important; }
+html.skin-redesign .comments-page .md-content { margin-top: 2px !important; }
+html.skin-redesign .comments-page .MuiPaper-root > .MuiStack-root > .MuiStack-root:nth-child(2) > .MuiStack-root:first-child > .MuiStack-root:last-child {
   position: absolute;
-  top: auto !important;
-  right: 10px !important;
-  bottom: 10px !important;
+  top: 4px;
+  right: 4px;
   margin: 0 !important;
+}
+html.skin-redesign .comments-page .fa-trash,
+html.skin-redesign .comments-page .fa-trash-restore { font-size: 11px !important; }
+html.skin-redesign .comments-page .emote-reactions {
+  position: static !important;
+  top: auto !important;
+  right: auto !important;
+  bottom: auto !important;
+  margin: 4px 0 0 !important;
+  justify-content: flex-start;
 }
 html.skin-redesign .comments-page .emote-reactions-picker .dropdown-control,
 html.skin-redesign.light-mode .comments-page .emote-reactions-picker .dropdown-control {
-  width: 22px !important;
-  min-width: 22px !important;
-  height: 22px !important;
+  width: 26px !important;
+  min-width: 26px !important;
+  height: 26px !important;
   padding: 0 !important;
-  border: 0 !important;
+  border: 1px solid rgba(139, 148, 158, .45) !important;
   border-radius: 4px !important;
   background: transparent !important;
   background-image: none !important;
@@ -1692,4 +1733,79 @@ html.skin-redesign .skin-port .panel .message .MuiTypography-caption {
     min-width: 0 !important;
     max-width: 42vw;
   }
+}
+
+/* Competitive row hover: the demo gold sheen. */
+html.skin-redesign .skin-port .game.comp .game-main,
+html.skin-redesign .skin-port .game.tone-competitive .game-main {
+  position: relative;
+}
+html.skin-redesign .skin-port .game.comp .game-main::after,
+html.skin-redesign .skin-port .game.tone-competitive .game-main::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0;
+  background: linear-gradient(105deg, transparent 0%, transparent 40%, rgba(255,220,130,.42) 50%, transparent 60%, transparent 100%);
+  background-size: 200% 100%;
+  background-repeat: no-repeat;
+}
+html.skin-redesign .skin-port .game.comp:hover .game-main::after,
+html.skin-redesign .skin-port .game.tone-competitive:hover .game-main::after {
+  opacity: 1;
+  animation: gold-sheen 1.6s linear infinite;
+}
+@keyframes gold-sheen {
+  0% { background-position: 130% 0; }
+  100% { background-position: -130% 0; }
+}
+html.skin-redesign .skin-port .game.comp .stub::after,
+html.skin-redesign .skin-port .game.tone-competitive .stub::after {
+  animation: strip-glow 2.4s linear infinite;
+}
+html.skin-redesign .skin-port .game.comp:hover .stub::after,
+html.skin-redesign .skin-port .game.tone-competitive:hover .stub::after {
+  opacity: 0;
+}
+@keyframes strip-glow {
+  0% { transform: translateY(-55%); }
+  100% { transform: translateY(55%); }
+}
+html.skin-redesign .skin-port .game.comp:hover .game-main,
+html.skin-redesign .skin-port .tone-competitive:hover .game-main {
+  box-shadow: inset 0 0 0 1px rgba(237,179,52,.7), 0 0 16px rgba(237,179,52,.22) !important;
+}
+
+html.skin-redesign .skin-port .panel .chat-window {
+  height: 220px !important;
+  max-height: 220px !important;
+}
+html.skin-redesign .skin-port .games-end,
+html.skin-redesign .skin-port .refresh-btn,
+html.skin-redesign .skin-port .refresh-btn .MuiIconButton-root,
+html.skin-redesign .skin-port .help-btn {
+  align-self: center !important;
+}
+html.skin-redesign .skin-port .refresh-btn .fa-spin {
+  animation: um-refresh-once 0.55s ease-out 1 !important;
+}
+@keyframes um-refresh-once {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+html.skin-redesign .skin-port .help-btn,
+html.skin-redesign .skin-port .help-btn.sq-btn,
+html.skin-redesign.light-mode .skin-port .help-btn.sq-btn {
+  width: auto !important;
+  height: auto !important;
+  min-width: 0 !important;
+  border: 0 !important;
+  background: transparent !important;
+  box-shadow: none !important;
+  border-radius: 0 !important;
+}
+html.skin-redesign .skin-port .help-btn svg {
+  width: 22px !important;
+  height: 22px !important;
 }

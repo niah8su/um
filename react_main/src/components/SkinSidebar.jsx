@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import axios from "axios";
 import { UserContext } from "Contexts";
 import { useSkinRedesign } from "./useSkinRedesign";
+import { SkinAppearanceFields, useSkinScheme } from "./SkinAppearance";
 
 // Same destinations and labels as the header menus. Shown only with the redesign.
 const GROUPS = [
@@ -77,6 +78,8 @@ export default function SkinSidebar() {
   const loggedIn = Boolean(user && user.loggedIn);
   const [collapsed, setCollapsed] = useState(true);
   const [online, setOnline] = useState([]);
+  const [appear, setAppear] = useState(false);
+  const { light, toggleMode } = useSkinScheme();
   useEffect(() => {
     if (!skin) return undefined;
     let stop = false;
@@ -130,9 +133,18 @@ export default function SkinSidebar() {
         <Link to="/play/create" aria-label="Create setup">
           <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5v14M5 12h14" /></svg>
         </Link>
-        <Link to="/user/settings" aria-label="Settings">
+        <button type="button" className="skin-dock-mode" aria-label={light ? "Dark mode" : "Light mode"} title={light ? "Dark mode" : "Light mode"} onClick={toggleMode}>
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M21 14.5A8.5 8.5 0 0 1 9.5 3 7 7 0 1 0 21 14.5z" /></svg>
+        </button>
+        <button type="button" className="skin-dock-wrench" aria-label="Appearance" title="Appearance" aria-expanded={appear} onClick={() => setAppear((open) => !open)}>
           <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l2-2a4.5 4.5 0 0 1-6 6L8.5 18.5 5.5 15.5 10.7 10.3a4.5 4.5 0 0 1 6-6l-2 2z" /></svg>
-        </Link>
+        </button>
+        {appear && (
+          <div className="skin-appear-pop" role="dialog" aria-label="Appearance">
+            <div className="skin-appear-title">Appearance</div>
+            <SkinAppearanceFields />
+          </div>
+        )}
         <button type="button" aria-label="Sign out" onClick={() => {
           axios.post("/api/user/logout").finally(() => {
             if (user && user.clear) user.clear();

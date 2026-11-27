@@ -2158,6 +2158,55 @@ html.skin-redesign.light-mode .MuiPaper-root:not(.MuiPopover-paper):not(.MuiMenu
   border-color: rgba(208, 215, 222, .95);
   color: #1c1917;
 }
+html.skin-redesign .MuiTab-root {
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  font-size: 11px !important;
+  font-weight: 700 !important;
+  color: #8b949e !important;
+  min-height: 40px;
+}
+html.skin-redesign .MuiTab-root.Mui-selected {
+  color: var(--um-accent) !important;
+}
+html.skin-redesign .MuiTabs-indicator {
+  background-color: var(--um-accent) !important;
+}
+html.skin-redesign .user-cell,
+html.skin-redesign .user-row,
+html.skin-redesign .newest-users {
+  background: linear-gradient(180deg, rgba(255,255,255,.08), rgba(255,255,255,.02) 42%), rgba(8, 10, 14, .62) !important;
+  border: 1px solid rgba(240, 246, 252, .14) !important;
+  border-radius: 8px !important;
+  box-shadow: inset 0 1px 0 rgba(255,255,255,.1) !important;
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  color: var(--um-ink);
+}
+html.skin-redesign.light-mode .user-cell,
+html.skin-redesign.light-mode .user-row,
+html.skin-redesign.light-mode .newest-users {
+  background: linear-gradient(180deg, rgba(255,255,255,.62), rgba(255,255,255,.28)), rgba(255,255,255,.42) !important;
+  border-color: rgba(208, 215, 222, .95) !important;
+  color: #1c1917;
+}
+html.skin-redesign .newest-users {
+  padding: 16px 18px;
+}
+html.skin-redesign .newest-users .heading {
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  font-size: 11px !important;
+  font-weight: 700 !important;
+  color: #8b949e !important;
+  margin-bottom: 10px;
+}
+html.skin-redesign .site-wrapper .MuiOutlinedInput-notchedOutline {
+  border-color: rgba(240, 246, 252, .14) !important;
+}
+html.skin-redesign.light-mode .site-wrapper .MuiOutlinedInput-notchedOutline {
+  border-color: rgba(208, 215, 222, .95) !important;
+}
 html.skin-redesign .MuiButton-contained {
   box-shadow: none !important;
 }
@@ -2376,6 +2425,9 @@ html.skin-redesign .thread-wrapper .btns-wrapper i:hover {
   }
   html.skin-redesign .forums .forum-nav-actions {
     margin-left: 0 !important;
+  }
+  html.skin-redesign .site-wrapper .MuiBox-root:has(> .user-cell) {
+    grid-template-columns: 1fr !important;
   }
   html.skin-redesign .forums .forum-category .board,
   html.skin-redesign .forums .board-wrapper .thread {

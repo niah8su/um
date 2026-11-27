@@ -133,14 +133,14 @@ export default function UserNavSection({
   ];
 
   return (
-    <Stack direction="row" spacing={0.5} divider={<Divider orientation="vertical" flexItem />} sx={{
+    <Stack className="header-user" direction="row" spacing={0.5} divider={<Divider orientation="vertical" flexItem />} sx={{
       px: 1,
       alignItems: "center",
       justifyContent: "end",
     }}>
       <DmButton />
       <Stack>
-        <Box sx={{
+        <Box className="header-hearts" sx={{
           display: "grid",
           gridTemplateColumns: "1fr 1em",
           columnGap: 0.5,

@@ -2238,12 +2238,49 @@ html.skin-redesign.um-loading .skin-appbar::after {
     object-fit: contain !important;
   }
   html.skin-redesign .skin-colors input[type="color"] {
-    width: 14px !important;
-    height: 14px !important;
+    width: 12px !important;
+    height: 12px !important;
+    padding: 0 !important;
   }
   html.skin-redesign .skin-colors {
     flex: 0 0 auto;
-    gap: 6px;
+    gap: 2px !important;
+  }
+  html.skin-redesign .skin-mode {
+    width: 22px !important;
+    height: 22px !important;
+  }
+  html.skin-redesign .skin-appbar [data-testid="dm-button"] {
+    width: 24px !important;
+    height: 24px !important;
+    padding: 0 !important;
+  }
+  html.skin-redesign .skin-appbar [data-testid="dm-button"] i {
+    font-size: 14px !important;
+  }
+  html.skin-redesign .header-user {
+    padding: 0 2px 0 0 !important;
+    gap: 2px !important;
+  }
+  html.skin-redesign .header-user > .MuiDivider-root {
+    display: none;
+  }
+  html.skin-redesign .header-hearts {
+    width: auto !important;
+    column-gap: 2px !important;
+  }
+  html.skin-redesign .header-hearts .MuiTypography-body2 {
+    font-size: 11px !important;
+    line-height: 1.1 !important;
+  }
+  html.skin-redesign .skin-appbar .avatar {
+    width: 26px !important;
+    height: 26px !important;
+  }
+  html.skin-redesign .skin-nav-btn {
+    min-width: 32px !important;
+    min-height: 32px !important;
+    padding: 4px !important;
   }
   html.skin-redesign .MuiTabs-scrollButtons {
     display: none !important;

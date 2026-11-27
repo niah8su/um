@@ -108,7 +108,7 @@ export function SkinAppearanceFields() {
         <input
           type="color"
           aria-label="Accent color"
-          value={colors[accentKey] || (light ? "#c92626" : "#9a0404")}
+          value={colors[accentKey] || (light ? "#d23232" : "#9a0404")}
           onChange={(e) => setColor(accentKey, e.target.value)}
         />
       </label>

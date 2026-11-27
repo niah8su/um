@@ -8,8 +8,8 @@ html.skin-redesign .skin-port {
   color: #e6edf3;
 }
 html.skin-redesign.light-mode .skin-port {
-  --panel: linear-gradient(180deg, rgba(255,255,255,.78), rgba(255,255,255,.48)), rgba(255,255,255,.58);
-  --panel-line: rgba(28, 25, 23, .12);
+  --panel: linear-gradient(180deg, rgba(255,255,255,.42), rgba(255,255,255,.14)), rgba(255,255,255,.22);
+  --panel-line: rgba(28, 25, 23, .14);
   --panel-shadow: 0 8px 24px rgba(31,35,40,.08), inset 0 1px 0 rgba(255,255,255,.9);
   color: #1f2328;
 }
@@ -86,8 +86,9 @@ html.skin-redesign .skin-port .games-bar {
 }
 html.skin-redesign.light-mode .skin-port .panel,
 html.skin-redesign.light-mode .skin-port .games-bar {
-  background: linear-gradient(180deg, rgba(255,255,255,.82), rgba(255,255,255,.5)), rgba(255,255,255,.62);
-  border-color: rgba(28, 25, 23, .12);
+  background: linear-gradient(180deg, rgba(255,255,255,.42), rgba(255,255,255,.14)), rgba(255,255,255,.22);
+  border-color: rgba(28, 25, 23, .14);
+  backdrop-filter: blur(22px) saturate(1.35);
   color: #1c1917;
 }
 html.skin-redesign .skin-port .games-bar {
@@ -1880,7 +1881,7 @@ html.skin-redesign .skin-port .refresh-btn i {
 html.skin-redesign .skin-port .help-btn .help-mark {
   font-family: Roboto, "Segoe UI", sans-serif;
   font-weight: 500;
-  font-size: 16px;
+  font-size: 18px;
   font-weight: 600;
   line-height: 1;
   display: block;

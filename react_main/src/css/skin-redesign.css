@@ -21,12 +21,12 @@ html.skin-redesign {
 }
 
 html.skin-redesign.light-mode {
-  --um-accent: #c92626;
+  --um-accent: #d23232;
   --um-accent-ink: #ffffff;
   --um-link: #9f1d1d;
   --um-grad-1: #e3e1e0;
   --um-grad-2: #e3e1e0;
-  --um-glass: rgba(255, 255, 255, 0.66);
+  --um-glass: rgba(255, 255, 255, 0.34);
   --um-glass-solid: rgba(255, 252, 250, 0.96);
   --um-ink: #1c1917;
   --um-line: rgba(28, 25, 23, 0.12);
@@ -1636,8 +1636,10 @@ html.skin-redesign.light-mode .play .MuiListItem-root,
 html.skin-redesign.light-mode .comments-page .MuiPaper-root,
 html.skin-redesign.light-mode .skin-welcome .MuiPaper-root,
 html.skin-redesign.light-mode .skin-announce {
-  background: linear-gradient(180deg, rgba(255,255,255,.84), rgba(255,255,255,.52)), rgba(255,255,255,.64) !important;
-  border: 1px solid rgba(28, 25, 23, .12) !important;
+  background: linear-gradient(180deg, rgba(255,255,255,.42), rgba(255,255,255,.14)), rgba(255,255,255,.22) !important;
+  backdrop-filter: blur(22px) saturate(1.35) !important;
+  -webkit-backdrop-filter: blur(22px) saturate(1.35) !important;
+  border: 1px solid rgba(28, 25, 23, .14) !important;
   box-shadow: 0 8px 24px rgba(31,35,40,.08), inset 0 1px 0 rgba(255,255,255,.9) !important;
   color: #1c1917;
 }
@@ -3220,8 +3222,9 @@ html.skin-redesign .skin-loader-card {
   backdrop-filter: blur(18px);
 }
 html.skin-redesign.light-mode .skin-loader-card {
-  background: linear-gradient(180deg, rgba(255,255,255,.72), rgba(255,255,255,.38)), rgba(255,255,255,.55);
-  border-color: rgba(0,0,0,.1);
+  background: linear-gradient(180deg, rgba(255,255,255,.42), rgba(255,255,255,.14)), rgba(255,255,255,.22);
+  border-color: rgba(28, 25, 23, .14);
+  backdrop-filter: blur(22px) saturate(1.35);
 }
 html.skin-redesign .skin-loader-beam {
   display: block;
@@ -3405,8 +3408,9 @@ html.skin-redesign .skin-forum-panel {
   overflow: hidden;
 }
 html.skin-redesign.light-mode .skin-forum-panel {
-  border-color: rgba(0,0,0,.1);
-  background: linear-gradient(180deg, rgba(255,255,255,.72), rgba(255,255,255,.38)), rgba(255,255,255,.5);
+  border-color: rgba(28, 25, 23, .14);
+  background: linear-gradient(180deg, rgba(255,255,255,.42), rgba(255,255,255,.14)), rgba(255,255,255,.22);
+  backdrop-filter: blur(22px) saturate(1.35);
 }
 html.skin-redesign .skin-board {
   display: grid;
@@ -3557,13 +3561,40 @@ html.skin-redesign .MuiAppBar-root .skin-nav-btn.is-active:not(:hover) .skin-nav
 html.skin-redesign .MuiAppBar-root .skin-nav-btn.is-active:not(:hover) .skin-nav-ico {
   color: #e7b4b4 !important;
 }
-html.skin-redesign.light-mode .MuiAppBar-root .skin-nav-btn.is-active:not(:hover) {
-  background: rgba(122, 28, 32, .16) !important;
-  border-color: rgba(122, 28, 32, .35) !important;
-  color: #8a2a2a !important;
+html.skin-redesign.light-mode .MuiAppBar-root .skin-nav-btn.is-active,
+html.skin-redesign.light-mode .MuiAppBar-root .skin-nav-btn.is-active:hover,
+html.skin-redesign.light-mode .MuiAppBar-root .skin-nav-btn:hover,
+html.skin-redesign.light-mode .MuiAppBar-root .skin-nav-btn[aria-expanded="true"] {
+  background: color-mix(in srgb, var(--um-accent) 92%, #1c1917) !important;
+  border: 1px solid var(--um-accent) !important;
+  box-shadow: none !important;
+  color: #fff !important;
+  transition: background 160ms ease, color 160ms ease, border-color 160ms ease;
 }
-html.skin-redesign.light-mode .MuiAppBar-root .skin-nav-btn.is-active:not(:hover) .skin-nav-label.MuiTypography-h3 {
-  color: #8a2a2a !important;
+html.skin-redesign.light-mode .MuiAppBar-root .skin-nav-btn.is-active .skin-nav-label.MuiTypography-h3,
+html.skin-redesign.light-mode .MuiAppBar-root .skin-nav-btn.is-active:hover .skin-nav-label.MuiTypography-h3,
+html.skin-redesign.light-mode .MuiAppBar-root .skin-nav-btn:hover .skin-nav-label.MuiTypography-h3,
+html.skin-redesign.light-mode .MuiAppBar-root .skin-nav-btn[aria-expanded="true"] .skin-nav-label.MuiTypography-h3,
+html.skin-redesign.light-mode .MuiAppBar-root .skin-nav-btn.is-active .skin-nav-ico,
+html.skin-redesign.light-mode .MuiAppBar-root .skin-nav-btn:hover .skin-nav-ico {
+  color: #fff !important;
+}
+html.skin-redesign .skin-side.collapsed {
+  width: 104px;
+  padding-left: 8px;
+  padding-right: 8px;
+}
+html.skin-redesign:has(.skin-side.collapsed) .site-wrapper { padding-left: 104px; }
+html.skin-redesign .skin-side.collapsed .skin-side-dock {
+  flex-direction: row;
+  flex-wrap: nowrap;
+  justify-content: center;
+  gap: 8px;
+}
+html.skin-redesign .skin-side.collapsed .skin-side-dock svg,
+html.skin-redesign .skin-side.collapsed .skin-side-dock a svg {
+  width: 16px;
+  height: 16px;
 }
 html.skin-redesign #skin-float-tip {
   position: fixed;
@@ -3826,23 +3857,24 @@ html.skin-redesign .skin-side-dock {
   gap: 10px;
 }
 html.skin-redesign .skin-side.collapsed {
-  width: 46px;
-  padding-left: 3px;
-  padding-right: 3px;
+  width: 104px;
+  padding-left: 8px;
+  padding-right: 8px;
   overflow: hidden;
 }
+html.skin-redesign:has(.skin-side.collapsed) .site-wrapper { padding-left: 104px; }
 html.skin-redesign .skin-side.collapsed .skin-side-dock {
   flex-direction: row;
   flex-wrap: nowrap;
   justify-content: center;
   align-items: center;
-  gap: 0;
+  gap: 8px;
   width: 100%;
 }
 html.skin-redesign .skin-side.collapsed .skin-side-dock svg,
 html.skin-redesign .skin-side.collapsed .skin-side-dock a svg {
-  width: 10px;
-  height: 10px;
+  width: 16px;
+  height: 16px;
 }
 @media (max-width: 900px) {
   html.skin-redesign .skin-side-dock {

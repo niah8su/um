@@ -489,6 +489,18 @@ html.skin-redesign .skin-port .bar-actions .skin-eye {
   background: rgba(255,255,255,.08) !important;
   border: 1px solid rgba(255,255,255,.14) !important;
 }
+html.skin-redesign.light-mode .skin-port .bar-actions .skin-eye,
+html.skin-redesign.light-mode .skin-port .bar-actions .sq-btn {
+  background: linear-gradient(180deg, rgba(255,255,255,.72), rgba(255,255,255,.38)), rgba(255,255,255,.5) !important;
+  border: 1px solid rgba(28, 25, 23, .35) !important;
+  color: #1c1917 !important;
+  box-shadow: none !important;
+}
+html.skin-redesign.light-mode .skin-port .bar-actions .skin-eye svg,
+html.skin-redesign.light-mode .skin-port .bar-actions .sq-btn .btn-ico {
+  color: #1c1917 !important;
+  stroke: #1c1917 !important;
+}
 html.skin-redesign .skin-port #skin-lobby-announce { margin: 0 0 8px; }
 html.skin-redesign .skin-port #skin-lobby-announce .skin-announce {
   padding: 16px 18px;

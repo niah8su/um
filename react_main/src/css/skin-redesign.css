@@ -3576,6 +3576,67 @@ html.skin-redesign.light-mode #skin-float-tip {
   color: #1f2328;
 }
 
+html.skin-redesign .skin-side-toggle {
+  align-self: flex-start;
+  margin: 4px 0 8px 0 !important;
+}
+html.skin-redesign .skin-side-groups { flex: 1 1 auto; min-height: 0; overflow: auto; }
+html.skin-redesign .skin-side-bottom {
+  margin-top: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  gap: 8px;
+  padding-top: 8px;
+  flex: none;
+}
+html.skin-redesign .skin-side-online {
+  justify-content: flex-start;
+  width: auto;
+  margin: 0;
+  padding: 0;
+}
+html.skin-redesign .skin-side-online-word {
+  color: #3fb950;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0;
+  text-transform: none;
+}
+html.skin-redesign .skin-side.collapsed .skin-side-online-word,
+html.skin-redesign .skin-side.collapsed .skin-side-display { display: none !important; }
+html.skin-redesign .skin-side.collapsed .skin-side-online {
+  justify-content: center;
+}
+html.skin-redesign .skin-side-dock {
+  margin-top: 0;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 10px;
+}
+html.skin-redesign .skin-side.collapsed {
+  overflow: visible;
+}
+html.skin-redesign .skin-side.collapsed .skin-side-dock {
+  justify-content: center;
+  gap: 6px 4px;
+  width: 100%;
+}
+html.skin-redesign .skin-side.collapsed .skin-side-dock svg,
+html.skin-redesign .skin-side.collapsed .skin-side-dock a svg {
+  width: 16px;
+  height: 16px;
+}
+@media (max-width: 900px) {
+  html.skin-redesign .skin-side-dock {
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+}
+
 @media (max-width: 900px) {
   html.skin-redesign .skin-side {
     display: flex !important;
@@ -3590,6 +3651,7 @@ html.skin-redesign.light-mode #skin-float-tip {
     border: 0 !important;
     backdrop-filter: none;
   }
-  html.skin-redesign .skin-side > :not(.skin-side-dock) { display: none !important; }
-  html.skin-redesign .skin-side-dock { display: flex; flex-direction: column; gap: 10px; }
+  html.skin-redesign .skin-side > :not(.skin-side-bottom) { display: none !important; }
+  html.skin-redesign .skin-side-bottom > :not(.skin-side-dock) { display: none !important; }
+  html.skin-redesign .skin-side-dock { display: flex; flex-direction: row; flex-wrap: wrap; gap: 8px; }
 }

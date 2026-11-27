@@ -107,10 +107,6 @@ export default function SkinSidebar() {
       >
         <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16" /></svg>
       </button>
-      <div className="skin-side-online" aria-label="Online users">
-        <i aria-hidden="true" />
-        <span className="skin-side-on">{online.length}</span>
-      </div>
       <div className="skin-side-groups">
         {GROUPS.map((group) => (
           <section key={group.label}>
@@ -126,8 +122,15 @@ export default function SkinSidebar() {
           </section>
         ))}
       </div>
-      <div className="skin-side-foot">
-        <Link to="/user/settings">Settings</Link>
+      <div className="skin-side-bottom">
+      <div className="skin-side-online" aria-label={`${online.length} users online`}>
+        <i aria-hidden="true" />
+        <span className="skin-side-on">{online.length}</span>
+        <span className="skin-side-online-word">users online</span>
+      </div>
+      <div className="skin-side-label skin-side-display">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 5h16v11H4zM8 20h8" /></svg>
+        Display Settings
       </div>
       <div className="skin-side-dock">
         <Link to="/play/create" aria-label="Create setup">
@@ -153,6 +156,7 @@ export default function SkinSidebar() {
         }}>
           <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M10 7V5H5v14h5v-2H7V7h3zm2 10 5-5-5-5v3H9v4h3v3z" /></svg>
         </button>
+      </div>
       </div>
     </nav>
   );

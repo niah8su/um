@@ -586,9 +586,8 @@ html.skin-redesign .site-wrapper {
   width: 100%;
   max-width: 100%;
 }
-@media (max-width: 899px) {
-  html.skin-redesign .skin-side { display: none; }
-  html.skin-redesign .site-wrapper { margin-left: 0; }
+@media (max-width: 900px) {
+  html.skin-redesign .site-wrapper { margin-left: 0; padding-left: 48px; }
 }
 
 html.skin-redesign .skin-games-bar {
@@ -2035,14 +2034,14 @@ html.skin-redesign.um-loading .skin-appbar::after {
     overflow-x: hidden;
   }
   html.skin-redesign .skin-side {
+    display: flex !important;
     position: fixed;
     z-index: 60;
     top: calc(var(--um-ticker-h, 0px) + 48px);
     left: 0;
     bottom: 0;
-    width: min(280px, 86vw);
-    transform: translateX(-105%);
-    transition: transform .2s ease;
+    width: 48px;
+    transform: none;
     background: rgba(13, 17, 23, .94);
     overflow: auto;
   }
@@ -2050,7 +2049,10 @@ html.skin-redesign.um-loading .skin-appbar::after {
     background: rgba(255, 255, 255, .96);
   }
   html.skin-redesign .skin-side:not(.collapsed) {
-    transform: none;
+    width: min(280px, 86vw);
+  }
+  html.skin-redesign:has(.skin-side.collapsed) .site-wrapper {
+    padding-left: 48px;
   }
   html.skin-redesign .skin-appbar .nav {
     display: none !important;
@@ -2096,4 +2098,24 @@ html.skin-redesign.um-loading .skin-appbar::after {
   html.skin-redesign .skin-port {
     max-width: 1280px;
   }
+}
+html.skin-redesign .MuiPaper-root:not(.MuiPopover-paper):not(.MuiMenu-paper):not(.MuiDialog-paper):not(.MuiAppBar-root) {
+  background: rgba(22, 16, 20, .55) !important;
+  background-image: linear-gradient(180deg, rgba(255,255,255,.08), rgba(255,255,255,.02)) !important;
+  backdrop-filter: blur(16px);
+  border: 1px solid rgba(240, 246, 252, .14);
+  box-shadow: none;
+  color: var(--um-ink);
+}
+html.skin-redesign.light-mode .MuiPaper-root:not(.MuiPopover-paper):not(.MuiMenu-paper):not(.MuiDialog-paper):not(.MuiAppBar-root) {
+  background: rgba(255, 255, 255, .72) !important;
+  background-image: none !important;
+  border-color: rgba(208, 215, 222, .95);
+  color: #1c1917;
+}
+html.skin-redesign .MuiButton-contained {
+  box-shadow: none !important;
+}
+html.skin-redesign .MuiButton-contained:hover {
+  box-shadow: 0 0 16px color-mix(in srgb, var(--um-accent) 45%, transparent) !important;
 }

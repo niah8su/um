@@ -207,25 +207,26 @@ html.skin-redesign .skin-strategies-btn {
   cursor: pointer;
 }
 
-html.skin-redesign .skin-gear {
-  background: rgba(22, 16, 20, 0.78);
-  color: #f6f1ea;
-  backdrop-filter: blur(16px);
-}
-
+html.skin-redesign .skin-gear,
 html.skin-redesign.light-mode .skin-gear {
-  background: rgba(255, 252, 250, 0.86);
-  color: #1c1917;
+  background: color-mix(in srgb, var(--um-accent) 85%, transparent) !important;
+  background-image: none !important;
+  color: var(--um-accent-ink, #fff) !important;
+  border: 1px solid var(--um-accent) !important;
+  box-shadow: none !important;
 }
 
 html.skin-redesign .skin-leave.MuiButton-root,
-html.skin-redesign .skin-strategies-btn {
-  background: linear-gradient(180deg, color-mix(in srgb, color-mix(in srgb, var(--um-accent) 78%, #fff) 83%, transparent), color-mix(in srgb, color-mix(in srgb, var(--um-accent) 90%, #1a1a1a) 83%, transparent)) !important;
+html.skin-redesign .skin-strategies-btn,
+html.skin-redesign .skin-gear,
+html.skin-redesign .game .btn-theme,
+html.skin-redesign .game .speech-dropdown {
+  background: color-mix(in srgb, var(--um-accent) 85%, transparent) !important;
+  background-image: none !important;
   color: var(--um-accent-ink, #fff) !important;
+  border: 1px solid var(--um-accent) !important;
   box-shadow: none !important;
-  backdrop-filter: blur(6px);
-  -webkit-backdrop-filter: blur(6px);
-  font-weight: 500;
+  font-weight: 700;
 }
 
 html.skin-redesign .skin-leave.MuiButton-root:hover,
@@ -436,12 +437,10 @@ html.skin-redesign body::before {
   min-height: 100vh;
   min-width: 100vw;
 }
-html.skin-redesign.light-mode .game-session {
-  background: linear-gradient(180deg, #e8893a 0%, #f0b429 48%, #ffe7a3 100%) !important;
-}
-html.skin-redesign.light-mode .game .center-panel {
-  border: 1px solid rgba(90, 42, 8, 0.28);
-  border-radius: 12px;
+html.skin-redesign.light-mode .game-session,
+html.skin-redesign .game-session {
+  background: transparent !important;
+  background-image: none !important;
 }
 html.skin-redesign .ios-beta-ticker,
 html.skin-redesign .ios-beta-ticker__viewport { justify-content: flex-start; width: 100%; }
@@ -1259,32 +1258,8 @@ html.skin-redesign .game .main {
   align-self: center;
   box-sizing: border-box;
 }
-html.skin-redesign .game .center-panel,
-html.skin-redesign .game .speech-display,
-html.skin-redesign .game .center-panel {
-  background: transparent !important;
-  background-color: transparent !important;
-}
-html.skin-redesign.light-mode .game .panel,
-html.skin-redesign.light-mode .game .left-panel,
-html.skin-redesign.light-mode .game .right-panel,
-html.skin-redesign.light-mode .game .title-box,
-html.skin-redesign.light-mode .game .meeting-tabs {
-  background: rgba(255, 255, 255, .4) !important;
-  background-color: rgba(255, 255, 255, .4) !important;
-  border: 1px solid rgba(208, 215, 222, .95);
-}
-html.skin-redesign:not(.light-mode) .game .speech-display,
-html.skin-redesign:not(.light-mode) .game .panel {
-  background: rgba(12, 10, 14, 0.28) !important;
-}
-html.skin-redesign.light-mode .game .speech-display,
-html.skin-redesign.light-mode .game .panel,
-html.skin-redesign.light-mode .game .left-panel,
-html.skin-redesign.light-mode .game .right-panel,
-html.skin-redesign.light-mode .game .title-box {
-  background: rgba(255, 255, 255, .42) !important;
-  background-color: rgba(255, 255, 255, .42) !important;
+html.skin-redesign .game .with-radial-gradient {
+  border-image: none !important;
 }
 
 html.skin-redesign .game .user-name-text { color: inherit !important; }
@@ -2460,6 +2435,21 @@ html.skin-redesign .MuiStack-root:has([aria-label="Settings Sections"]) .MuiTypo
   font-weight: 700 !important;
   color: #8b949e !important;
 }
+html.skin-redesign .fame-competitive,
+html.skin-redesign .fame-competitive .MuiGrid2-root,
+html.skin-redesign .fame-competitive .MuiPaper-root {
+  max-width: 100%;
+  min-width: 0;
+}
+html.skin-redesign .fame-frame {
+  width: 100% !important;
+  max-width: 100% !important;
+  left: auto !important;
+  transform: none !important;
+}
+html.skin-redesign .fame-competitive {
+  overflow-x: clip;
+}
 html.skin-redesign .fame-competitive .MuiPaper-root {
   background: linear-gradient(180deg, rgba(255,255,255,.08), rgba(255,255,255,.02) 42%), rgba(8, 10, 14, .55) !important;
   border: 1px solid rgba(240, 246, 252, .14) !important;
@@ -2848,6 +2838,151 @@ html.skin-redesign .game textarea {
   background: transparent;
   color: var(--um-ink);
   border-color: var(--um-line);
+}
+html.skin-redesign {
+  --um-module: linear-gradient(180deg, rgba(255,255,255,.08), rgba(255,255,255,.02) 42%), rgba(8, 10, 14, .62);
+}
+html.skin-redesign.light-mode {
+  --um-module: linear-gradient(180deg, rgba(255,255,255,.62), rgba(255,255,255,.28)), rgba(255,255,255,.42);
+}
+/* One glass module per column. Headers and the chat body sit on that glass. */
+html.skin-redesign .game .left-panel,
+html.skin-redesign .game .center-panel,
+html.skin-redesign .game .right-panel {
+  background: var(--um-module) !important;
+  border: 1px solid rgba(240, 246, 252, .14) !important;
+  box-shadow: inset 0 1px 0 rgba(255,255,255,.12) !important;
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  color: var(--um-ink);
+}
+html.skin-redesign.light-mode .game .left-panel,
+html.skin-redesign.light-mode .game .center-panel,
+html.skin-redesign.light-mode .game .right-panel {
+  border-color: rgba(208, 215, 222, .95) !important;
+  color: #1c1917;
+}
+html.skin-redesign .game .speech-display,
+html.skin-redesign .game .speech-footer,
+html.skin-redesign .game .speech-input-area,
+html.skin-redesign .game .speech-input,
+html.skin-redesign .game .title-box,
+html.skin-redesign .game .meeting-tabs,
+html.skin-redesign .game .tab,
+html.skin-redesign .game .side-menu,
+html.skin-redesign .game .side-menu-content,
+html.skin-redesign .game .action,
+html.skin-redesign .game .player-list {
+  background: transparent !important;
+  background-color: transparent !important;
+  background-image: none !important;
+  box-shadow: none !important;
+}
+html.skin-redesign .game .title-box,
+html.skin-redesign .game .meeting-tabs {
+  border-bottom: 1px solid var(--um-line);
+  border-radius: 0;
+}
+html.skin-redesign .game .action .btn,
+html.skin-redesign .game .action-option-btn {
+  background: color-mix(in srgb, var(--um-accent) 85%, transparent) !important;
+  background-image: none !important;
+  color: var(--um-accent-ink, #fff) !important;
+  border: 1px solid var(--um-accent) !important;
+  border-radius: 8px;
+  box-shadow: none !important;
+}
+html.skin-redesign .game .voter-btn {
+  background: transparent !important;
+  background-image: none !important;
+  color: var(--um-ink) !important;
+  border: 1px solid transparent !important;
+  border-radius: 8px;
+  box-shadow: none !important;
+}
+html.skin-redesign .game .voter-btn:hover,
+html.skin-redesign .game .action-option-btn:hover,
+html.skin-redesign .game .action .btn:hover {
+  box-shadow: 0 0 16px color-mix(in srgb, var(--um-accent) 45%, transparent) !important;
+}
+html.skin-redesign .game .voter-btn:hover {
+  border-color: var(--um-accent) !important;
+  color: var(--um-accent) !important;
+}
+html.skin-redesign .game .role-count-wrap,
+html.skin-redesign .game .player .role {
+  background: transparent !important;
+  box-shadow: none !important;
+}
+html.skin-redesign .game .vote-count {
+  background: color-mix(in srgb, var(--um-accent) 85%, transparent) !important;
+  color: var(--um-accent-ink, #fff) !important;
+  border: 1px solid var(--um-accent);
+}
+html.skin-redesign .game .MuiAccordion-root,
+html.skin-redesign .game .MuiAccordionSummary-root,
+html.skin-redesign .game .MuiAccordionDetails-root {
+  background: transparent !important;
+  background-image: none !important;
+  color: inherit !important;
+  box-shadow: none !important;
+}
+html.skin-redesign .game .MuiAccordionSummary-root {
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  font-weight: 700;
+  border-top: 1px solid var(--um-line);
+}
+@media (max-width: 899.95px) {
+  html.skin-redesign .game {
+    background: transparent !important;
+    background-color: transparent !important;
+    background-image: none !important;
+  }
+  html.skin-redesign .game .speech-display {
+    background: var(--um-module) !important;
+  }
+  html.skin-redesign .game .MuiBottomNavigation-root {
+    background: transparent !important;
+    color: var(--um-ink);
+  }
+  html.skin-redesign .game .MuiPaper-root:has(.MuiBottomNavigation-root) {
+    background: var(--um-module) !important;
+    box-shadow: none !important;
+  }
+}
+html.skin-redesign .game .title-box,
+html.skin-redesign .game .tab,
+html.skin-redesign .game .state-name,
+html.skin-redesign .game .player-list .section-title {
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  font-weight: 700;
+}
+html.skin-redesign .game .tab.sel {
+  background: transparent !important;
+  color: var(--um-accent) !important;
+  box-shadow: inset 0 -2px 0 var(--um-accent);
+}
+html.skin-redesign.light-mode .ios-beta-ticker,
+html.skin-redesign.light-mode .ios-beta-ticker a,
+html.skin-redesign.light-mode .ios-beta-ticker__viewport,
+html.skin-redesign.light-mode .ios-beta-ticker__item,
+html.skin-redesign.light-mode .ios-beta-ticker__close {
+  color: #1c1917 !important;
+}
+html.skin-redesign.light-mode .ios-beta-ticker__mark {
+  color: #176c2b !important;
+}
+html.skin-redesign.light-mode .ios-beta-ticker__divider {
+  color: var(--um-accent) !important;
+}
+html.skin-redesign .game .btn-theme:hover,
+html.skin-redesign .game .speech-dropdown:hover,
+html.skin-redesign .skin-leave.MuiButton-root:hover,
+html.skin-redesign .skin-strategies-btn:hover,
+html.skin-redesign .skin-gear:hover {
+  box-shadow: 0 0 16px color-mix(in srgb, var(--um-accent) 45%, transparent) !important;
 }
 html.skin-redesign .page-nav .MuiIconButton-root.is-current,
 html.skin-redesign .page-nav .MuiIconButton-root.is-current:hover {

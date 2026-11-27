@@ -16,7 +16,7 @@ export default function Fame(props) {
 
   return (
     <>
-      <Box sx={{ 
+      <Box className="fame-frame" sx={{ 
         width: { xs: '100%', md: '1280px' }, 
         maxWidth: '100vw',
         position: 'relative',

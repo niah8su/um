@@ -2057,6 +2057,32 @@ html.skin-redesign.um-loading .skin-appbar::after {
   html.skin-redesign .skin-appbar .nav {
     display: none !important;
   }
+  html.skin-redesign .skin-appbar,
+  html.skin-redesign .app-shell:has(.ios-beta-ticker) .skin-appbar {
+    top: var(--um-ticker-h) !important;
+    overflow: hidden;
+  }
+  html.skin-redesign .skin-appbar img,
+  html.skin-redesign .logo img {
+    max-height: 28px !important;
+    width: auto !important;
+  }
+  html.skin-redesign .skin-announce,
+  html.skin-redesign .announcements .announcement {
+    max-height: 140px;
+    overflow: auto;
+  }
+  html.skin-redesign .skin-port .games-word {
+    font-size: 12px !important;
+  }
+  html.skin-redesign .learn,
+  html.skin-redesign .span-panel,
+  html.skin-redesign .forum-category,
+  html.skin-redesign .policy,
+  html.skin-redesign .settings,
+  html.skin-redesign .profile {
+    color: var(--um-ink);
+  }
   html.skin-redesign .skin-port {
     max-width: 100%;
     padding: 0 8px;

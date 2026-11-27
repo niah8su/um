@@ -10,6 +10,7 @@
 html.skin-redesign {
   --um-accent: #9a0404;
   --um-accent-ink: #ffffff;
+  --um-link: #ff8f8f;
   --um-grad-1: #4a1220;
   --um-grad-2: #12060c;
   --um-glass: rgba(8, 10, 14, 0.42);
@@ -22,6 +23,7 @@ html.skin-redesign {
 html.skin-redesign.light-mode {
   --um-accent: #c92626;
   --um-accent-ink: #ffffff;
+  --um-link: #9f1d1d;
   --um-grad-1: #d2cccb;
   --um-grad-2: #d2cccb;
   --um-glass: rgba(255, 255, 255, 0.52);
@@ -38,6 +40,16 @@ html.skin-redesign input,
 html.skin-redesign textarea {
   font-family: Roboto, "Segoe UI", sans-serif !important;
   color: var(--um-ink);
+}
+html.skin-redesign .fas,
+html.skin-redesign .far,
+html.skin-redesign button.fas,
+html.skin-redesign button.far,
+html.skin-redesign .fab {
+  font-family: "Font Awesome 5 Free" !important;
+}
+html.skin-redesign .fab {
+  font-family: "Font Awesome 5 Brands" !important;
 }
 
 html.skin-redesign body::before {
@@ -1792,7 +1804,7 @@ html.skin-redesign .MuiAppBar-root .skin-nav-btn .skin-nav-label.MuiTypography-h
   font-family: "Roboto", "Segoe UI", sans-serif !important;
   font-weight: 300 !important;
   font-size: 0.78rem !important;
-  letter-spacing: 0.16em !important;
+  letter-spacing: 0.04em !important;
   line-height: 1 !important;
   text-transform: uppercase !important;
   color: #8b949e !important;
@@ -1816,8 +1828,8 @@ html.skin-redesign .skin-nav-btn,
 html.skin-redesign .skin-nav-label {
   font-family: "Roboto", "Segoe UI", sans-serif !important;
   font-weight: 300 !important;
-  font-size: 0.78rem !important;
-  letter-spacing: 0.16em !important;
+  font-size: 0.72rem !important;
+  letter-spacing: 0.04em !important;
   line-height: normal !important;
   text-transform: uppercase;
 }
@@ -1869,7 +1881,35 @@ html.skin-redesign .MuiMenu-paper .MuiMenuItem-root {
 }
 html.skin-redesign .skin-nav-btn .MuiButton-endIcon { margin-left: 2px; opacity: .65; }
 html.skin-redesign .skin-nav-btn .MuiButton-endIcon i { font-size: 10px; }
-html.skin-redesign .skin-appbar .nav { gap: 0 !important; }
+html.skin-redesign .skin-appbar a[href="/play"] {
+  display: inline-flex !important;
+  align-items: center;
+  width: 100% !important;
+  max-width: 180px !important;
+  min-width: 0 !important;
+  overflow: hidden;
+}
+html.skin-redesign .skin-appbar a[href="/play"] img {
+  display: block;
+  height: 36px !important;
+  width: 100% !important;
+  max-width: 180px !important;
+  object-fit: contain;
+  object-position: left center;
+}
+html.skin-redesign .skin-appbar .nav {
+  gap: 2px !important;
+  min-width: 0;
+  flex-wrap: nowrap;
+  width: auto !important;
+  flex: 1 1 auto !important;
+}
+html.skin-redesign .skin-head-end {
+  flex: 0 0 auto;
+  margin-left: auto !important;
+  position: relative;
+  z-index: 1;
+}
 html.skin-redesign .skin-head-end .MuiButton-outlined,
 html.skin-redesign .skin-head-end .MuiButton-contained {
   border-radius: 999px !important;
@@ -1963,7 +2003,7 @@ html.skin-redesign .skin-welcome form .MuiButton-contained {
 }
 html.skin-redesign:has(.skin-side.collapsed) .skin-appbar .skin-bar {
   display: grid !important;
-  grid-template-columns: 46px minmax(0, 1fr);
+  grid-template-columns: 180px minmax(0, 1fr);
 }
 html.skin-redesign:has(.skin-side:not(.collapsed)) .skin-appbar .skin-bar {
   display: grid !important;
@@ -1971,8 +2011,10 @@ html.skin-redesign:has(.skin-side:not(.collapsed)) .skin-appbar .skin-bar {
 }
 html.skin-redesign .skin-appbar .nav {
   justify-content: center !important;
-  width: 100%;
-  transform: translateX(-16px);
+  width: 100% !important;
+  transform: none !important;
+  padding-right: 300px;
+  box-sizing: border-box;
 }
 html.skin-redesign.um-loading .skin-appbar {
   overflow: hidden;
@@ -2122,10 +2164,43 @@ html.skin-redesign.um-loading .skin-appbar::after {
   html.skin-redesign .skin-port .help-btn,
   html.skin-redesign .skin-port .refresh-btn,
   html.skin-redesign .skin-port .sq-btn,
-  html.skin-redesign .skin-nav-btn,
-  html.skin-redesign .page-nav .MuiIconButton-root {
+  html.skin-redesign .skin-nav-btn {
     min-width: 40px !important;
     min-height: 40px !important;
+  }
+  html.skin-redesign .mobile-nav {
+    margin-left: 48px;
+    width: calc(100% - 48px);
+    box-sizing: border-box;
+  }
+  html.skin-redesign .skin-appbar > .MuiStack-root {
+    gap: 8px !important;
+  }
+  html.skin-redesign .skin-appbar > .MuiStack-root > div:last-child {
+    flex: 0 0 auto !important;
+  }
+  html.skin-redesign .skin-appbar a[href="/play"] {
+    flex: 0 0 112px !important;
+    width: 112px !important;
+    min-width: 112px !important;
+    max-width: 112px !important;
+    margin-right: 8px;
+  }
+  html.skin-redesign .skin-appbar a[href="/play"] img {
+    width: 112px !important;
+    max-width: 112px !important;
+    height: 28px !important;
+    max-height: 28px !important;
+  }
+  html.skin-redesign .skin-colors {
+    flex: 0 0 auto;
+    gap: 6px;
+  }
+  html.skin-redesign .MuiTabs-scrollButtons {
+    display: none !important;
+  }
+  html.skin-redesign .MuiTabs-scroller {
+    mask-image: linear-gradient(90deg, transparent 0, #000 16px, #000 calc(100% - 28px), transparent);
   }
   html.skin-redesign .MuiPopover-paper.skin-detail-pop {
     max-width: calc(100vw - 24px) !important;
@@ -2217,11 +2292,44 @@ html.skin-redesign .profile .box-panel {
   backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(16px);
 }
-html.skin-redesign.light-mode .profile .box-panel {
-  background: linear-gradient(180deg, rgba(255,255,255,.72), rgba(255,255,255,.4)), rgba(255,255,255,.55) !important;
+html.skin-redesign.light-mode .profile .box-panel,
+html.skin-redesign.light-mode .profile .trophy-tile,
+html.skin-redesign.light-mode .profile .box-panel .MuiPaper-root {
+  background: rgba(255, 255, 255, .28) !important;
+  background-image: none !important;
+  background-color: rgba(255, 255, 255, .28) !important;
   border-color: rgba(208, 215, 222, .95) !important;
   color: #1c1917 !important;
-  box-shadow: inset 0 1px 0 rgba(255,255,255,.9) !important;
+  box-shadow: inset 0 1px 0 rgba(255,255,255,.65) !important;
+  backdrop-filter: blur(18px) saturate(1.15) !important;
+  -webkit-backdrop-filter: blur(18px) saturate(1.15) !important;
+}
+html.skin-redesign.light-mode .profile .bio,
+html.skin-redesign.light-mode .profile .box-panel .content,
+html.skin-redesign.light-mode .profile .box-panel .content > * {
+  background: transparent !important;
+  background-color: transparent !important;
+  box-shadow: none !important;
+}
+html.skin-redesign .profile .trophy-tile {
+  background: linear-gradient(180deg, rgba(255,255,255,.08), rgba(255,255,255,.02)), rgba(8, 10, 14, .35) !important;
+  border: 1px solid rgba(240, 246, 252, .14) !important;
+  box-shadow: none !important;
+}
+html.skin-redesign .profile .banner.no-banner {
+  background: rgba(255, 255, 255, .12) !important;
+  background-image: none !important;
+  border: 1px solid var(--um-line) !important;
+  border-radius: 8px;
+  backdrop-filter: blur(12px);
+  min-height: 56px;
+}
+html.skin-redesign.light-mode .profile .banner.no-banner {
+  background: linear-gradient(180deg, rgba(255,255,255,.38), rgba(255,255,255,.12)) !important;
+}
+html.skin-redesign .profile .banner.no-banner .edit,
+html.skin-redesign .profile .banner.no-banner .banner-edit-overlay {
+  background: transparent !important;
 }
 html.skin-redesign .profile .box-panel .MuiTypography-h3 {
   text-transform: uppercase;
@@ -2318,6 +2426,8 @@ html.skin-redesign .forums .board-wrapper .thread {
   padding: 12px 0 !important;
   margin: 0 !important;
   column-gap: 16px;
+  grid-template-columns: 28px max-content minmax(220px, 1fr) minmax(280px, 1.35fr) !important;
+  align-items: start;
 }
 html.skin-redesign .forums .forum-category .board:last-child,
 html.skin-redesign .forums .board-wrapper .thread:last-child {
@@ -2353,12 +2463,33 @@ html.skin-redesign .thread-wrapper .forum-author-meta {
   color: #8b949e !important;
   opacity: 1 !important;
 }
+html.skin-redesign .forums > .span-panel:first-child {
+  min-height: 52px;
+  padding: 12px 16px !important;
+}
+html.skin-redesign .forums .forum-nav {
+  min-height: 36px;
+  align-items: center;
+}
+html.skin-redesign .forums .forum-nav .path a {
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+html.skin-redesign .forums .forum-nav .MuiButton-root {
+  min-height: 32px;
+  padding: 6px 12px;
+}
 html.skin-redesign .forums .thread-link-wrapper a,
 html.skin-redesign .forums .board-info,
 html.skin-redesign .forums .forum-nav .path a {
-  color: var(--um-accent) !important;
+  color: var(--um-link) !important;
   font-weight: 600;
   text-decoration: none;
+}
+html.skin-redesign .site-wrapper a:not(.MuiButton-root):not(.skin-nav-btn) {
+  color: var(--um-link);
 }
 html.skin-redesign .forums .forum-column .column-content,
 html.skin-redesign .forums .forum-column.two .column-content,

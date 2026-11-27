@@ -3066,3 +3066,50 @@ html.skin-redesign.light-mode .fame-competitive .MuiPaper-root {
   -webkit-backdrop-filter: none !important;
   border-radius: 0 !important;
 }
+
+/* Title rules sit above a hairline, after the accent underline. */
+html.skin-redesign .play .skin-mod-title.MuiTypography-h3,
+html.skin-redesign .skin-port .skin-mod-title.MuiTypography-h3,
+html.skin-redesign .box-panel .skin-mod-title.MuiTypography-h3 {
+  border-bottom-width: 1px !important;
+  border-bottom-style: solid !important;
+  border-bottom-color: rgba(255, 255, 255, .1) !important;
+}
+html.skin-redesign.light-mode .play .skin-mod-title.MuiTypography-h3,
+html.skin-redesign.light-mode .skin-port .skin-mod-title.MuiTypography-h3,
+html.skin-redesign.light-mode .box-panel .skin-mod-title.MuiTypography-h3 {
+  border-bottom-color: rgba(0, 0, 0, .1) !important;
+}
+
+/* Role icons on a lobby row have no pill behind them. */
+html.skin-redesign .play .skin-port .game .roles .setup.MuiPaper-root,
+html.skin-redesign.light-mode .play .skin-port .game .roles .setup.MuiPaper-root,
+html.skin-redesign .play .skin-port .game .roles .setup .MuiStack-root,
+html.skin-redesign.light-mode .play .skin-port .game .roles .setup .MuiStack-root,
+html.skin-redesign .play .skin-port .game .roles .MuiCard-root,
+html.skin-redesign.light-mode .play .skin-port .game .roles .MuiCard-root {
+  background: transparent !important;
+  background-color: transparent !important;
+  background-image: none !important;
+  border: 0 !important;
+  box-shadow: none !important;
+  border-radius: 0 !important;
+}
+
+/* One sans family with the lobby. Icon fonts stay on their own glyphs. */
+html.skin-redesign,
+html.skin-redesign body,
+html.skin-redesign body *:not(.fas):not(.far):not(.fab):not(.fa) {
+  font-family: Roboto, "Segoe UI", sans-serif !important;
+}
+html.skin-redesign .fas,
+html.skin-redesign .far,
+html.skin-redesign .fa,
+html.skin-redesign i.fas,
+html.skin-redesign i.far {
+  font-family: "Font Awesome 5 Free" !important;
+}
+html.skin-redesign .fab,
+html.skin-redesign i.fab {
+  font-family: "Font Awesome 5 Brands" !important;
+}

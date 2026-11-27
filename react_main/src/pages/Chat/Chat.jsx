@@ -781,9 +781,12 @@ export default function Chat({
           size="small"
           variant="contained"
           color="secondary"
+          className={skin ? "skin-chat-new" : undefined}
           onClick={onOpenNewChatDialog}
+          aria-label="New"
+          title="New"
         >
-          New
+          {skin ? <i className="fas fa-plus" aria-hidden="true" /> : "New"}
         </Button>
       </Stack>
 

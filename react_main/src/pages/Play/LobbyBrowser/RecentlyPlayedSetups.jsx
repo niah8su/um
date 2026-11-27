@@ -106,7 +106,7 @@ export const RecentlyPlayedSetups = ({ lobby }) => {
           setup={selSetup}
         />
       )}
-      <Stack spacing={1}>{setupRows}</Stack>
+      <Stack className="skin-pop-setups" spacing={1}>{setupRows}</Stack>
     </LobbySidebarPanel>
   );
 };

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { GameStatus } from "./GameRow";
 import Setup from "components/Setup";
@@ -197,6 +197,23 @@ export default function SkinLobby({
 }) {
   const [rehost, setRehost] = useState(null);
   const light = useSiteLight();
+  useEffect(() => {
+    const root = document.documentElement;
+    if (!loading) return undefined;
+    const id = String(Date.now());
+    const shownAt = Date.now();
+    root.dataset.umBusy = id;
+    root.classList.add("um-loading");
+    return () => {
+      if (root.dataset.umBusy === id) delete root.dataset.umBusy;
+      const wait = Math.max(0, 900 - (Date.now() - shownAt));
+      window.setTimeout(() => {
+        if (root.dataset.umBusy) return;
+        if (!document.querySelector(".skin-port")) return;
+        root.classList.remove("um-loading");
+      }, wait);
+    };
+  }, [loading]);
   const rows = lobbyGames(games);
   return (
     <div className="view-player skin-port">

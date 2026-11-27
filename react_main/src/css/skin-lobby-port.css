@@ -660,7 +660,11 @@ html.skin-redesign .skin-port .skin-mod-title {
   letter-spacing: .08em;
   font-size: 13px !important;
   font-weight: 700 !important;
-  border-bottom: 1px solid var(--um-accent) !important;
+  border-bottom: 1px solid rgba(255, 255, 255, .1) !important;
+}
+html.skin-redesign.light-mode .skin-mod-title,
+html.skin-redesign.light-mode .skin-port .skin-mod-title {
+  border-bottom-color: rgba(0, 0, 0, .1) !important;
 }
 html.skin-redesign .skin-mod-ico {
   width: 16px;
@@ -1218,7 +1222,7 @@ html.skin-redesign .skin-port .poll-quote {
   position: absolute;
   z-index: 1;
   margin: 0;
-  font-family: Georgia, Palatino, serif;
+  font-family: Roboto, "Segoe UI", sans-serif;
   font-size: 44px;
   font-weight: 700;
   line-height: 1;
@@ -1302,8 +1306,8 @@ html.skin-redesign .skin-forum-kicker {
 html.skin-redesign.light-mode .skin-forum-kicker {
   color: #1c1917 !important;
 }
-html.skin-redesign:not(.light-mode) .skin-forum-title { color: var(--um-link, #ff8f8f) !important; font-weight: 600; }
-html.skin-redesign.light-mode .skin-forum-title { color: var(--um-accent) !important; font-weight: 600; }
+html.skin-redesign:not(.light-mode) .skin-forum-title { color: #d8d2cc !important; font-weight: 500; font-size: 12px !important; }
+html.skin-redesign.light-mode .skin-forum-title { color: #3f4650 !important; font-weight: 500; font-size: 12px !important; }
 html.skin-redesign .lobby-side > .panel:empty {
   display: none !important;
   padding: 0 !important;
@@ -1333,4 +1337,359 @@ html.skin-redesign .skin-letter-ava {
 html.skin-redesign .skin-port .gift-row,
 html.skin-redesign .box-panel .content .MuiStack-root > .MuiBox-root {
   justify-content: center;
+}
+
+/* Competitive stub is a gold metal cap, not the flat #111 face. */
+html.skin-redesign .skin-port .game.comp .stub,
+html.skin-redesign .skin-port .game.tone-competitive .stub {
+  position: relative;
+  overflow: hidden;
+  background: linear-gradient(90deg, #5a4612 0%, #8c6a1e 14%, #e4c15e 38%, #fff3c2 50%, #f2d48a 60%, #9a7426 84%, #4a3a0e 100%) !important;
+  box-shadow: inset 1px 0 1px rgba(255, 246, 214, .55), inset -1px 0 2px rgba(36, 24, 4, .55) !important;
+}
+html.skin-redesign .skin-port .game.comp .stub::after,
+html.skin-redesign .skin-port .game.tone-competitive .stub::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(255,255,255,.38), transparent 30%, transparent 72%, rgba(0,0,0,.18));
+  pointer-events: none;
+}
+html.skin-redesign.light-mode .skin-port .game.comp .stub,
+html.skin-redesign.light-mode .skin-port .game.tone-competitive .stub {
+  background: linear-gradient(90deg, #8a6a12 0%, #c9a227 18%, #fff6d0 48%, #f6e27a 64%, #b8891c 100%) !important;
+}
+
+/* Role icons sit on the row, with no dark pill behind them. */
+html.skin-redesign .skin-port .game .roles,
+html.skin-redesign .skin-port .game .roles .setup,
+html.skin-redesign .skin-port .game .roles .MuiPaper-root,
+html.skin-redesign .skin-port .game .roles .MuiCard-root,
+html.skin-redesign .skin-port .game .roles .MuiStack-root,
+html.skin-redesign.light-mode .skin-port .game .roles,
+html.skin-redesign.light-mode .skin-port .game .roles .setup,
+html.skin-redesign.light-mode .skin-port .game .roles .MuiPaper-root,
+html.skin-redesign.light-mode .skin-port .game .roles .MuiCard-root,
+html.skin-redesign.light-mode .skin-port .game .roles .MuiStack-root {
+  background: transparent !important;
+  background-color: transparent !important;
+  background-image: none !important;
+  border: 0 !important;
+  box-shadow: none !important;
+  border-radius: 0 !important;
+}
+
+/* One All tab. A later lobby that falls through to the All face is the duplicate. */
+html.skin-redesign .skin-port .lobby-tabs button[data-lobby="all"] ~ button[data-lobby="all"] {
+  display: none !important;
+}
+html.skin-redesign .skin-port .lobby-tabs button[data-lobby="all"].on,
+html.skin-redesign .skin-port .lobby-tabs button[data-lobby="all"]:hover {
+  color: var(--tab-on, #d8dee6) !important;
+  background: var(--tab-on-bg, rgba(255,255,255,.1)) !important;
+  border-color: var(--tab-on-border, rgba(255,255,255,.22)) !important;
+  box-shadow: var(--tab-on-shadow, none) !important;
+}
+
+/* Module titles use a hairline divider, not an accent bar. */
+html.skin-redesign .play .skin-mod-title.MuiTypography-h3,
+html.skin-redesign .skin-port .skin-mod-title,
+html.skin-redesign .box-panel .skin-mod-title.MuiTypography-h3 {
+  border-bottom: 1px solid rgba(255, 255, 255, .1) !important;
+}
+html.skin-redesign.light-mode .play .skin-mod-title.MuiTypography-h3,
+html.skin-redesign.light-mode .skin-port .skin-mod-title,
+html.skin-redesign.light-mode .box-panel .skin-mod-title.MuiTypography-h3 {
+  border-bottom: 1px solid rgba(0, 0, 0, .1) !important;
+}
+
+/* Pager: dark glass on the current page, muted chevrons, preview text shadow. */
+html.skin-redesign .page-nav .MuiIconButton-root,
+html.skin-redesign .page-nav .MuiIconButton-root i,
+html.skin-redesign .page-nav .MuiIconButton-root .fas,
+html.skin-redesign .skin-port .page-nav .MuiIconButton-root,
+html.skin-redesign .skin-port .page-nav .MuiIconButton-root i {
+  color: rgba(246, 241, 234, .55) !important;
+  background: transparent !important;
+  background-color: transparent !important;
+  border-color: transparent !important;
+  box-shadow: none !important;
+  text-shadow: 0 1px 0 rgba(255, 255, 255, .28);
+}
+html.skin-redesign .page-nav .MuiIconButton-root.is-current,
+html.skin-redesign .page-nav .MuiIconButton-root.is-current:hover,
+html.skin-redesign .page-nav .MuiIconButton-root[style],
+html.skin-redesign .skin-port .page-nav .MuiIconButton-root.is-current,
+html.skin-redesign .skin-port .page-nav .MuiIconButton-root[style] {
+  background: rgba(255, 255, 255, .08) !important;
+  background-color: rgba(255, 255, 255, .08) !important;
+  color: rgba(246, 241, 234, .92) !important;
+  border: 1px solid rgba(255, 255, 255, .12) !important;
+  box-shadow: none !important;
+}
+html.skin-redesign .page-nav .MuiIconButton-root.is-current .MuiTypography-root,
+html.skin-redesign .page-nav .MuiIconButton-root[style] .MuiTypography-root {
+  color: rgba(246, 241, 234, .92) !important;
+  text-shadow: 0 1px 0 rgba(255, 255, 255, .28);
+}
+html.skin-redesign.light-mode .page-nav .MuiIconButton-root,
+html.skin-redesign.light-mode .page-nav .MuiIconButton-root i,
+html.skin-redesign.light-mode .page-nav .MuiIconButton-root .fas,
+html.skin-redesign.light-mode .skin-port .page-nav .MuiIconButton-root,
+html.skin-redesign.light-mode .skin-port .page-nav .MuiIconButton-root i {
+  color: #57606a !important;
+  text-shadow: none;
+}
+html.skin-redesign.light-mode .page-nav .MuiIconButton-root.is-current,
+html.skin-redesign.light-mode .page-nav .MuiIconButton-root.is-current:hover,
+html.skin-redesign.light-mode .page-nav .MuiIconButton-root[style],
+html.skin-redesign.light-mode .skin-port .page-nav .MuiIconButton-root.is-current,
+html.skin-redesign.light-mode .skin-port .page-nav .MuiIconButton-root[style] {
+  background: rgba(28, 25, 23, .08) !important;
+  background-color: rgba(28, 25, 23, .08) !important;
+  color: #1c1917 !important;
+  border: 1px solid rgba(0, 0, 0, .12) !important;
+}
+html.skin-redesign.light-mode .page-nav .MuiIconButton-root.is-current .MuiTypography-root,
+html.skin-redesign.light-mode .page-nav .MuiIconButton-root[style] .MuiTypography-root {
+  color: #1c1917 !important;
+  text-shadow: none;
+}
+
+html.skin-redesign .avatar,
+html.skin-redesign.light-mode .avatar {
+  box-shadow: none !important;
+}
+
+/* Popular setups: one thin glass card, name above smaller icons. */
+html.skin-redesign .skin-pop-setups > .MuiBox-root,
+html.skin-redesign.light-mode .skin-pop-setups > .MuiBox-root {
+  align-items: flex-start !important;
+  gap: 6px;
+  padding: 8px 8px 6px !important;
+  border-radius: 6px !important;
+  border: 1px solid rgba(255, 255, 255, .14) !important;
+  background: rgba(255, 255, 255, .04) !important;
+  box-shadow: none !important;
+}
+html.skin-redesign.light-mode .skin-pop-setups > .MuiBox-root {
+  border-color: rgba(0, 0, 0, .1) !important;
+  background: rgba(255, 255, 255, .35) !important;
+}
+html.skin-redesign .skin-pop-setups .setup,
+html.skin-redesign .skin-pop-setups .setup .MuiStack-root,
+html.skin-redesign.light-mode .skin-pop-setups .setup,
+html.skin-redesign.light-mode .skin-pop-setups .setup .MuiStack-root {
+  background: transparent !important;
+  background-image: none !important;
+  border: 0 !important;
+  box-shadow: none !important;
+  border-radius: 0 !important;
+  padding: 0 !important;
+}
+html.skin-redesign .skin-pop-setups .setup > .MuiStack-root > button,
+html.skin-redesign .skin-pop-setups .setup > .MuiStack-root > .MuiDivider-root {
+  display: none !important;
+}
+html.skin-redesign .skin-pop-setups .setup > .MuiStack-root {
+  align-items: flex-start !important;
+  width: 100%;
+}
+html.skin-redesign .skin-pop-setups .setup > .MuiStack-root > .MuiStack-root:not(button) {
+  flex-direction: column !important;
+  align-items: flex-start !important;
+  justify-content: flex-start !important;
+  gap: 4px !important;
+  padding: 0 !important;
+  width: 100%;
+}
+html.skin-redesign .skin-pop-setups .setup-name,
+html.skin-redesign .skin-pop-setups .setup-name span {
+  text-align: left !important;
+  white-space: normal !important;
+}
+html.skin-redesign .skin-pop-setups .role,
+html.skin-redesign .skin-pop-setups .role-count-wrap {
+  width: 14px !important;
+  height: 14px !important;
+  min-width: 14px !important;
+}
+html.skin-redesign .skin-pop-setups .MuiIconButton-root {
+  width: 22px !important;
+  height: 22px !important;
+  min-width: 22px !important;
+  padding: 0 !important;
+  margin-top: 0 !important;
+}
+html.skin-redesign .skin-pop-setups .rehost {
+  font-size: 11px !important;
+}
+
+/* Poll keeps the pager under the question. */
+html.skin-redesign .skin-module .skin-poll-pager:first-child {
+  display: none !important;
+}
+
+/* Comments. */
+html.skin-redesign .comments-page .post,
+html.skin-redesign .comments-page .MuiPaper-root,
+html.skin-redesign.light-mode .comments-page .MuiPaper-root {
+  padding: 16px 14px 18px !important;
+  border-radius: 6px !important;
+}
+html.skin-redesign .comments-page .md-content,
+html.skin-redesign .comments-page .user-name,
+html.skin-redesign .comments-page .md-content p {
+  font-size: 13px !important;
+  line-height: 1.35 !important;
+}
+html.skin-redesign .comments-page .skin-c-time,
+html.skin-redesign.light-mode .comments-page .skin-c-time {
+  top: 8px;
+  right: 12px;
+  color: #8b949e !important;
+  opacity: 1 !important;
+  font-size: 11px !important;
+  z-index: 2;
+  pointer-events: none;
+}
+html.skin-redesign .comments-page .MuiPaper-root > .MuiStack-root > .MuiStack-root:nth-child(2) > .MuiStack-root:first-child {
+  padding-right: 78px;
+}
+html.skin-redesign .comments-page .MuiPaper-root > .MuiStack-root > .MuiStack-root:first-child {
+  align-items: center !important;
+  width: 28px !important;
+  min-width: 28px !important;
+  padding-right: 0 !important;
+  flex: none;
+}
+html.skin-redesign .comments-page .fa-arrow-up,
+html.skin-redesign .comments-page .fa-arrow-down,
+html.skin-redesign .comments-page .MuiPaper-root > .MuiStack-root > .MuiStack-root:first-child .MuiIconButton-root {
+  width: 28px !important;
+  min-width: 28px !important;
+  height: 22px !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+}
+html.skin-redesign .comments-page .fa-arrow-up::before,
+html.skin-redesign .comments-page .fa-arrow-down::before {
+  display: block;
+  width: 100%;
+  text-align: center;
+  line-height: 1;
+}
+html.skin-redesign .comments-page .emote-reactions {
+  position: absolute;
+  top: auto !important;
+  right: 10px !important;
+  bottom: 10px !important;
+  margin: 0 !important;
+}
+html.skin-redesign .comments-page .emote-reactions-picker .dropdown-control,
+html.skin-redesign.light-mode .comments-page .emote-reactions-picker .dropdown-control {
+  width: 22px !important;
+  min-width: 22px !important;
+  height: 22px !important;
+  padding: 0 !important;
+  border: 0 !important;
+  border-radius: 4px !important;
+  background: transparent !important;
+  background-image: none !important;
+  box-shadow: none !important;
+  color: #8b949e !important;
+}
+html.skin-redesign .comments-page .emote-reactions-picker .dropdown-control img { display: none !important; }
+html.skin-redesign .comments-page .emote-reactions-picker .dropdown-control::before {
+  content: "\f118";
+  font-family: "Font Awesome 5 Free" !important;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 1;
+}
+html.skin-redesign .comments-page .emote-reactions-picker .dropdown-control:hover,
+html.skin-redesign.light-mode .comments-page .emote-reactions-picker .dropdown-control:hover {
+  color: #e6edf3 !important;
+  background: transparent !important;
+  box-shadow: none !important;
+}
+html.skin-redesign.light-mode .comments-page .emote-reactions-picker .dropdown-control:hover {
+  color: #1c1917 !important;
+}
+
+/* Stamp exchange is the outer glass only. */
+html.skin-redesign .skin-port .panel .box-panel,
+html.skin-redesign.light-mode .skin-port .panel .box-panel,
+html.skin-redesign .skin-port .panel .box-panel .content,
+html.skin-redesign.light-mode .skin-port .panel .box-panel .content {
+  background: transparent !important;
+  background-color: transparent !important;
+  background-image: none !important;
+  border: 0 !important;
+  box-shadow: none !important;
+  border-radius: 0 !important;
+}
+html.skin-redesign .skin-port .panel .box-panel { padding: 0 !important; }
+
+/* Lobby chat is one glass surface. The composer keeps a hairline. */
+html.skin-redesign .skin-port .panel > .MuiPaper-root,
+html.skin-redesign.light-mode .skin-port .panel > .MuiPaper-root,
+html.skin-redesign .skin-port .panel .chat-window,
+html.skin-redesign .skin-port .panel .channel-messages,
+html.skin-redesign.light-mode .skin-port .panel .chat-window,
+html.skin-redesign.light-mode .skin-port .panel .channel-messages {
+  background: transparent !important;
+  background-color: transparent !important;
+  background-image: none !important;
+  border: 0 !important;
+  box-shadow: none !important;
+}
+html.skin-redesign .skin-port .panel > .MuiPaper-root { overflow: visible !important; }
+html.skin-redesign .skin-port .panel > .MuiPaper-root > .MuiStack-root:first-of-type {
+  padding: 8px 10px 6px !important;
+  min-width: 0;
+}
+html.skin-redesign .skin-port .panel .channel-messages + .MuiBox-root,
+html.skin-redesign.light-mode .skin-port .panel .channel-messages + .MuiBox-root {
+  background: transparent !important;
+  background-color: transparent !important;
+  border-top: 1px solid rgba(255, 255, 255, .1) !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+}
+html.skin-redesign.light-mode .skin-port .panel .channel-messages + .MuiBox-root {
+  border-top-color: rgba(0, 0, 0, .1) !important;
+}
+html.skin-redesign .skin-chat-new.MuiButton-contained,
+html.skin-redesign .skin-chat-new.MuiButton-root {
+  flex: none;
+  width: 28px !important;
+  min-width: 28px !important;
+  height: 28px !important;
+  padding: 0 !important;
+  border-radius: 8px !important;
+  background: color-mix(in srgb, var(--um-accent) 85%, transparent) !important;
+  color: var(--um-accent-ink, #fff) !important;
+  border: 1px solid var(--um-accent) !important;
+  box-shadow: none !important;
+}
+html.skin-redesign .skin-chat-new.MuiButton-root:hover {
+  box-shadow: 0 0 16px color-mix(in srgb, var(--um-accent) 45%, transparent) !important;
+}
+html.skin-redesign .skin-port .panel .message .user-name,
+html.skin-redesign .skin-port .panel .message .content {
+  font-size: 12px !important;
+}
+html.skin-redesign .skin-port .panel .message .MuiTypography-caption {
+  font-size: 10px !important;
+  color: #8b949e !important;
+}
+@media (max-width: 500px) {
+  html.skin-redesign .skin-port .panel > .MuiPaper-root .MuiInputBase-root {
+    min-width: 0 !important;
+    max-width: 42vw;
+  }
 }

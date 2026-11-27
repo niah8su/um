@@ -1261,8 +1261,30 @@ html.skin-redesign .game .main {
 }
 html.skin-redesign .game .center-panel,
 html.skin-redesign .game .speech-display,
-html.skin-redesign .game .panel {
+html.skin-redesign .game .center-panel {
+  background: transparent !important;
+  background-color: transparent !important;
+}
+html.skin-redesign.light-mode .game .panel,
+html.skin-redesign.light-mode .game .left-panel,
+html.skin-redesign.light-mode .game .right-panel,
+html.skin-redesign.light-mode .game .title-box,
+html.skin-redesign.light-mode .game .meeting-tabs {
+  background: rgba(255, 255, 255, .4) !important;
+  background-color: rgba(255, 255, 255, .4) !important;
+  border: 1px solid rgba(208, 215, 222, .95);
+}
+html.skin-redesign:not(.light-mode) .game .speech-display,
+html.skin-redesign:not(.light-mode) .game .panel {
   background: rgba(12, 10, 14, 0.28) !important;
+}
+html.skin-redesign.light-mode .game .speech-display,
+html.skin-redesign.light-mode .game .panel,
+html.skin-redesign.light-mode .game .left-panel,
+html.skin-redesign.light-mode .game .right-panel,
+html.skin-redesign.light-mode .game .title-box {
+  background: rgba(255, 255, 255, .42) !important;
+  background-color: rgba(255, 255, 255, .42) !important;
 }
 
 html.skin-redesign .game .user-name-text { color: inherit !important; }
@@ -2765,6 +2787,67 @@ html.skin-redesign .site-activity .MuiTypography-overline {
   letter-spacing: 0.08em;
   text-transform: uppercase;
   color: #8b949e;
+}
+html.skin-redesign .setup-wizard > .MuiPaper-root,
+html.skin-redesign .setup-step-navigation {
+  background: linear-gradient(180deg, rgba(255,255,255,.08), rgba(255,255,255,.02)), rgba(8, 10, 14, .5) !important;
+  border: 1px solid rgba(240, 246, 252, .14) !important;
+  border-radius: 8px !important;
+  box-shadow: none !important;
+  color: var(--um-ink);
+}
+html.skin-redesign.light-mode .setup-wizard > .MuiPaper-root,
+html.skin-redesign.light-mode .setup-step-navigation {
+  background: rgba(255, 255, 255, .34) !important;
+  background-image: none !important;
+  border-color: rgba(208, 215, 222, .95) !important;
+  color: #1c1917;
+}
+html.skin-redesign .setup-wizard .MuiTypography-h3,
+html.skin-redesign .setup-wizard .MuiStepLabel-label {
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+html.skin-redesign .setup-wizard .MuiStepIcon-root.Mui-active,
+html.skin-redesign .setup-wizard .MuiStepIcon-root.Mui-completed {
+  color: var(--um-accent) !important;
+}
+html.skin-redesign .game .state-name {
+  color: var(--um-ink);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  font-size: 12px;
+}
+html.skin-redesign .game .state-timer {
+  background: var(--um-accent);
+  color: var(--um-accent-ink, #fff);
+  border: 1px solid var(--um-accent);
+}
+html.skin-redesign .game .game-name,
+html.skin-redesign .game .game-name span {
+  color: var(--um-ink);
+  text-shadow: none;
+  font-family: Roboto, "Segoe UI", sans-serif;
+}
+html.skin-redesign .game .player-list .section-title {
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  font-size: 11px;
+  color: #8b949e;
+}
+html.skin-redesign .game .player-list .player {
+  border-bottom: 1px solid var(--um-line);
+}
+html.skin-redesign .game .tab.sel {
+  background: color-mix(in srgb, var(--um-accent) 85%, transparent);
+  color: var(--um-accent-ink, #fff);
+}
+html.skin-redesign .game .input-area,
+html.skin-redesign .game .chat-input,
+html.skin-redesign .game textarea {
+  background: transparent;
+  color: var(--um-ink);
+  border-color: var(--um-line);
 }
 html.skin-redesign .page-nav .MuiIconButton-root.is-current,
 html.skin-redesign .page-nav .MuiIconButton-root.is-current:hover {

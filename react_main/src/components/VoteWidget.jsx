@@ -103,7 +103,7 @@ export function VoteWidget(props) {
   return (
     <Stack direction="column">
       <IconButton
-        className={`fas fa-arrow-up`}
+        className={`fas fa-arrow-up${item.vote === 1 ? " is-voted" : ""}`}
         sx={{
           fontSize: "1em",
           color: "inherit",
@@ -132,7 +132,7 @@ export function VoteWidget(props) {
         </Typography>
       </IconButton>
       <IconButton
-        className={`fas fa-arrow-down`}
+        className={`fas fa-arrow-down${item.vote === -1 ? " is-voted" : ""}`}
         sx={{
           fontSize: "1em",
           color: "inherit",

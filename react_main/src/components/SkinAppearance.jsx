@@ -117,7 +117,7 @@ export function SkinAppearanceFields() {
         <input
           type="color"
           aria-label="Color 1"
-          value={colors[g1Key] || (light ? "#d2cccb" : "#4a1220")}
+          value={colors[g1Key] || (light ? "#e3e1e0" : "#4a1220")}
           onChange={(e) => setColor(g1Key, e.target.value)}
         />
       </label>
@@ -126,7 +126,7 @@ export function SkinAppearanceFields() {
         <input
           type="color"
           aria-label="Color 2"
-          value={colors[g2Key] || (light ? "#d2cccb" : "#12060c")}
+          value={colors[g2Key] || (light ? "#e3e1e0" : "#12060c")}
           onChange={(e) => setColor(g2Key, e.target.value)}
         />
       </label>

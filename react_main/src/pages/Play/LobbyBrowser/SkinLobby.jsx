@@ -260,7 +260,7 @@ export default function SkinLobby({
             <div className="games-end">
               {!user.settings?.hideTutorialButton && (
                 <Link className="sq-btn help-btn" to="/play/tutorial" data-testid="tutorial-link" aria-label="Tutorial" title="Tutorial">
-                  <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M11.2 17.2h1.6v-1.7h-1.6zm.2-3.2h1.6c0-1.7 2.5-1.6 2.5-3.5A2.7 2.7 0 0 0 12 7.6 2.7 2.7 0 0 0 9.1 10h1.7a1.2 1.2 0 1 1 2.1.8c-.7.5-1.5 1-1.5 2.6z" /></svg>
+                  <span className="help-mark" aria-hidden="true">?</span>
                 </Link>
               )}
               <button type="button" className="icon-btn refresh-btn" aria-label="Refresh the games list" onClick={refreshGames}>

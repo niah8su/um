@@ -8,8 +8,8 @@ html.skin-redesign .skin-port {
   color: #e6edf3;
 }
 html.skin-redesign.light-mode .skin-port {
-  --panel: linear-gradient(180deg, rgba(255,255,255,.62), rgba(255,255,255,.28)), rgba(255,255,255,.42);
-  --panel-line: rgba(208,215,222,.95);
+  --panel: linear-gradient(180deg, rgba(255,255,255,.78), rgba(255,255,255,.48)), rgba(255,255,255,.58);
+  --panel-line: rgba(28, 25, 23, .12);
   --panel-shadow: 0 8px 24px rgba(31,35,40,.08), inset 0 1px 0 rgba(255,255,255,.9);
   color: #1f2328;
 }
@@ -86,8 +86,8 @@ html.skin-redesign .skin-port .games-bar {
 }
 html.skin-redesign.light-mode .skin-port .panel,
 html.skin-redesign.light-mode .skin-port .games-bar {
-  background: linear-gradient(180deg, rgba(255,255,255,.78), rgba(255,255,255,.4)), rgba(255,255,255,.55);
-  border-color: rgba(208,215,222,.95);
+  background: linear-gradient(180deg, rgba(255,255,255,.82), rgba(255,255,255,.5)), rgba(255,255,255,.62);
+  border-color: rgba(28, 25, 23, .12);
   color: #1c1917;
 }
 html.skin-redesign .skin-port .games-bar {
@@ -1522,9 +1522,10 @@ html.skin-redesign .skin-pop-setups .setup-name span {
 }
 html.skin-redesign .skin-pop-setups .role,
 html.skin-redesign .skin-pop-setups .role-count-wrap {
-  width: 14px !important;
-  height: 14px !important;
-  min-width: 14px !important;
+  width: 17px !important;
+  height: 17px !important;
+  min-width: 17px !important;
+  max-width: 17px !important;
 }
 html.skin-redesign .skin-pop-setups .MuiIconButton-root {
   width: 22px !important;
@@ -1613,7 +1614,40 @@ html.skin-redesign .comments-page .MuiPaper-root > .MuiStack-root > .MuiStack-ro
   min-width: 0;
 }
 html.skin-redesign .comments-page .MuiDivider-root { display: none !important; }
-html.skin-redesign .comments-page .md-content { margin-top: 2px !important; }
+html.skin-redesign .comments-page .name-with-avatar { margin-left: 0 !important; }
+html.skin-redesign .comments-page .name-with-avatar > .MuiStack-root {
+  border-left: 1px solid rgba(255, 255, 255, .08);
+  padding-left: 10px;
+  margin-left: 8px;
+}
+html.skin-redesign.light-mode .comments-page .name-with-avatar > .MuiStack-root {
+  border-left-color: rgba(0, 0, 0, .08);
+}
+html.skin-redesign .comments-page .md-content {
+  margin-top: 2px !important;
+  margin-left: 67px !important;
+  padding-left: 0 !important;
+}
+html.skin-redesign .comments-page .fa-arrow-up:hover,
+html.skin-redesign .comments-page .fa-arrow-up.is-voted { color: #3fb950 !important; }
+html.skin-redesign .comments-page .fa-arrow-down:hover,
+html.skin-redesign .comments-page .fa-arrow-down.is-voted { color: #f85149 !important; }
+html.skin-redesign .comments-page .MuiPaper-root > .MuiStack-root > .MuiStack-root:first-child .MuiIconButton-root:not(.fa-arrow-up):not(.fa-arrow-down) {
+  background: transparent !important;
+  border: 0 !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+  width: 28px !important;
+  height: 16px !important;
+  min-height: 0 !important;
+}
+html.skin-redesign .comments-page .MuiPaper-root > .MuiStack-root > .MuiStack-root:first-child .MuiIconButton-root:not(.fa-arrow-up):not(.fa-arrow-down) .MuiTypography-root {
+  position: static !important;
+  font-size: 11px !important;
+  line-height: 1 !important;
+  background: none !important;
+  border: 0 !important;
+}
 html.skin-redesign .comments-page .MuiPaper-root > .MuiStack-root > .MuiStack-root:nth-child(2) > .MuiStack-root:first-child > .MuiStack-root:last-child {
   position: absolute;
   top: 4px;
@@ -1808,4 +1842,46 @@ html.skin-redesign.light-mode .skin-port .help-btn.sq-btn {
 html.skin-redesign .skin-port .help-btn svg {
   width: 22px !important;
   height: 22px !important;
+}
+html.skin-redesign .skin-port .games-bar {
+  align-items: center !important;
+}
+html.skin-redesign .skin-port .games-end {
+  align-self: center !important;
+  height: auto !important;
+  display: flex !important;
+  align-items: center !important;
+}
+html.skin-redesign .skin-port .refresh-btn,
+html.skin-redesign .skin-port .refresh-btn .MuiIconButton-root,
+html.skin-redesign .skin-port .help-btn,
+html.skin-redesign .skin-port .help-btn.sq-btn {
+  width: 28px !important;
+  height: 28px !important;
+  min-width: 28px !important;
+  min-height: 28px !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  align-self: center !important;
+  line-height: 1 !important;
+}
+html.skin-redesign .skin-port .refresh-btn i {
+  font-size: 16px !important;
+  line-height: 1 !important;
+  width: 16px !important;
+  height: 16px !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+}
+html.skin-redesign .skin-port .help-btn .help-mark {
+  font-family: Roboto, "Segoe UI", sans-serif;
+  font-weight: 500;
+  font-size: 16px;
+  font-weight: 600;
+  line-height: 1;
+  display: block;
 }

@@ -12,6 +12,7 @@ import {
   DialogContent,
 } from "@mui/material";
 import ProviderButton from "./ProviderButton";
+import { useSkinRedesign } from "./useSkinRedesign";
 import {
   getAuth,
   GoogleAuthProvider,
@@ -35,6 +36,7 @@ import SignInWithAppleButton, {
 } from "./SignInWithAppleButton";
 
 export const Auth = ({ defaultTab = 0, open, onClose, asDialog = false }) => {
+  const skin = useSkinRedesign();
   const snackbarHook = useSnackbar();
   const siteInfo = useContext(SiteInfoContext);
   const user = useContext(UserContext);
@@ -626,6 +628,8 @@ export const Auth = ({ defaultTab = 0, open, onClose, asDialog = false }) => {
               Login
             </Button>
           </form>
+          {skin && <div className="skin-or">Or sign in with</div>}
+          <div className={skin ? "skin-provider-row" : undefined}>
           <ProviderButton
             provider="google"
             onClick={loginGoogle}
@@ -643,7 +647,9 @@ export const Auth = ({ defaultTab = 0, open, onClose, asDialog = false }) => {
             Sign in with Discord
           </ProviderButton>
           <SignInWithAppleButton onClick={loginApple} disabled={loading} />
+          </div>
           <Typography
+            className={skin ? "skin-auth-terms" : undefined}
             color="text.secondary"
             sx={{
               fontSize: "11px",
@@ -658,7 +664,7 @@ export const Auth = ({ defaultTab = 0, open, onClose, asDialog = false }) => {
             &nbsp;and&nbsp;
             <Link to="/policy/privacy">Privacy Policy</Link>.
           </Typography>
-          <Stack direction="row" spacing={1} sx={{ mt: 1, justifyContent: "center" }}>
+          <Stack className={skin ? "skin-auth-links" : undefined} direction="row" spacing={1} sx={{ mt: 1, justifyContent: "center" }}>
             <Button
               variant="text"
               sx={{ pb: 0, cursor: "Pointer", textTransform: "none", fontSize: "12px" }}
@@ -756,6 +762,8 @@ export const Auth = ({ defaultTab = 0, open, onClose, asDialog = false }) => {
           Register
         </Button>
       </form>
+      {skin && <div className="skin-or">Or sign in with</div>}
+      <div className={skin ? "skin-provider-row" : undefined}>
       <ProviderButton
         provider="google"
         onClick={registerGoogle}
@@ -777,6 +785,7 @@ export const Auth = ({ defaultTab = 0, open, onClose, asDialog = false }) => {
         disabled={loading}
         label="Sign up with Apple"
       />
+      </div>
       <Typography
         color="text.secondary"
         sx={{
@@ -841,8 +850,9 @@ export const Auth = ({ defaultTab = 0, open, onClose, asDialog = false }) => {
           maxWidth="sm"
           fullWidth
           PaperProps={{
+            className: skin ? "skin-auth-dialog" : undefined,
             sx: {
-              height: "600px",
+              height: skin ? "auto" : "600px",
               maxHeight: "90vh",
             }
           }}

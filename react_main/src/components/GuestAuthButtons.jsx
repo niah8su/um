@@ -22,8 +22,9 @@ export const GuestAuthButtons = () => {
 
   return (
     <>
-      <Stack direction="row" spacing={1}>
+      <Stack className="skin-guest-auth" direction="row" spacing={1}>
         <Button
+          className="skin-guest-login"
           variant="outlined"
           size="small"
           onClick={openLoginDialog}
@@ -35,6 +36,7 @@ export const GuestAuthButtons = () => {
           Login
         </Button>
         <Button
+          className="skin-guest-register"
           variant="contained"
           size="small"
           onClick={openRegisterDialog}

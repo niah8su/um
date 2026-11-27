@@ -210,6 +210,16 @@ function Main(props) {
   }, [inGame]);
 
   const loading = isUserLoading || isSiteInfoLoading;
+  const [loaderHold, setLoaderHold] = useState(false);
+  useEffect(() => {
+    if (loading) {
+      setLoaderHold(false);
+      return undefined;
+    }
+    setLoaderHold(true);
+    const timer = window.setTimeout(() => setLoaderHold(false), 220);
+    return () => window.clearTimeout(timer);
+  }, [loading]);
 
   useEffect(() => {
     clearChunkReloadFlag();
@@ -318,7 +328,7 @@ function Main(props) {
 
   const mainContent = (
     <SiteInfoProvider setSiteInfoLoading={setSiteInfoLoading}>
-      {loading && <Loading />}
+      {(loading || loaderHold) && <Loading fading={!loading && loaderHold} />}
       {!loading && (
         <AppLocationContext.Provider value={location}>
         {/* Guide windows are hosted here rather than inside the game page, so a

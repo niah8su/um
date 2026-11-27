@@ -6,7 +6,7 @@ import { useTheme } from "@mui/material/styles";
 import { useSkinRedesign } from "./useSkinRedesign";
 import SiteLogo from "./SiteLogo";
 
-export const Loading = ({ small, extraSmall }) => {
+export const Loading = ({ small, extraSmall, fading }) => {
   const theme = useTheme();
   const isPhoneDevice = useIsPhoneDevice();
   const skin = useSkinRedesign();
@@ -24,7 +24,7 @@ export const Loading = ({ small, extraSmall }) => {
 
   if (skin && !extraSmall) {
     return (
-      <Box className="skin-loader" sx={{ height, bgcolor: "transparent" }}>
+      <Box className={fading ? "skin-loader is-leaving" : "skin-loader"} sx={{ height, bgcolor: "transparent" }}>
         <div className="skin-loader-card">
           <SiteLogo />
           <i className="skin-loader-beam" aria-hidden="true" />

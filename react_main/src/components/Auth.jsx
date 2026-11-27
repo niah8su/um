@@ -806,7 +806,7 @@ export const Auth = ({ defaultTab = 0, open, onClose, asDialog = false }) => {
   );
 
   const authContent = (
-    <Box sx={{ width: "100%", height: "100%", display: "flex", flexDirection: "column" }}>
+    <Box className={skin ? "skin-auth" : undefined} sx={{ width: "100%", height: "100%", display: "flex", flexDirection: "column" }}>
       <Tabs
         value={tabValue}
         onChange={handleTabChange}

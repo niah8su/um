@@ -3644,13 +3644,44 @@ html.skin-redesign .skin-auth-dialog {
   width: min(420px, calc(100vw - 32px)) !important;
   padding: 8px 8px 16px !important;
 }
-html.skin-redesign .skin-auth-dialog .MuiTab-root {
+html.skin-redesign .skin-auth .MuiTab-root {
   text-transform: uppercase;
   letter-spacing: 0.12em;
   font-weight: 700;
   font-size: 12px;
+  color: #8b949e;
 }
-html.skin-redesign .skin-auth-dialog .MuiInputLabel-root {
+html.skin-redesign .skin-auth .MuiTab-root.Mui-selected { color: var(--um-accent) !important; }
+html.skin-redesign .skin-auth .MuiTabs-indicator {
+  background-color: var(--um-accent) !important;
+  height: 2px;
+}
+html.skin-redesign .skin-auth .MuiInputBase-input { color: #f6f1ea; }
+html.skin-redesign.light-mode .skin-auth .MuiInputBase-input { color: #1c1917; }
+html.skin-redesign .skin-auth-links .MuiButton-text {
+  white-space: nowrap;
+  background: transparent !important;
+  width: auto !important;
+  min-width: 0 !important;
+}
+html.skin-redesign .skin-auth-card { min-height: 0 !important; }
+html.skin-redesign .skin-welcome-intro {
+  font-size: 13px !important;
+  line-height: 1.45 !important;
+}
+html.skin-redesign.light-mode .skin-side {
+  background: rgba(255, 255, 255, .38) !important;
+  backdrop-filter: blur(18px) saturate(1.25);
+  -webkit-backdrop-filter: blur(18px) saturate(1.25);
+}
+@media (min-width: 901px) {
+  html.skin-redesign .skin-side {
+    transition: top 220ms cubic-bezier(.2, .8, .2, 1), width 220ms cubic-bezier(.2, .8, .2, 1);
+  }
+  html.skin-redesign body.nav-away .skin-side,
+  html.skin-redesign body.nav-away .app-shell:has(.ios-beta-ticker) .skin-side { top: 0; }
+}
+html.skin-redesign .skin-auth .MuiInputLabel-root {
   position: static !important;
   transform: none !important;
   text-transform: uppercase;
@@ -3660,25 +3691,25 @@ html.skin-redesign .skin-auth-dialog .MuiInputLabel-root {
   color: #d0d7de !important;
   margin-bottom: 6px;
 }
-html.skin-redesign.light-mode .skin-auth-dialog .MuiInputLabel-root { color: #24292f !important; }
-html.skin-redesign .skin-auth-dialog .MuiTextField-root { margin-top: 12px; display: block; }
-html.skin-redesign .skin-auth-dialog .MuiInput-root {
+html.skin-redesign.light-mode .skin-auth .MuiInputLabel-root { color: #24292f !important; }
+html.skin-redesign .skin-auth .MuiTextField-root { margin-top: 12px; display: block; }
+html.skin-redesign .skin-auth .MuiInput-root {
   margin-top: 0;
   background: rgba(255,255,255,.06);
   border: 1px solid rgba(255,255,255,.16);
   border-radius: 8px;
   padding: 8px 10px;
 }
-html.skin-redesign.light-mode .skin-auth-dialog .MuiInput-root {
+html.skin-redesign.light-mode .skin-auth .MuiInput-root {
   background: rgba(255,255,255,.7);
   border-color: rgba(0,0,0,.12);
 }
-html.skin-redesign .skin-auth-dialog .MuiInput-underline:before,
-html.skin-redesign .skin-auth-dialog .MuiInput-underline:after,
-html.skin-redesign .skin-auth-dialog .MuiInput-underline:hover:not(.Mui-disabled):before {
+html.skin-redesign .skin-auth .MuiInput-underline:before,
+html.skin-redesign .skin-auth .MuiInput-underline:after,
+html.skin-redesign .skin-auth .MuiInput-underline:hover:not(.Mui-disabled):before {
   border-bottom: 0 !important;
 }
-html.skin-redesign .skin-auth-dialog form .MuiButton-root {
+html.skin-redesign .skin-auth form .MuiButton-root {
   margin-top: 16px !important;
   height: 40px;
   border-radius: 8px !important;

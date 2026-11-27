@@ -138,6 +138,7 @@ export const Welcome = () => {
         <Grid2 container rowSpacing={1} columnSpacing={1}>
           <Grid2 size={{ xs: 12, md: 4 }}>
             <Paper
+              className={skin ? "skin-auth-card" : undefined}
               elevation={2}
               sx={{
                 p: 2,
@@ -172,7 +173,7 @@ export const Welcome = () => {
                   mb: 2,
                 }}
               />
-              <Typography variant="body1" color="text.secondary" paragraph>
+              <Typography className={skin ? "skin-welcome-intro" : undefined} variant="body1" color="text.secondary" paragraph>
                 UltiMafia is a community-built rendition of the classic social deduction game Mafia. Mafia, played by millions, is a captivating party game that forges friendships and sharpens cognitive skills. Join casual and competitive matches and build fully-customizable setups tailored to your needs.
               </Typography>
               <Box>

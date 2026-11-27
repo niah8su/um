@@ -130,7 +130,9 @@ function Overview({ roundInfo, seasonInfo }) {
                 return (
                   <Box key={userId} sx={{
                     display: "grid",
-                    gridTemplateColumns: "2em minmax(0, 1fr) 2em 16px 2em 16px",
+                    gridTemplateColumns: isPhoneDevice
+                      ? "1.4em minmax(0, 1fr) auto 14px auto 14px"
+                      : "2em minmax(0, 1fr) 2em 16px 2em 16px",
                     gap: 0.5,
                     alignItems: "center",
                     textAlign: "right",
@@ -214,7 +216,9 @@ function Overview({ roundInfo, seasonInfo }) {
                 return (
                   <Box key={roundStanding.userId} sx={{
                     display: "grid",
-                    gridTemplateColumns: "2em minmax(0, 1fr) 2em 16px 1.5em 1em",
+                    gridTemplateColumns: isPhoneDevice
+                      ? "1.4em minmax(0, 1fr) auto 14px auto 14px"
+                      : "2em minmax(0, 1fr) 2em 16px 1.5em 1em",
                     gap: 0.5,
                     alignItems: "center",
                     textAlign: "right",
@@ -661,7 +665,7 @@ export default function Competitive() {
   }
 
   return (
-    <Stack direction="column" spacing={1}>
+    <Stack className="fame-competitive" direction="column" spacing={1}>
       <Grid2
         container
         columns={isPhoneDevice ? 1 : 3}

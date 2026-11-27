@@ -2352,6 +2352,32 @@ html.skin-redesign .MuiStack-root:has([aria-label="Settings Sections"]) .MuiTypo
   font-weight: 700 !important;
   color: #8b949e !important;
 }
+html.skin-redesign .fame-competitive .MuiPaper-root {
+  background: linear-gradient(180deg, rgba(255,255,255,.08), rgba(255,255,255,.02) 42%), rgba(8, 10, 14, .55) !important;
+  border: 1px solid rgba(240, 246, 252, .14) !important;
+  border-radius: 8px !important;
+  box-shadow: inset 0 1px 0 rgba(255,255,255,.08) !important;
+  backdrop-filter: blur(16px);
+}
+html.skin-redesign.light-mode .fame-competitive .MuiPaper-root {
+  background: rgba(255, 255, 255, .34) !important;
+  background-image: none !important;
+  border-color: rgba(208, 215, 222, .95) !important;
+  color: #1c1917;
+}
+html.skin-redesign .fame-competitive .MuiTypography-h3 {
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  font-size: 11px !important;
+  font-weight: 700 !important;
+  color: #8b949e !important;
+}
+html.skin-redesign .fame-competitive .MuiDivider-root {
+  border-color: rgba(240, 246, 252, .14);
+}
+html.skin-redesign.light-mode .fame-competitive .MuiDivider-root {
+  border-color: rgba(208, 215, 222, .95);
+}
 html.skin-redesign .MuiButton-contained {
   box-shadow: none !important;
 }

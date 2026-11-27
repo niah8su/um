@@ -927,13 +927,18 @@ html.skin-redesign .page-nav .MuiIconButton-root .fas {
   display: inline-block !important;
   opacity: 1 !important;
 }
+html.skin-redesign .page-nav .MuiIconButton-root.is-current,
 html.skin-redesign .page-nav .MuiIconButton-root[style] {
   width: 22px !important;
   height: 22px !important;
   border-radius: 4px !important;
-  background: #161b22 !important;
-  color: var(--um-accent) !important;
-  border: 1px solid color-mix(in srgb, var(--um-accent) 55%, transparent) !important;
+  background: var(--um-accent) !important;
+  background-color: var(--um-accent) !important;
+  color: var(--um-accent-ink, #fff) !important;
+  border: 1px solid var(--um-accent) !important;
+}
+html.skin-redesign .page-nav .MuiIconButton-root.is-current .MuiTypography-root {
+  color: var(--um-accent-ink, #fff) !important;
 }
 html.skin-redesign.light-mode .page-nav .MuiIconButton-root[style] {
   background: #fff !important;
@@ -1132,10 +1137,12 @@ html.skin-redesign .page-nav .MuiIconButton-root[style] {
   font-weight: 700 !important;
   backdrop-filter: blur(8px);
 }
+html.skin-redesign.light-mode .page-nav .MuiIconButton-root.is-current,
 html.skin-redesign.light-mode .page-nav .MuiIconButton-root[style] {
-  background: rgba(255, 255, 255, .82) !important;
-  border-color: #d0d7de !important;
-  color: var(--um-accent) !important;
+  background: var(--um-accent) !important;
+  background-color: var(--um-accent) !important;
+  border-color: var(--um-accent) !important;
+  color: var(--um-accent-ink, #fff) !important;
 }
 html.skin-redesign .skin-port .announce,
 html.skin-redesign .skin-new-here {

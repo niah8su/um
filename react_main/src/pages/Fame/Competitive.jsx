@@ -131,7 +131,7 @@ function Overview({ roundInfo, seasonInfo }) {
                   <Box key={userId} sx={{
                     display: "grid",
                     gridTemplateColumns: isPhoneDevice
-                      ? "1.4em minmax(0, 1fr) auto 14px auto 14px"
+                      ? "auto max-content auto 14px auto 14px"
                       : "2em minmax(0, 1fr) 2em 16px 2em 16px",
                     gap: 0.5,
                     alignItems: "center",
@@ -142,7 +142,7 @@ function Overview({ roundInfo, seasonInfo }) {
                     }}>
                       {seasonStanding.ranking+1}.
                     </Typography>
-                    <Box sx={{ overflowX: "clip" }}>
+                    <Box sx={{ minWidth: 0 }}>
                       <NameWithAvatar
                         id={user.id}
                         name={user.name}
@@ -217,7 +217,7 @@ function Overview({ roundInfo, seasonInfo }) {
                   <Box key={roundStanding.userId} sx={{
                     display: "grid",
                     gridTemplateColumns: isPhoneDevice
-                      ? "1.4em minmax(0, 1fr) auto 14px auto 14px"
+                      ? "auto max-content auto 14px auto 14px"
                       : "2em minmax(0, 1fr) 2em 16px 1.5em 1em",
                     gap: 0.5,
                     alignItems: "center",
@@ -228,7 +228,7 @@ function Overview({ roundInfo, seasonInfo }) {
                     }}>
                       {roundStanding.ranking+1}.
                     </Typography>
-                    <Box sx={{ overflowX: "clip" }}>
+                    <Box sx={{ minWidth: 0 }}>
                       <NameWithAvatar
                         id={user.id}
                         name={user.name}

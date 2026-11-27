@@ -111,6 +111,7 @@ export function PageNav(props) {
       <IconButton
         color="primary"
         key={page}
+        className={props.page === page ? "is-current" : undefined}
         onClick={() => onClick(page)}
         sx={{ ...IconButtonSx, ...extraSx, fontSize }}
       >

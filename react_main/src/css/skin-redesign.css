@@ -1414,13 +1414,14 @@ html.skin-redesign .ios-beta-ticker {
   letter-spacing: 0.08em;
 }
 html.skin-redesign .app-shell:has(.ios-beta-ticker) {
-  padding-top: calc(var(--um-ticker-h) + 48px);
+  padding-top: calc(var(--um-ticker-h) + 64px);
   box-sizing: border-box;
 }
 html.skin-redesign .skin-appbar {
   top: 0 !important;
   z-index: 40;
-  overflow: hidden;
+  overflow: visible;
+  min-height: 64px;
 }
 html.skin-redesign .app-shell:has(.ios-beta-ticker) .skin-appbar {
   top: var(--um-ticker-h) !important;
@@ -1748,20 +1749,35 @@ html.skin-redesign .skin-site-footer a[href*="discord"] .iconify {
   color: #5865F2 !important;
 }
 html.skin-redesign .skin-bar.MuiStack-root {
-  display: grid !important;
-  grid-template-columns: auto minmax(0, 1fr);
-  align-items: center;
+  display: flex !important;
+  flex-direction: row !important;
+  flex-wrap: nowrap !important;
+  align-items: center !important;
   width: 100%;
+  min-height: 64px;
+  gap: 8px !important;
 }
 html.skin-redesign .skin-bar .nav {
-  justify-content: center !important;
-  position: relative;
+  display: flex !important;
+  flex: 1 1 auto;
+  min-width: 0;
+  align-items: center !important;
+  justify-content: flex-start !important;
+  position: static !important;
+  width: auto !important;
+  padding: 0 !important;
+  transform: none !important;
+  gap: 2px !important;
 }
 html.skin-redesign .skin-head-end {
-  position: absolute;
-  right: 8px;
-  top: 50%;
-  transform: translateY(-50%);
+  position: static !important;
+  top: auto !important;
+  right: auto !important;
+  transform: none !important;
+  margin-left: auto !important;
+  flex: 0 0 auto;
+  align-items: center;
+  height: auto;
 }
 html.skin-redesign .skin-port {
   max-width: 1080px;
@@ -1884,31 +1900,27 @@ html.skin-redesign .skin-nav-btn .MuiButton-endIcon i { font-size: 10px; }
 html.skin-redesign .skin-appbar a[href="/play"] {
   display: inline-flex !important;
   align-items: center;
-  width: 100% !important;
-  max-width: 180px !important;
+  flex: 0 0 auto !important;
+  width: auto !important;
+  max-width: 150px !important;
   min-width: 0 !important;
   overflow: hidden;
 }
 html.skin-redesign .skin-appbar a[href="/play"] img {
   display: block;
-  height: 36px !important;
-  width: 100% !important;
-  max-width: 180px !important;
+  height: 34px !important;
+  width: auto !important;
+  max-width: 150px !important;
   object-fit: contain;
   object-position: left center;
-}
-html.skin-redesign .skin-appbar .nav {
-  gap: 2px !important;
-  min-width: 0;
-  flex-wrap: nowrap;
-  width: auto !important;
-  flex: 1 1 auto !important;
 }
 html.skin-redesign .skin-head-end {
   flex: 0 0 auto;
   margin-left: auto !important;
-  position: relative;
+  position: static !important;
+  transform: none !important;
   z-index: 1;
+  align-self: center;
 }
 html.skin-redesign .skin-head-end .MuiButton-outlined,
 html.skin-redesign .skin-head-end .MuiButton-contained {
@@ -2001,19 +2013,16 @@ html.skin-redesign .skin-welcome form .MuiButton-contained {
   text-transform: uppercase;
   letter-spacing: 0.08em;
 }
-html.skin-redesign:has(.skin-side.collapsed) .skin-appbar .skin-bar {
-  display: grid !important;
-  grid-template-columns: 180px minmax(0, 1fr);
-}
+html.skin-redesign:has(.skin-side.collapsed) .skin-appbar .skin-bar,
 html.skin-redesign:has(.skin-side:not(.collapsed)) .skin-appbar .skin-bar {
-  display: grid !important;
-  grid-template-columns: 232px minmax(0, 1fr);
+  display: flex !important;
+  grid-template-columns: none !important;
 }
 html.skin-redesign .skin-appbar .nav {
-  justify-content: center !important;
-  width: 100% !important;
+  justify-content: flex-start !important;
+  width: auto !important;
   transform: none !important;
-  padding-right: 300px;
+  padding-right: 0 !important;
   box-sizing: border-box;
 }
 html.skin-redesign.um-loading .skin-appbar {
@@ -2069,6 +2078,23 @@ html.skin-redesign.um-loading .skin-appbar::after {
   .um-skin-wipe { display: none !important; }
 }
 
+@media (max-width: 1100px) {
+  html.skin-redesign .skin-nav-btn {
+    padding: 6px 4px !important;
+    gap: 4px;
+  }
+  html.skin-redesign .skin-nav-btn,
+  html.skin-redesign .skin-nav-label {
+    letter-spacing: 0.02em !important;
+  }
+  html.skin-redesign .skin-appbar a[href="/play"],
+  html.skin-redesign .skin-appbar a[href="/play"] img {
+    max-width: 120px !important;
+  }
+  html.skin-redesign .skin-bar .nav {
+    margin-right: 16px !important;
+  }
+}
 /* Phone layout. Desktop rules above stay in force at 1280 and wider. */
 @media (max-width: 900px) {
   html.skin-redesign,
@@ -2076,16 +2102,7 @@ html.skin-redesign.um-loading .skin-appbar::after {
     overflow-x: hidden;
   }
   html.skin-redesign .skin-side {
-    display: flex !important;
-    position: fixed;
-    z-index: 60;
-    top: calc(var(--um-ticker-h, 0px) + 48px);
-    left: 0;
-    bottom: 0;
-    width: 48px;
-    transform: none;
-    background: rgba(13, 17, 23, .94);
-    overflow: auto;
+    display: none !important;
   }
   html.skin-redesign.light-mode .skin-side {
     background: rgba(255, 255, 255, .96);
@@ -2093,8 +2110,10 @@ html.skin-redesign.um-loading .skin-appbar::after {
   html.skin-redesign .skin-side:not(.collapsed) {
     width: min(280px, 86vw);
   }
-  html.skin-redesign:has(.skin-side.collapsed) .site-wrapper {
-    padding-left: 48px;
+  html.skin-redesign:has(.skin-side.collapsed) .site-wrapper,
+  html.skin-redesign .site-wrapper {
+    padding-left: 0 !important;
+    margin-left: 0 !important;
   }
   html.skin-redesign .skin-appbar .nav {
     display: none !important;
@@ -2102,7 +2121,7 @@ html.skin-redesign.um-loading .skin-appbar::after {
   html.skin-redesign .skin-appbar,
   html.skin-redesign .app-shell:has(.ios-beta-ticker) .skin-appbar {
     top: var(--um-ticker-h) !important;
-    overflow: hidden;
+    overflow: visible;
   }
   html.skin-redesign .skin-appbar img,
   html.skin-redesign .logo img {
@@ -2169,28 +2188,58 @@ html.skin-redesign.um-loading .skin-appbar::after {
     min-height: 40px !important;
   }
   html.skin-redesign .mobile-nav {
-    margin-left: 48px;
-    width: calc(100% - 48px);
+    margin-left: 0;
+    width: 100%;
     box-sizing: border-box;
   }
+  html.skin-redesign .profile,
+  html.skin-redesign .profile .box-panel,
+  html.skin-redesign .profile .trophies-content,
+  html.skin-redesign .profile .trophies-grid,
+  html.skin-redesign .fame-competitive {
+    max-width: 100%;
+    min-width: 0;
+  }
+  html.skin-redesign .profile .trophies-content {
+    flex-flow: row wrap !important;
+  }
+  html.skin-redesign .profile .trophies-grid {
+    width: 100%;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr) !important;
+  }
+  html.skin-redesign .profile .trophy-tile {
+    min-width: 0;
+    overflow: hidden;
+  }
+  html.skin-redesign .fame-competitive .MuiBox-root {
+    overflow-x: visible !important;
+  }
   html.skin-redesign .skin-appbar > .MuiStack-root {
-    gap: 8px !important;
+    gap: 6px !important;
+    min-width: 0;
+    max-width: 100%;
   }
   html.skin-redesign .skin-appbar > .MuiStack-root > div:last-child {
     flex: 0 0 auto !important;
   }
   html.skin-redesign .skin-appbar a[href="/play"] {
-    flex: 0 0 112px !important;
-    width: 112px !important;
-    min-width: 112px !important;
-    max-width: 112px !important;
-    margin-right: 8px;
+    flex: 0 0 auto !important;
+    width: auto !important;
+    min-width: 0 !important;
+    max-width: none !important;
+    margin-right: 4px;
+    overflow: visible;
   }
   html.skin-redesign .skin-appbar a[href="/play"] img {
-    width: 112px !important;
-    max-width: 112px !important;
-    height: 28px !important;
-    max-height: 28px !important;
+    width: auto !important;
+    max-width: none !important;
+    height: 22px !important;
+    max-height: 22px !important;
+    object-fit: contain !important;
+  }
+  html.skin-redesign .skin-colors input[type="color"] {
+    width: 14px !important;
+    height: 14px !important;
   }
   html.skin-redesign .skin-colors {
     flex: 0 0 auto;
@@ -2657,4 +2706,14 @@ html.skin-redesign .thread-wrapper .btns-wrapper i:hover {
     width: calc(100vw - 24px) !important;
     max-width: calc(100vw - 24px);
   }
+}
+html.skin-redesign .page-nav .MuiIconButton-root.is-current,
+html.skin-redesign .page-nav .MuiIconButton-root.is-current:hover {
+  background: var(--um-accent) !important;
+  background-color: var(--um-accent) !important;
+  color: var(--um-accent-ink, #fff) !important;
+  border: 1px solid var(--um-accent) !important;
+}
+html.skin-redesign .page-nav .MuiIconButton-root.is-current .MuiTypography-root {
+  color: var(--um-accent-ink, #fff) !important;
 }

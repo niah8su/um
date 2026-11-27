@@ -2707,6 +2707,28 @@ html.skin-redesign .thread-wrapper .btns-wrapper i:hover {
     max-width: calc(100vw - 24px);
   }
 }
+html.skin-redesign .site-activity.MuiPaper-root,
+html.skin-redesign .activity-counter {
+  background: linear-gradient(180deg, rgba(255,255,255,.08), rgba(255,255,255,.02)), rgba(8, 10, 14, .45) !important;
+  background-color: transparent !important;
+  border: 1px solid rgba(240, 246, 252, .14) !important;
+  box-shadow: none !important;
+  color: var(--um-ink);
+}
+html.skin-redesign.light-mode .site-activity.MuiPaper-root,
+html.skin-redesign.light-mode .activity-counter {
+  background: rgba(255, 255, 255, .34) !important;
+  background-image: none !important;
+  background-color: rgba(255, 255, 255, .34) !important;
+  border-color: rgba(208, 215, 222, .95) !important;
+  color: #1c1917;
+}
+html.skin-redesign .site-activity .MuiTypography-h3,
+html.skin-redesign .site-activity .MuiTypography-overline {
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #8b949e;
+}
 html.skin-redesign .page-nav .MuiIconButton-root.is-current,
 html.skin-redesign .page-nav .MuiIconButton-root.is-current:hover {
   background: var(--um-accent) !important;

@@ -24,6 +24,7 @@ export default function SiteActivityPage() {
 
   return (
     <Paper
+      className="site-activity"
       sx={{
         p: { xs: 2, md: 3 },
         minHeight: "60vh",

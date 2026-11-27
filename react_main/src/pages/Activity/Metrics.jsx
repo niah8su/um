@@ -95,6 +95,7 @@ function SectionEyebrow({ label, count }) {
 function Counter({ def, value }) {
   return (
     <Box
+      className="activity-counter"
       sx={{
         position: "relative",
         px: 2,

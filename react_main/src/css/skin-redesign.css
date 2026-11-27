@@ -3580,7 +3580,37 @@ html.skin-redesign .skin-side-toggle {
   align-self: flex-start;
   margin: 4px 0 8px 0 !important;
 }
-html.skin-redesign .skin-side-groups { flex: 1 1 auto; min-height: 0; overflow: auto; }
+html.skin-redesign .skin-side { overflow: hidden; }
+html.skin-redesign .skin-side-groups {
+  flex: 1 1 auto;
+  min-height: 0;
+  overflow-x: hidden;
+  overflow-y: auto;
+  scrollbar-width: none;
+}
+html.skin-redesign .skin-side-groups::-webkit-scrollbar {
+  width: 4px;
+  height: 4px;
+  background: transparent;
+}
+html.skin-redesign .skin-side-groups::-webkit-scrollbar-track { background: transparent; }
+html.skin-redesign .skin-side-groups::-webkit-scrollbar-thumb {
+  background: transparent;
+  border-radius: 99px;
+}
+html.skin-redesign .skin-side-groups:hover {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(255, 255, 255, .28) transparent;
+}
+html.skin-redesign .skin-side-groups:hover::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, .28);
+}
+html.skin-redesign.light-mode .skin-side-groups:hover {
+  scrollbar-color: rgba(28, 25, 23, .28) transparent;
+}
+html.skin-redesign.light-mode .skin-side-groups:hover::-webkit-scrollbar-thumb {
+  background: rgba(28, 25, 23, .28);
+}
 html.skin-redesign .skin-side-bottom {
   margin-top: auto;
   display: flex;

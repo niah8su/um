@@ -6,6 +6,9 @@
  * Run where Redis is reachable, after dev/seed-local-lobby.mjs:
  *   REDIS_URL=redis://127.0.0.1:6379 node dev/seed-open-games.mjs
  * Inside the dev stack the host is usually redis:6379.
+ *
+ * Windows, from the repo, with the docker stack up (containers web + redis):
+ *   docker exec -w /home/um -e REDIS_URL=redis://redis:6379 -e MONGO_URL=mongodb://mongo:27017/ultimafia web node dev/seed-open-games.mjs
  */
 import { createRequire } from "module";
 import { dirname, join } from "path";
@@ -60,13 +63,14 @@ async function main() {
   }
 
   const games = [
-    ["seed-open-main", "Main", "Main", false],
-    ["seed-open-ranked", "Main", "Ranked", true],
-    ["seed-open-sandbox", "Sandbox", "Sandbox", false],
-    ["seed-open-comp", "Competitive", "Competitive", false],
+    ["seed-open-main", "Main", "Main", false, "Open", "Pregame"],
+    ["seed-open-ranked", "Main", "Ranked", true, "Open", "Pregame"],
+    ["seed-open-sandbox", "Sandbox", "Sandbox", false, "Open", "Pregame"],
+    ["seed-open-comp", "Competitive", "Competitive", false, "Open", "Pregame"],
+    ["seed-live-sandbox", "Sandbox", "Sandbox", false, "In Progress", "Day"],
   ];
 
-  for (const [id, lobby, lobbyName, ranked] of games) {
+  for (const [id, lobby, lobbyName, ranked, status, gameState] of games) {
     const settings = {
       setup: setupId,
       lobbyName,
@@ -83,13 +87,13 @@ async function main() {
     };
     const fields = {
       type: "Mafia",
-      status: "Open",
+      status,
       hostId,
       lobby,
       lobbyName,
       settings: JSON.stringify(settings),
       spectatorCount: "0",
-      gameState: "Pregame",
+      gameState,
       winnersInfo: "{}",
       createTime: String(Date.now()),
       startTime: "0",
@@ -100,8 +104,12 @@ async function main() {
     }
     await redisCommand(socket, ["DEL", `game:${id}:players`]);
     await redisCommand(socket, ["SADD", `game:${id}:players`, hostId]);
+    if (status === "In Progress") {
+      await redisCommand(socket, ["SADD", `game:${id}:players`, "seed-seat-2", "seed-seat-3"]);
+      await redisCommand(socket, ["SET", `game:${id}:startTime`, String(Date.now() - 15 * 60 * 1000)]);
+    }
     await redisCommand(socket, ["SADD", "games", id]);
-    console.log("open game", id, lobby, ranked ? "ranked" : "unranked");
+    console.log(status === "In Progress" ? "in-progress game" : "open game", id, lobby, gameState);
   }
 
   socket.end();

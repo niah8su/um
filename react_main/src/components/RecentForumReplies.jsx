@@ -3,7 +3,7 @@ import axios from "axios";
 import { Link } from "react-router-dom";
 
 import { Paper, Stack, Typography, Box } from "@mui/material";
-import { Avatar, NameWithAvatar } from "pages/User/UserWidgets";
+import { Avatar } from "pages/User/UserWidgets";
 import { useSkinRedesign } from "components/useSkinRedesign";
 import { Time } from "components/Basic";
 import LobbySidebarPanel from "pages/Play/LobbyBrowser/LobbySidebarPanel";
@@ -86,7 +86,7 @@ export function RecentForumReplies() {
 
   return (
     <LobbySidebarPanel title="Forum Activity">
-      <Typography variant="subtitle2" sx={{ fontWeight: 700, mb: 0.5 }}>
+      <Typography className={skin ? "skin-forum-kicker" : undefined} variant="subtitle2" sx={{ fontWeight: 700, mb: 0.5 }}>
         Newest Thread
       </Typography>
       {newestThreads.length === 0 ? (
@@ -102,16 +102,8 @@ export function RecentForumReplies() {
                 key={`thread-${item.threadId}-${item.date}`}
                 sx={{ display: "flex", alignItems: "center", gap: 1, minWidth: 0 }}
               >
-                {skin && item.user?.id ? (
-                  <Box className="skin-forum-ava">
-                    <NameWithAvatar
-                      small
-                      noLink
-                      id={item.user.id}
-                      name={item.user.name}
-                      avatar={item.user.avatar}
-                    />
-                  </Box>
+                {skin ? (
+                  <span className="skin-letter-ava">{String(item.user?.name || "?").trim().charAt(0).toUpperCase() || "?"}</span>
                 ) : (
                   <Avatar
                     small
@@ -129,6 +121,7 @@ export function RecentForumReplies() {
                   }}
                 >
                   <Link
+                    className={skin ? "skin-forum-title" : undefined}
                     to={link}
                     style={{
                       overflow: "hidden",
@@ -151,7 +144,7 @@ export function RecentForumReplies() {
         </Stack>
       )}
 
-      <Typography variant="subtitle2" sx={{ fontWeight: 700, mb: 0.5 }}>
+      <Typography className={skin ? "skin-forum-kicker" : undefined} variant="subtitle2" sx={{ fontWeight: 700, mb: 0.5 }}>
         Recent Replies
       </Typography>
       {recentReplies.length === 0 ? (
@@ -165,16 +158,8 @@ export function RecentForumReplies() {
                 key={`reply-${item.replyId}-${item.date}`}
                 sx={{ display: "flex", alignItems: "center", gap: 1, minWidth: 0 }}
               >
-                {skin && item.user?.id ? (
-                  <Box className="skin-forum-ava">
-                    <NameWithAvatar
-                      small
-                      noLink
-                      id={item.user.id}
-                      name={item.user.name}
-                      avatar={item.user.avatar}
-                    />
-                  </Box>
+                {skin ? (
+                  <span className="skin-letter-ava">{String(item.user?.name || "?").trim().charAt(0).toUpperCase() || "?"}</span>
                 ) : (
                   <Avatar
                     small
@@ -192,6 +177,7 @@ export function RecentForumReplies() {
                   }}
                 >
                   <Link
+                    className={skin ? "skin-forum-title" : undefined}
                     to={link}
                     style={{
                       overflow: "hidden",

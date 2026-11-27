@@ -20,9 +20,10 @@ html.skin-redesign {
 }
 
 html.skin-redesign.light-mode {
+  --um-accent: #c92626;
   --um-accent-ink: #ffffff;
-  --um-grad-1: #fff4f2;
-  --um-grad-2: #f3f6fb;
+  --um-grad-1: #d2cccb;
+  --um-grad-2: #d2cccb;
   --um-glass: rgba(255, 255, 255, 0.52);
   --um-glass-solid: rgba(255, 252, 250, 0.96);
   --um-ink: #1c1917;
@@ -53,9 +54,9 @@ html.skin-redesign body::before {
 
 html.skin-redesign.light-mode body::before {
   background:
-    radial-gradient(1100px 760px at 14% 30%, color-mix(in srgb, var(--um-grad-1, #fff4f2) 62%, transparent), transparent 70%),
-    radial-gradient(980px 700px at 88% 88%, color-mix(in srgb, var(--um-grad-2, #f3f6fb) 48%, transparent), transparent 68%),
-    #fff;
+    radial-gradient(1100px 760px at 14% 30%, color-mix(in srgb, var(--um-grad-1, #d2cccb) 62%, transparent), transparent 70%),
+    radial-gradient(980px 700px at 88% 88%, color-mix(in srgb, var(--um-grad-2, #d2cccb) 48%, transparent), transparent 68%),
+    #d2cccb;
 }
 
 html.skin-redesign .app-shell,
@@ -401,12 +402,27 @@ html.skin-redesign body {
   background-color: #07060a;
   background-attachment: fixed;
 }
+html.skin-redesign,
+html.skin-redesign body,
+html.skin-redesign #root {
+  min-height: 100%;
+}
+html.skin-redesign.light-mode,
+html.skin-redesign.light-mode body,
+html.skin-redesign.light-mode #root,
+html.skin-redesign.light-mode .app-shell {
+  background-color: #d2cccb !important;
+  background-attachment: fixed;
+}
 html.skin-redesign.light-mode body {
-  background-color: #f7f5f2;
   background-image:
-    radial-gradient(1100px 760px at 14% 20%, color-mix(in srgb, var(--um-grad-1, #fff4f2) 70%, transparent), transparent 70%),
-    radial-gradient(980px 700px at 88% 90%, color-mix(in srgb, var(--um-grad-2, #f3f6fb) 55%, transparent), transparent 70%);
+    radial-gradient(1100px 760px at 14% 20%, color-mix(in srgb, var(--um-grad-1, #d2cccb) 70%, transparent), transparent 70%),
+    radial-gradient(980px 700px at 88% 90%, color-mix(in srgb, var(--um-grad-2, #d2cccb) 55%, transparent), transparent 70%);
   color: #1c1917;
+}
+html.skin-redesign body::before {
+  min-height: 100vh;
+  min-width: 100vw;
 }
 html.skin-redesign.light-mode .game-session {
   background: linear-gradient(180deg, #e8893a 0%, #f0b429 48%, #ffe7a3 100%) !important;
@@ -635,13 +651,27 @@ html.skin-redesign .skin-welcome [data-provider] {
   display: inline-flex !important;
   width: 44px !important;
   min-width: 44px !important;
-  height: 40px;
+  max-width: 44px !important;
+  height: 40px !important;
   padding: 0 !important;
   margin: 14px 5px 0 !important;
   font-size: 0 !important;
   justify-content: center;
   border-radius: 8px !important;
   vertical-align: middle;
+  background: rgba(255, 255, 255, .06) !important;
+  color: inherit !important;
+  border: 1px solid var(--um-line) !important;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, .14) !important;
+  backdrop-filter: blur(12px);
+}
+html.skin-redesign.light-mode .skin-welcome [data-provider] {
+  background: rgba(255, 255, 255, .55) !important;
+  color: #1f2328 !important;
+}
+html.skin-redesign .skin-welcome [data-provider]:hover {
+  transform: translateY(-2px);
+  border-color: color-mix(in srgb, var(--um-accent) 75%, transparent) !important;
 }
 html.skin-redesign .skin-welcome [data-provider] img,
 html.skin-redesign .skin-welcome [data-provider] svg,
@@ -1654,6 +1684,40 @@ html.skin-redesign .skin-site-footer .MuiStack-root > .MuiStack-root:first-child
 html.skin-redesign .skin-site-footer .MuiStack-root > .MuiStack-root:first-child a .fab {
   color: #57606a !important;
 }
+html.skin-redesign .skin-site-footer .skin-foot-note,
+html.skin-redesign .skin-site-footer .skin-foot-note.MuiTypography-root {
+  color: #8b949e !important;
+  font-size: 11px !important;
+  font-weight: 400 !important;
+  letter-spacing: 0 !important;
+  text-transform: none !important;
+}
+html.skin-redesign .skin-site-footer .skin-foot-credits {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+}
+html.skin-redesign .skin-site-footer .skin-credit,
+html.skin-redesign .skin-site-footer .skin-credit.MuiLink-root,
+html.skin-redesign .skin-site-footer .skin-credit a {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  color: #6e7681 !important;
+  font-family: Roboto, "Segoe UI", sans-serif !important;
+  font-size: 10px !important;
+  font-weight: 500 !important;
+  letter-spacing: 0.08em !important;
+  text-transform: uppercase !important;
+  text-decoration: none !important;
+}
+html.skin-redesign .skin-site-footer .skin-credit .nav-ico {
+  width: 12px;
+  height: 12px;
+  flex: none;
+}
 html.skin-redesign .skin-site-footer .MuiTypography-root {
   color: #6e7781 !important;
   font-family: Roboto, "Segoe UI", sans-serif !important;
@@ -1737,14 +1801,17 @@ html.skin-redesign .MuiAppBar-root .skin-nav-btn .skin-nav-label.MuiTypography-h
 html.skin-redesign.light-mode .MuiAppBar-root .skin-nav-btn .skin-nav-label.MuiTypography-h3 {
   color: #57606a !important;
 }
-html.skin-redesign .MuiAppBar-root .skin-nav-btn.is-active {
-  background: color-mix(in srgb, var(--um-accent) 78%, transparent) !important;
+html.skin-redesign .MuiAppBar-root .skin-nav-btn.is-active,
+html.skin-redesign .MuiAppBar-root .skin-nav-btn.is-active:hover {
+  background: color-mix(in srgb, var(--um-accent) 85%, transparent) !important;
   border: 1px solid var(--um-accent) !important;
-  box-shadow: 0 0 16px color-mix(in srgb, var(--um-accent) 50%, transparent) !important;
+  box-shadow: 0 0 14px color-mix(in srgb, var(--um-accent) 45%, transparent) !important;
   border-radius: 8px !important;
+  color: var(--um-accent-ink, #fff) !important;
 }
-html.skin-redesign .MuiAppBar-root .skin-nav-btn.is-active .skin-nav-label.MuiTypography-h3 {
-  color: #f0f3f6 !important;
+html.skin-redesign .MuiAppBar-root .skin-nav-btn.is-active .skin-nav-label.MuiTypography-h3,
+html.skin-redesign .MuiAppBar-root .skin-nav-btn.is-active:hover .skin-nav-label.MuiTypography-h3 {
+  color: var(--um-accent-ink, #fff) !important;
 }
 html.skin-redesign .skin-nav-btn,
 html.skin-redesign .skin-nav-label {
@@ -1959,4 +2026,74 @@ html.skin-redesign.um-loading .skin-appbar::after {
 }
 @media (prefers-reduced-motion: reduce) {
   .um-skin-wipe { display: none !important; }
+}
+
+/* Phone layout. Desktop rules above stay in force at 1280 and wider. */
+@media (max-width: 900px) {
+  html.skin-redesign,
+  html.skin-redesign body {
+    overflow-x: hidden;
+  }
+  html.skin-redesign .skin-side {
+    position: fixed;
+    z-index: 60;
+    top: calc(var(--um-ticker-h, 0px) + 48px);
+    left: 0;
+    bottom: 0;
+    width: min(280px, 86vw);
+    transform: translateX(-105%);
+    transition: transform .2s ease;
+    background: rgba(13, 17, 23, .94);
+    overflow: auto;
+  }
+  html.skin-redesign.light-mode .skin-side {
+    background: rgba(255, 255, 255, .96);
+  }
+  html.skin-redesign .skin-side:not(.collapsed) {
+    transform: none;
+  }
+  html.skin-redesign .skin-appbar .nav {
+    display: none !important;
+  }
+  html.skin-redesign .skin-port {
+    max-width: 100%;
+    padding: 0 8px;
+  }
+  html.skin-redesign .skin-port .lobby-split {
+    display: block;
+  }
+  html.skin-redesign .skin-port .lobby-side {
+    display: none;
+  }
+  html.skin-redesign .skin-port .setup-row {
+    grid-template-columns: minmax(0, 1fr) !important;
+  }
+  html.skin-redesign .skin-port .game-main,
+  html.skin-redesign .skin-port .bar-actions {
+    flex-wrap: wrap;
+  }
+  html.skin-redesign .skin-port .help-btn,
+  html.skin-redesign .skin-port .refresh-btn,
+  html.skin-redesign .skin-port .sq-btn,
+  html.skin-redesign .skin-nav-btn,
+  html.skin-redesign .page-nav .MuiIconButton-root {
+    min-width: 40px !important;
+    min-height: 40px !important;
+  }
+  html.skin-redesign .MuiPopover-paper.skin-detail-pop {
+    max-width: calc(100vw - 24px) !important;
+  }
+  html.skin-redesign .skin-site-footer {
+    padding-bottom: 24px;
+  }
+}
+@media (min-width: 1280px) {
+  html.skin-redesign .skin-port {
+    max-width: 1180px;
+  }
+}
+@media (min-width: 1440px) {
+  html.skin-redesign .skin-port {
+    max-width: 1280px;
+  }
 }

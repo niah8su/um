@@ -770,7 +770,7 @@ function Footer() {
             />
           </MuiLink>
         </Stack>
-        <Typography variant="body2" sx={{ textAlign: "center" }}>
+        <Typography className={skin ? "skin-foot-note" : undefined} variant="body2" sx={{ textAlign: "center" }}>
           By accessing this website, you agree to our{" "}
           <MuiLink
             component={Link}
@@ -787,8 +787,15 @@ function Footer() {
           </MuiLink>
           .
         </Typography>
-        <Stack className={skin ? "skin-foot-credits" : undefined} direction={skin || isPhoneDevice ? "column" : "row"} spacing={skin || isPhoneDevice ? 0.5 : 2} sx={{
-        }}>
+        <Stack className={skin ? "skin-foot-credits" : undefined} direction={skin || isPhoneDevice ? "column" : "row"} spacing={skin || isPhoneDevice ? 0.5 : 2}>
+          {skin ? (
+            <>
+              <span className="skin-credit"><svg className="nav-ico" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="8" fill="none" stroke="currentColor" strokeWidth="1.6" /><path d="M14.6 9.4a3.4 3.4 0 1 0 0 5.2" fill="none" stroke="currentColor" strokeWidth="1.6" /></svg><span>© {year} UltiMafia</span></span>
+              <MuiLink className="skin-credit" href="https://github.com/r3ndd/BeyondMafia-Integration" rel="noopener noreferrer nofollow"><svg className="nav-ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M9 8L5 12l4 4M15 8l4 4-4 4" fill="none" stroke="currentColor" strokeWidth="1.6" /></svg><span>Built on code provided by rend</span></MuiLink>
+              <span className="skin-credit"><svg className="nav-ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M9 18V6.5L19 4v11.5" fill="none" stroke="currentColor" strokeWidth="1.6" /><circle cx="7" cy="18" r="2" fill="none" stroke="currentColor" strokeWidth="1.6" /><circle cx="17" cy="15.5" r="2" fill="none" stroke="currentColor" strokeWidth="1.6" /></svg><span>Featuring music by <MuiLink href="https://www.youtube.com/@fredthemontymole" target="_blank" rel="noopener noreferrer nofollow">FredTheMole</MuiLink> & <MuiLink href="https://ultimafia.com/user/2oDrE3Ueq">Jumpy</MuiLink></span></span>
+            </>
+          ) : (
+            <>
           <Typography variant="body2">
             © {year} UltiMafia
           </Typography>
@@ -814,6 +821,8 @@ function Footer() {
           >
             Additional music by Jumpy
           </MuiLink>
+            </>
+          )}
         </Stack>
       </Stack>
     </AppBar>

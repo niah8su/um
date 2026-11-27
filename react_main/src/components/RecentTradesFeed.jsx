@@ -16,6 +16,12 @@ import { useErrorAlert } from "components/Alerts";
 import { StampItem } from "components/Scrapbook";
 import { NameWithAvatar } from "pages/User/UserWidgets";
 import { useViewActive } from "../hooks/useViewActivity";
+import { useSkinRedesign } from "components/useSkinRedesign";
+
+function LetterFace({ name }) {
+  const letter = String(name || "?").trim().charAt(0).toUpperCase() || "?";
+  return <span className="skin-letter-ava">{letter}</span>;
+}
 
 function StickerPlaceholder({ size = 32, onClick }) {
   return (
@@ -51,6 +57,7 @@ export default function RecentTradesFeed() {
   const STAMPS_PER_PAGE = 20;
 
   const user = useContext(UserContext);
+  const skin = useSkinRedesign();
   const active = useViewActive();
   const siteInfo = useContext(SiteInfoContext);
   const errorAlert = useErrorAlert();
@@ -164,12 +171,14 @@ export default function RecentTradesFeed() {
                     }}
                   >
                     <Box sx={{ flex: 1, minWidth: 0 }}>
+                      {skin ? <LetterFace name={t.initiator?.name} /> : (
                       <NameWithAvatar
                         id={t.initiator?.id}
                         name={t.initiator?.name}
                         avatar={t.initiator?.avatar}
                         small
                       />
+                      )}
                     </Box>
                     <StampItem
                       role={t.initiatorRole}
@@ -225,12 +234,14 @@ export default function RecentTradesFeed() {
                     }}
                   >
                     <Box sx={{ display: "flex", justifyContent: "flex-end", minWidth: 0 }}>
+                      {skin ? <LetterFace name={t.initiator?.name} /> : (
                       <NameWithAvatar
                         id={t.initiator?.id}
                         name={t.initiator?.name}
                         avatar={t.initiator?.avatar}
                         small
                       />
+                      )}
                     </Box>
                     <Box sx={{ display: "flex", alignItems: "center", gap: 0.5 }}>
                       <StampItem
@@ -263,12 +274,14 @@ export default function RecentTradesFeed() {
                       )}
                     </Box>
                     <Box sx={{ display: "flex", justifyContent: "flex-start", minWidth: 0 }}>
+                      {skin ? <LetterFace name={t.recipient?.name} /> : (
                       <NameWithAvatar
                         id={t.recipient?.id}
                         name={t.recipient?.name}
                         avatar={t.recipient?.avatar}
                         small
                       />
+                      )}
                     </Box>
                   </Box>
                 );

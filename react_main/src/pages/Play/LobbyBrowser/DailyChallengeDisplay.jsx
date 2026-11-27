@@ -1,6 +1,7 @@
 import React, { useEffect, useRef, useState, useContext } from "react";
 import { Box, Divider, Paper, Stack, Typography } from "@mui/material";
 import { UserContext } from "Contexts";
+import { useSkinRedesign } from "components/useSkinRedesign";
 import { DailyChallengeData } from "constants/DailyChallenge";
 import { RoleCount } from "components/Roles";
 
@@ -9,6 +10,7 @@ import LobbySidebarPanel from "./LobbySidebarPanel";
 
 export const DailyChallenges = () => {
   const user = useContext(UserContext);
+  const skin = useSkinRedesign();
 
   let dailys = user.dailyChallenges?.map((m) => m.split(":"));
 
@@ -34,17 +36,19 @@ export const DailyChallenges = () => {
     return (
       <Box
         key={quest.join(":")}
+        className={skin ? "daily" : undefined}
         sx={{
-          pt: 0.5,
+          pt: skin ? 0 : 0.5,
         }}
       >
         <Stack
+          className={skin ? "top" : undefined}
           direction="row"
           sx={{
             alignItems: "center",
           }}
         >
-          <Typography fontWeight="bold">{name}</Typography>
+          <Typography className={skin ? "daily-name" : undefined} fontWeight="bold">{name}</Typography>
           {isRole && (
             <Box
               sx={{
@@ -77,7 +81,7 @@ export const DailyChallenges = () => {
             }}
           />
         </Stack>
-        <Typography> {description}</Typography>
+        <Typography className={skin ? "daily-sub" : undefined}> {description}</Typography>
       </Box>
     );
   });

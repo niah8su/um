@@ -97,21 +97,21 @@ export default function SkinAppearance() {
         type="color"
         aria-label="accent"
         title="accent"
-        value={colors[accentKey] || (light ? "#b54a4a" : "#9a0404")}
+        value={colors[accentKey] || (light ? "#c92626" : "#9a0404")}
         onChange={(e) => setColor(accentKey, e.target.value)}
       />
       <input
         type="color"
         aria-label="Color 1"
         title="Color 1"
-        value={colors[g1Key] || (light ? "#fff4f2" : "#4a1220")}
+        value={colors[g1Key] || (light ? "#d2cccb" : "#4a1220")}
         onChange={(e) => setColor(g1Key, e.target.value)}
       />
       <input
         type="color"
         aria-label="Color 2"
         title="Color 2"
-        value={colors[g2Key] || (light ? "#f3f6fb" : "#12060c")}
+        value={colors[g2Key] || (light ? "#d2cccb" : "#12060c")}
         onChange={(e) => setColor(g2Key, e.target.value)}
       />
       <button

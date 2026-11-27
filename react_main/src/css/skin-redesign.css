@@ -3630,6 +3630,31 @@ html.skin-redesign .skin-guest-register.MuiButton-contained {
   color: var(--um-accent-ink, #fff) !important;
   border: 1px solid var(--um-accent) !important;
 }
+html.skin-redesign .skin-guest-login,
+html.skin-redesign .skin-guest-register {
+  position: relative;
+  overflow: visible;
+}
+html.skin-redesign .skin-guest-login::before,
+html.skin-redesign .skin-guest-register::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  padding: 1.5px;
+  pointer-events: none;
+  opacity: 0;
+  background: conic-gradient(from var(--join-beam), transparent 0deg, transparent 300deg, color-mix(in srgb, var(--um-accent) 45%, #fff) 332deg, var(--um-accent) 348deg, transparent 360deg);
+  -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+  mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  mask-composite: exclude;
+}
+html.skin-redesign .skin-guest-login:hover::before,
+html.skin-redesign .skin-guest-register:hover::before {
+  opacity: 1;
+  animation: skin-join-beam 5.6s cubic-bezier(0.4, 0, 1, 1) infinite;
+}
 html.skin-redesign .skin-auth-dialog {
   width: min(420px, calc(100vw - 32px)) !important;
   padding: 8px 8px 16px !important;

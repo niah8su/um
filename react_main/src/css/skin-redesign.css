@@ -3933,22 +3933,19 @@ html.skin-redesign .skin-side.collapsed .skin-side-dock {
 }
 
 @media (max-width: 900px) {
-  html.skin-redesign .skin-side {
-    display: flex !important;
-    top: auto;
-    bottom: 12px;
-    left: 8px;
-    width: auto;
-    height: auto;
-    padding: 0;
-    overflow: visible;
+  html.skin-redesign .skin-side,
+  html.skin-redesign.light-mode .skin-side {
+    display: none !important;
+    visibility: hidden !important;
+    pointer-events: none !important;
     background: transparent !important;
-    border: 0 !important;
-    backdrop-filter: none;
   }
-  html.skin-redesign .skin-side > :not(.skin-side-bottom) { display: none !important; }
-  html.skin-redesign .skin-side-bottom > :not(.skin-side-dock) { display: none !important; }
-  html.skin-redesign .skin-side-dock { display: flex; flex-direction: row; flex-wrap: wrap; gap: 8px; }
+  html.skin-redesign .site-wrapper,
+  html.skin-redesign:has(.skin-side) .site-wrapper,
+  html.skin-redesign:has(.skin-side.collapsed) .site-wrapper {
+    padding-left: 0 !important;
+    margin-left: 0 !important;
+  }
 }
 
 @media (min-width: 901px) {

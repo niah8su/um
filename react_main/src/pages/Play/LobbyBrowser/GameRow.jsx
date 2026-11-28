@@ -198,9 +198,26 @@ export const GameStatus = (props) => {
       );
     }
     if (skin) {
+      const spectateOnly = buttonText === "Spectate";
       return (
         <>
-          {canShowGameButton && !isFullOpenGame && GameButton}
+          {canShowGameButton && !isFullOpenGame && (spectateOnly ? (
+            <Button
+              component={Link}
+              to={buttonUrl}
+              state={membershipState}
+              variant="outlined"
+              color="inherit"
+              className="skin-eye"
+              aria-label="Spectate"
+              sx={{ p: 0, width: 34, minWidth: 34, height: 34 }}
+            >
+              <svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true">
+                <path fill="none" stroke="currentColor" strokeWidth="1.8" d="M2 12s4-6 10-6 10 6 10 6-4 6-10 6S2 12 2 12z" />
+                <circle cx="12" cy="12" r="2.4" fill="currentColor" stroke="none" />
+              </svg>
+            </Button>
+          ) : GameButton)}
           {canShowGameButton && spectateButton}
           {isRankedJoin && tutorialGate.dialog}
           {props.game.broken && (

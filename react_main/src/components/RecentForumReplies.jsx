@@ -103,6 +103,7 @@ export function RecentForumReplies() {
             return (
               <Box
                 key={`thread-${item.threadId}-${item.date}`}
+                className={skin ? "skin-forum-row" : undefined}
                 sx={{ display: "flex", alignItems: "center", gap: 1, minWidth: 0 }}
               >
                 {skin ? (
@@ -153,12 +154,13 @@ export function RecentForumReplies() {
       {replyRows.length === 0 ? (
         <Typography variant="body2">No recent replies.</Typography>
       ) : (
-        <Stack spacing={1}>
+        <Stack className={skin ? "skin-forum-replies" : undefined} spacing={1}>
           {replyRows.map((item) => {
             const link = `/community/forums/thread/${item.threadId}?reply=${item.replyId}`;
             return (
               <Box
                 key={`reply-${item.replyId}-${item.date}`}
+                className={skin ? "skin-forum-row" : undefined}
                 sx={{ display: "flex", alignItems: "center", gap: 1, minWidth: 0 }}
               >
                 {skin ? (

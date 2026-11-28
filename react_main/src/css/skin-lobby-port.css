@@ -243,8 +243,8 @@ html.skin-redesign .skin-port .setup-row .game-icon {
 }
 html.skin-redesign .skin-port .setup-copy {
   border-left: 1px solid rgba(139, 148, 158, .28);
-  padding: 2px 0 2px 8px;
-  margin-left: 4px;
+  padding: 2px 0 2px 12px;
+  margin-left: 12px;
 }
 html.skin-redesign .skin-port .player-count {
   position: relative;
@@ -1369,7 +1369,20 @@ html.skin-redesign .skin-port .daily {
 }
 html.skin-redesign .skin-port .daily:first-of-type { border-top: 0; }
 html.skin-redesign .skin-port .daily .top { display: flex; align-items: center; gap: 6px; width: 100%; }
-html.skin-redesign .skin-port .daily-name { font-weight: 700 !important; color: #f6f1ea !important; }
+html.skin-redesign .skin-port .daily-name {
+  font-weight: 500 !important;
+  font-size: 11px !important;
+  color: #f6f1ea !important;
+}
+html.skin-redesign .skin-port .daily + .MuiDivider-root { display: none !important; }
+html.skin-redesign .skin-port .daily .role,
+html.skin-redesign .skin-port .daily .top .role {
+  width: 18px !important;
+  height: 18px !important;
+  min-width: 18px !important;
+  margin: 0 !important;
+  flex: none;
+}
 html.skin-redesign.light-mode .skin-port .daily-name { color: #1f2328 !important; }
 html.skin-redesign .skin-port .daily-sub { color: #8b949e !important; font-size: 12px !important; }
 html.skin-redesign .skin-port .daily .um-coin,
@@ -1386,6 +1399,17 @@ html.skin-redesign.light-mode .skin-forum-kicker {
 }
 html.skin-redesign:not(.light-mode) .skin-forum-title { color: #d8d2cc !important; font-weight: 500; font-size: 12px !important; }
 html.skin-redesign.light-mode .skin-forum-title { color: #3f4650 !important; font-weight: 500; font-size: 12px !important; }
+html.skin-redesign .skin-forum-row {
+  margin-left: 0 !important;
+  padding-left: 0 !important;
+}
+html.skin-redesign .skin-forum-row .skin-forum-title {
+  margin-left: 0 !important;
+  padding-left: 0 !important;
+}
+html.skin-redesign .skin-forum-replies .skin-forum-row {
+  padding-left: 10px !important;
+}
 html.skin-redesign .lobby-side > .panel:empty {
   display: none !important;
   padding: 0 !important;
@@ -1625,14 +1649,19 @@ html.skin-redesign .skin-module .skin-poll-pager:first-child {
 html.skin-redesign .comments-page .post,
 html.skin-redesign .comments-page .MuiPaper-root,
 html.skin-redesign.light-mode .comments-page .MuiPaper-root {
-  padding: 10px 12px 12px !important;
+  padding: 8px 20px 4px !important;
   border-radius: 4px !important;
 }
 html.skin-redesign .comments-page .md-content,
-html.skin-redesign .comments-page .user-name,
 html.skin-redesign .comments-page .md-content p {
   font-size: 13px !important;
   line-height: 1.35 !important;
+}
+html.skin-redesign .comments-page .user-name,
+html.skin-redesign .comments-page .user-name .user-name-text,
+html.skin-redesign .comments-page .user-name .MuiTypography-root {
+  font-size: 11px !important;
+  line-height: 1.2 !important;
 }
 html.skin-redesign .comments-page .skin-c-time,
 html.skin-redesign.light-mode .comments-page .skin-c-time {
@@ -1694,17 +1723,18 @@ html.skin-redesign .comments-page .MuiPaper-root > .MuiStack-root > .MuiStack-ro
 html.skin-redesign .comments-page .MuiDivider-root { display: none !important; }
 html.skin-redesign .comments-page .name-with-avatar { margin-left: 0 !important; }
 html.skin-redesign .comments-page .name-with-avatar > .MuiStack-root {
-  border-left: 1px solid rgba(255, 255, 255, .08);
-  padding-left: 10px;
-  margin-left: 8px;
-}
-html.skin-redesign.light-mode .comments-page .name-with-avatar > .MuiStack-root {
-  border-left-color: rgba(0, 0, 0, .08);
+  border-left: 0 !important;
+  padding-left: 0 !important;
+  margin-left: 0 !important;
 }
 html.skin-redesign .comments-page .md-content {
   margin-top: 2px !important;
-  margin-left: 67px !important;
-  padding-left: 0 !important;
+  margin-left: 59px !important;
+  padding-left: 8px !important;
+  border-left: 1px solid rgba(255, 255, 255, .16);
+}
+html.skin-redesign.light-mode .comments-page .md-content {
+  border-left-color: rgba(28, 25, 23, .16);
 }
 html.skin-redesign .comments-page .fa-arrow-up:hover,
 html.skin-redesign .comments-page .fa-arrow-up.is-voted { color: #3fb950 !important; }
@@ -1744,9 +1774,9 @@ html.skin-redesign .comments-page .emote-reactions {
 }
 html.skin-redesign .comments-page .emote-reactions-picker .dropdown-control,
 html.skin-redesign.light-mode .comments-page .emote-reactions-picker .dropdown-control {
-  width: 26px !important;
-  min-width: 26px !important;
-  height: 26px !important;
+  width: 16px !important;
+  min-width: 16px !important;
+  height: 16px !important;
   padding: 0 !important;
   border: 1px solid rgba(139, 148, 158, .45) !important;
   border-radius: 4px !important;
@@ -1760,7 +1790,7 @@ html.skin-redesign .comments-page .emote-reactions-picker .dropdown-control::bef
   content: "\f118";
   font-family: "Font Awesome 5 Free" !important;
   font-weight: 400;
-  font-size: 16px;
+  font-size: 11px;
   line-height: 1;
 }
 html.skin-redesign .comments-page .emote-reactions-picker .dropdown-control:hover,
@@ -2041,7 +2071,7 @@ html.skin-redesign .skin-port .bar-actions .sq-btn {
     margin-right: 0;
   }
   html.skin-redesign .skin-port .game {
-    width: calc(100% - 20px);
+    width: calc(100% - 36px);
     margin-left: auto;
     margin-right: auto;
   }
@@ -2050,12 +2080,18 @@ html.skin-redesign .skin-port .bar-actions .sq-btn {
     padding-left: 4px !important;
   }
   html.skin-redesign .skin-port .setup-row {
-    grid-template-columns: 26px minmax(0, 1fr) 168px !important;
+    grid-template-columns: 26px minmax(0, 1fr) 148px !important;
     column-gap: 4px !important;
   }
   html.skin-redesign .skin-port .setup-copy {
-    margin-left: 0 !important;
-    padding-left: 4px !important;
+    margin-left: 12px !important;
+    padding-left: 12px !important;
+  }
+  html.skin-redesign .skin-port .setup-row .roles {
+    margin-left: -16px !important;
+    width: 148px !important;
+    min-width: 0 !important;
+    max-width: 148px !important;
   }
 }
 @media (max-width: 1100px) {

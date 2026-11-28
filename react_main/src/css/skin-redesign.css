@@ -3810,8 +3810,17 @@ html.skin-redesign .skin-auth-links .MuiButton-text {
 }
 
 html.skin-redesign .skin-side-toggle {
+  align-self: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  margin: 4px auto 8px !important;
+  padding: 0;
+}
+html.skin-redesign .skin-side:not(.collapsed) .skin-side-toggle {
   align-self: flex-start;
-  margin: 4px 0 8px 0 !important;
+  margin: 4px 0 8px !important;
 }
 html.skin-redesign .skin-side { overflow: hidden; }
 html.skin-redesign .skin-side-groups {

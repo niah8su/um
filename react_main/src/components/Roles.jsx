@@ -611,7 +611,7 @@ export function RoleCount({
         spacing={1}
         divider={<Divider orientation="horizontal" flexItem />}
       >
-        <Typography>
+        <Typography className="skin-role-tags">
           <span style={{ fontWeight: "bold" }}>Tags</span>: {roleTags}
         </Typography>
         {DescriptionLines}

@@ -52,7 +52,7 @@ export const FeaturedSetup = ({ lobby, glowingHostButton }) => {
           <Button
             color="primary"
             sx={{ maxWidth: "4em" }}
-            className={isButtonGlowing ? "glow-slightly" : ""}
+            className={isButtonGlowing ? "glow-slightly skin-join" : "skin-join"}
             onClick={() => setIshostGameDialogueOpen(true)}
           >
             Play Setup

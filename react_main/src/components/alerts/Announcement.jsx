@@ -11,12 +11,14 @@ import {
 import { Loading } from "../Loading";
 import { minimumLoadingTime } from "../../Constants";
 import { useIsPhoneDevice } from "../../hooks/useIsPhoneDevice";
+import { useSkinRedesign } from "../useSkinRedesign";
 import { urlifyText } from "../../utilsFolder";
 
 export const Announcement = ({
   showAnnouncementTemporarily,
   setShowAnnouncementTemporarily,
 }) => {
+  const skin = useSkinRedesign();
   const [seenAnnouncement, setSeenAnnouncement] = useState(false);
   const [announcement, setAnnouncement] = useState(null);
   const [showPrevButton, setShowPrevButton] = useState(false);
@@ -166,7 +168,7 @@ export const Announcement = ({
 
   const announcementUi = (
     <Stack direction="row" spacing={1} className="skin-announce-row">
-      {ScrollButtons}
+      {skin ? null : ScrollButtons}
       <Alert
         className="skin-announce"
         severity="info"
@@ -176,7 +178,14 @@ export const Announcement = ({
           backgroundColor: "background.paper",
         }}
         action={CloseButton}
-        icon={<i className="fas fa-bullhorn" />}
+        icon={skin ? (
+          <span className="skin-announce-lead">
+            <span className="skin-announce-nav">{PrevButton}{NextButton}</span>
+            <i className="fas fa-bullhorn" />
+          </span>
+        ) : (
+          <i className="fas fa-bullhorn" />
+        )}
       >
         <Box
           sx={{

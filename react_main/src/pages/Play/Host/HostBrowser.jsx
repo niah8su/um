@@ -561,7 +561,7 @@ function SetupRow(props) {
       }}
     >
       {!isPhoneDevice && user.loggedIn && (
-        <Button onClick={() => props.onSelect(props.setup)}>Host</Button>
+        <Button className="skin-join" onClick={() => props.onSelect(props.setup)}>Host</Button>
       )}
       <Box
         sx={{
@@ -581,7 +581,7 @@ function SetupRow(props) {
         }}
       >
         {isPhoneDevice && user.loggedIn && (
-          <Button size="small" onClick={() => props.onSelect(props.setup)}>Host</Button>
+          <Button className="skin-join" size="small" onClick={() => props.onSelect(props.setup)}>Host</Button>
         )}
         {user.loggedIn && (
           <Box sx={{ ml: isPhoneDevice ? undefined : "auto" }}>

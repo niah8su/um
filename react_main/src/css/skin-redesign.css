@@ -483,7 +483,7 @@ html.skin-redesign .skin-side {
   bottom: 0;
   left: 0;
   z-index: 35;
-  width: 232px;
+  width: 196px;
   display: flex;
   flex-direction: column;
   padding: 10px 12px 12px;
@@ -592,7 +592,7 @@ html.skin-redesign .skin-side a:hover { background: color-mix(in srgb, var(--um-
 html.skin-redesign .skin-side-foot { margin-top: auto; padding-top: 8px; border-top: 1px solid var(--um-line); }
 html.skin-redesign .site-wrapper {
   margin-left: 0;
-  padding-left: 232px;
+  padding-left: 196px;
   box-sizing: border-box;
   width: 100%;
   max-width: 100%;
@@ -3867,7 +3867,7 @@ html.skin-redesign .skin-side-online-word {
   text-transform: none;
 }
 html.skin-redesign .skin-side {
-  width: 232px;
+  width: 196px;
   transition: width 220ms cubic-bezier(.2, .8, .2, 1);
   will-change: width;
 }
@@ -3910,12 +3910,12 @@ html.skin-redesign .skin-side-dock a svg {
   height: 18px;
 }
 html.skin-redesign .skin-side.collapsed {
-  width: 72px;
-  padding-left: 8px;
-  padding-right: 8px;
+  width: 56px;
+  padding-left: 6px;
+  padding-right: 6px;
   overflow: hidden;
 }
-html.skin-redesign:has(.skin-side.collapsed) .site-wrapper { padding-left: 72px; }
+html.skin-redesign:has(.skin-side.collapsed) .site-wrapper { padding-left: 56px; }
 html.skin-redesign .skin-side.collapsed .skin-side-dock {
   flex-direction: column;
   flex-wrap: nowrap;

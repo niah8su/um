@@ -148,44 +148,49 @@ function Miniprofile(props) {
             style={{ flex: 1, minWidth: 0 }}
           >
             <Stack direction="row" spacing={1} sx={{ alignItems: "flex-start" }}>
-              <Avatar
-                hasImage={avatar}
-                id={id}
-                avatarId={avatarId}
-                name={name}
-                onlineStatus={skin && user.status === "online" ? "online" : null}
-                lastActive={user.lastActive}
-                inGame={user.inGame}
-              />
               {skin ? (
-                <div className="skin-card-copy">
-                  <div className="skin-card-line">
-                    <span className="user-name" style={color ? { color } : undefined}>{name}</span>
-                    {!hasDefaultPronouns && (
-                      <>
-                        <span className="skin-card-div" aria-hidden="true" />
-                        <span className="skin-card-pronouns">({pronouns})</span>
-                      </>
-                    )}
-                    {totalGames > 0 && (
-                      <>
-                        <span className="skin-card-div" aria-hidden="true" />
-                        <span className="skin-card-games">{totalGames} games</span>
-                      </>
-                    )}
-                  </div>
+                <div className="skin-card-ava-col">
+                  <Avatar
+                    hasImage={avatar}
+                    id={id}
+                    avatarId={avatarId}
+                    name={name}
+                    onlineStatus={user.status === "online" ? "online" : null}
+                    lastActive={user.lastActive}
+                    inGame={user.inGame}
+                  />
                   {user.trophies?.length > 0 && (
                     <div className="skin-card-trophies">
                       <TrophyCase trophies={user.trophies} showHeading={false} wrapInPanel={false} keyboardAccessible />
                     </div>
                   )}
+                </div>
+              ) : (
+              <Avatar
+                hasImage={avatar}
+                id={id}
+                avatarId={avatarId}
+                name={name}
+                onlineStatus={null}
+                lastActive={user.lastActive}
+                inGame={user.inGame}
+              />
+              )}
+              {skin ? (
+                <div className="skin-card-copy">
+                  <div className="skin-card-line">
+                    <span className="user-name" style={color ? { color } : undefined}>{name}</span>
+                    {!hasDefaultPronouns && (
+                      <span className="skin-card-pronouns">({pronouns})</span>
+                    )}
+                  </div>
                   {user.family && user.family.name && (
                     <div className="skin-card-family">
-                      Member of{" "}
-                      {user.family.avatar ? (
+                      <span className="skin-card-family-lab">Member of</span>
+                      <span className="skin-card-family-bit">
                         <FamilyAvatarImage id={user.family.id} size={16} cacheVal={siteInfo.cacheVal} />
-                      ) : null}
-                      {user.family.name}
+                        <span>{user.family.name}</span>
+                      </span>
                     </div>
                   )}
                 </div>
@@ -204,7 +209,7 @@ function Miniprofile(props) {
             </Stack>
           </Link>
           {!isSelf && currentUser.loggedIn && (
-            <Stack direction="row" spacing={0.5}>
+            <Stack direction="row" spacing={0.5} className={skin ? "skin-card-actions" : undefined}>
               <Tooltip title={isFriend ? "Unfriend" : isFriendRequested ? "Cancel Friend Request" : "Send Friend Request"}>
                 <IconButton
                   size="small"
@@ -226,6 +231,9 @@ function Miniprofile(props) {
             </Stack>
           )}
         </Stack>
+        {skin && (
+          <div className="skin-card-games">{totalGames} games</div>
+        )}
         {skin && user.joined && (
           <div className="skin-card-joined">
             Joined {new Date(Number(user.joined)).toLocaleDateString()}

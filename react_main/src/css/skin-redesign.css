@@ -4155,3 +4155,22 @@ html.skin-redesign .skin-dm [data-testid="dm-emote-picker"] .dropdown-control::b
   line-height: 1;
   color: inherit;
 }
+html.skin-redesign .comments-page .MuiPaper-root.MuiPaper-root {
+  position: relative;
+  padding: 8px 20px 8px !important;
+}
+html.skin-redesign .comments-page .MuiPaper-root .emote-reactions {
+  position: absolute !important;
+  top: 10px !important;
+  right: 12px !important;
+  bottom: auto !important;
+  margin: 0 !important;
+  height: 16px !important;
+  min-height: 0 !important;
+}
+html.skin-redesign .comments-page .emote-reactions-picker .dropdown-control {
+  width: 16px !important;
+  min-width: 16px !important;
+  height: 16px !important;
+  min-height: 16px !important;
+}

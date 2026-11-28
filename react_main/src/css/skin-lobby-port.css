@@ -1649,7 +1649,7 @@ html.skin-redesign .skin-module .skin-poll-pager:first-child {
 html.skin-redesign .comments-page .post,
 html.skin-redesign .comments-page .MuiPaper-root,
 html.skin-redesign.light-mode .comments-page .MuiPaper-root {
-  padding: 8px 20px 4px !important;
+  padding: 8px 20px 8px !important;
   border-radius: 4px !important;
 }
 html.skin-redesign .comments-page .md-content,
@@ -1765,12 +1765,18 @@ html.skin-redesign .comments-page .MuiPaper-root > .MuiStack-root > .MuiStack-ro
 html.skin-redesign .comments-page .fa-trash,
 html.skin-redesign .comments-page .fa-trash-restore { font-size: 11px !important; }
 html.skin-redesign .comments-page .emote-reactions {
-  position: static !important;
-  top: auto !important;
-  right: auto !important;
+  position: absolute !important;
+  top: 10px !important;
+  right: 12px !important;
   bottom: auto !important;
-  margin: 4px 0 0 !important;
+  left: auto !important;
+  margin: 0 !important;
+  height: 16px !important;
+  min-height: 0 !important;
   justify-content: flex-start;
+}
+html.skin-redesign .comments-page .emote-reactions-picker .dropdown-control {
+  min-height: 16px !important;
 }
 html.skin-redesign .comments-page .emote-reactions-picker .dropdown-control,
 html.skin-redesign.light-mode .comments-page .emote-reactions-picker .dropdown-control {
@@ -2319,6 +2325,7 @@ html.skin-redesign .comments-page .name-with-avatar > .MuiStack-root > .MuiStack
 html.skin-redesign.light-mode .comments-page .name-with-avatar > .MuiStack-root > .MuiStack-root {
   border-left-color: rgba(0, 0, 0, .08);
 }
-html.skin-redesign .comments-page .MuiPaper-root {
-  padding-top: 16px !important;
+html.skin-redesign .comments-page .MuiPaper-root.MuiPaper-root {
+  position: relative;
+  padding: 8px 20px 8px !important;
 }
